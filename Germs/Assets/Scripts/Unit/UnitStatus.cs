@@ -6,8 +6,7 @@ public class UnitStatus : MonoBehaviour {
 	public float currentHealth = 100;
 	public float damage = 10;
 	public float speed = 10;
-	
-	private float maxHealth = 100;
+	public float maxHealth = 100;
 	
 	// Use this for initialization
 	void Start () {

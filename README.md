@@ -5,9 +5,22 @@ Tehdään heroes 3 might and magic tapainen vuoropohjainen RPG seikkailu/taistelup
 Teemana on bakteeri/virus rpg/seikkailu
 
 
+<b>Gitin käytöstä:</b>
+
+git add -A --ignore-errors
+git rm -r --cached .\Germs\Library
+
+(git status, check onko kaikki ok)
+
+git commit -m "viesti"
+git push
+
 
 
 <h2>Linkkejä:</h2>
+
+moving object with mouse to some position:
+http://answers.unity3d.com/questions/639139/how-to-move-an-2d-object-to-mouse-click-position-i.html
 
 
 Hienoja tekstuureita, saa vissiin käyttää jopa kaupallisesti, kunhan ei sano, et ite olis tehny niit
