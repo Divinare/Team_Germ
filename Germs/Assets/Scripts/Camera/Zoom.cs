@@ -20,7 +20,8 @@ public class Zoom : MonoBehaviour {
 	{
 		distance -= Input.GetAxis("Mouse ScrollWheel") * sensitivityDistance;
 		distance = Mathf.Clamp(distance, min, max);
-		Camera.main.orthographicSize = distance;
+		//Camera.main.orthographicSize = distance;
+
 	}
 
 }
