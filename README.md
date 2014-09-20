@@ -13,9 +13,11 @@ Teemana on bakteeri/virus rpg/seikkailu
 Hienoja tekstuureita, saa vissiin k‰ytt‰‰ jopa kaupallisesti, kunhan ei sano, et ite olis tehny niit
 http://www.cgtextures.com/
 
+Clicking an object:
+http://www.youtube.com/watch?v=DrR0soJDCUo
 
-
-
+Targeting units:
+https://www.youtube.com/watch?v=g1P2Q9xKCAs
 
 <h2>Kurssin tavoite:</h2>
 
