@@ -9,10 +9,10 @@ Teemana on bakteerit ja virukset RPG-seikkailussa.
 
 <b>Gitin käytöstä:</b>
 
-git add -A --ignore-errors
-(git status, check onko kaikki ok)
-git commit -m "viesti"
-git push
+* git add -A --ignore-errors
+* (git status, check onko kaikki ok)
+* git commit -m "viesti"
+* git push
 
 
 <h2>Linkkejä:</h2>
