@@ -1,0 +1,11 @@
+$PROJDIR/Germs/Temp/
+$PROJDIR/Germs/Library/
+$PROJDIR/Germs/Obj/
+ 
+*.csproj
+*.unityproj
+*.sln
+*.user
+*.userprefs
+*.DS_store
+*~
