@@ -11,12 +11,12 @@ public class TurnHandler : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		GameObject[] units = GameObject.FindGameObjectsWithTag("Unit");
-		Debug.Log("Units-lista");
-		Debug.Log(units);
-		Debug.Log("Units-listan eka alkio");
-		Debug.Log("LOG[index]: " + units[0]);	
-		Debug.Log("Units-listan ekan alkion nopeus");
-		Debug.Log("LOG[index]: " + units[0].speed);
+		//Debug.Log("Units-lista");
+		//Debug.Log(units);
+		//Debug.Log("Units-listan eka alkio");
+		//Debug.Log("LOG[index]: " + units[0]);	
+		//Debug.Log("Units-listan ekan alkion nopeus");
+		//Debug.Log("LOG[index]: " + units[0].speed);
 	}
 	
 	// Update is called once per frame

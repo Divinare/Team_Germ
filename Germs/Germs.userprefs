@@ -1,9 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Unit\UnitStatus.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Turn\TurnHandler.cs">
     <Files>
-      <File FileName="Assets\Scripts\Turn\TurnHandler.cs" Line="21" Column="2" />
-      <File FileName="Assets\Scripts\Unit\UnitStatus.cs" Line="37" Column="2" />
+      <File FileName="Assets\Scripts\Turn\TurnHandler.cs" Line="13" Column="3" />
+      <File FileName="Assets\Scripts\Unit\UnitStatus.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Selector.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
