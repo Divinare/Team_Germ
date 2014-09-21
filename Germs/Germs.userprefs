@@ -1,11 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Unit\UnitStatus.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Turn\TurnHandler.cs">
     <Files>
       <File FileName="Assets\Scripts\Unit\UnitStatus.cs" Line="8" Column="26" />
-      <File FileName="Assets\Scripts\Selector.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Matrix\SquarePosition.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Camera\Zoom.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Turn\TurnHandler.cs" Line="18" Column="2" />
+      <File FileName="Assets\Scripts\Selector.cs" Line="26" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
