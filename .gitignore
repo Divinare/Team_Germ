@@ -1,6 +1,6 @@
-$PROJDIR/Germs/Temp/
-$PROJDIR/Germs/Library/
-$PROJDIR/Germs/Obj/
+/Germs/Temp/
+/Germs/Library/
+/Germs/Obj/
  
 *.csproj
 *.unityproj
