@@ -2,9 +2,7 @@
 using System.Collections;
 
 public class SquarePosition : MonoBehaviour {
-
-	public int x;
-	public int y;
+	
 	// Use this for initialization
 	void Start () {
 	
@@ -12,6 +10,6 @@ public class SquarePosition : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log ("My location is at x: " + x + " y: " + y);
+		//Debug.Log ("My location is at x: " + x + " y: " + y);
 	}
 }
