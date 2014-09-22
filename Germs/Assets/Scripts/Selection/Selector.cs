@@ -25,22 +25,22 @@ public class Selector : MonoBehaviour {
 				return;
 			}
 			GameObject objectClicked = hit.collider.gameObject;
-			//this.GetComponent<Action> ().setTargetSquare(hit.collider.gameObject);
-			Debug.Log (hit.collider.gameObject);
-			Debug.Log("mouse pressed!");
 
 			GameObject activeUnit = findActiveUnit();
 			Debug.Log (activeUnit);
 			if (objectClicked.tag == "Unit") {
-				unitAction(activeUnit);
+				unitAction(activeUnit, objectClicked);
 			} else if (objectClicked.tag == "Square") {
 				activeUnit.GetComponent<Movement> ().startMoving(objectClicked);
+			} else if (objectClicked.tag == "MenuItem") {
+				Debug.Log("menu item clicked!");
+				activeUnit.GetComponent<UnitStatus> ().switchSelectedAction(objectClicked.name);
 			}
 
 		}
 	}
 
-	private void unitAction(GameObject activeUnit) {
+	private void unitAction(GameObject activeUnit, GameObject objectClicked) {
 		Debug.Log ("Unit clicked!");
 		
 		string action = activeUnit.GetComponent<UnitStatus> ().selectedAction;
@@ -51,8 +51,7 @@ public class Selector : MonoBehaviour {
 			
 		} else if (action == "ranged") {
 			Debug.Log ("Ranged attack selected");
-			
-			// to be implemented
+			activeUnit.GetComponent<RangedAttack> ().attack(objectClicked);
 			
 		} else if (action == "magic") {
 			Debug.Log ("Magic attack selected");

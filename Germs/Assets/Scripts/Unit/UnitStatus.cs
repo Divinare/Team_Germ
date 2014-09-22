@@ -29,25 +29,28 @@ public class UnitStatus : MonoBehaviour {
 		}
 	}
 
-	void Heal(int heal) {
+	public void Heal(int heal) {
 		currentHealth += heal;
 	}
-	
-	void TakeDamage(int damage) {
+
+	public void TakeDamage(int damage) {
 		currentHealth -= damage;
 	}
 	
-	void Poisoned(int damage) {
+	public void Poisoned(int damage) {
 		transform.FindChild("poisonBubbles").gameObject.SetActive(true);
 		//poisoned units taka damage over time, set amount of rounds
 	}
 
-
-	void Select() {
+	public void switchSelectedAction(string clickedMenuItem) {
+		selectedAction = clickedMenuItem;
+	}
+	
+	public void Select() {
 		selected = true;
 	}
 	
-	void Deselect() {
+	public void Deselect() {
 		selected = false;
 	}
 
