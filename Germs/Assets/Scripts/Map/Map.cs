@@ -5,41 +5,33 @@ using System.Collections.Generic;
 public class Map : MonoBehaviour {
 	//selection
 	RaycastHit hit;
-	RaycastHit storeHit;
 	private float raycastLength = 200;
-	private Vector3 clickPoint;
-	
-	//currency
-	public float gold;
-	public float xp;
-
 
 	//checking tools
 	private List<Transform> allNodes = new List<Transform>();
+	private List<bool> gameBools = new List<bool>();
 	private Transform statusTracker;
+	private string storedNode;
 
 	// Use this for initialization
 	void Start () {
-		//vars
-		gold = 0;
-		xp = 0;
-		
-		//List<Transform> allNodes = new List<Transform>();
-		
+		//store all nodes
 		foreach (Transform child in transform) {
 			allNodes.Add (child);
 		}
 
-		//on start activate first node
+		//retrieval
+		statusTracker = GameObject.Find("StatusTracker").transform;
+		retrieveGameStatus();
 		setNodeActive(transform.FindChild("Node1"));
 
-
-		//store game status
-		/*
-		statusTracker = transform.FindChild("StatusTracker");
-		storeGameStatus();
-		retrieveGameStatus();
-		*/
+		//complete the node that was entered, temporary! needs better way of telling when level is complete
+		storedNode = statusTracker.gameObject.GetComponent<storeMapStatus>().getNode();
+		Debug.Log(storedNode);
+		if (storedNode != "") {
+			setNodeCompleted(transform.FindChild(storedNode));
+			setGold(transform.FindChild(storedNode));
+		}
 	}
 	
 	// Update is called once per frame
@@ -56,15 +48,13 @@ public class Map : MonoBehaviour {
 				if (Input.GetMouseButtonUp(0)) {
 					//Debug.Log (hit.collider.gameObject.GetComponent<Node>().active);
 					if (hit.collider.gameObject.GetComponent<Node>().active == true) {
+
+						//storage
+						storeGameStatus();
+						statusTracker.SendMessage("storeNode", hit.collider.transform);
+
 						//enter level
-						setNodeCompleted(hit.collider.transform);
-						//storeGameStatus();
-						//nodeLoadLevel (hit.collider.transform);
-
-						//level completed test
-						Debug.Log ("Let's pretend the level is complete");
-						setNodeCompleted(hit.collider.transform);
-
+						nodeLoadLevel (hit.collider.transform);
 					}
 				}
 				
@@ -87,25 +77,29 @@ public class Map : MonoBehaviour {
 	}
 
 	void storeGameStatus() {
-		Debug.Log ("Storing");
 		statusTracker.SendMessage("storeGameStatus", allNodes);
 	}
-	/*
-	void retrieveGameStatus() {
-		statusTracker.SendMessage("retrieveGameStatus", allNodes);
+
+	void setGold(Transform node) {
+		Debug.Log ("set gold map");
+		statusTracker.SendMessage("setGold", node);
 	}
 
-	void setGameStatus(Dictionary <Transform, bool> gameStatus) {
-		foreach(KeyValuePair<Transform, bool> entry in gameStatus) {
-			if (entry.Value) {
-				setNodeActive(entry.Key);
-				setNodeCompleted(entry.Key);
+	void retrieveGameStatus() {
+		gameBools = statusTracker.gameObject.GetComponent<storeMapStatus>().retrieveGameBools();
+
+		for (int i = 0; i < gameBools.Count; i++) {
+			if (gameBools[i]) {
+				setNodeActive(allNodes[i]);
+				setNodeCompleted(allNodes[i]);
 			}
 		}
 	}
-	*/
 
-	void checkActiveConditions() {
-		
+	void OnGUI() {
+		if(GUI.Button(new Rect(0,0,100,50), "Shop")) {
+			Debug.Log ("Shop");
+		}
 	}
+	
 }

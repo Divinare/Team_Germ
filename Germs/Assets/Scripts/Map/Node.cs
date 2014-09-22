@@ -6,12 +6,13 @@ public class Node : MonoBehaviour {
 	public bool active = false;
 	public bool completed = false;
 
+	//test currency values
 	public float gold;
 	public float xp;
 
 	public GameObject previousNode;
 	public string levelName;
-
+	
 	// Use this for initialization
 	void Start () {
 	}
@@ -21,7 +22,6 @@ public class Node : MonoBehaviour {
 		if (previousNode.gameObject.GetComponent<Node>().completed == true) {
 			setNodeActive();
 		}
-	
 	}
 
 	void setNodeActive() {
@@ -31,6 +31,15 @@ public class Node : MonoBehaviour {
 
 	void setNodeCompleted() {
 		completed = true;
+	}
+
+	public float getGold() {
+		Debug.Log ("node gold"+gold);
+		return gold;
+	}
+
+	public float getXp() {
+		return xp;
 	}
 
 	void loadLevel() {

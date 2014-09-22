@@ -14,7 +14,7 @@ public class levelComplete : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		if(GUI.Button(new Rect(240, 20, 160, 40), "Completed")) {
+		if(GUI.Button(new Rect(240, 20, 160, 40), "Complete level")) {
 			Application.LoadLevel ("Map");
 		}
 	}

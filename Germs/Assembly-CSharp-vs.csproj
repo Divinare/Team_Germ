@@ -49,11 +49,11 @@
      <Compile Include="Assets\Scripts\Camera\Zoom.cs" />
      <Compile Include="Assets\Scripts\Map\Map.cs" />
      <Compile Include="Assets\Scripts\Map\Node.cs" />
+     <Compile Include="Assets\Scripts\Map\storeMapStatus.cs" />
      <Compile Include="Assets\Scripts\Matrix\SquarePosition.cs" />
      <Compile Include="Assets\Scripts\Selector.cs" />
      <Compile Include="Assets\Scripts\Turn\TurnHandler.cs" />
      <Compile Include="Assets\Scripts\Unit\UnitStatus.cs" />
-     <Compile Include="Assets\storeMapStatus.cs" />
      <Compile Include="Assets\testLevels\levelComplete.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
