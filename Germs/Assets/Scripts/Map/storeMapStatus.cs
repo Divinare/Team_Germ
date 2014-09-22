@@ -50,7 +50,6 @@ public class storeMapStatus : MonoBehaviour {
 	}
 
 	void setGold(Transform node) {
-		Debug.Log (node.gameObject.GetComponent<Node>().getGold());
 		gold += node.gameObject.GetComponent<Node>().getGold();
 		xp += node.gameObject.GetComponent<Node>().getXp();
 

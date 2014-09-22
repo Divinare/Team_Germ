@@ -34,7 +34,6 @@ public class Node : MonoBehaviour {
 	}
 
 	public float getGold() {
-		Debug.Log ("node gold"+gold);
 		return gold;
 	}
 

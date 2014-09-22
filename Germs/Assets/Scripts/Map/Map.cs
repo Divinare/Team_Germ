@@ -27,7 +27,7 @@ public class Map : MonoBehaviour {
 
 		//complete the node that was entered, temporary! needs better way of telling when level is complete
 		storedNode = statusTracker.gameObject.GetComponent<storeMapStatus>().getNode();
-		Debug.Log(storedNode);
+		//Debug.Log(storedNode);
 		if (storedNode != "") {
 			setNodeCompleted(transform.FindChild(storedNode));
 			setGold(transform.FindChild(storedNode));
@@ -81,7 +81,6 @@ public class Map : MonoBehaviour {
 	}
 
 	void setGold(Transform node) {
-		Debug.Log ("set gold map");
 		statusTracker.SendMessage("setGold", node);
 	}
 
