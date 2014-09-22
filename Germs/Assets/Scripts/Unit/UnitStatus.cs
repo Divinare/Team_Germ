@@ -8,7 +8,10 @@ public class UnitStatus : MonoBehaviour {
 	public int speed = 10;
 	public int maxHealth = 100;
 	public int size = 1;
+// This is the attack that we have selected from the attack toolbar
+	public string selectedAttack = "melee";
 	public bool selected = false;
+	public bool enemy = false;
 
 	// Use this for initialization
 	void Start () {
@@ -21,7 +24,9 @@ public class UnitStatus : MonoBehaviour {
 			Debug.Log("Unit died");
 			Destroy(this.gameObject);
 		}
-		
+		if (selected) {
+			transform.FindChild("selectionCircle").gameObject.active = true;
+		}
 	}
 
 	void Heal(int heal) {
@@ -44,5 +49,9 @@ public class UnitStatus : MonoBehaviour {
 	
 	void Deselect() {
 		selected = false;
+	}
+
+	public bool isAtTargetSquare(GameObject Square) {
+		return false;
 	}
 }

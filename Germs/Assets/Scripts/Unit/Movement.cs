@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Movement : MonoBehaviour {
 
-	public float speed;
+	public float movementSpeed;
 	public Vector3 targetPosition;
 	private Vector3 prevPosition;
 
@@ -30,9 +30,12 @@ public class Movement : MonoBehaviour {
 			targetPosition = prevPosition;
 		}
 			//constant movement
+		if (targetPosition != transform.position) {
 			
-			transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
+			transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
 			
+			
+		}
 
 	}
 	
