@@ -5,7 +5,6 @@ public class Movement : MonoBehaviour {
 
 	public float speed;
 	public Vector3 targetPosition;
-	public bool selected = false;
 	private Vector3 prevPosition;
 
 
@@ -30,13 +29,11 @@ public class Movement : MonoBehaviour {
 			//return to previous position
 			targetPosition = prevPosition;
 		}
-		if (selected && targetPosition != transform.position) {
 			//constant movement
 			
 			transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 			
-			
-		}
+
 	}
 	
 	void OnMouseDown() {
@@ -48,23 +45,13 @@ public class Movement : MonoBehaviour {
 		/*distance = Vector2.Distance(transform.position, target);
 		Debug.Log (distance);
 		*/
-		if (selected) {
+
 			//set target to current mouse point
 			targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			targetPosition.z = transform.position.z;
 			
 			//direction X
 			Instantiate(moveToBox, targetPosition, transform.rotation);
-		}
-	}
-	
-	void Select() {
-		selected = true;
-	}
-	
-	void Deselect() {
-		if (targetPosition == transform.position) {
-			selected = false;
-		}
+
 	}
 }
