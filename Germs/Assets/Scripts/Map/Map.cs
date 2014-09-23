@@ -50,7 +50,9 @@ public class Map : MonoBehaviour {
 			if (hit.collider.gameObject.tag == "Node") {
 				//Debug.Log("Node hit");
 				if (Input.GetMouseButtonUp(0)) {
+					if (!drawBattleWindow) {
 					storedHit = hit;
+					}
 					//Debug.Log (hit.collider.gameObject.GetComponent<Node>().active);
 					if (hit.collider.gameObject.GetComponent<Node>().active == true) {
 
@@ -111,8 +113,11 @@ public class Map : MonoBehaviour {
 		if (drawBattleWindow) {
 			GUI.Box(new Rect(Screen.width /2 - 100,Screen.height /2 - 100,250,200), "Level Info");
 			GUI.Box(new Rect(Screen.width /2 - 100,Screen.height /2 - 80,250,120), "You will recieve x gold and y xp \n from completion of this level!\n\n Other info from node");
-			if (GUI.Button (new Rect (Screen.width /2 - 15, Screen.height / 2 + 50, 100, 50), "Enter Level")) {
+			if (GUI.Button (new Rect (Screen.width /2 - 100, Screen.height / 2 + 50, 100, 50), "Enter Level")) {
 				nodeLoadLevel (storedHit.collider.transform);
+			}
+			if (GUI.Button (new Rect (Screen.width /2 + 50, Screen.height / 2 + 50, 100, 50), "Exit")) {
+				drawBattleWindow = false;
 			}
 		}
 
