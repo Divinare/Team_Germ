@@ -19,7 +19,9 @@ public class Node : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (previousNode.gameObject.GetComponent<Node>().completed == true) {
+		if (previousNode.gameObject.GetComponent<Node>().completed == true && active == false) {
+			setNodeActive();
+		} else if (completed) {
 			setNodeActive();
 		}
 	}

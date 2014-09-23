@@ -16,6 +16,7 @@ public class storeMapStatus : MonoBehaviour {
 		gold = 0;
 		xp = 0;
 
+		//muy importanto!
 		DontDestroyOnLoad(this);
 
 		//remove duplicates
@@ -53,9 +54,11 @@ public class storeMapStatus : MonoBehaviour {
 		xp += node.gameObject.GetComponent<Node>().getXp();
 	}
 
-	void OnGUI() {
-		GUI.Box (new Rect (Screen.width - 200,Screen.height - 50,200,50), "Gold: "+gold+" XP: "+xp);
+	public float getGold() {
+		return gold;
 	}
 
-
+	public float getXp() {
+		return xp;
+	}
 }

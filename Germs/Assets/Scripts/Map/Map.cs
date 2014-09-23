@@ -103,13 +103,7 @@ public class Map : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		if (GUI.Button (new Rect (0,0,100,50), "Shop")) {
-			Debug.Log ("Shop");
-		}
-		if (GUI.Button (new Rect (Screen.width - 100,0,100,50), "Training")) {
-			Debug.Log ("Training");
-		}
-
+		//level loading window with info
 		if (drawBattleWindow) {
 			GUI.Box(new Rect(Screen.width /2 - 100,Screen.height /2 - 100,250,200), "Level Info");
 			GUI.Box(new Rect(Screen.width /2 - 100,Screen.height /2 - 80,250,120), "You will recieve x gold and y xp \n from completion of this level!\n\n Other info from node");
