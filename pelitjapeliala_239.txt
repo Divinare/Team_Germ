@@ -1,0 +1,68 @@
+23.9. Tapaaminen
+
+Still Under Discussion:
+
+	- täytyy miettiä, miten estää sen ettei hahmot oo lähekkäin toisaan. Mulla lyö tyhjää sen suhteen :D
+
+
+Kenttä&/XP:
+	
+	- Helpompi olis toteuttaa sillee et kentän läpäsyn jälkee voi antaa mille vaan hahmolle expaa.
+	  Olis joku UI mis on kuva kaikist hahmoist mitä on ja sit käytettävä expan määrä
+	  
+	  tai
+	  
+	- Bakteerien level x locked kunnes tietty määrä kenttiä suoritettu
+	
+	
+	- Mitä tapahtuu jos häviää kentän?
+		* ainakin highscoreen "monellako battlella läpäsi pelin" +1
+	- Mitä tapahtuu jos bakteeri kuolee kentässä, mutta kenttä voitetaan?
+	
+
+
+Kentät:
+	- GameStatus olio muistaa mitkä bakut on valittu mapilla
+	- Joillakin kentillä on juoni esim. vesikauhukenttä/lintuinfluenssakenttä
+	- Kentän infossa kuvaus juonesta / mahd. kuvia mapilla
+	
+
+Vuoro:
+    - TurnHandler asettaa valitun otuksen Selectorille tai TurnHandlerilla on metodi, josta
+      Selector voi kutsua valitun otuksen
+    - Yks liikkuminen/Yks hyökkäys/Wait
+    - Spellin tai heal potionin? käyttö ei vie vuoroa
+    
+	
+XP:
+	- Tallentuu tuhoutumattomaan peliobjektiin kullan kanssa
+	- Käytetään Mapilla Trainerissa tjs
+
+
+Bakteerit:
+	- Muutama bakteerityyppi alkuun (yks ranged ja yks melee)
+	- Uusia bakteereja avautuu kun suorittaa kenttiä
+	- Kaikilla bakteereilla eri skillejä
+	
+	
+Skillit:
+	- Saa esim. bosseilta/tärkeiltä leveleiltä
+	- Kullalla voi kanssa ostaa
+	- Kun bakteeri saa tarpeeksi leveleitä
+	
+	
+Kauppa, voi ostaa:
+	- Potionit
+	- Uusia skillejä
+	- Voi parantaa skillejä ostamalla
+	- uusia bakteereita
+	- Hattuja
+	
+Trainer
+	- UI, jossa on hahmot, joita gGameStatukseen kuuluu
+	- Hahmojen päällä tai jossain "level up" button
+		* näkyy vain, jos on tarpeeksi expaa seuraavaan leveliin
+		* näkyy jotenkin paljonko levelaus vie expaa/paljonko tarvitaan seuraavaan leveliin
+	
+Battle
+	- 6 batkeeria kentällä samaan aikaan max?
