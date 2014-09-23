@@ -34,7 +34,6 @@ public class storeMapStatus : MonoBehaviour {
 		foreach (Transform node in allNodes) {
 			gameBools.Add(node.gameObject.GetComponent<Node>().completed);
 		}
-		//dictCheck(gameState);
 	}
 	
 	public List<bool> retrieveGameBools() {
@@ -52,7 +51,6 @@ public class storeMapStatus : MonoBehaviour {
 	void setGold(Transform node) {
 		gold += node.gameObject.GetComponent<Node>().getGold();
 		xp += node.gameObject.GetComponent<Node>().getXp();
-
 	}
 
 	void OnGUI() {

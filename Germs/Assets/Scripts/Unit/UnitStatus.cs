@@ -30,7 +30,12 @@ public class UnitStatus : MonoBehaviour {
 	}
 
 	public void Heal(int heal) {
-		currentHealth += heal;
+		//cannot get more hp than maxhp
+		if (currentHealth + heal < maxHealth) {
+			currentHealth += heal;
+		} else {
+			currentHealth = maxHealth;
+		}
 	}
 
 	public void TakeDamage(int damage) {
