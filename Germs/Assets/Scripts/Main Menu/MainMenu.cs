@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		GUI.Box(new Rect(Screen.width /2 - Screen.width/5,Screen.height /2 - Screen.height/3,Screen.width/3,Screen.height - Screen.height/3), "Main Menu");
+		//GUI.Box(new Rect(Screen.width /2 - Screen.width/5,Screen.height /2 - Screen.height/6,Screen.width/3,Screen.height - Screen.height/6), "Main Menu");
 		if (GUI.Button (new Rect (Screen.width /2 - Screen.width/5, Screen.height / 2 - Screen.height/4, Screen.width/3, Screen.height/8), "New Game")) {
 		}
 		if (GUI.Button (new Rect (Screen.width /2 - Screen.width/5, Screen.height / 2 - Screen.height/8, Screen.width/3, Screen.height/8), "Load Game")) {
