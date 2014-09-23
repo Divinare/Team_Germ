@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class Map : MonoBehaviour {
 	//selection
 	RaycastHit hit;
+	RaycastHit storedHit;
 	private float raycastLength = 200;
 
 	//checking tools
@@ -12,6 +13,9 @@ public class Map : MonoBehaviour {
 	private List<bool> gameBools = new List<bool>();
 	private Transform statusTracker;
 	private string storedNode;
+
+	//GUI tools
+	private bool drawBattleWindow = false;	
 
 	// Use this for initialization
 	void Start () {
@@ -46,6 +50,7 @@ public class Map : MonoBehaviour {
 			if (hit.collider.gameObject.tag == "Node") {
 				//Debug.Log("Node hit");
 				if (Input.GetMouseButtonUp(0)) {
+					storedHit = hit;
 					//Debug.Log (hit.collider.gameObject.GetComponent<Node>().active);
 					if (hit.collider.gameObject.GetComponent<Node>().active == true) {
 
@@ -53,8 +58,8 @@ public class Map : MonoBehaviour {
 						storeGameStatus();
 						statusTracker.SendMessage("storeNode", hit.collider.transform);
 
-						//enter level
-						nodeLoadLevel (hit.collider.transform);
+						//enter level through GUI window
+						drawBattleWindow = true;
 					}
 				}
 				
@@ -96,9 +101,21 @@ public class Map : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		if(GUI.Button(new Rect(0,0,100,50), "Shop")) {
+		if (GUI.Button (new Rect (0,0,100,50), "Shop")) {
 			Debug.Log ("Shop");
 		}
+		if (GUI.Button (new Rect (Screen.width - 100,0,100,50), "Training")) {
+			Debug.Log ("Training");
+		}
+
+		if (drawBattleWindow) {
+			GUI.Box(new Rect(Screen.width /2 - 100,Screen.height /2 - 100,250,200), "Level Info");
+			GUI.Box(new Rect(Screen.width /2 - 100,Screen.height /2 - 80,250,120), "You will recieve x gold and y xp \n from completion of this level!\n\n Other info from node");
+			if (GUI.Button (new Rect (Screen.width /2 - 15, Screen.height / 2 + 50, 100, 50), "Enter Level")) {
+				nodeLoadLevel (storedHit.collider.transform);
+			}
+		}
+
 	}
 	
 }

@@ -46,7 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\GUI_Elements.cs" />
      <Compile Include="Assets\Scripts\Camera\Zoom.cs" />
      <Compile Include="Assets\Scripts\Map\Map.cs" />
      <Compile Include="Assets\Scripts\Map\Node.cs" />
@@ -54,6 +53,7 @@
      <Compile Include="Assets\Scripts\Matrix\SquarePosition.cs" />
      <Compile Include="Assets\Scripts\Selection\Selector.cs" />
      <Compile Include="Assets\Scripts\Turn\TurnHandler.cs" />
+     <Compile Include="Assets\Scripts\Unit\GUI_Elements.cs" />
      <Compile Include="Assets\Scripts\Unit\Movement.cs" />
      <Compile Include="Assets\Scripts\Unit\RangedAttack.cs" />
      <Compile Include="Assets\Scripts\Unit\UnitStatus.cs" />

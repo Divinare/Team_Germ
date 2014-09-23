@@ -26,7 +26,11 @@ public class Node : MonoBehaviour {
 
 	void setNodeActive() {
 		active = true;
-		this.gameObject.renderer.material.color = Color.green;
+		if (active == true && completed == true) {
+			this.gameObject.renderer.material.color = Color.green;
+		} else if (active == true && completed == false) {
+			this.gameObject.renderer.material.color = Color.yellow;
+		}
 	}
 
 	void setNodeCompleted() {
