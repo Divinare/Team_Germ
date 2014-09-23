@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Camera\Zoom.cs" />
+     <Compile Include="Assets\Scripts\Main Menu\MainMenu.cs" />
+     <Compile Include="Assets\Scripts\Main Menu\Menu_movement.cs" />
      <Compile Include="Assets\Scripts\Map\Map.cs" />
      <Compile Include="Assets\Scripts\Map\Map_GUI.cs" />
      <Compile Include="Assets\Scripts\Map\Node.cs" />
@@ -58,7 +60,7 @@
      <Compile Include="Assets\Scripts\Unit\Movement.cs" />
      <Compile Include="Assets\Scripts\Unit\RangedAttack.cs" />
      <Compile Include="Assets\Scripts\Unit\UnitStatus.cs" />
-     <Compile Include="Assets\testLevels\levelComplete.cs" />
+     <Compile Include="Assets\Scripts\testLevels\levelComplete.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
