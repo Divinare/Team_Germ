@@ -12,15 +12,25 @@ public class UnitStatus : MonoBehaviour {
 	public string selectedAction = "melee";
 	public bool selected = false;
 	public bool enemy = false;
+	public AudioClip[] sounds;
+	public GameObject DeathSound;
 
 	// Use this for initialization
 	void Start () {
-		
+
+
 	}
+
+	void PlaySound(int clipId) {
+		audio.clip = sounds [clipId];
+		audio.Play ();
+	}
+
 	
 	// Update is called once per frame
 	void Update () {
 		if (currentHealth <= 0) {
+			GameObject deathSound = Instantiate (DeathSound, this.transform.position, this.transform.rotation) as GameObject;
 			Debug.Log("Unit died");
 			Destroy(this.gameObject);
 		}
@@ -39,6 +49,7 @@ public class UnitStatus : MonoBehaviour {
 	}
 
 	public void TakeDamage(int damage) {
+		PlaySound (0);
 		currentHealth -= damage;
 	}
 	
