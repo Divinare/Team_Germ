@@ -37,6 +37,9 @@ public class UnitStatus : MonoBehaviour {
 		if (selected) {
 			transform.FindChild("selectionCircle").gameObject.active = true;
 		}
+		else {
+			transform.FindChild("selectionCircle").gameObject.active = false;
+		}
 	}
 
 	public void Heal(int heal) {
