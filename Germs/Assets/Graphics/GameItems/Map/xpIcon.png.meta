@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: cf105556e6e6e7c47a334971cdc33b4c
+guid: 65f44ebf229160c4e9ab7fff2263adb8
 TextureImporter:
   fileIDToRecycleName:
-    21300000: window
+    21300000: xpIcon
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

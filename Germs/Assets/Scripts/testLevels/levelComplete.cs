@@ -2,11 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 
+
 public class levelComplete : MonoBehaviour {
 	public List<GameObject> allEnemies = new List<GameObject>();
 	public bool enemiesAlive;
 
 	private Transform battleTracker;
+
+	public Texture2D victoryIcon;
 
 	// Use this for initialization
 	void Start () {
@@ -28,7 +31,10 @@ public class levelComplete : MonoBehaviour {
 			Application.LoadLevel ("Map");
 		}
 		if (!enemiesAlive) {
-			if(GUI.Button(new Rect(240, 20, 160, 40), "Complete level")) {
+			GUI.Box( new Rect(Screen.width/2 - Screen.width/4, 0, Screen.width/2, Screen.height/4), "");
+			GUI.Box ( new Rect(Screen.width/2 - Screen.width/4, 0, Screen.width/2, Screen.height/4), victoryIcon);
+			GUI.Box( new Rect(Screen.width/2 - Screen.width/4, Screen.height/12, Screen.width/2, Screen.height/4), "You have defeated all the enemies and will be greatly rewarded!\n Congratulations and Celebrations!");
+			if(GUI.Button(new Rect(Screen.width/2 - Screen.width/14, Screen.height/4, Screen.width/8, Screen.height/16), "Yay!")) {
 				Application.LoadLevel ("Map");
 			}
 		}

@@ -2,18 +2,23 @@
 using System.Collections;
 
 public class Node : MonoBehaviour {
-
+	public GameObject previousNode;
 	public bool active = false;
 	public bool completed = false;
 
-	//test currency values
+	//currency values
 	public float gold;
 	public float xp;
-
-	public GameObject previousNode;
+	
+	//level info
 	public string levelName;
 	public string levelInfo;
-	
+
+	//tooltip info
+	private bool mouseOver;
+	public string tooltipText;
+	private string deactiveTooltip = "You must complete more levels to unlock this one.";
+
 	// Use this for initialization
 	void Start () {
 	}
@@ -55,8 +60,29 @@ public class Node : MonoBehaviour {
 	public string getLevelInfo() {
 		return levelInfo;
 	}
-
 	void loadLevel() {
 		Application.LoadLevel (1);
+	}
+
+	void OnMouseEnter() {
+		mouseOver = true;
+	}
+
+	void OnMouseExit() {
+		mouseOver = false;
+	}
+
+	void OnGUI() {
+		if (mouseOver && active) {
+			var x = Event.current.mousePosition.x;
+			var y = Event.current.mousePosition.y;
+
+			GUI.Box (new Rect(x-149, y+21, 300, 30), tooltipText);
+		} else if (mouseOver && !active) {
+			var x = Event.current.mousePosition.x;
+			var y = Event.current.mousePosition.y;
+			
+			GUI.Box(new Rect(x-149, y+21, 300, 30), deactiveTooltip);
+		}
 	}
 }
