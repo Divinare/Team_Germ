@@ -35,11 +35,13 @@ public class Map_GUI : MonoBehaviour {
 		GUI.Label(new Rect(Screen.width - Screen.width/12,Screen.height - Screen.height/8,Screen.width/12,Screen.height/8), gold.ToString(), bigNumbers);
 
 		//shop buttons
-		if (GUI.Button (new Rect (0,0,100,50), "Shop")) {
+		if (GUI.Button (new Rect (0,0,Screen.height/6,Screen.height/12), "Shop")) {
 			Debug.Log ("Shop");
 		}
-		if (GUI.Button (new Rect (Screen.width - 100,0,100,50), "Training")) {
+		if (GUI.Button (new Rect (Screen.width - Screen.height/6,0,Screen.height/6,Screen.height/12), "Training")) {
 			Debug.Log ("Training");
+		}
+		if (GUI.Button (new Rect (0,Screen.height - Screen.height/12,Screen.height/4,Screen.height/12), "Choose Your Bacs")) {
 		}
 	}
 }

@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 8d260735abbf5ee45a574dae155a8d14
+guid: f0b8168ca9e5a944595ba7c948532364
 TextureImporter:
   fileIDToRecycleName:
-    21300000: test_map
+    21300000: skillIcon
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

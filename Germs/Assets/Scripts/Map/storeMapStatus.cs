@@ -24,31 +24,22 @@ public class storeMapStatus : MonoBehaviour {
 			Destroy(gameObject);
 		}
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
+
+	//stores map status
 	void storeGameStatus(List<Transform> allNodes) {
 		gameBools.Clear();
 		foreach (Transform node in allNodes) {
 			gameBools.Add(node.gameObject.GetComponent<Node>().completed);
 		}
 	}
-	
+
+	//get map status
 	public List<bool> retrieveGameBools() {
 		return gameBools;
 	}
 
-	void storeNode(Transform node) {
-		nodeFrom = node.transform.name;
-	}
-
-	public string getNode() {
-		return nodeFrom;
-	}
-
+	//store gold
 	void setGold(Transform node) {
 		gold += node.gameObject.GetComponent<Node>().getGold();
 		xp += node.gameObject.GetComponent<Node>().getXp();

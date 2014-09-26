@@ -12,6 +12,7 @@ public class Node : MonoBehaviour {
 
 	public GameObject previousNode;
 	public string levelName;
+	public string levelInfo;
 	
 	// Use this for initialization
 	void Start () {
@@ -45,6 +46,14 @@ public class Node : MonoBehaviour {
 
 	public float getXp() {
 		return xp;
+	}
+
+	public string getLevelName() {
+		return levelName;
+	}
+
+	public string getLevelInfo() {
+		return levelInfo;
 	}
 
 	void loadLevel() {
