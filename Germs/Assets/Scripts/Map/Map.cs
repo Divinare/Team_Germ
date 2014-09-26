@@ -18,13 +18,18 @@ public class Map : MonoBehaviour {
 	//GUI tools
 	private bool drawBattleWindow = false;
 	public GUIStyle bigNumbers;
+	public GUIStyle titleLetters;
 	public string lvlInfo;
 	public string lvlName;
 	public float gold;
 	public float xp;
+	public bool skill;
 	public Texture2D goldIcon;
 	public Texture2D xpIcon;
 	public Texture2D skillIcon;
+
+	//sound
+	public AudioSource clickSound;
 
 	// Use this for initialization
 	void Start () {
@@ -42,6 +47,7 @@ public class Map : MonoBehaviour {
 
 		//first node
 		setNodeActive(transform.FindChild("Node1"));
+		clickSound = GameObject.FindGameObjectWithTag ("AudioDummy").GetComponent<AudioSource> (); 
 
 		//complete the node that was entered, temporary! needs better way of telling when level is complete
 		storedNode = battleTracker.gameObject.GetComponent<storeBattleStatus>().getNode();
@@ -62,7 +68,6 @@ public class Map : MonoBehaviour {
 		
 		if (Physics.Raycast(ray, out hit, raycastLength)) {
 			//Debug.Log(hit.collider.gameObject.name);
-			
 			if (hit.collider.gameObject.tag == "Node") {
 				//Debug.Log("Node hit");
 				if (Input.GetMouseButtonUp(0)) {
@@ -72,7 +77,7 @@ public class Map : MonoBehaviour {
 						if (hit.collider.gameObject.GetComponent<Node>().active == true) {
 							//storage
 							storeGameStatus();
-
+							clickSound.Play();
 							//enter level through GUI window
 							drawBattleWindow = true;
 						}
@@ -107,7 +112,6 @@ public class Map : MonoBehaviour {
 
 	void retrieveGameStatus() {
 		gameBools = statusTracker.gameObject.GetComponent<storeMapStatus>().retrieveGameBools();
-
 		for (int i = 0; i < gameBools.Count; i++) {
 			if (gameBools[i]) {
 				setNodeActive(allNodes[i]);
@@ -124,31 +128,29 @@ public class Map : MonoBehaviour {
 			lvlInfo = storedHit.transform.GetComponent<Node>().getLevelInfo();
 			gold = storedHit.transform.GetComponent<Node>().getGold();
 			xp = storedHit.transform.GetComponent<Node>().getXp();
-			
-			GUI.Box(new Rect(Screen.width /2 - 100,Screen.height /2 - 300,250,400), "Level Info: "+lvlName);
-			GUI.Box(new Rect(Screen.width /2 - 100,Screen.height /2 - 270,250,120), lvlInfo);
-			GUI.Box(new Rect(Screen.width /2 - 100,Screen.height /2 - 120,250,160), "You will recieve :");
-			GUI.Box(new Rect(Screen.width /2 - 80,Screen.height /2 - 80,64,64), goldIcon);
-			GUI.Label(new Rect(Screen.width /2 - 80,Screen.height /2 - 80,64,64), gold.ToString(), bigNumbers);
-			GUI.Box(new Rect(Screen.width /2 - 10,Screen.height /2 - 80,64,64), xpIcon);
-			GUI.Label(new Rect(Screen.width /2 - 10,Screen.height /2 - 80,64,64), xp.ToString(), bigNumbers);
-			GUI.Box(new Rect(Screen.width /2 + 60,Screen.height /2 - 80,64,64), skillIcon);
-			if (GUI.Button (new Rect (Screen.width /2 - 100, Screen.height / 2 + 50, 100, 50), "Enter Level")) {
+			skill = storedHit.transform.GetComponent<Node>().getSkill();
+
+			GUI.Box( new Rect(Screen.width/2 - Screen.width/4, 0, Screen.width/2, Screen.height/2), "");
+			GUI.Box( new Rect(Screen.width/2 - Screen.width/4, 0, Screen.width/2, Screen.height/2), "Level Info: "+lvlName, titleLetters);
+			GUI.Box( new Rect(Screen.width/2 - Screen.width/4, Screen.height/24, Screen.width/2, Screen.height/4), lvlInfo);
+			GUI.Box( new Rect(Screen.width/2 - Screen.width/4, Screen.height/3, Screen.width/2, Screen.height/6), "You will recieve:");
+			GUI.Box (new Rect (Screen.width/2 - Screen.width/4,Screen.height/3 + Screen.height/16,Screen.width/12,Screen.height/10), xpIcon);
+			GUI.Box (new Rect (Screen.width/2 - Screen.width/4,Screen.height/3 + Screen.height/16,Screen.width/12,Screen.height/10), xp.ToString(), bigNumbers);
+			GUI.Box (new Rect (Screen.width/2 - Screen.width/6,Screen.height/3 + Screen.height/16,Screen.width/12,Screen.height/10), goldIcon);
+			GUI.Box (new Rect (Screen.width/2 - Screen.width/6,Screen.height/3 + Screen.height/16,Screen.width/12,Screen.height/10), gold.ToString(), bigNumbers);
+			if (skill) {
+				GUI.Box (new Rect (Screen.width/2 - Screen.width/12,Screen.height/3 + Screen.height/16,Screen.width/12,Screen.height/10), skillIcon);
+			}
+			if(GUI.Button(new Rect(Screen.width/2 - Screen.width/4, Screen.height/2, Screen.width/8, Screen.height/16), "Enter Level")) {
 				battleTracker.SendMessage("storeNode", storedHit.collider.transform);
+				clickSound.Play();
 				nodeLoadLevel (storedHit.collider.transform);
 			}
-			if (GUI.Button (new Rect (Screen.width /2 + 50, Screen.height / 2 + 50, 100, 50), "Exit")) {
+			if(GUI.Button(new Rect(Screen.width/2 + Screen.width/8, Screen.height/2, Screen.width/8, Screen.height/16), "Exit")) {
+				clickSound.Play();
 				drawBattleWindow = false;
 			}
-
-
-			//get level info
-			lvlName = storedHit.transform.GetComponent<Node>().getLevelName();
-			lvlInfo = storedHit.transform.GetComponent<Node>().getLevelInfo();
-
-			//GUI.Box(new Rect(Screen.width/2 - Screen.width/6, Screen.height/8, Screen.width/3, Screen.width/3), "Level Menu: "+lvlName);
-	
-			}
+		}
 		
 	}
 	

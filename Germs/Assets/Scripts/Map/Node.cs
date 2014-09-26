@@ -9,6 +9,7 @@ public class Node : MonoBehaviour {
 	//currency values
 	public float gold;
 	public float xp;
+	public bool skillReward;
 	
 	//level info
 	public string levelName;
@@ -51,6 +52,11 @@ public class Node : MonoBehaviour {
 
 	public float getXp() {
 		return xp;
+	}
+
+	public bool getSkill() {
+		//does this map reward a skill?
+		return skillReward;
 	}
 
 	public string getLevelName() {
