@@ -25,6 +25,7 @@ public class storeBattleStatus : MonoBehaviour {
 		}
 	}
 
+	//the level that was entered was...
 	void levelCompleted() {
 		levelsCompleted += 1;
 		levelComplete = true;
@@ -38,6 +39,7 @@ public class storeBattleStatus : MonoBehaviour {
 		levelsFailed += 1;
 	}
 
+	//called on Start in map
 	public bool onReturnToMap() {
 		if (levelComplete) {
 			return true;
