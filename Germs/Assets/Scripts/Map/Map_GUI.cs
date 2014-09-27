@@ -7,8 +7,10 @@ public class Map_GUI : MonoBehaviour {
 
 	public Texture2D goldIcon;
 	public Texture2D xpIcon;
-	public GUIStyle bigNumbers;
+	public Texture2D shopButton;
 
+	public GUIStyle bigNumbers;
+	public GUIStyle trainerHover;
 	public AudioSource clickSound;
 
 	//GameStateObject
@@ -38,11 +40,11 @@ public class Map_GUI : MonoBehaviour {
 
 		//shop buttons
 
-		if (GUI.Button (new Rect (0,0,Screen.height/6,Screen.height/12), "Shop")) {
+		if (GUI.Button (new Rect (0,0,Screen.height/6,Screen.height/12), shopButton, bigNumbers)) {
 			clickSound.Play ();	
 			Debug.Log ("Shop");
 		}
-		if (GUI.Button (new Rect (Screen.width - Screen.height/6,0,Screen.height/6,Screen.height/12), "Training")) {
+		if (GUI.Button (new Rect (Screen.width - Screen.height/6,0,Screen.height/6,Screen.height/12), "", trainerHover)) {
 			clickSound.Play ();	
 			Debug.Log ("Training");
 		}
