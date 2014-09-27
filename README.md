@@ -30,6 +30,9 @@ http://www.youtube.com/watch?v=DrR0soJDCUo
 Targeting units:
 https://www.youtube.com/watch?v=g1P2Q9xKCAs
 
+Add "tags" to runtime objects <-> create Dictionary<string, GameObject>
+http://answers.unity3d.com/questions/46037/add-tags-during-runtime.html
+
 <h2>Kurssin tavoitteita:</h2>
 
 - joku perus-AI vastassa

@@ -39,10 +39,10 @@
 	<Reference Include="System.Core" />
 	<Reference Include="System.Xml.Linq" />
 	<Reference Include="UnityEngine">
-	  <HintPath>F:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
 	</Reference>
 	<Reference Include="UnityEditor">
-	  <HintPath>F:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+	  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
 	</Reference>
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\Map\onClickDestroy.cs" />
      <Compile Include="Assets\Scripts\Map\storeBattleStatus.cs" />
      <Compile Include="Assets\Scripts\Map\storeMapStatus.cs" />
+     <Compile Include="Assets\Scripts\Matrix\Matrix.cs" />
      <Compile Include="Assets\Scripts\Matrix\SquarePosition.cs" />
      <Compile Include="Assets\Scripts\Selection\Selector.cs" />
      <Compile Include="Assets\Scripts\Turn\TurnHandler.cs" />
@@ -65,6 +66,7 @@
      <Compile Include="Assets\Scripts\Unit\RangedAttack.cs" />
      <Compile Include="Assets\Scripts\Unit\UnitStatus.cs" />
      <Compile Include="Assets\Scripts\testLevels\levelComplete.cs" />
+     <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

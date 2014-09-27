@@ -5,6 +5,8 @@ public class Selector : MonoBehaviour {
 
 	RaycastHit hit;
 	private float raycastLength = 1000;
+	string tags = "Unit, MenuItem";
+	private GameObject poppedSquare = null;
 	// Update is called once per frame
 	void Update () {
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
@@ -19,22 +21,26 @@ public class Selector : MonoBehaviour {
 		}
 		Debug.DrawRay (ray.origin, ray.direction * raycastLength);
 
+		if (hit.collider == null) {
+			Debug.Log ("empty space");
+			return;
+		}
+
+		popUpSquare (hit.collider.gameObject);
+
 		if (Input.GetMouseButtonUp (0)) {
-			if (hit.collider == null) {
-				Debug.Log ("clicked empty space");
-				return;
-			}
 			GameObject objectClicked = hit.collider.gameObject;
 
 			GameObject activeUnit = findActiveUnit();
 			Debug.Log (activeUnit);
 			if (objectClicked.tag == "Unit") {
 				unitAction(activeUnit, objectClicked);
-			} else if (objectClicked.tag == "Square") {
-				activeUnit.GetComponent<Movement> ().startMoving(objectClicked);
 			} else if (objectClicked.tag == "MenuItem") {
 				Debug.Log("menu item clicked!");
 				activeUnit.GetComponent<UnitStatus> ().switchSelectedAction(objectClicked.name);
+			} else {
+				// Clicked a square, squares have no tags
+				activeUnit.GetComponent<Movement> ().startMoving(objectClicked);
 			}
 
 		}
@@ -67,6 +73,29 @@ public class Selector : MonoBehaviour {
 		
 		// etc...
 		
+	}
+
+	// pop up a square so that player can see where he can move
+	private void popUpSquare(GameObject go) {
+		if (go == poppedSquare) {
+			return;
+		}
+		// check if clicked something else than square, squares have no tag
+		for (int i = 0; i < this.tags.Length; i++) {
+			if(this.tags[i].Equals(go.tag)) {
+				return;
+			}
+		}
+		float x = go.transform.position.x;
+		float y = go.transform.position.y;
+		hit.collider.gameObject.transform.position = new Vector3 (x, y, -1.5f);
+
+		// move the last popped square back to its original position
+		if (poppedSquare != null) {
+			poppedSquare.transform.position = new Vector3 (x, y, 0f);
+		}
+		poppedSquare = go;
+
 	}
 
 
