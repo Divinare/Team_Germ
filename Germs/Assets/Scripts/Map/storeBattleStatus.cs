@@ -6,6 +6,10 @@ public class storeBattleStatus : MonoBehaviour {
 	public List<GameObject> allBacs = new List<GameObject>();
 	public List<GameObject> selectedBacs = new List<GameObject>();
 
+	//Real list is transform or gameobject and will display image not text, this is for testing
+	public List<string> allBacsTest = new List<string>();
+	public List<string> selectedBacsTest = new List<string>();
+
 	public string storedNode;
 	
 	//level status/count
@@ -23,6 +27,22 @@ public class storeBattleStatus : MonoBehaviour {
 		if (FindObjectsOfType(GetType()).Length > 1) {
 			Destroy(gameObject);
 		}
+
+		//test
+		allBacsTest.Add ("A");
+		allBacsTest.Add ("B");
+		allBacsTest.Add ("C");
+		allBacsTest.Add ("D");
+		allBacsTest.Add ("E");
+		allBacsTest.Add ("F");
+		allBacsTest.Add ("G");
+		allBacsTest.Add ("");
+		selectedBacsTest.Add ("");
+		selectedBacsTest.Add ("");
+		selectedBacsTest.Add ("");
+		selectedBacsTest.Add ("");
+		selectedBacsTest.Add ("");
+
 	}
 
 	//the level that was entered was...
@@ -74,5 +94,22 @@ public class storeBattleStatus : MonoBehaviour {
 
 	void setAllBacs(List<GameObject> allBacteria) {
 		allBacs = allBacteria;
+	}
+
+	//testing methods
+	public List<string> getAllBacsTest() {
+		return allBacsTest;
+	}
+	
+	public List<string> getSelectedBacsTest() {
+		return selectedBacsTest;
+	}
+
+	public void setSelectedBacTest(string bac, int indx) {
+		selectedBacsTest[indx] = bac;
+	}
+
+	public void removeSelectedBacTest(string bac) {
+		selectedBacsTest.Remove(bac);
 	}
 }
