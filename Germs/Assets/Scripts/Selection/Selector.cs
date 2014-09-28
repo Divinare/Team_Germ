@@ -22,7 +22,7 @@ public class Selector : MonoBehaviour {
 		Debug.DrawRay (ray.origin, ray.direction * raycastLength);
 
 		if (hit.collider == null) {
-			// Debug.Log ("empty space"); // Tämä spämmää koko konsolilogin täyteen - älkää pls jättäkö näitä kommentoimatta silloin, kun pushaatte
+			// Debug.Log ("empty space");
 			return;
 		}
 

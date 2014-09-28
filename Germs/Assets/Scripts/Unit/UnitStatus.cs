@@ -14,6 +14,12 @@ public class UnitStatus : MonoBehaviour {
 	public bool enemy = false;
 	public AudioClip[] sounds;
 	public GameObject DeathSound;
+	public int x;
+	public int y;
+	// How many squares from center to left or right
+	public int width;
+	// How many squares from center to up or down
+	public int height;
 
 	// Use this for initialization
 	void Start () {
