@@ -10,15 +10,16 @@ public class Selector : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-		if (Physics.Raycast (ray, out hit, raycastLength)) {
+		Physics.Raycast (ray, out hit, raycastLength);
+	//	if (Physics.Raycast (ray, out hit, raycastLength)) {
 
-			Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			//Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 			// Make a floor function to the coordinates
-			float x = Mathf.Floor (pz.x);
-			float y = Mathf.Floor (pz.y);
+	//		float x = Mathf.Floor (pz.x);
+	//		float y = Mathf.Floor (pz.y);
 
-		}
+	//	}
 		Debug.DrawRay (ray.origin, ray.direction * raycastLength);
 
 		if (hit.collider == null) {
@@ -86,9 +87,14 @@ public class Selector : MonoBehaviour {
 				return;
 			}
 		}
+
+		if (!enoughSpace()) {
+			return;
+		}
+
 		float x = go.transform.position.x;
 		float y = go.transform.position.y;
-		hit.collider.gameObject.transform.position = new Vector3 (x, y, -1.5f);
+		go.transform.position = new Vector3 (x, y, -1.5f);
 
 		// move the last popped square back to its original position
 		if (poppedSquare != null) {
@@ -96,6 +102,20 @@ public class Selector : MonoBehaviour {
 		}
 		poppedSquare = go;
 
+	}
+
+	private bool enoughSpace() {
+		GameObject activeUnit = findActiveUnit();
+
+
+		//widthLeftRight = activeUnit.GetComponent<UnitStatus> ().width;
+	//	height
+
+
+
+
+
+		return true;
 	}
 
 

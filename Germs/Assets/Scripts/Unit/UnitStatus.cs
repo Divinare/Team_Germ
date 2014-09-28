@@ -16,10 +16,14 @@ public class UnitStatus : MonoBehaviour {
 	public GameObject DeathSound;
 	public int x;
 	public int y;
-	// How many squares from center to left or right
-	public int width;
-	// How many squares from center to up or down
-	public int height;
+	// How many squares from center to left
+	public int widthLeft;
+	// How many squares from center to right
+	public int widthRight;
+	// How many squares from center to up
+	public int heightUp;
+	// How many squares from center to down
+	public int heightDown;
 
 	// Use this for initialization
 	void Start () {
