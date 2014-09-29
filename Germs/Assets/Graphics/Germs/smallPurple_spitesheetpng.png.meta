@@ -1,0 +1,444 @@
+fileFormatVersion: 2
+guid: 780503fa1b8c45e40a8af83f2b8c1f15
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: smallPurple_spitesheetpng
+    21300002: smallPurple_spitesheetpng_0
+    21300004: smallPurple_spitesheetpng_1
+    21300006: smallPurple_spitesheetpng_2
+    21300008: smallPurple_spitesheetpng_3
+    21300010: smallPurple_spitesheetpng_4
+    21300012: smallPurple_spitesheetpng_5
+    21300014: smallPurple_spitesheetpng_6
+    21300016: smallPurple_spitesheetpng_7
+    21300018: smallPurple_spitesheetpng_8
+    21300020: smallPurple_spitesheetpng_9
+    21300022: smallPurple_spitesheetpng_10
+    21300024: smallPurple_spitesheetpng_11
+    21300026: smallPurple_spitesheetpng_12
+    21300028: smallPurple_spitesheetpng_13
+    21300030: smallPurple_spitesheetpng_14
+    21300032: smallPurple_spitesheetpng_15
+    21300034: smallPurple_spitesheetpng_16
+    21300036: smallPurple_spitesheetpng_17
+    21300038: smallPurple_spitesheetpng_18
+    21300040: smallPurple_spitesheetpng_19
+    21300042: smallPurple_spitesheetpng_20
+    21300044: smallPurple_spitesheetpng_21
+    21300046: smallPurple_spitesheetpng_22
+    21300048: smallPurple_spitesheetpng_23
+    21300050: smallPurple_spitesheetpng_24
+    21300052: smallPurple_spitesheetpng_25
+    21300054: smallPurple_spitesheetpng_26
+    21300056: smallPurple_spitesheetpng_27
+    21300058: smallPurple_spitesheetpng_28
+    21300060: smallPurple_spitesheetpng_29
+    21300062: smallPurple_spitesheetpng_30
+    21300064: smallPurple_spitesheetpng_31
+    21300066: smallPurple_spitesheetpng_32
+    21300068: smallPurple_spitesheetpng_33
+    21300070: smallPurple_spitesheetpng_34
+    21300072: smallPurple_spitesheetpng_35
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: smallPurple_spitesheetpng_0
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1512
+        width: 226
+        height: 350
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_1
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 1507
+        width: 233
+        height: 358
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_2
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 1496
+        width: 226
+        height: 369
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_3
+      rect:
+        serializedVersion: 2
+        x: 718
+        y: 1469
+        width: 208
+        height: 396
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_4
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 1449
+        width: 186
+        height: 416
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_5
+      rect:
+        serializedVersion: 2
+        x: 1143
+        y: 1402
+        width: 118
+        height: 473
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_6
+      rect:
+        serializedVersion: 2
+        x: 1310
+        y: 1434
+        width: 126
+        height: 431
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_7
+      rect:
+        serializedVersion: 2
+        x: 1438
+        y: 1454
+        width: 174
+        height: 411
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_8
+      rect:
+        serializedVersion: 2
+        x: 1614
+        y: 1476
+        width: 195
+        height: 389
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_9
+      rect:
+        serializedVersion: 2
+        x: 1809
+        y: 1487
+        width: 225
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_10
+      rect:
+        serializedVersion: 2
+        x: 2037
+        y: 1498
+        width: 232
+        height: 367
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1040
+        width: 225
+        height: 351
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_12
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 1036
+        width: 235
+        height: 357
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_13
+      rect:
+        serializedVersion: 2
+        x: 482
+        y: 1025
+        width: 227
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_14
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 998
+        width: 206
+        height: 395
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_15
+      rect:
+        serializedVersion: 2
+        x: 933
+        y: 978
+        width: 185
+        height: 415
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_16
+      rect:
+        serializedVersion: 2
+        x: 1141
+        y: 922
+        width: 118
+        height: 471
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_17
+      rect:
+        serializedVersion: 2
+        x: 1308
+        y: 964
+        width: 125
+        height: 429
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_18
+      rect:
+        serializedVersion: 2
+        x: 1436
+        y: 983
+        width: 174
+        height: 410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_19
+      rect:
+        serializedVersion: 2
+        x: 1612
+        y: 1005
+        width: 194
+        height: 388
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_20
+      rect:
+        serializedVersion: 2
+        x: 1807
+        y: 1016
+        width: 225
+        height: 377
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_21
+      rect:
+        serializedVersion: 2
+        x: 2034
+        y: 1027
+        width: 233
+        height: 366
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_22
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 562
+        width: 228
+        height: 349
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_23
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 558
+        width: 234
+        height: 355
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_24
+      rect:
+        serializedVersion: 2
+        x: 500
+        y: 546
+        width: 228
+        height: 367
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_25
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 517
+        width: 208
+        height: 396
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_26
+      rect:
+        serializedVersion: 2
+        x: 951
+        y: 499
+        width: 187
+        height: 414
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_27
+      rect:
+        serializedVersion: 2
+        x: 1159
+        y: 443
+        width: 122
+        height: 470
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_28
+      rect:
+        serializedVersion: 2
+        x: 1328
+        y: 484
+        width: 127
+        height: 429
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_29
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 503
+        width: 176
+        height: 410
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_30
+      rect:
+        serializedVersion: 2
+        x: 1827
+        y: 535
+        width: 227
+        height: 378
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_31
+      rect:
+        serializedVersion: 2
+        x: 2055
+        y: 546
+        width: 233
+        height: 367
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_32
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 0
+        width: 118
+        height: 479
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_33
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 1
+        width: 122
+        height: 481
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_34
+      rect:
+        serializedVersion: 2
+        x: 347
+        y: 3
+        width: 119
+        height: 481
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: smallPurple_spitesheetpng_35
+      rect:
+        serializedVersion: 2
+        x: 519
+        y: 8
+        width: 117
+        height: 480
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
