@@ -64,6 +64,7 @@ public class UnitStatus : MonoBehaviour {
 	public void TakeDamage(int damage) {
 		PlaySound (0);
 		currentHealth -= damage;
+		battlelog ("taken " + damage + " dmg");
 	}
 	
 	public void Poisoned(int damage) {
@@ -85,5 +86,9 @@ public class UnitStatus : MonoBehaviour {
 
 	public bool isAtTargetSquare(GameObject Square) {
 		return false;
+	}
+
+	private void battlelog(string txt) {
+		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Battlelog> ().addToBattleLog(txt);
 	}
 }

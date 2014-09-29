@@ -216,7 +216,6 @@ public class Selector : MonoBehaviour {
 			db ("y pieni/suuri " + y );
 			return false;
 		}
-		Debug.Log ("x " + x + " y " + y);
 		if(unitMap[y,x] == 1) {
 			db ("no space");
 			return false;

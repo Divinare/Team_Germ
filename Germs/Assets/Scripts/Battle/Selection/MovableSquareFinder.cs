@@ -12,7 +12,6 @@ public class MovableSquareFinder : MonoBehaviour {
 	public void initUnitsMatrix(int width, int height) {
 		this.matrixWidth = width;
 		this.matrixHeight = height;
-		Debug.Log ("width: " + width + " height: " + height);
 		this.unitMap = new int[height, width];
 		
 		for (int x = 0; x < width; x++) {
@@ -37,9 +36,6 @@ public class MovableSquareFinder : MonoBehaviour {
 		GameObject matrix = GameObject.FindGameObjectWithTag ("Matrix");
 		GameObject[] squares = matrix.GetComponent<Matrix> ().getSquares ();
 		Vector3 backward = transform.TransformDirection (Vector3.back);
-
-		//int x = matrixWidth-1;
-		//int y = 0;
 
 		int y = 0;
 		int x = 0;

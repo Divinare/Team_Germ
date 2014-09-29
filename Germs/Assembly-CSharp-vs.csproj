@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\Battle\Turn\BattleEndWindow.cs" />
      <Compile Include="Assets\Scripts\Battle\Turn\TurnHandler.cs" />
      <Compile Include="Assets\Scripts\Battle\UI\ActivityMenu.cs" />
+     <Compile Include="Assets\Scripts\Battle\UI\Battlelog.cs" />
      <Compile Include="Assets\Scripts\Battle\Unit\HealthBar.cs" />
      <Compile Include="Assets\Scripts\Battle\Unit\Movement.cs" />
      <Compile Include="Assets\Scripts\Battle\Unit\PreventRotation.cs" />

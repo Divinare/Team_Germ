@@ -23,14 +23,10 @@ public class Matrix : MonoBehaviour {
 			for (int y = 0; y < matrixHeight; y++) {
 				GameObject square = GameObject.CreatePrimitive (PrimitiveType.Cube);
 				square.transform.position = new Vector3 (x+0.5f, y+0.5f, 0);
-				//	square.name = "Square" + i + j;
-				//	squares[square.name] = square;
+
 				square.transform.parent = matrixParent.transform;
-				square.AddComponent("SquarePosition");
+				//square.AddComponent("SquarePosition");
 
-
-				//	cube.transform.localScale = Vector3 (1.25, 1.5, 1);
-				//squares[x][y] = square;
 				squares[squaresIndex] = square;
 				squaresIndex++;
 			}
@@ -43,7 +39,7 @@ public class Matrix : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		//cube.transform.position.x == 2;
+
 	}
 	
 	public int getLength() {
