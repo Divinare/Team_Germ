@@ -68,7 +68,7 @@
      <Compile Include="Assets\Scripts\Unit\PreventRotation.cs" />
      <Compile Include="Assets\Scripts\Unit\RangedAttack.cs" />
      <Compile Include="Assets\Scripts\Unit\UnitStatus.cs" />
-     <Compile Include="Assets\Scripts\testLevels\levelComplete.cs" />
+     <Compile Include="Assets\testLevels\levelComplete.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
