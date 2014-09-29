@@ -12,26 +12,29 @@ public class Selector : MonoBehaviour {
 	private int unitMaxSize = 5;
 
 	// for developing
-	private bool debug = true;
+	private bool debug = false;
 
 	// Update is called once per frame
 	void Update () {
 
 		if (!GameObject.FindGameObjectWithTag("TurnHandler").transform.GetComponent<TurnHandler>().isBattleOver()) {
+			changeUnitsBoxColliders(true);
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			Physics.Raycast (ray, out hit, raycastLength);
 			//	if (Physics.Raycast (ray, out hit, raycastLength)) {
+			changeUnitsBoxColliders(false);
 
-			Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			//Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 			// Make a floor function to the coordinates
 				//	float x = Mathf.Floor (pz.x);
 				//	float y = Mathf.Floor (pz.y);
 			//db ("x: " + x + " y: " + y);
-			//	}
+
 			//Debug.DrawRay (ray.origin, ray.direction * raycastLength);
+
+			// empty space
 			if (hit.collider == null) {
-				// Debug.Log ("empty space");
 			return;
 			}
 			popUpMovableSquare (hit.collider.gameObject);
@@ -239,6 +242,17 @@ public class Selector : MonoBehaviour {
 		// No active units found
 		Debug.Log ("Active unit not found");
 		return null;
+	}
+
+	private void changeUnitsBoxColliders(bool b) {
+		GameObject[] units = GameObject.FindGameObjectsWithTag ("Unit");
+		for (int i = 0; i < units.Length; i++) {
+			if(b) {
+				units[i].collider.enabled = true;
+			} else {
+				units[i].collider.enabled = false;
+			}
+		}
 	}
 
 
