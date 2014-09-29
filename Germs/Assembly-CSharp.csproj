@@ -48,7 +48,18 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Audio\AudioController.cs" />
      <Compile Include="Assets\Scripts\Audio\DestroyAudioObject.cs" />
-     <Compile Include="Assets\Scripts\Camera\Zoom.cs" />
+     <Compile Include="Assets\Scripts\Battle\Camera\Zoom.cs" />
+     <Compile Include="Assets\Scripts\Battle\Matrix\Matrix.cs" />
+     <Compile Include="Assets\Scripts\Battle\Selection\MovableSquareFinder.cs" />
+     <Compile Include="Assets\Scripts\Battle\Selection\Selector.cs" />
+     <Compile Include="Assets\Scripts\Battle\Turn\BattleEndWindow.cs" />
+     <Compile Include="Assets\Scripts\Battle\Turn\TurnHandler.cs" />
+     <Compile Include="Assets\Scripts\Battle\UI\ActivityMenu.cs" />
+     <Compile Include="Assets\Scripts\Battle\Unit\HealthBar.cs" />
+     <Compile Include="Assets\Scripts\Battle\Unit\Movement.cs" />
+     <Compile Include="Assets\Scripts\Battle\Unit\PreventRotation.cs" />
+     <Compile Include="Assets\Scripts\Battle\Unit\RangedAttack.cs" />
+     <Compile Include="Assets\Scripts\Battle\Unit\UnitStatus.cs" />
      <Compile Include="Assets\Scripts\Main Menu\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Main Menu\Menu_movement.cs" />
      <Compile Include="Assets\Scripts\Map\Map.cs" />
@@ -57,18 +68,6 @@
      <Compile Include="Assets\Scripts\Map\onClickDestroy.cs" />
      <Compile Include="Assets\Scripts\Map\storeBattleStatus.cs" />
      <Compile Include="Assets\Scripts\Map\storeMapStatus.cs" />
-     <Compile Include="Assets\Scripts\Matrix\Matrix.cs" />
-     <Compile Include="Assets\Scripts\Matrix\SquarePosition.cs" />
-     <Compile Include="Assets\Scripts\Selection\MovableSquareFinder.cs" />
-     <Compile Include="Assets\Scripts\Selection\Selector.cs" />
-     <Compile Include="Assets\Scripts\Turn\BattleEndWindow.cs" />
-     <Compile Include="Assets\Scripts\Turn\TurnHandler.cs" />
-     <Compile Include="Assets\Scripts\Unit\GUI_Elements.cs" />
-     <Compile Include="Assets\Scripts\Unit\HealthBar.cs" />
-     <Compile Include="Assets\Scripts\Unit\Movement.cs" />
-     <Compile Include="Assets\Scripts\Unit\PreventRotation.cs" />
-     <Compile Include="Assets\Scripts\Unit\RangedAttack.cs" />
-     <Compile Include="Assets\Scripts\Unit\UnitStatus.cs" />
      <Compile Include="Assets\testLevels\levelComplete.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

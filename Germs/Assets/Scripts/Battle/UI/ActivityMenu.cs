@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GUI_Elements : MonoBehaviour {
+public class ActivityMenu : MonoBehaviour {
 	
 	public Texture2D meleeIcon;
 	public Texture2D rangedIcon;
