@@ -12,7 +12,7 @@ public class Selector : MonoBehaviour {
 	private int unitMaxSize = 5;
 
 	// for developing
-	private bool debug = false;
+	private bool debug = true;
 
 	// Update is called once per frame
 	void Update () {
@@ -22,12 +22,12 @@ public class Selector : MonoBehaviour {
 			Physics.Raycast (ray, out hit, raycastLength);
 			//	if (Physics.Raycast (ray, out hit, raycastLength)) {
 
-			//Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 			// Make a floor function to the coordinates
-			//		float x = Mathf.Floor (pz.x);
-			//		float y = Mathf.Floor (pz.y);
-
+				//	float x = Mathf.Floor (pz.x);
+				//	float y = Mathf.Floor (pz.y);
+			//db ("x: " + x + " y: " + y);
 			//	}
 			//Debug.DrawRay (ray.origin, ray.direction * raycastLength);
 			if (hit.collider == null) {
@@ -155,18 +155,18 @@ public class Selector : MonoBehaviour {
 		// up left & up right
 		for (int u = 1; u < up+1; u++) {
 
-			if(!spaceAtSquare (x, y-u, unitMap)) {
+			if(!spaceAtSquare (x, y+u, unitMap)) {
 				db ("up false");
 				return false;
 			}
 			for (int l = 1; l < left+1; l++) {
-				if(!spaceAtSquare (x+l, y-u, unitMap)) {
+				if(!spaceAtSquare (x+l, y+u, unitMap)) {
 					db ("up left false");
 					return false;
 				}
 			}
 			for (int r = 1; r < right+1; r++) {
-				if(!spaceAtSquare (x-r, y-u, unitMap)) {
+				if(!spaceAtSquare (x-r, y+u, unitMap)) {
 					db ("up right false");
 					return false;
 				}
@@ -177,18 +177,18 @@ public class Selector : MonoBehaviour {
 		// down left & down right
 		for (int d = 1; d < down+1; d++) {
 			
-			if(!spaceAtSquare (x, y+d, unitMap)) {
+			if(!spaceAtSquare (x, y-d, unitMap)) {
 				db ("down false");
 				return false;
 			}
 			for (int l = 1; l < left+1; l++) {
-				if(!spaceAtSquare (x+l, y+d, unitMap)) {
+				if(!spaceAtSquare (x+l, y-d, unitMap)) {
 					db ("down left false");
 					return false;
 				}
 			}
 			for (int r = 1; r < right+1; r++) {
-				if(!spaceAtSquare (x-r, y+d, unitMap)) {
+				if(!spaceAtSquare (x-r, y-d, unitMap)) {
 					db ("down right false");
 					return false;
 				}
@@ -205,11 +205,11 @@ public class Selector : MonoBehaviour {
 		int matrixWidth = this.GetComponent<MovableSquareFinder> ().matrixWidth;
 		int matrixHeight = this.GetComponent<MovableSquareFinder> ().matrixHeight;
 
-		if (x <= 0 || x >= matrixWidth) {
+		if (x < 0 || x >= matrixWidth) {
 			db ("x pieni/suuri " + x);
 			return false;
 		}
-		if (y <= 0 || y >= matrixHeight) {
+		if (y < 0 || y >= matrixHeight) {
 			db ("y pieni/suuri " + y );
 			return false;
 		}
