@@ -16,8 +16,8 @@ public class Movement : MonoBehaviour {
 
 			//constant movement
 		if (targetPosition != transform.position) {
-			Debug.Log ("moving");
-			Debug.Log (targetPosition);
+			//Debug.Log ("moving");
+			//Debug.Log (targetPosition); // Nämä spämmäävät koko konsolilogin täyteen - älkää pls jättäkö näitä kommentoimatta silloin, kun pushaatte
 
 			transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
 		}
