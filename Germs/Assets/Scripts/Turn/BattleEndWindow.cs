@@ -21,11 +21,11 @@ public class BattleEndWindow : MonoBehaviour {
 		if (battleIsOver) {
 			if (winner.Equals("player")) {
 				windowRect = GUI.Window(0, windowRect, DoMyWindow, ("Battle Over"));
-				print("Much win. Wow.");
+				// add victory pic to window
 			}
 			else {
 				windowRect = GUI.Window(0, windowRect, DoMyWindow, ("Battle Over"));
-				print("Such defeat. Wow.");
+				// add defeat pic to window
 			}
 		}
 	}

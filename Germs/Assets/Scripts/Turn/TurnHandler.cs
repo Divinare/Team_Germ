@@ -32,13 +32,14 @@ public class TurnHandler : MonoBehaviour {
 					
 					// Checks whether round has ended
 					if (unitListIndex == unitList.Count - 1) {
-						trimUnitList ();
+						trimUnitList ();						
+						initNewRound();
 					}
 					// Round hasn't ended
 					else {
 						unitListIndex++;
 						// Checks wheter the next unit is still alive so it can be given the next turn
-						if (unitList [unitListIndex] != null) {
+						if (unitListIndex <= unitList.Count - 1 && unitList [unitListIndex] != null) {
 							activeUnit = unitList [unitListIndex];
 							activeUnit.transform.GetComponent<UnitStatus> ().Select ();
 						}
@@ -61,7 +62,6 @@ public class TurnHandler : MonoBehaviour {
 				unitList.RemoveAt(i);
 			}
 		}
-		initNewRound();
 	}
 	
 	// Initializes variables for a new game round
@@ -80,7 +80,7 @@ public class TurnHandler : MonoBehaviour {
 				enemyIsDead = false;
 			}
 			// If the player side has unit(s) alive
-			else {
+			else if (unitList[i] != null && !unitList[i].transform.GetComponent<UnitStatus>().enemy) {
 				playerIsDead = false;
 			}
 		}
