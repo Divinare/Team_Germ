@@ -14,10 +14,10 @@ public class Map_GUI : MonoBehaviour {
 
 	public Texture2D goldIcon;
 	public Texture2D xpIcon;
-	public Texture2D shopButton;
 
 	public GUIStyle bigNumbers;
 	public GUIStyle trainerHover;
+	public GUIStyle shopHover;
 	public AudioSource clickSound;
 
 	//GameStateObject
@@ -54,46 +54,36 @@ public class Map_GUI : MonoBehaviour {
 
 		//shop buttons
 
-		if (GUI.Button (new Rect (0,0,Screen.height/6,Screen.height/12), shopButton, bigNumbers)) {
+		if (GUI.Button (new Rect (0 + Screen.height/6,Screen.height - Screen.height/12,Screen.height/6,Screen.height/12), "", shopHover)) {
 			clickSound.Play ();	
 			Debug.Log ("Shop");
 		}
-		if (GUI.Button (new Rect (Screen.width - Screen.height/6,0,Screen.height/6,Screen.height/12), "", trainerHover)) {
+		if (GUI.Button (new Rect (0,Screen.height - Screen.height/12,Screen.height/6,Screen.height/12), "", trainerHover)) {
 			clickSound.Play ();	
 			Debug.Log ("Training");
 		}
-		if (GUI.Button (new Rect (0,Screen.height - Screen.height/12,Screen.height/4,Screen.height/12), "Choose bacs")) {
-			clickSound.Play ();
-			Debug.Log ("Choose bacteria");
-		}
 
 		//frame for chosen bacteria
-		if (selectedBacsTest[0] != null || selectedBacsTest[0] != "") {
 			if (GUI.Button (new Rect (Screen.width/2 - Screen.width/4,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedBacsTest[0])) {
 				clickedIndex = 0;
 				bacteriaChooserOn();
 			}
-		} else {
-			if (GUI.Button (new Rect (Screen.width/2 - Screen.width/4,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), "1")) {
-				clickedIndex = 0;
-				bacteriaChooserOn();
-			}
-		}
-		if (selectedBacsTest[0] != null || selectedBacsTest[1] != "") {
 			if (GUI.Button (new Rect (Screen.width/2 - Screen.width/6,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedBacsTest[1])) {
 				clickedIndex = 1;
 				bacteriaChooserOn();
 			}
-		} else {
-			if (GUI.Button (new Rect (Screen.width/2 - Screen.width/6,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), "2")) {
-				clickedIndex = 1;
+			if (GUI.Button (new Rect (Screen.width/2 - Screen.width/12,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedBacsTest[2])) {
+				clickedIndex = 2;
 				bacteriaChooserOn();
 			}
-		}
-
-		GUI.Box (new Rect (Screen.width/2 - Screen.width/12,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), "3");
-		GUI.Box (new Rect (Screen.width/2,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), "4");
-		GUI.Box (new Rect (Screen.width/2 + Screen.width/12,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), "5");
+			if (GUI.Button (new Rect (Screen.width/2,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedBacsTest[3])) {
+				clickedIndex = 3;
+				bacteriaChooserOn();
+			}
+			if (GUI.Button (new Rect (Screen.width/2 + Screen.width/12,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedBacsTest[4])) {
+				clickedIndex = 4;
+				bacteriaChooserOn();
+			}
 
 		if (bacChooser) {
 			var pos = 0;
@@ -107,8 +97,8 @@ public class Map_GUI : MonoBehaviour {
 				}
 			}
 		}
-	}
 
+	}
 	void bacteriaChooserOn() {
 		bacChooser = true;
 		allBacsTest = battleTracker.gameObject.GetComponent<storeBattleStatus>().getAllBacsTest();

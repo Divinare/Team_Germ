@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class levelComplete : MonoBehaviour {
 	public List<GameObject> allEnemies = new List<GameObject>();
+	public List<string> selectedBacsTest = new List<string>();
 	public bool enemiesAlive;
 	public bool unitsAlive;
 
@@ -16,6 +17,7 @@ public class levelComplete : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		battleTracker = GameObject.Find ("BattleTracker").transform;
+		selectedBacsTest = battleTracker.gameObject.GetComponent<storeBattleStatus>().getSelectedBacsTest();
 		enemiesAlive = true;
 		unitsAlive = true;
 	}
@@ -33,6 +35,7 @@ public class levelComplete : MonoBehaviour {
 	}
 
 	void OnGUI() {
+		GUI.Label( new Rect(0, 0, 100, 100), "Your bacteria: "+selectedBacsTest[0]+selectedBacsTest[1]+selectedBacsTest[2]+selectedBacsTest[3]+selectedBacsTest[4]);
 		if (GUI.Button (new Rect (0,Screen.height - 50,100,50), "Return to Map")) {
 			levelInterrupted();
 			Application.LoadLevel ("Map");

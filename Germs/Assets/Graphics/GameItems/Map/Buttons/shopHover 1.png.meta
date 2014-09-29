@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 4b2a0af20faaef24a9e8476995ebe698
+guid: 42ceca8cc923633459b67d01d2ed3c58
 TextureImporter:
   fileIDToRecycleName:
-    21300000: shop
+    21300000: shopHover 1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
