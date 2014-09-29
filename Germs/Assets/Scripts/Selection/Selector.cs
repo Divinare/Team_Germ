@@ -16,41 +16,44 @@ public class Selector : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-		Physics.Raycast (ray, out hit, raycastLength);
-	//	if (Physics.Raycast (ray, out hit, raycastLength)) {
+
+		if (!GameObject.FindGameObjectWithTag("TurnHandler").transform.GetComponent<TurnHandler>().isBattleOver()) {
+			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+			Physics.Raycast (ray, out hit, raycastLength);
+			//	if (Physics.Raycast (ray, out hit, raycastLength)) {
 
 			//Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
 			// Make a floor function to the coordinates
-	//		float x = Mathf.Floor (pz.x);
-	//		float y = Mathf.Floor (pz.y);
+			//		float x = Mathf.Floor (pz.x);
+			//		float y = Mathf.Floor (pz.y);
 
-	//	}
-		//Debug.DrawRay (ray.origin, ray.direction * raycastLength);
-
-		if (hit.collider == null) {
-			// Debug.Log ("empty space");
+			//	}
+			//Debug.DrawRay (ray.origin, ray.direction * raycastLength);
+			if (hit.collider == null) {
+				// Debug.Log ("empty space");
 			return;
-		}
-
-		popUpMovableSquare (hit.collider.gameObject);
-
-		if (Input.GetMouseButtonUp (0)) {
-			GameObject objectClicked = hit.collider.gameObject;
-
-			GameObject activeUnit = findActiveUnit();
-			Debug.Log (activeUnit);
-			if (objectClicked.tag == "Unit") {
-				unitAction(activeUnit, objectClicked);
-			} else if (objectClicked.tag == "MenuItem") {
-				Debug.Log("menu item clicked!");
-				activeUnit.GetComponent<UnitStatus> ().switchSelectedAction(objectClicked.name);
-			} else {
-				// Clicked a square, squares have no tags
-				activeUnit.GetComponent<Movement> ().startMoving(objectClicked);
 			}
+			popUpMovableSquare (hit.collider.gameObject);
 
+			if (Input.GetMouseButtonUp (0)) {
+				GameObject objectClicked = hit.collider.gameObject;
+
+				GameObject activeUnit = findActiveUnit();
+				Debug.Log (activeUnit);
+				if (objectClicked.tag == "Unit") {
+
+					unitAction(activeUnit, objectClicked);
+				} 
+				else if (objectClicked.tag == "MenuItem") {
+					Debug.Log("menu item clicked!");
+					activeUnit.GetComponent<UnitStatus> ().switchSelectedAction(objectClicked.name);
+				} 
+				else {
+					// Clicked a square, squares have no tags
+					activeUnit.GetComponent<Movement> ().startMoving(objectClicked);
+				}
+			}
 		}
 	}
 
