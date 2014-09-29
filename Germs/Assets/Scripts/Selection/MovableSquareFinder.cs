@@ -7,27 +7,22 @@ public class MovableSquareFinder : MonoBehaviour {
 	public int[,] unitMap; // 1 = unit is at that square, 0 = free square
 	public int matrixWidth = 0;
 	public int matrixHeight = 0;
-	
+	RaycastHit hit;
+
 	public void initUnitsMatrix(int width, int height) {
 		this.matrixWidth = width;
 		this.matrixHeight = height;
-		this.unitMap = new int[width, height];
+		Debug.Log ("width: " + width + " height: " + height);
+		this.unitMap = new int[height, width];
 		
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				this.unitMap[x, y] = 0;
+				this.unitMap[y, x] = 0;
 			}
 		}
 		
 		GameObject[] units = GameObject.FindGameObjectsWithTag("Unit");
 
-
-//		for(int i = 0; i < units.Length; i++) {
-//			int x = units[i].GetComponent<UnitStatus>().x;
-//			int y = units[i].GetComponent<UnitStatus>().y;
-//			this.unitMap[y, x] = 1;
-
-		//}
 		addUnitsToUnitMap ();
 
 		debugUnitMap();
@@ -35,42 +30,51 @@ public class MovableSquareFinder : MonoBehaviour {
 		
 	}
 
+	// adds 1's to unitMap to all squares where unit is being
 	public void addUnitsToUnitMap() {
+		changeUnitsBoxColliders (true);
+
 		GameObject matrix = GameObject.FindGameObjectWithTag ("Matrix");
 		GameObject[] squares = matrix.GetComponent<Matrix> ().getSquares ();
-		//	Debug.Log (squares[1]);
+		Vector3 backward = transform.TransformDirection (Vector3.back);
+
+		//int x = matrixWidth-1;
+		//int y = 0;
+
+		int y = 0;
+		int x = 0;
+
 		for (int i = 0; i < squares.Length; i++) {
-				//RaycastHit hit;
-				Ray ray = Camera.main.ScreenPointToRay (squares [i].transform.position);
+			Ray ray = Camera.main.ScreenPointToRay (squares [i].transform.position);
+			Vector3 rayStart = squares [i].transform.position;
 
-				//Debug.Log (squares[i].transform.position);
-				//Physics.Raycast (ray, hit, 100);
-
-				RaycastHit hit;
-			if (Physics.Raycast(ray, out hit, 100)) {
-				Debug.DrawLine(ray.origin, hit.point);
-				Debug.DrawRay (ray.origin, ray.direction * 1000);
-			
+			if (Physics.Raycast (squares [i].transform.position, backward, out hit, 10)) {
+				unitMap[y,x] = 1;
+			}
+			y++;
+			// skip a column in the matrix
+			if (y == matrixHeight) {
+				y = 0;
+				x++;
 			}
 
+		}
+		changeUnitsBoxColliders (false);
+	}
 
-				
-				Debug.DrawRay (ray.origin, ray.direction * 1000);
-			Debug.Log (ray.origin);
-			Debug.Log (ray.direction);
-
-				if (hit.collider != null) {
-					Debug.Log (hit.collider.gameObject);
-					return;
-				}
-				Debug.Log ("missed");
-				//Debug.Log (hit.collider.gameObject);
-
+	private void changeUnitsBoxColliders(bool b) {
+		GameObject[] units = GameObject.FindGameObjectsWithTag ("Unit");
+		for (int i = 0; i < units.Length; i++) {
+			if(b) {
+				units[i].collider.enabled = true;
+			} else {
+				units[i].collider.enabled = false;
+			}
 		}
 	}
 
-
 	public int[,] getUnitMap() {
+
 		return this.unitMap;
 	}
 
@@ -78,17 +82,20 @@ public class MovableSquareFinder : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
 	private void debugUnitMap() {
+		Debug.Log ("23 " + unitMap [2, 3]);
 		string db = "";
-		for (int x = 0; x < this.matrixWidth; x++) {
-			for (int y = 0; y < this.matrixHeight; y++) {
-				db = db + this.unitMap[x, y] + " ";
+		for (int y = 0; y < this.matrixHeight; y++) {
+
+			for (int x = 0; x < this.matrixWidth; x++) {
+				db = db + this.unitMap[y, x] + " ";
 			}
-			Debug.Log (db);
-			db = "";
+
+			db = db + "\n";
 		}
+		Debug.Log (db);
 	}
 }

@@ -17,13 +17,13 @@ public class UnitStatus : MonoBehaviour {
 	public int x;
 	public int y;
 	// How many squares from center to left
-	public int widthLeft;
+	public int widthLeft = 0;
 	// How many squares from center to right
-	public int widthRight;
+	public int widthRight = 0;
 	// How many squares from center to up
-	public int heightUp;
+	public int heightUp = 0;
 	// How many squares from center to down
-	public int heightDown;
+	public int heightDown = 0;
 
 	// Use this for initialization
 	void Start () {

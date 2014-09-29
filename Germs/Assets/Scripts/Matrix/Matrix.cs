@@ -26,7 +26,9 @@ public class Matrix : MonoBehaviour {
 				//	square.name = "Square" + i + j;
 				//	squares[square.name] = square;
 				square.transform.parent = matrixParent.transform;
-				//	square.AddComponent("SquareStatus");
+				square.AddComponent("SquarePosition");
+
+
 				//	cube.transform.localScale = Vector3 (1.25, 1.5, 1);
 				//squares[x][y] = square;
 				squares[squaresIndex] = square;
@@ -34,7 +36,7 @@ public class Matrix : MonoBehaviour {
 			}
 		}
 		GameObject selector = GameObject.FindGameObjectWithTag("Selector");
-		selector.GetComponent<MovableSquareFinder> ().initUnitsMatrix (matrixHeight, matrixWidth);
+		selector.GetComponent<MovableSquareFinder> ().initUnitsMatrix (matrixWidth, matrixHeight);
 	}
 	
 	
