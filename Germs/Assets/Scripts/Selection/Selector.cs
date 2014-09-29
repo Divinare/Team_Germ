@@ -12,7 +12,7 @@ public class Selector : MonoBehaviour {
 	private int unitMaxSize = 5;
 
 	// for developing
-	private bool debug = true;
+	private bool debug = false;
 
 	// Update is called once per frame
 	void Update () {
