@@ -1,0 +1,423 @@
+fileFormatVersion: 2
+guid: 6af4eb402c47cb847b84ae5b1bb8bc74
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: shop_all
+    21300002: shop_all_0
+    21300004: shop_all_1
+    21300006: shop_all_2
+    21300008: shop_all_3
+    21300010: shop_all_4
+    21300012: shop_all_5
+    21300014: shop_all_6
+    21300016: shop_all_7
+    21300018: shop_all_8
+    21300020: shop_all_9
+    21300022: shop_all_10
+    21300024: shop_all_11
+    21300026: shop_all_12
+    21300028: shop_all_13
+    21300030: shop_all_14
+    21300032: shop_all_15
+    21300034: shop_all_16
+    21300036: shop_all_17
+    21300038: shop_all_18
+    21300040: shop_all_19
+    21300042: shop_all_21
+    21300044: shop_all_22
+    21300046: shop_all_23
+    21300048: shop_all_24
+    21300050: shop_all_25
+    21300052: shop_all_26
+    21300054: shop_all_27
+    21300056: shop_all_28
+    21300058: shop_all_29
+    21300060: shop_all_30
+    21300062: shop_all_31
+    21300064: shop_all_32
+    21300066: shop_all_33
+    21300068: shop_all_34
+    21300070: shop_all_35
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: shop_all_1
+      rect:
+        serializedVersion: 2
+        x: 184
+        y: 1754
+        width: 547
+        height: 273
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_2
+      rect:
+        serializedVersion: 2
+        x: 809
+        y: 1862
+        width: 594
+        height: 146
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_3
+      rect:
+        serializedVersion: 2
+        x: 1447
+        y: 1851
+        width: 225
+        height: 89
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_4
+      rect:
+        serializedVersion: 2
+        x: 1712
+        y: 1851
+        width: 254
+        height: 98
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_5
+      rect:
+        serializedVersion: 2
+        x: 1998
+        y: 1862
+        width: 565
+        height: 90
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_6
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 1628
+        width: 574
+        height: 124
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_7
+      rect:
+        serializedVersion: 2
+        x: 1447
+        y: 1738
+        width: 225
+        height: 90
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_8
+      rect:
+        serializedVersion: 2
+        x: 1709
+        y: 1729
+        width: 254
+        height: 99
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_9
+      rect:
+        serializedVersion: 2
+        x: 1995
+        y: 1744
+        width: 565
+        height: 89
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_10
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 1461
+        width: 505
+        height: 141
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_11
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 1
+        width: 1183
+        height: 1671
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_12
+      rect:
+        serializedVersion: 2
+        x: 1946
+        y: 803
+        width: 1008
+        height: 869
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_13
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 1328
+        width: 334
+        height: 124
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_14
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 1178
+        width: 323
+        height: 113
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_15
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 1052
+        width: 577
+        height: 124
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_16
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 896
+        width: 502
+        height: 141
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_17
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 766
+        width: 334
+        height: 124
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_18
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 622
+        width: 326
+        height: 109
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_19
+      rect:
+        serializedVersion: 2
+        x: 1980
+        y: 628
+        width: 373
+        height: 126
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_21
+      rect:
+        serializedVersion: 2
+        x: 2459
+        y: 639
+        width: 219
+        height: 124
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_22
+      rect:
+        serializedVersion: 2
+        x: 2719
+        y: 645
+        width: 219
+        height: 121
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_23
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 475
+        width: 717
+        height: 124
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_24
+      rect:
+        serializedVersion: 2
+        x: 1975
+        y: 443
+        width: 268
+        height: 147
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_25
+      rect:
+        serializedVersion: 2
+        x: 2341
+        y: 460
+        width: 182
+        height: 123
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_26
+      rect:
+        serializedVersion: 2
+        x: 2650
+        y: 489
+        width: 262
+        height: 121
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 322
+        width: 717
+        height: 124
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_28
+      rect:
+        serializedVersion: 2
+        x: 1983
+        y: 293
+        width: 269
+        height: 147
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_29
+      rect:
+        serializedVersion: 2
+        x: 2341
+        y: 313
+        width: 182
+        height: 124
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_30
+      rect:
+        serializedVersion: 2
+        x: 2647
+        y: 359
+        width: 262
+        height: 121
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_31
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 137
+        width: 663
+        height: 144
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_32
+      rect:
+        serializedVersion: 2
+        x: 1976
+        y: 149
+        width: 431
+        height: 121
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_33
+      rect:
+        serializedVersion: 2
+        x: 2580
+        y: 157
+        width: 306
+        height: 144
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_34
+      rect:
+        serializedVersion: 2
+        x: 1987
+        y: 16
+        width: 432
+        height: 124
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: shop_all_35
+      rect:
+        serializedVersion: 2
+        x: 2566
+        y: 0
+        width: 309
+        height: 143
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
