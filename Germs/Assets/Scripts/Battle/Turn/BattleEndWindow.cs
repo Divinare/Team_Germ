@@ -50,7 +50,7 @@ public class BattleEndWindow : MonoBehaviour {
 		GUILayout.BeginVertical();		
 		GUILayout.FlexibleSpace();
 
-		if (GUILayout.Button ("Okay", GUILayout.Width(100), GUILayout.Height(50)))
+		if (GUILayout.Button ("", GUILayout.Width(100), GUILayout.Height(50)))
 			Application.LoadLevel ("Map");
 
 		// More centering...
