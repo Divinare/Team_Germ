@@ -123,103 +123,12 @@ public class Selector : MonoBehaviour {
 		int[,] unitMap = this.GetComponent<MovableSquareFinder> ().getUnitMap();
 		int x = (int)squareToPopUp.transform.position.x;
 		int y = (int)squareToPopUp.transform.position.y;
-	//	int[,] unitSpace = getUnitSpace (x, y);
-		//Debug.Log ("x " + x);
-		//Debug.Log ("y " + y);
 
 		// if target square is not empty
-		if (unitMap [y, x] == 1) {
+		if (unitMap [y, x] == 1 || unitMap [y, x] == 2) {
 			return false;
 		}
 
-		int up = activeUnit.GetComponent<UnitStatus> ().heightUp;
-		int down = activeUnit.GetComponent<UnitStatus> ().heightDown;
-		int left = activeUnit.GetComponent<UnitStatus> ().widthLeft;
-		int right = activeUnit.GetComponent<UnitStatus> ().widthRight;
-		db ("up" + up);
-		db ("left" + left);
-
-		/* check aroundings of target square */
-
-		for (int l = 1; l < left+1; l++) {
-			if(!spaceAtSquare(x-l, y, unitMap)) {
-				db ("left false");
-				return false;
-			}
-		}
-		
-		for (int r = 1; r < right+1; r++) {
-			if(!spaceAtSquare(x+r, y, unitMap)) {
-				db ("right false");
-				return false;
-			}
-		}
-
-		// up left & up right
-		for (int u = 1; u < up+1; u++) {
-
-			if(!spaceAtSquare (x, y+u, unitMap)) {
-				db ("up false");
-				return false;
-			}
-			for (int l = 1; l < left+1; l++) {
-				if(!spaceAtSquare (x+l, y+u, unitMap)) {
-					db ("up left false");
-					return false;
-				}
-			}
-			for (int r = 1; r < right+1; r++) {
-				if(!spaceAtSquare (x-r, y+u, unitMap)) {
-					db ("up right false");
-					return false;
-				}
-
-			}
-		}
-
-		// down left & down right
-		for (int d = 1; d < down+1; d++) {
-			
-			if(!spaceAtSquare (x, y-d, unitMap)) {
-				db ("down false");
-				return false;
-			}
-			for (int l = 1; l < left+1; l++) {
-				if(!spaceAtSquare (x+l, y-d, unitMap)) {
-					db ("down left false");
-					return false;
-				}
-			}
-			for (int r = 1; r < right+1; r++) {
-				if(!spaceAtSquare (x-r, y-d, unitMap)) {
-					db ("down right false");
-					return false;
-				}
-				
-			}
-		}
-
-
-
-		return true;
-	}
-
-	private bool spaceAtSquare(int x, int y, int[,] unitMap) {
-		int matrixWidth = this.GetComponent<MovableSquareFinder> ().matrixWidth;
-		int matrixHeight = this.GetComponent<MovableSquareFinder> ().matrixHeight;
-
-		if (x < 0 || x >= matrixWidth) {
-			db ("x pieni/suuri " + x);
-			return false;
-		}
-		if (y < 0 || y >= matrixHeight) {
-			db ("y pieni/suuri " + y );
-			return false;
-		}
-		if(unitMap[y,x] == 1) {
-			db ("no space");
-			return false;
-		}
 		return true;
 	}
 

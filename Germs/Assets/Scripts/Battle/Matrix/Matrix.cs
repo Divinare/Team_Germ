@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Matrix : MonoBehaviour {
 	
-	public int matrixHeight = 10;
+	public int matrixHeight = 11;
 	public int matrixWidth = 15;
 
 	public GameObject[] squares;
