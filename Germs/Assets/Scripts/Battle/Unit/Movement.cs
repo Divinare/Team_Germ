@@ -5,9 +5,13 @@ public class Movement : MonoBehaviour {
 
 	public float movementSpeed = 1;
 	public Vector3 targetPosition;
+	GameObject selector;
+	private int[,] unitMap;
 
 	void Start() {
 		targetPosition = transform.position;
+		selector = GameObject.FindGameObjectWithTag("Selector");
+		unitMap =  selector.GetComponent<MovableSquareFinder> ().getUnitMap();
 	}
 	
 	// Update is called once per frame

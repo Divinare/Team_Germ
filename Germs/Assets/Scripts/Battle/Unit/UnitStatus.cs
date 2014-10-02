@@ -23,6 +23,7 @@ public class UnitStatus : MonoBehaviour {
 
 	}
 
+	// Sounds array contains the following sounds for each clipId: 0 = sound of being hit;
 	void PlaySound(int clipId) {
 		audio.clip = sounds [clipId];
 		audio.Play ();
@@ -54,7 +55,7 @@ public class UnitStatus : MonoBehaviour {
 	}
 
 	public void TakeDamage(int damage) {
-		PlaySound (0);
+		PlaySound (0); // 0 = 'damage taken'-sound
 		currentHealth -= damage;
 		battlelog ("taken " + damage + " dmg");
 	}
