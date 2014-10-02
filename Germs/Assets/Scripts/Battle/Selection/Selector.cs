@@ -10,6 +10,7 @@ public class Selector : MonoBehaviour {
 	private float poppedSquareX = 0;
 	private float poppedSquareY = 0;
 	private int unitMaxSize = 5;
+	public Transform square;
 
 	// for developing
 	private bool debug = false;
@@ -91,17 +92,22 @@ public class Selector : MonoBehaviour {
 
 	// pop up a square so that player can see where he can move
 	private void popUpMovableSquare(GameObject squareToPopUp) {
+
+		//Commented out old code that moves blocks
+		/*
 		if (squareToPopUp == poppedSquare) {
 			return;
-		}
+		}*/
+		/*
 		// check if clicked something else than square, squares have no tag
 		for (int i = 0; i < this.tags.Length; i++) {
 				if (this.tags [i].Equals (squareToPopUp.tag)) {
 						return;
 				}
 		}
+		*/
 
-		if (enoughSpace (squareToPopUp)) {
+		/* if (enoughSpace (squareToPopUp)) {
 
 			float x = squareToPopUp.transform.position.x;
 			float y = squareToPopUp.transform.position.y;
@@ -114,7 +120,24 @@ public class Selector : MonoBehaviour {
 			poppedSquare = squareToPopUp;
 			poppedSquareX = x;
 			poppedSquareY = y;
+		} */
+
+		float x = squareToPopUp.transform.position.x;
+		float y = squareToPopUp.transform.position.y;
+		float z = squareToPopUp.transform.position.z;
+
+		poppedSquare = squareToPopUp;
+		if (poppedSquare != null) {
+			// Delete old square selection icon
+			GameObject toDelete = GameObject.FindGameObjectWithTag ("SquareGfx");
+			if (toDelete != null) {
+				Destroy(toDelete);
+			}
 		}
+		// Create square choice icon at selected square
+		Instantiate (square, new Vector3(x,y,z -1f), Quaternion.identity);
+
+
 
 	}
 
