@@ -24,15 +24,26 @@ public class BattleInitializer : MonoBehaviour {
 	public void SpawnGermsAtBattleStart() {
 		GameObject matrix = GameObject.FindGameObjectWithTag ("Matrix");
 		GameObject[] squares = matrix.GetComponent<Matrix> ().getSquares ();
-		SpawnObjectAtSquare (FriendlyGermsToSpawn [2], squares [2]);
+		for (int i = 0; i < FriendlyGermsToSpawn.Length; i++) {
+			GameObject spawnedGerm = SpawnObjectAtSquare (FriendlyGermsToSpawn [i], squares [i * 2 + 1]);
+			spawnedGerm.GetComponent<UnitStatus>().setFriendlyStatus (true);
+		}
+		for (int i = 0; i < HostileGermsToSpawn.Length; i++) {
+			GameObject spawnedGerm = SpawnObjectAtSquare (HostileGermsToSpawn[i], squares[squares.Length - (i * 2) - 2]);
+		}
+
+
+
 
 	}
 
 
-	void SpawnObjectAtSquare(GameObject objectToSpawn, GameObject square) {
+	GameObject SpawnObjectAtSquare(GameObject objectToSpawn, GameObject square) {
 		float x = square.transform.position.x;
 		float y = square.transform.position.y;
 		float z = square.transform.position.z;
-		Instantiate (objectToSpawn, new Vector3(x,y,z -1f), Quaternion.identity);
+		GameObject spawnedObject = (GameObject) Instantiate (objectToSpawn, new Vector3(x,y,z -1f), Quaternion.identity);
+		return spawnedObject;
+
 	}
 }

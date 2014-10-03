@@ -24,7 +24,7 @@ public class UnitStatus : MonoBehaviour {
 
 	}
 
-	void setFriendlyStatus(bool status) {
+	public void setFriendlyStatus(bool status) {
 			isFriendly = status;
 	}
 
