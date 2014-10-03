@@ -33,6 +33,8 @@ public class Matrix : MonoBehaviour {
 		}
 		GameObject selector = GameObject.FindGameObjectWithTag("Selector");
 		selector.GetComponent<MovableSquareFinder> ().initUnitsMatrix (matrixWidth, matrixHeight);
+		GameObject battleInitializer = GameObject.FindGameObjectWithTag ("Battle Initializer");
+		battleInitializer.GetComponent<BattleInitializer> ().SpawnGermsAtBattleStart ();
 	}
 	
 	

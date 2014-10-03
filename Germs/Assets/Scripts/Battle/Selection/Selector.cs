@@ -10,7 +10,7 @@ public class Selector : MonoBehaviour {
 	private float poppedSquareX = 0;
 	private float poppedSquareY = 0;
 	private int unitMaxSize = 5;
-	public Transform square;
+	public Transform selectedSquareIcon;
 
 	// for developing
 	private bool debug = false;
@@ -135,7 +135,7 @@ public class Selector : MonoBehaviour {
 			}
 		}
 		// Create square choice icon at selected square
-		Instantiate (square, new Vector3(x,y,z -1f), Quaternion.identity);
+		Instantiate (selectedSquareIcon, new Vector3(x,y,z -1f), Quaternion.identity);
 
 
 

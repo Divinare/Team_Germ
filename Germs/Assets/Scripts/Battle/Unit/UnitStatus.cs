@@ -14,6 +14,7 @@ public class UnitStatus : MonoBehaviour {
 	public bool enemy = false;
 	public AudioClip[] sounds;
 	public GameObject DeathSound;
+	public bool isFriendly = false;
 	public int x;
 	public int y;
 
@@ -21,6 +22,10 @@ public class UnitStatus : MonoBehaviour {
 	void Start () {
 
 
+	}
+
+	void setFriendlyStatus(bool status) {
+			isFriendly = status;
 	}
 
 	// Sounds array contains the following sounds for each clipId: 0 = sound of being hit;
