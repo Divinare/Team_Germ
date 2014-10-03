@@ -21,22 +21,22 @@ public class Map_GUI : MonoBehaviour {
 	public AudioSource clickSound;
 
 	//GameStateObject
-	private Transform statusTracker;
+	private Transform gameStatus;
 	private Transform battleTracker;
  
 	// Use this for initialization
 	void Start () {
-		statusTracker = GameObject.Find("StatusTracker").transform;
+		gameStatus = GameObject.Find("GameStatus").transform;
 		battleTracker = GameObject.Find ("BattleTracker").transform;
 		clickSound = GameObject.FindGameObjectWithTag ("AudioDummy").GetComponent<AudioSource> (); 
 
-		gold = statusTracker.gameObject.GetComponent<storeMapStatus>().getGold();
-		xp = statusTracker.gameObject.GetComponent<storeMapStatus>().getXp();
+		gold = gameStatus.gameObject.GetComponent<GameStatus>().getGold();
+		xp = gameStatus.gameObject.GetComponent<GameStatus>().getXp();
 		bacChooser = false;
 
 		//get test lists
-		allBacsTest = battleTracker.gameObject.GetComponent<storeBattleStatus>().getAllBacsTest();
-		selectedBacsTest = battleTracker.gameObject.GetComponent<storeBattleStatus>().getSelectedBacsTest();
+		allBacsTest = battleTracker.gameObject.GetComponent<BattleStatus>().getAllBacsTest();
+		selectedBacsTest = battleTracker.gameObject.GetComponent<BattleStatus>().getSelectedBacsTest();
 	}
 	
 	// Update is called once per frame
@@ -90,7 +90,7 @@ public class Map_GUI : MonoBehaviour {
 			foreach (string bac in allBacsTest) {
 				if (!selectedBacsTest.Contains(bac)) {
 					if (GUI.Button (new Rect (Screen.width/2 - Screen.width/4 +pos,Screen.height - Screen.height/4,Screen.width/12,Screen.height/10), bac)) {
-						battleTracker.gameObject.GetComponent<storeBattleStatus>().setSelectedBacTest(bac, clickedIndex);
+						battleTracker.gameObject.GetComponent<BattleStatus>().setSelectedBacTest(bac, clickedIndex);
 						bacChooser = false;
 					}
 					pos += 90;
@@ -101,6 +101,6 @@ public class Map_GUI : MonoBehaviour {
 	}
 	void bacteriaChooserOn() {
 		bacChooser = true;
-		allBacsTest = battleTracker.gameObject.GetComponent<storeBattleStatus>().getAllBacsTest();
+		allBacsTest = battleTracker.gameObject.GetComponent<BattleStatus>().getAllBacsTest();
 	}
 }

@@ -61,14 +61,15 @@
      <Compile Include="Assets\Scripts\Battle\Unit\PreventRotation.cs" />
      <Compile Include="Assets\Scripts\Battle\Unit\RangedAttack.cs" />
      <Compile Include="Assets\Scripts\Battle\Unit\UnitStatus.cs" />
+     <Compile Include="Assets\Scripts\GameStatus.cs" />
      <Compile Include="Assets\Scripts\Main Menu\MainMenu.cs" />
      <Compile Include="Assets\Scripts\Main Menu\Menu_movement.cs" />
+     <Compile Include="Assets\Scripts\Map\BattleStatus.cs" />
      <Compile Include="Assets\Scripts\Map\Map.cs" />
      <Compile Include="Assets\Scripts\Map\Map_GUI.cs" />
      <Compile Include="Assets\Scripts\Map\Node.cs" />
      <Compile Include="Assets\Scripts\Map\onClickDestroy.cs" />
-     <Compile Include="Assets\Scripts\Map\storeBattleStatus.cs" />
-     <Compile Include="Assets\Scripts\Map\storeMapStatus.cs" />
+     <Compile Include="Assets\Scripts\Shop\Shop_GUI.cs" />
      <Compile Include="Assets\testLevels\levelComplete.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

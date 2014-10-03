@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class storeMapStatus : MonoBehaviour {
+public class GameStatus : MonoBehaviour {
 	//currency
 	public float gold;
 	public float xp;

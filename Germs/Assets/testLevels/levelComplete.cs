@@ -17,7 +17,7 @@ public class levelComplete : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		battleTracker = GameObject.Find ("BattleTracker").transform;
-		selectedBacsTest = battleTracker.gameObject.GetComponent<storeBattleStatus>().getSelectedBacsTest();
+		selectedBacsTest = battleTracker.gameObject.GetComponent<BattleStatus>().getSelectedBacsTest();
 		enemiesAlive = true;
 		unitsAlive = true;
 	}

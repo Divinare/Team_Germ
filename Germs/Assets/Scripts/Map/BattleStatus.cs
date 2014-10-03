@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class storeBattleStatus : MonoBehaviour {
+public class BattleStatus : MonoBehaviour {
 	public List<GameObject> allBacs = new List<GameObject>();
 	public List<GameObject> selectedBacs = new List<GameObject>();
 
