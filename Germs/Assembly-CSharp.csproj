@@ -48,8 +48,10 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Audio\AudioController.cs" />
      <Compile Include="Assets\Scripts\Audio\DestroyAudioObject.cs" />
+     <Compile Include="Assets\Scripts\Battle\Battle Initializer\BattleInitializer.cs" />
      <Compile Include="Assets\Scripts\Battle\Camera\Zoom.cs" />
      <Compile Include="Assets\Scripts\Battle\Matrix\Matrix.cs" />
+     <Compile Include="Assets\Scripts\Battle\Matrix\SquareStatus.cs" />
      <Compile Include="Assets\Scripts\Battle\Selection\MovableSquareFinder.cs" />
      <Compile Include="Assets\Scripts\Battle\Selection\Selector.cs" />
      <Compile Include="Assets\Scripts\Battle\Turn\BattleEndWindow.cs" />
