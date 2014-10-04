@@ -21,13 +21,11 @@ public class Matrix : MonoBehaviour {
 		// Create length * width matrix of cubes
 		for (int x = 0; x < matrixWidth; x++) {
 			for (int y = 0; y < matrixHeight; y++) {
-				//	GameObject square = GameObject.CreatePrimitive (PrimitiveType.Cube); // Old code
+
 				GameObject square = (GameObject) Instantiate (squarePrefab, new Vector3(x+0.5f, y+0.5f, 0), Quaternion.identity) as GameObject;
 				square.GetComponent<SquareStatus>().setStatus ("movable", null);
-				// square.transform.position = new Vector3 (x+0.5f, y+0.5f, 0); // Old code
 
 				square.transform.parent = matrixParent.transform;
-				//square.AddComponent("SquarePosition");
 
 				squares[x,y] = square;
 			}

@@ -38,7 +38,7 @@ public class Selector : MonoBehaviour {
 			if (hit.collider == null) {
 			return;
 			}
-			popUpMovableSquare (hit.collider.gameObject);
+			drawSelectionSquare (hit.collider.gameObject);
 
 			if (Input.GetMouseButtonUp (0)) {
 				GameObject objectClicked = hit.collider.gameObject;
@@ -91,36 +91,7 @@ public class Selector : MonoBehaviour {
 	}
 
 	// pop up a square so that player can see where he can move
-	private void popUpMovableSquare(GameObject squareToPopUp) {
-
-		//Commented out old code that pops up squares
-		/*
-		if (squareToPopUp == poppedSquare) {
-			return;
-		}*/
-		/*
-		// check if clicked something else than square, squares have no tag
-		for (int i = 0; i < this.tags.Length; i++) {
-				if (this.tags [i].Equals (squareToPopUp.tag)) {
-						return;
-				}
-		}
-		*/
-
-		/* if (enoughSpace (squareToPopUp)) {
-
-			float x = squareToPopUp.transform.position.x;
-			float y = squareToPopUp.transform.position.y;
-			squareToPopUp.transform.position = new Vector3 (x, y, -1f);
-
-			// move the last popped square back to its original position
-			if (poppedSquare != null) {
-					poppedSquare.transform.position = new Vector3 (poppedSquareX, poppedSquareY, 0f);
-			}
-			poppedSquare = squareToPopUp;
-			poppedSquareX = x;
-			poppedSquareY = y;
-		} */
+	private void drawSelectionSquare(GameObject squareToPopUp) {
 
 		float x = squareToPopUp.transform.position.x;
 		float y = squareToPopUp.transform.position.y;
@@ -134,25 +105,10 @@ public class Selector : MonoBehaviour {
 				Destroy(toDelete);
 			}
 		}
+
 		// Create selected square icon at selected square
 		Instantiate (selectedSquareIcon, new Vector3(x,y,z -1f), Quaternion.identity);
 
-
-
-	}
-
-	private bool enoughSpace(GameObject squareToPopUp) {
-		GameObject activeUnit = findActiveUnit();
-		int[,] unitMap = this.GetComponent<MovableSquareFinder> ().getUnitMap();
-		int x = (int)squareToPopUp.transform.position.x;
-		int y = (int)squareToPopUp.transform.position.y;
-
-		// if target square is not empty
-		if (unitMap [y, x] == 1 || unitMap [y, x] == 2) {
-			return false;
-		}
-
-		return true;
 	}
 
 	public void db(string stringToDebug) {

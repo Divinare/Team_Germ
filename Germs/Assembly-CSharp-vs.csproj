@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\Battle\GUI\ItemMenu.cs" />
      <Compile Include="Assets\Scripts\Battle\Matrix\Matrix.cs" />
      <Compile Include="Assets\Scripts\Battle\Matrix\SquareStatus.cs" />
+     <Compile Include="Assets\Scripts\Battle\RouteFinder.cs" />
      <Compile Include="Assets\Scripts\Battle\Selection\MovableSquareFinder.cs" />
      <Compile Include="Assets\Scripts\Battle\Selection\Selector.cs" />
      <Compile Include="Assets\Scripts\Battle\Turn\BattleEndWindow.cs" />
