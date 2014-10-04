@@ -31,6 +31,8 @@ public class Movement : MonoBehaviour {
 			Debug.Log ("Moving towards " + targetSquare);
 			targetPosition = targetSquare.transform.position;
 			targetPosition.z = transform.position.z;
+			this.gameObject.GetComponent<UnitStatus>().getSquare().GetComponent<SquareStatus>().setStatus ("movable", null); // clear status of currently occupied square
+			targetSquare.GetComponent<SquareStatus>().setStatus ("friendly", this.gameObject); // set this object as occupying the target square
 		}
 	}
 
