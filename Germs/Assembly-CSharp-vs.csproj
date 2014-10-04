@@ -50,14 +50,14 @@
      <Compile Include="Assets\Scripts\Audio\DestroyAudioObject.cs" />
      <Compile Include="Assets\Scripts\Battle\Battle Initializer\BattleInitializer.cs" />
      <Compile Include="Assets\Scripts\Battle\Camera\Zoom.cs" />
+     <Compile Include="Assets\Scripts\Battle\GUI\ActivityMenu.cs" />
+     <Compile Include="Assets\Scripts\Battle\GUI\Battlelog.cs" />
      <Compile Include="Assets\Scripts\Battle\Matrix\Matrix.cs" />
      <Compile Include="Assets\Scripts\Battle\Matrix\SquareStatus.cs" />
      <Compile Include="Assets\Scripts\Battle\Selection\MovableSquareFinder.cs" />
      <Compile Include="Assets\Scripts\Battle\Selection\Selector.cs" />
      <Compile Include="Assets\Scripts\Battle\Turn\BattleEndWindow.cs" />
      <Compile Include="Assets\Scripts\Battle\Turn\TurnHandler.cs" />
-     <Compile Include="Assets\Scripts\Battle\UI\ActivityMenu.cs" />
-     <Compile Include="Assets\Scripts\Battle\UI\Battlelog.cs" />
      <Compile Include="Assets\Scripts\Battle\Unit\HealthBar.cs" />
      <Compile Include="Assets\Scripts\Battle\Unit\Movement.cs" />
      <Compile Include="Assets\Scripts\Battle\Unit\PreventRotation.cs" />
