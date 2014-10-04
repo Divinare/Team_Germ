@@ -20,34 +20,28 @@ public class ActivityMenu : MonoBehaviour {
 	}
 	
 	void OnGUI() {
-		
+
+		float amountOfItems = 3;
+		float buttonWidth = 80;
+		float buttonHeight = 80;
+
 		//bg box
-		GUI.Box (new Rect (Screen.width - 400, Screen.height - 50, 500, 50), "");
+		GUI.Box (new Rect (Screen.width-buttonWidth * amountOfItems, Screen.height - buttonHeight, buttonWidth * amountOfItems, buttonHeight), "");
+
 		//buttons
-		if (GUI.Button (new Rect (Screen.width - 400, Screen.height - 50, 50, 50), new GUIContent (meleeIcon, "Fancy melee attack"))) {
+		if (GUI.Button (new Rect (Screen.width-buttonWidth*3, Screen.height - buttonHeight, buttonWidth, buttonHeight), new GUIContent (meleeIcon, "Fancy melee attack"))) {
 			clickSound.Play ();		
 		}
-		
-		if (GUI.Button (new Rect (Screen.width - 350, Screen.height - 50, 50, 50), new GUIContent (rangedIcon, "Fancy ranged attack"))) {
-			clickSound.Play ();
+		if (GUI.Button (new Rect (Screen.width-buttonWidth*2, Screen.height - buttonHeight, buttonWidth, buttonHeight), new GUIContent (rangedIcon, "Fancy ranged attack"))) {
+			clickSound.Play ();		
 		}
-		
-		if (GUI.Button (new Rect (Screen.width - 300, Screen.height - 50, 50, 50), "3")) {
-			clickSound.Play();
+		if (GUI.Button (new Rect (Screen.width-buttonWidth, Screen.height - buttonHeight, buttonWidth, buttonHeight), new GUIContent ("3", "Fancy magic attack"))) {
+			clickSound.Play ();		
 		}
-		
-		
-		if (GUI.Button (new Rect (Screen.width - 250, Screen.height - 50, 50, 50), "4")) {
-			clickSound.Play ();
-		}
-		
-		if (GUI.Button (new Rect (Screen.width - 200, Screen.height - 50, 50, 50), "5")) {
-			clickSound.Play ();
-		}
-		
-		
+	
+
 		//Tooltip position
-		GUI.Label(new Rect(Screen.width - 100, Screen.height - 100, 100, 100), GUI.tooltip);
+		GUI.Label(new Rect(Screen.width - 100, Screen.height - buttonHeight - 50, 100, 100), GUI.tooltip);
 		
 		
 	}

@@ -18,11 +18,16 @@ public class Battlelog : MonoBehaviour {
 	void OnGUI() {
 
 
+
 		float width = (float)(Screen.width * 0.2);
 		float height = 80;
-		float posY = Screen.height - ((float)(Screen.height * 0.2));
+		float posY = Screen.height - height;
 		float posX = 0;
 
+		// Text area background
+		GUI.Box(new Rect(posX, posY-1.5f, width, height+2), new GUIContent());
+
+		// Battlelog
 		GUILayout.BeginArea (new Rect (posX, posY, width, height));
 		scrollPosition = GUILayout.BeginScrollView(scrollPosition, GUILayout.Width(width), GUILayout.Height(height));
 		GUILayout.Label(battlelog);
@@ -30,8 +35,6 @@ public class Battlelog : MonoBehaviour {
 		GUILayout.EndScrollView();
 		GUILayout.EndArea();
 
-		// Text area background
-		GUI.Box(new Rect(posX, posY-1.5f, width, height+2), new GUIContent());
 
 
 	

@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\Battle\Camera\Zoom.cs" />
      <Compile Include="Assets\Scripts\Battle\GUI\ActivityMenu.cs" />
      <Compile Include="Assets\Scripts\Battle\GUI\Battlelog.cs" />
+     <Compile Include="Assets\Scripts\Battle\GUI\ItemMenu.cs" />
      <Compile Include="Assets\Scripts\Battle\Matrix\Matrix.cs" />
      <Compile Include="Assets\Scripts\Battle\Matrix\SquareStatus.cs" />
      <Compile Include="Assets\Scripts\Battle\Selection\MovableSquareFinder.cs" />
