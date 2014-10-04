@@ -72,11 +72,10 @@ public class HealthBar : MonoBehaviour {
 		Vector3 point = Camera.main.WorldToScreenPoint(new Vector3(
 			transform.position.x,
 			transform.position.y,
-			transform.position.z)
-		                                               );
+			transform.position.z));
 		
 		// Setting healthbar to correct location on Y axis
-		healthbarBackground.y = (Screen.height - point.y - (Screen.height/10) - 2 * offsetY);
+		healthbarBackground.y = Screen.height - point.y - Screen.height * 0.065f;
 		currentHealth.y = healthbarBackground.y;
 		
 		// Setting healthbar to correct location on X axis
