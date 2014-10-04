@@ -5,7 +5,8 @@ public class Movement : MonoBehaviour {
 
 	public float movementSpeed = 1;
 	public Vector3 targetPosition;
-	GameObject selector;
+	private GameObject Matrix;
+
 
 	void Start() {
 		targetPosition = transform.position;
@@ -26,9 +27,11 @@ public class Movement : MonoBehaviour {
 	}
 	
 	public void startMoving(GameObject targetSquare) {
-		Debug.Log ("Moving towards " + targetSquare);
-		targetPosition = targetSquare.transform.position;
-		targetPosition.z = transform.position.z;
+		if (targetSquare.GetComponent<SquareStatus> ().getObjectOnSquare() == null) {
+			Debug.Log ("Moving towards " + targetSquare);
+			targetPosition = targetSquare.transform.position;
+			targetPosition.z = transform.position.z;
+		}
 	}
 
 }

@@ -93,7 +93,7 @@ public class Selector : MonoBehaviour {
 	// pop up a square so that player can see where he can move
 	private void popUpMovableSquare(GameObject squareToPopUp) {
 
-		//Commented out old code that moves blocks
+		//Commented out old code that pops up squares
 		/*
 		if (squareToPopUp == poppedSquare) {
 			return;
@@ -134,7 +134,7 @@ public class Selector : MonoBehaviour {
 				Destroy(toDelete);
 			}
 		}
-		// Create square choice icon at selected square
+		// Create selected square icon at selected square
 		Instantiate (selectedSquareIcon, new Vector3(x,y,z -1f), Quaternion.identity);
 
 
