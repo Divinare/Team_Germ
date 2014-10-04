@@ -4,11 +4,10 @@ using System.Collections;
 public class SquareStatus : MonoBehaviour {
 
 	public string squareStatus; // "friendly" for friendly target, "enemy" for enemy target, "movable" for a square that can be moved to
-	private GameObject objectOnSquare;
+	public GameObject objectOnSquare;
 
 	// Use this for initialization
 	void Start () {
-		squareStatus = "movable";
 	}
 
 	public void setStatus(string status, GameObject theObject) {

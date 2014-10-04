@@ -27,12 +27,13 @@ public class Movement : MonoBehaviour {
 	}
 	
 	public void startMoving(GameObject targetSquare) {
-		if (targetSquare.GetComponent<SquareStatus> ().getObjectOnSquare() == null) {
+		if (targetSquare.GetComponent<SquareStatus> ().getStatus ().Equals("movable")) {
 			Debug.Log ("Moving towards " + targetSquare);
 			targetPosition = targetSquare.transform.position;
 			targetPosition.z = transform.position.z;
 			this.gameObject.GetComponent<UnitStatus>().getSquare().GetComponent<SquareStatus>().setStatus ("movable", null); // clear status of currently occupied square
 			targetSquare.GetComponent<SquareStatus>().setStatus ("friendly", this.gameObject); // set this object as occupying the target square
+			this.gameObject.GetComponent<UnitStatus>().setSquare (targetSquare);
 		}
 	}
 
