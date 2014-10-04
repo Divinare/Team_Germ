@@ -5,14 +5,17 @@ using System.Collections;
 public class MovableSquareFinder : MonoBehaviour {
 	
 	public int[,] unitMap; // 1 = unit is at that square, 0 = free square
+
 	public int matrixWidth = 0;
 	public int matrixHeight = 0;
 	RaycastHit hit;
 
 	public void initUnitsMatrix(int width, int height) {
+		/*
 		this.matrixWidth = width;
 		this.matrixHeight = height;
 		this.unitMap = new int[height, width];
+
 		
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
@@ -24,13 +27,14 @@ public class MovableSquareFinder : MonoBehaviour {
 
 		addUnitsToUnitMap ();
 
-		debugUnitMap();
+		debugUnitMap();*/
 		
 		
 	}
 
 	// adds 1's to unitMap to all squares where unit is being
 	public void addUnitsToUnitMap() {
+		/*
 		changeUnitsBoxColliders (true);
 
 		GameObject matrix = GameObject.FindGameObjectWithTag ("Matrix");
@@ -56,6 +60,7 @@ public class MovableSquareFinder : MonoBehaviour {
 
 		}
 		changeUnitsBoxColliders (false);
+		*/
 	}
 
 	private void changeUnitsBoxColliders(bool b) {
