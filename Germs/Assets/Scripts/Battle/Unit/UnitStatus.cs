@@ -17,6 +17,7 @@ public class UnitStatus : MonoBehaviour {
 	public bool isFriendly = false;
 	public int x;
 	public int y;
+	private GameObject currentSquare; // the square currently occupied by the unit
 
 	// Use this for initialization
 	void Start () {
@@ -33,6 +34,17 @@ public class UnitStatus : MonoBehaviour {
 		audio.clip = sounds [clipId];
 		audio.Play ();
 	}
+
+	public void setSquare(GameObject square) {
+		this.currentSquare = square;
+	}
+
+	public GameObject getSquare() {
+		return currentSquare;
+	
+	}
+
+
 
 	
 	// Update is called once per frame
