@@ -6,9 +6,8 @@ public class Selector : MonoBehaviour {
 	RaycastHit hit;
 	private float raycastLength = 1000;
 	string tags = "Selector, Unit, MenuItem, Matrix";
-	private GameObject poppedSquare = null;
-	private float poppedSquareX = 0;
-	private float poppedSquareY = 0;
+	private GameObject mouseHoveredSquare;
+
 	private int unitMaxSize = 5;
 	public Transform selectedSquareIcon;
 
@@ -43,7 +42,8 @@ public class Selector : MonoBehaviour {
 			if (hit.collider == null) {
 			return;
 			}
-			drawSelectionSquare (hit.collider.gameObject);
+
+			handleMouseHover (hit.collider.gameObject);
 
 			if (Input.GetMouseButtonUp (0)) {
 				GameObject objectClicked = hit.collider.gameObject;
@@ -96,26 +96,48 @@ public class Selector : MonoBehaviour {
 		
 	}
 
-	// pop up a square so that player can see where he can move
-	private void drawSelectionSquare(GameObject squareToPopUp) {
-
-		float x = squareToPopUp.transform.position.x;
-		float y = squareToPopUp.transform.position.y;
-		float z = squareToPopUp.transform.position.z;
-
-		poppedSquare = squareToPopUp;
-		if (poppedSquare != null) {
-			// Delete old square selection icon
-			GameObject toDelete = GameObject.FindGameObjectWithTag ("SquareGfx");
-			if (toDelete != null) {
-				Destroy(toDelete);
-			}
+	// Draw a circle to a square so that player can see where he can move
+	private void handleMouseHover(GameObject hoveredSquare) {
+		if (hoveredSquare == null) {
+			return;
 		}
+		
+		// Only do some action if a new square has been encountered or encountering a square for the first time
+		if (this.mouseHoveredSquare == hoveredSquare) {
+			return;
+		}
+		mouseHoveredSquare = hoveredSquare;
 
+		Debug.Log ("uusi?");
+
+		int x = (int)mouseHoveredSquare.transform.position.x;
+		int y = (int)mouseHoveredSquare.transform.position.y;
+		GameObject[,] squares = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<Matrix> ().getSquares();
+		GameObject targetSquare = squares [x, y];
+
+		//GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (targetSquare);
+
+		drawSelectionSquare (hoveredSquare);
+	}
+
+	private void drawSelectionSquare(GameObject squareToDrawCircle) {
+		float x = mouseHoveredSquare.transform.position.x;
+		float y = mouseHoveredSquare.transform.position.y;
+		float z = mouseHoveredSquare.transform.position.z;
+		
+		// Delete old square selection icon
+		GameObject toDelete = GameObject.FindGameObjectWithTag ("SquareGfx");
+		if (toDelete != null) {
+			Destroy(toDelete);
+		}
+		
+		
 		// Create selected square icon at selected square
 		Instantiate (selectedSquareIcon, new Vector3(x,y,z -1f), Quaternion.identity);
 
+
 	}
+
 
 	public void db(string stringToDebug) {
 		if (debug) {

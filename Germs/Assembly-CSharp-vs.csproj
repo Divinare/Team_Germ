@@ -57,7 +57,7 @@
      <Compile Include="Assets\Scripts\Battle\Matrix\MovableSquaresFinder.cs" />
      <Compile Include="Assets\Scripts\Battle\Matrix\SquareStatus.cs" />
      <Compile Include="Assets\Scripts\Battle\RouteFinder.cs" />
-     <Compile Include="Assets\Scripts\Battle\Selection\Selector.cs" />
+     <Compile Include="Assets\Scripts\Battle\Selector\Selector.cs" />
      <Compile Include="Assets\Scripts\Battle\Turn\BattleEndWindow.cs" />
      <Compile Include="Assets\Scripts\Battle\Turn\TurnHandler.cs" />
      <Compile Include="Assets\Scripts\Battle\Turn\TurnStartHandler.cs" />

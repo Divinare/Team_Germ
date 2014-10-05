@@ -1,16 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class SquareStatus : MonoBehaviour {
 
 	private string squareStatus; // "friendly" for friendly target, "enemy" for enemy target, "movable" for a square that can be moved to
 	public int x;
 	public int y;
+	private List<GameObject> path;
 
 	public GameObject objectOnSquare;
 
 	// Use this for initialization
 	void Start () {
+		path = new List<GameObject> ();
 	}
 
 	public void setStatus(string status, GameObject theObject) {
@@ -26,9 +29,31 @@ public class SquareStatus : MonoBehaviour {
 		return objectOnSquare;
 	}
 
+	public void resetPath() {
+		this.path = new List<GameObject> ();
+	}
+
+	public void addSquareToPath(GameObject square) {
+		path.Add (square);
+
+	}
+
+	public void addPathToPath(List<GameObject> pathToAdd) {
+		if (pathToAdd.Count == 0) {
+			Debug.Log ("tried to add empty");
+			return;
+		}
+
+		Debug.Log ("pituuuuuuus : " + pathToAdd.Count);
+		foreach(GameObject toAdd in pathToAdd) {
+			if (toAdd != null) {
+				path.Add (toAdd);
+			}
+		}
+	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+
+	public List<GameObject> getPath() {
+		return path;
 	}
 }

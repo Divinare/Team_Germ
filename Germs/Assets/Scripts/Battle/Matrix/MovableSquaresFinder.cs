@@ -5,20 +5,21 @@ using System.Collections.Generic;
 
 public class MovableSquaresFinder : MonoBehaviour {
 
-	List<GameObject> movableSquares = new List<GameObject>();
+	List<GameObject> movableSquares;
 	private TurnHandler turnHandler;
 	
-	List<GameObject> visited;
-	List<GameObject> toBeVisited;
+	private List<GameObject> visited;
+	private List<GameObject> toBeVisited;
 
 	// matrix that tells the smallest length for a square
-	double[,] distances;
+	private double[,] distances;
 
-	GameObject[,] squares;
+	// matrix of all squares
+	private GameObject[,] squares;
 
 	
 	void Start () {
-
+		this.movableSquares = new List<GameObject>();
 		this.turnHandler = GameObject.FindGameObjectWithTag ("TurnHandler").transform.GetComponent<TurnHandler> ();
 	}
 
@@ -88,25 +89,6 @@ public class MovableSquaresFinder : MonoBehaviour {
 		}
 	}
 
-
-
-	public void visitAllMovableSquares(List<GameObject> visited, int speed) {
-
-
-
-	}
-
-	private void deleteOldMovableSquares() {
-		// Delete old square selection icon
-		GameObject[] deleteList = GameObject.FindGameObjectsWithTag ("MovableSquareGfx");
-		foreach(GameObject toDelete in deleteList) {
-			if (toDelete != null) {
-				Destroy(toDelete);
-			}
-		}
-
-	}
-	
 	private bool isValidSquare(int x, int y, GameObject gb) {
 		if (x < 0 || x >= squares.GetLength(0)) {
 			return false;
@@ -121,6 +103,16 @@ public class MovableSquaresFinder : MonoBehaviour {
 		return true;
 	}
 
+	private void deleteOldMovableSquares() {
+		// Delete old square selection icon
+		GameObject[] deleteList = GameObject.FindGameObjectsWithTag ("MovableSquareGfx");
+		foreach(GameObject toDelete in deleteList) {
+			if (toDelete != null) {
+				Destroy(toDelete);
+			}
+		}
+
+	}
 
 	public List<GameObject> getMovableSquares() {
 		return this.movableSquares;
