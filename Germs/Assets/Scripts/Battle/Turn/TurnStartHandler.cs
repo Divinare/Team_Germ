@@ -30,7 +30,7 @@ public class TurnStartHandler : MonoBehaviour {
 			float y = square.transform.position.y;
 			float z = square.transform.position.z;
 			// Create movable square icon
-			Instantiate (movableSquareIcon, new Vector3(x,y,z -1f), Quaternion.identity);
+			Instantiate (movableSquareIcon, new Vector3(x,y,z -0.9f), Quaternion.identity);
 		
 		}
 
