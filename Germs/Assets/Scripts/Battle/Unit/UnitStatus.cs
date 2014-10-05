@@ -55,10 +55,10 @@ public class UnitStatus : MonoBehaviour {
 			Destroy(this.gameObject);
 		}
 		if (selected) {
-			transform.FindChild("selectionCircle").gameObject.active = true;
-		}
+			this.gameObject.transform.FindChild("selectionCircle").gameObject.active = true;
+			}
 		else {
-			transform.FindChild("selectionCircle").gameObject.active = false;
+			this.gameObject.transform.FindChild("selectionCircle").gameObject.active = false;
 		}
 	}
 

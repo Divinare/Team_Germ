@@ -25,6 +25,7 @@ public class BattleInitializer : MonoBehaviour {
 		for (int i = 0; i < FriendlyGermsToSpawn.Length; i++) {
 			GameObject spawnedGerm = SpawnObjectAtSquare (FriendlyGermsToSpawn [i], squares [0, y]); 
 			spawnedGerm.GetComponent<UnitStatus>().setFriendlyStatus (true);
+			spawnedGerm.transform.GetChild(0).position = spawnedGerm.transform.position;
 			spawnedGerm.GetComponent<UnitStatus>().setSquare (squares[0,y]); // give unit a reference to the square it is currently standing on
 			squares[0, y].GetComponent <SquareStatus>().setStatus ("friendly", spawnedGerm); // Set square status to indicate there is a friendly unit
 			y -= 2;
