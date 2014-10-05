@@ -15,6 +15,7 @@ public class UnitStatus : MonoBehaviour {
 	public AudioClip[] sounds;
 	public GameObject DeathSound;
 	public bool isFriendly = false;
+	public string unitName;
 	public int x;
 	public int y;
 	private GameObject currentSquare; // the square currently occupied by the unit

@@ -4,7 +4,7 @@ using System.Collections;
 public class BattleInitializer : MonoBehaviour {
 
 	GameObject selector;
-	public GameObject[] FriendlyGermsToSpawn;
+	public string[] FriendlyGermsToSpawn;
 	public GameObject[] HostileGermsToSpawn;
 	RaycastHit hit;
 
@@ -21,9 +21,14 @@ public class BattleInitializer : MonoBehaviour {
 	public void SpawnGermsAtBattleStart() {
 		GameObject matrix = GameObject.FindGameObjectWithTag ("Matrix");
 		GameObject[,] squares = matrix.GetComponent<Matrix> ().getSquares ();
+		GameObject battleStatus = GameObject.FindGameObjectWithTag ("Battle Tracker");
+		if (battleStatus != null) {
+			FriendlyGermsToSpawn = battleStatus.GetComponent<BattleStatus>().getSelectedBacsTest ().ToArray ();
+		}
 		int y = 8; // Start spawning mobs from the top to bottom
 		for (int i = 0; i < FriendlyGermsToSpawn.Length; i++) {
-			GameObject spawnedGerm = SpawnObjectAtSquare (FriendlyGermsToSpawn [i], squares [0, y]); 
+			GameObject germToSpawn = GameObject.FindGameObjectWithTag("Unit Prefab Container").GetComponent<UnitPrefabContainer>().getGerm(FriendlyGermsToSpawn[i]);
+			GameObject spawnedGerm = SpawnObjectAtSquare (germToSpawn, squares [0, y]); 
 			spawnedGerm.GetComponent<UnitStatus>().setFriendlyStatus (true);
 			spawnedGerm.transform.GetChild(0).position = spawnedGerm.transform.position;
 			spawnedGerm.GetComponent<UnitStatus>().setSquare (squares[0,y]); // give unit a reference to the square it is currently standing on

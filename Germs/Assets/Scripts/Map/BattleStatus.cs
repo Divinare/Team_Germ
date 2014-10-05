@@ -29,19 +29,16 @@ public class BattleStatus : MonoBehaviour {
 		}
 
 		//test
-		allBacsTest.Add ("A");
-		allBacsTest.Add ("B");
-		allBacsTest.Add ("C");
-		allBacsTest.Add ("D");
-		allBacsTest.Add ("E");
-		allBacsTest.Add ("F");
-		allBacsTest.Add ("G");
 		allBacsTest.Add ("");
-		selectedBacsTest.Add ("");
-		selectedBacsTest.Add ("");
-		selectedBacsTest.Add ("");
-		selectedBacsTest.Add ("");
-		selectedBacsTest.Add ("");
+		allBacsTest.Add ("");
+		allBacsTest.Add ("");
+		allBacsTest.Add ("");
+		allBacsTest.Add ("");
+		selectedBacsTest.Add ("Gatbac");
+		selectedBacsTest.Add ("Gatbac");
+		selectedBacsTest.Add ("Strep_p");
+		selectedBacsTest.Add ("smallRed");
+		selectedBacsTest.Add ("Phage");
 
 	}
 
