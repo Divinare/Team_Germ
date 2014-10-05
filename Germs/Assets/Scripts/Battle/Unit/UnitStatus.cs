@@ -88,6 +88,7 @@ public class UnitStatus : MonoBehaviour {
 	
 	public void Select() {
 		selected = true;
+		GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnStartHandler> ().handeTurnStart ();
 	}
 	
 	public void Deselect() {

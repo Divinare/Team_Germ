@@ -4,9 +4,12 @@ using System.Collections.Generic;
 
 public class RouteFinder : MonoBehaviour {
 
+	private TurnHandler turnHandler;
+	private GameObject[,] squares;
 	// Use this for initialization
 	void Start () {
-	
+		this.turnHandler = GameObject.FindGameObjectWithTag ("TurnHandler").transform.GetComponent<TurnHandler> ();
+		this.squares = GameObject.FindGameObjectWithTag ("Matrix").transform.GetComponent<Matrix> ().getSquares();
 	}
 	
 	// Update is called once per frame
@@ -19,21 +22,19 @@ public class RouteFinder : MonoBehaviour {
 
 	public List<GameObject> getRoute(GameObject targetSquare) {
 		List<GameObject> route = new List<GameObject> ();
+		int speed = turnHandler.getActiveUnit ().GetComponent<UnitStatus> ().speed;
+
+		List<GameObject> visited = new List<GameObject> ();
+
+		List<GameObject> toBeVisited = new List<GameObject> ();
+
+
+
 
 
 		return route;
 	}
 
-	public GameObject findActiveUnit() {
-		GameObject[] units = GameObject.FindGameObjectsWithTag("Unit");
-		for (int i = 0; i < units.Length; i++) {
-			if(units[i].GetComponent<UnitStatus> ().selected) {
-				return units[i];
-			}
-		}
-		// No active units found
-		Debug.Log ("Active unit not found");
-		return null;
-	}
+
 
 }

@@ -24,18 +24,19 @@ public class Matrix : MonoBehaviour {
 
 				GameObject square = (GameObject) Instantiate (squarePrefab, new Vector3(x+0.5f, y+0.5f, 0), Quaternion.identity) as GameObject;
 				square.GetComponent<SquareStatus>().setStatus ("movable", null);
-
+				square.GetComponent<SquareStatus>().x = x;
+				square.GetComponent<SquareStatus>().y = y;
 				square.transform.parent = matrixParent.transform;
 
 				squares[x,y] = square;
 			}
 		}
 		GameObject selector = GameObject.FindGameObjectWithTag("Selector");
-		selector.GetComponent<MovableSquareFinder> ().initUnitsMatrix (matrixWidth, matrixHeight);
 
 		// Spawn germs on battlefield
 		GameObject battleInitializer = GameObject.FindGameObjectWithTag ("Battle Initializer");
 		battleInitializer.GetComponent<BattleInitializer> ().SpawnGermsAtBattleStart ();
+
 	}
 	
 	

@@ -54,12 +54,13 @@
      <Compile Include="Assets\Scripts\Battle\GUI\Battlelog.cs" />
      <Compile Include="Assets\Scripts\Battle\GUI\ItemMenu.cs" />
      <Compile Include="Assets\Scripts\Battle\Matrix\Matrix.cs" />
+     <Compile Include="Assets\Scripts\Battle\Matrix\MovableSquaresFinder.cs" />
      <Compile Include="Assets\Scripts\Battle\Matrix\SquareStatus.cs" />
      <Compile Include="Assets\Scripts\Battle\RouteFinder.cs" />
-     <Compile Include="Assets\Scripts\Battle\Selection\MovableSquareFinder.cs" />
      <Compile Include="Assets\Scripts\Battle\Selection\Selector.cs" />
      <Compile Include="Assets\Scripts\Battle\Turn\BattleEndWindow.cs" />
      <Compile Include="Assets\Scripts\Battle\Turn\TurnHandler.cs" />
+     <Compile Include="Assets\Scripts\Battle\Turn\TurnStartHandler.cs" />
      <Compile Include="Assets\Scripts\Battle\Unit\HealthBar.cs" />
      <Compile Include="Assets\Scripts\Battle\Unit\Movement.cs" />
      <Compile Include="Assets\Scripts\Battle\Unit\PreventRotation.cs" />
@@ -74,6 +75,7 @@
      <Compile Include="Assets\Scripts\Map\Node.cs" />
      <Compile Include="Assets\Scripts\Map\onClickDestroy.cs" />
      <Compile Include="Assets\Scripts\Shop\Shop_GUI.cs" />
+     <Compile Include="Assets\Trash\MovableSquareFinder.cs" />
      <Compile Include="Assets\testLevels\levelComplete.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

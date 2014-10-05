@@ -12,13 +12,18 @@ public class Selector : MonoBehaviour {
 	private int unitMaxSize = 5;
 	public Transform selectedSquareIcon;
 
+	private TurnHandler turnHandler;
 	// for developing
 	private bool debug = false;
+
+	void Start() {
+		this.turnHandler = GameObject.FindGameObjectWithTag ("TurnHandler").transform.GetComponent<TurnHandler> ();
+	}
 
 	// Update is called once per frame
 	void Update () {
 
-		if (!GameObject.FindGameObjectWithTag("TurnHandler").transform.GetComponent<TurnHandler>().isBattleOver()) {
+		if (!turnHandler.isBattleOver()) {
 			changeUnitsBoxColliders(true);
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			Physics.Raycast (ray, out hit, raycastLength);
@@ -43,7 +48,8 @@ public class Selector : MonoBehaviour {
 			if (Input.GetMouseButtonUp (0)) {
 				GameObject objectClicked = hit.collider.gameObject;
 
-				GameObject activeUnit = findActiveUnit();
+				GameObject activeUnit = turnHandler.getActiveUnit();
+
 				Debug.Log (activeUnit);
 				if (objectClicked.tag == "Unit") {
 
@@ -115,20 +121,6 @@ public class Selector : MonoBehaviour {
 		if (debug) {
 			Debug.Log (stringToDebug);
 		}
-	}
-	
-
-
-	public GameObject findActiveUnit() {
-		GameObject[] units = GameObject.FindGameObjectsWithTag("Unit");
-		for (int i = 0; i < units.Length; i++) {
-			if(units[i].GetComponent<UnitStatus> ().selected) {
-				return units[i];
-			}
-		}
-		// No active units found
-		Debug.Log ("Active unit not found");
-		return null;
 	}
 
 	private void changeUnitsBoxColliders(bool b) {

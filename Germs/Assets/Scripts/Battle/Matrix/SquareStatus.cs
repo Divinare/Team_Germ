@@ -3,7 +3,10 @@ using System.Collections;
 
 public class SquareStatus : MonoBehaviour {
 
-	public string squareStatus; // "friendly" for friendly target, "enemy" for enemy target, "movable" for a square that can be moved to
+	private string squareStatus; // "friendly" for friendly target, "enemy" for enemy target, "movable" for a square that can be moved to
+	public int x;
+	public int y;
+
 	public GameObject objectOnSquare;
 
 	// Use this for initialization
