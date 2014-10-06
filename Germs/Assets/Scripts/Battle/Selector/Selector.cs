@@ -13,12 +13,13 @@ public class Selector : MonoBehaviour {
 
 	private TurnHandler turnHandler;
 
-	private List<GameObject> route;
+	public List<GameObject> route;
 
 	// for developing
 	private bool debug = false;
 	
 	void Start() {
+		//this.route = null;
 		this.turnHandler = GameObject.FindGameObjectWithTag ("TurnHandler").transform.GetComponent<TurnHandler> ();
 	}
 
@@ -58,8 +59,12 @@ public class Selector : MonoBehaviour {
 				else if (objectClicked.tag == "Square"){
 					// Clicked a square, squares have no tags
 
-					Debug.Log ("Moving taken out because of some errors");
-					//activeUnit.GetComponent<Movement> ().startMoving(route);
+					//Debug.Log ("Moving taken out because of some errors");
+					if(this.route != null) {
+						List<GameObject> tempRoute = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (hit.collider.gameObject);
+						//Debug.Log ("aikaisempi countti: " + tempRoute.Count);
+						activeUnit.GetComponent<Movement> ().startMoving(tempRoute);
+					}
 				}
 			}
 		}
@@ -106,21 +111,23 @@ public class Selector : MonoBehaviour {
 		}
 		mouseHoveredSquare = hoveredSquare;
 
-		Debug.Log ("uusi?");
-
 		int x = (int)mouseHoveredSquare.transform.position.x;
 		int y = (int)mouseHoveredSquare.transform.position.y;
 		GameObject[,] squares = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<Matrix> ().getSquares();
 		GameObject targetSquare = squares [x, y];
 
+		if(hoveredSquare.tag.Equals("Square")) {
+
 		// getting route for a new square, will be null if not found!
 		this.route = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (targetSquare);
-
+		
+		//Debug.Log ("laitettii route: " + this.route.Count);
 		// draws a route if there is one
 		GameObject.FindGameObjectWithTag ("Drawer").GetComponent<Drawer> ().drawRoute (this.route);
 
 		// draws a circle hovered square
 		GameObject.FindGameObjectWithTag ("Drawer").GetComponent<Drawer> ().drawSelectionSquare (hoveredSquare);
+		}
 	}
 
 	public void db(string stringToDebug) {

@@ -83,14 +83,17 @@ public class RouteFinder : MonoBehaviour {
 			visitSquare (x-1, y-1, current, 1.5, speedUsed, maxSpeed, targetSquare);
 			visitSquare (x-1, y+1, current, 1.5, speedUsed, maxSpeed, targetSquare);
 			visitSquare (x+1, y-1, current, 1.5, speedUsed, maxSpeed, targetSquare);
-			//Debug.Log ("size: " + this.toBeVisited.Count);
-		}
 
+		}
+		if (!found) {
+			return null;
+		}
 		List<GameObject> pathFound = formPath (targetSquare);
 
 		if (pathFound != null) {
 			return pathFound;
 		}
+
 		return null;
 	}
 
@@ -102,7 +105,11 @@ public class RouteFinder : MonoBehaviour {
 			GameObject newSquare = squares[x, y];
 
 				if(speedUsed+cost < this.distances[x,y]) {
-					newSquare.GetComponent<SquareStatus>().setPreviousSquare(current);
+
+					// not adding starting square to the route
+					if (current != turnHandler.getActiveUnit ().GetComponent<UnitStatus> ().getSquare ()) {
+						newSquare.GetComponent<SquareStatus>().setPreviousSquare(current);
+					}
 					this.distances[x,y] = (speedUsed+cost);
 					if (newSquare == target) {
 						this.found = true;
@@ -131,27 +138,39 @@ public class RouteFinder : MonoBehaviour {
 	private List<GameObject> formPath(GameObject endSquare) {
 		List<GameObject> route = new List<GameObject>();
 		GameObject startSquare = turnHandler.getActiveUnit ().GetComponent<UnitStatus> ().getSquare ();
-		if (endSquare.GetComponent<SquareStatus> ().getPreviousSquare() == null) {
+		/*if (endSquare.GetComponent<SquareStatus> ().getPreviousSquare() == null) {
 			return null;
 		}
-		GameObject current = endSquare.GetComponent<SquareStatus> ().getPreviousSquare ();
+		*/
+		GameObject current = endSquare;
 		route.Add (current);
-		while (current != startSquare) {
+
+		while (current != null) {
 			current = current.GetComponent<SquareStatus> ().getPreviousSquare ();
 			route.Add(current);
-			if(current == null) {
-				Debug.Log ("formPath error!");
-				break;
-			}
 		}
+		// take of first square
+		//route.RemoveAt (0);
 
+
+		/*
 		List<GameObject> twistedRoute = new List<GameObject>();
 		if (route != null) {
-			for(int i = route.Count-1; i > 0; i--) {
+			for(int i = route.Count-1; i >= 0; i--) {
 				twistedRoute.Add(route[i]);
 			}
 		}
+	*/
 
+		/*
+		
+		List<GameObject> twistedRoute = new List<GameObject>();
+		if (route != null) {
+			for(int i = 0; i < route.Count-1; i++) {
+				twistedRoute.Add(route[i]);
+			}
+		}
+	*/
 
 		return route;
 	}
