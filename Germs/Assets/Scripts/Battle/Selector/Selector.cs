@@ -26,11 +26,11 @@ public class Selector : MonoBehaviour {
 	void Update () {
 
 		if (!turnHandler.isBattleOver()) {
-			changeUnitsBoxColliders(true);
+			//changeUnitsBoxColliders(true);
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			Physics.Raycast (ray, out hit, raycastLength);
 			//	if (Physics.Raycast (ray, out hit, raycastLength)) {
-			changeUnitsBoxColliders(false);
+			//changeUnitsBoxColliders(false);
 
 			//Debug.DrawRay (ray.origin, ray.direction * raycastLength);
 
