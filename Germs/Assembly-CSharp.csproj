@@ -48,7 +48,6 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Audio\AudioController.cs" />
      <Compile Include="Assets\Scripts\Audio\DestroyAudioObject.cs" />
-     <Compile Include="Assets\Scripts\Battle\Battle Initializer\BattleInitializer.cs" />
      <Compile Include="Assets\Scripts\Battle\Battle Initializer\UnitPrefabContainer.cs" />
      <Compile Include="Assets\Scripts\Battle\Camera\Zoom.cs" />
      <Compile Include="Assets\Scripts\Battle\Drawer.cs" />
