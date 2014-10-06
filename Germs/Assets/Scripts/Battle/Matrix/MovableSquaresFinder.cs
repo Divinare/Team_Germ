@@ -25,8 +25,6 @@ public class MovableSquaresFinder : MonoBehaviour {
 
 	public void findMovableSquares() {
 
-		deleteOldMovableSquares ();
-
 		this.squares = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<Matrix> ().getSquares ();
 
 		// speed of the current active unit
@@ -101,17 +99,6 @@ public class MovableSquaresFinder : MonoBehaviour {
 			return false;
 		}
 		return true;
-	}
-
-	private void deleteOldMovableSquares() {
-		// Delete old square selection icon
-		GameObject[] deleteList = GameObject.FindGameObjectsWithTag ("MovableSquareGfx");
-		foreach(GameObject toDelete in deleteList) {
-			if (toDelete != null) {
-				Destroy(toDelete);
-			}
-		}
-
 	}
 
 	public List<GameObject> getMovableSquares() {

@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
 public class TurnStartHandler : MonoBehaviour {
-
-	public Transform movableSquareIcon;
-
+	
 	public void handeTurnStart() {
 
-		drawMovableSquares ();
+		GameObject.FindGameObjectWithTag ("Drawer").transform.GetComponent<Drawer> ().drawMovableSquares ();
 
 
 		/* make poison damage to all units poisoned
@@ -17,26 +16,6 @@ public class TurnStartHandler : MonoBehaviour {
 		 */
 
 		}
-
-
-	private void drawMovableSquares() {
-		GameObject.FindGameObjectWithTag ("Matrix").GetComponent<MovableSquaresFinder> ().findMovableSquares ();
-		
-		List<GameObject> squares = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<MovableSquaresFinder> ().getMovableSquares ();
-
-		foreach(GameObject square in squares) {
-
-			float x = square.transform.position.x;
-			float y = square.transform.position.y;
-			float z = square.transform.position.z;
-			// Create movable square icon
-			Instantiate (movableSquareIcon, new Vector3(x,y,z -0.9f), Quaternion.identity);
-		
-		}
-
-
-	}
-
 	}
 
 

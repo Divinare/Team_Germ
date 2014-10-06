@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Selector : MonoBehaviour {
 
@@ -9,12 +10,14 @@ public class Selector : MonoBehaviour {
 	private GameObject mouseHoveredSquare;
 
 	private int unitMaxSize = 5;
-	public Transform selectedSquareIcon;
 
 	private TurnHandler turnHandler;
+
+	private List<GameObject> route;
+
 	// for developing
 	private bool debug = false;
-
+	
 	void Start() {
 		this.turnHandler = GameObject.FindGameObjectWithTag ("TurnHandler").transform.GetComponent<TurnHandler> ();
 	}
@@ -29,18 +32,11 @@ public class Selector : MonoBehaviour {
 			//	if (Physics.Raycast (ray, out hit, raycastLength)) {
 			changeUnitsBoxColliders(false);
 
-			//Vector3 pz = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-			// Make a floor function to the coordinates
-				//	float x = Mathf.Floor (pz.x);
-				//	float y = Mathf.Floor (pz.y);
-			//db ("x: " + x + " y: " + y);
-
 			//Debug.DrawRay (ray.origin, ray.direction * raycastLength);
 
 			// empty space
 			if (hit.collider == null) {
-			return;
+				return;
 			}
 
 			handleMouseHover (hit.collider.gameObject);
@@ -59,9 +55,11 @@ public class Selector : MonoBehaviour {
 					Debug.Log("menu item clicked!");
 					activeUnit.GetComponent<UnitStatus> ().switchSelectedAction(objectClicked.name);
 				} 
-				else {
+				else if (objectClicked.tag == "Square"){
 					// Clicked a square, squares have no tags
-					activeUnit.GetComponent<Movement> ().startMoving(objectClicked);
+
+					Debug.Log ("Moving taken out because of some errors");
+					//activeUnit.GetComponent<Movement> ().startMoving(route);
 				}
 			}
 		}
@@ -115,29 +113,15 @@ public class Selector : MonoBehaviour {
 		GameObject[,] squares = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<Matrix> ().getSquares();
 		GameObject targetSquare = squares [x, y];
 
-		//GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (targetSquare);
+		// getting route for a new square, will be null if not found!
+		this.route = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (targetSquare);
 
-		drawSelectionSquare (hoveredSquare);
+		// draws a route if there is one
+		GameObject.FindGameObjectWithTag ("Drawer").GetComponent<Drawer> ().drawRoute (this.route);
+
+		// draws a circle hovered square
+		GameObject.FindGameObjectWithTag ("Drawer").GetComponent<Drawer> ().drawSelectionSquare (hoveredSquare);
 	}
-
-	private void drawSelectionSquare(GameObject squareToDrawCircle) {
-		float x = mouseHoveredSquare.transform.position.x;
-		float y = mouseHoveredSquare.transform.position.y;
-		float z = mouseHoveredSquare.transform.position.z;
-		
-		// Delete old square selection icon
-		GameObject toDelete = GameObject.FindGameObjectWithTag ("SquareGfx");
-		if (toDelete != null) {
-			Destroy(toDelete);
-		}
-		
-		
-		// Create selected square icon at selected square
-		Instantiate (selectedSquareIcon, new Vector3(x,y,z -1f), Quaternion.identity);
-
-
-	}
-
 
 	public void db(string stringToDebug) {
 		if (debug) {

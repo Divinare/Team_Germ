@@ -10,7 +10,7 @@ public class RouteFinder : MonoBehaviour {
 
 	private List<GameObject> visited;
 	private List<GameObject> toBeVisited;
-
+	private bool found = false;
 
 	// matrix that tells the smallest length for a square
 	private double[,] distances;
@@ -31,8 +31,10 @@ public class RouteFinder : MonoBehaviour {
 
 	
 	public List<GameObject> findRoute(GameObject targetSquare) {
-		this.movableSquares = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<MovableSquaresFinder> ().getMovableSquares ();
+		removeAllPaths ();
+		this.found = false;
 
+		this.movableSquares = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<MovableSquaresFinder> ().getMovableSquares ();
 
 		List<GameObject> route = new List<GameObject> ();
 		int speed = turnHandler.getActiveUnit ().GetComponent<UnitStatus> ().speed;
@@ -65,7 +67,7 @@ public class RouteFinder : MonoBehaviour {
 		// set starting point 0 so that it won't be visited
 		distances [first.GetComponent<SquareStatus> ().x, first.GetComponent<SquareStatus> ().y] = 0;
 
-		while (toBeVisited.Count > 0) {
+		while (toBeVisited.Count > 0 && !this.found) {
 			GameObject current = toBeVisited[0];
 			this.toBeVisited.RemoveAt(0);
 
@@ -73,51 +75,41 @@ public class RouteFinder : MonoBehaviour {
 			int y = current.GetComponent<SquareStatus> ().y;
 
 			double speedUsed = distances[x,y];
-			visitSquare (x+1, y, current, 1, speedUsed, targetSquare);
-			visitSquare (x-1, y, current, 1, speedUsed, targetSquare);
-			visitSquare (x, y+1, current, 1, speedUsed, targetSquare);
-			visitSquare (x, y-1, current, 1, speedUsed, targetSquare);
-			visitSquare (x+1, y+1, current, 1.5, speedUsed, targetSquare);
-			visitSquare (x-1, y-1, current, 1.5, speedUsed, targetSquare);
-			visitSquare (x-1, y+1, current, 1.5, speedUsed, targetSquare);
-			visitSquare (x+1, y-1, current, 1.5, speedUsed, targetSquare);
-			Debug.Log ("size: " + this.toBeVisited.Count);
+			visitSquare (x+1, y, current, 1, speedUsed, maxSpeed, targetSquare);
+			visitSquare (x-1, y, current, 1, speedUsed, maxSpeed, targetSquare);
+			visitSquare (x, y+1, current, 1, speedUsed, maxSpeed, targetSquare);
+			visitSquare (x, y-1, current, 1, speedUsed, maxSpeed, targetSquare);
+			visitSquare (x+1, y+1, current, 1.5, speedUsed, maxSpeed, targetSquare);
+			visitSquare (x-1, y-1, current, 1.5, speedUsed, maxSpeed, targetSquare);
+			visitSquare (x-1, y+1, current, 1.5, speedUsed, maxSpeed, targetSquare);
+			visitSquare (x+1, y-1, current, 1.5, speedUsed, maxSpeed, targetSquare);
+			//Debug.Log ("size: " + this.toBeVisited.Count);
 		}
 
-		List<GameObject> pathFound = targetSquare.GetComponent<SquareStatus> ().getPath();
+		List<GameObject> pathFound = formPath (targetSquare);
+
 		if (pathFound != null) {
-			Debug.Log ("reitin pituus: " + pathFound.Count);
 			return pathFound;
 		}
 		return null;
 	}
 
-	private void visitSquare(int x, int y, GameObject current, double cost, double speedUsed, GameObject target) {
+	private void visitSquare(int x, int y, GameObject current, double cost, double speedUsed, int maxSpeed, GameObject target) {
 		if (isValidSquare(x, y, current)) {
-
-			current.GetComponent<SquareStatus>().addSquareToPath(current);
-
-			List<GameObject> path = current.GetComponent<SquareStatus>().getPath();
-
-			if (current == target) {
-				Debug.Log ("found");
-				target.GetComponent<SquareStatus>().addPathToPath(path);
-				Debug.Log(" pituus nyt: " + target.GetComponent<SquareStatus> ().getPath().Count);
+			if (speedUsed+cost > maxSpeed) {
+				return;
 			}
-			//Debug.Log ("onko sisäl " + movableSquares.Count);
-			if(contains(movableSquares, x, y)) {
+			GameObject newSquare = squares[x, y];
 
-			//	Debug.Log ("oli");
-				GameObject newSquare = squares[x, y];
-				if(!visited.Contains(newSquare)) {
-
-					newSquare.GetComponent<SquareStatus>().addPathToPath(path);
+				if(speedUsed+cost < this.distances[x,y]) {
+					newSquare.GetComponent<SquareStatus>().setPreviousSquare(current);
+					this.distances[x,y] = (speedUsed+cost);
+					if (newSquare == target) {
+						this.found = true;
+						return;
+					}
 					toBeVisited.Add(newSquare);
-					visited.Add(newSquare);
-
-					//Debug.Log ("added stuff " + toBeVisited.Count);
 				}
-			}
 		}
 	}
 
@@ -136,6 +128,37 @@ public class RouteFinder : MonoBehaviour {
 		return true;
 	}
 
+	private List<GameObject> formPath(GameObject endSquare) {
+		List<GameObject> route = new List<GameObject>();
+		GameObject startSquare = turnHandler.getActiveUnit ().GetComponent<UnitStatus> ().getSquare ();
+		if (endSquare.GetComponent<SquareStatus> ().getPreviousSquare() == null) {
+			return null;
+		}
+		GameObject current = endSquare.GetComponent<SquareStatus> ().getPreviousSquare ();
+		route.Add (current);
+		while (current != startSquare) {
+			current = current.GetComponent<SquareStatus> ().getPreviousSquare ();
+			route.Add(current);
+			if(current == null) {
+				Debug.Log ("formPath error!");
+				break;
+			}
+		}
+
+		List<GameObject> twistedRoute = new List<GameObject>();
+		if (route != null) {
+			for(int i = route.Count-1; i > 0; i--) {
+				twistedRoute.Add(route[i]);
+			}
+		}
+
+
+		return route;
+	}
+
+
+
+
 	private bool contains(List<GameObject> objects, int x, int y) {
 		//Debug.Log (objectToCompare.GetInstanceID ());
 		foreach (GameObject square in objects) {
@@ -153,6 +176,21 @@ public class RouteFinder : MonoBehaviour {
 
 
 		return false;
+	}
+
+	public void debugDistances() {
+		double[,] matrix = distances;
+		string db = "";
+		for (int i = 0; i < matrix.GetLength(0); i++) {
+			
+			for (int j = 0; j < matrix.GetLength(1); j++) {
+				db = db + matrix[i, j] + " ";
+			}
+			
+			db = db + "\n";
+		}
+		Debug.Log (db);
+		
 	}
 
 	private void removeAllPaths() {
