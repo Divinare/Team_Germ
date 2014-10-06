@@ -39,18 +39,20 @@ public class Drawer : MonoBehaviour {
 		removeDrawedItems ("MovingIndicationGfx");
 
 		if (squares == null) {
-			Debug.Log ("tried to draw empty route");
+			//Debug.Log ("tried to draw empty route");
 			return;
 		}
-		while (squares.Count > 0) {
-			GameObject square = squares[0];
-			squares.RemoveAt(0);
+		//Debug.Log ("squares pituus: " + squares.Count);
+		for(int i = 0; i < squares.Count; i++) {
+			GameObject square = squares[i];
 
+			if(square != null) {
 			float x = square.transform.position.x;
 			float y = square.transform.position.y;
 			float z = square.transform.position.z;
 
 			Instantiate (movingIndicationIcon, new Vector3(x,y,z -0.95f), Quaternion.identity);
+			}
 		}
 	}
 
