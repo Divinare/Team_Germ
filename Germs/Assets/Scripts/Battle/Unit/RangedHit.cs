@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class OnCollision : MonoBehaviour {
+public class RangedHit : MonoBehaviour {
 
 	private int attackerGivesDamage;
 

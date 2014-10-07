@@ -4,15 +4,23 @@ using System.Collections;
 public class RangedAttack : MonoBehaviour {
 	
 	public Rigidbody projectile;
-	public float bulletSpeed;		
-	public Rigidbody bullet;
-	public GameObject target;
+	private float bulletSpeed;	
+	private float rotationSpeed;
+	private Rigidbody bullet;
+	private GameObject target;
 	
 
 	void Start () {
-		bulletSpeed = 10;
+		bulletSpeed = 8;
+		rotationSpeed = 520.0f; // degrees per second
 		bullet = null;
 		target = null;
+	}
+
+	void Update() {
+		if (bullet != null) {
+			bullet.transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime, Space.Self);
+		}
 	}
 	
 
