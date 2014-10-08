@@ -56,6 +56,7 @@ public class Map_GUI : MonoBehaviour {
 
 		if (GUI.Button (new Rect (0 + Screen.height/6,Screen.height - Screen.height/12,Screen.height/6,Screen.height/12), "", shopHover)) {
 			clickSound.Play ();	
+			Application.LoadLevel ("Shop");
 			Debug.Log ("Shop");
 		}
 		if (GUI.Button (new Rect (0,Screen.height - Screen.height/12,Screen.height/6,Screen.height/12), "", trainerHover)) {
