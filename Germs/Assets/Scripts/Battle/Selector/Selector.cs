@@ -15,6 +15,8 @@ public class Selector : MonoBehaviour {
 
 	public List<GameObject> route;
 
+	private GameObject targetedUnit;
+
 	// for developing
 	private bool debug = false;
 	
@@ -72,6 +74,7 @@ public class Selector : MonoBehaviour {
 
 	private void unitAction(GameObject activeUnit, GameObject objectClicked) {
 		Debug.Log ("Unit clicked!");
+		this.targetedUnit = objectClicked; // now projectiles know what they are trying to hit
 		
 		string action = activeUnit.GetComponent<UnitStatus> ().selectedAction;
 		if (action == "melee") {
@@ -97,6 +100,17 @@ public class Selector : MonoBehaviour {
 		
 		// etc...
 		
+	}
+
+	public GameObject GetTargetedUnit() {
+		if (targetedUnit != null) {
+			return targetedUnit;
+		}
+		return null;
+	}
+
+	public void SetTargetedUnitToNull() {
+		targetedUnit = null;
 	}
 
 	// Draw a circle to a square so that player can see where he can move
@@ -136,14 +150,12 @@ public class Selector : MonoBehaviour {
 		}
 	}
 
+
+	// is this still needed...?
 	private void changeUnitsBoxColliders(bool b) {
 		GameObject[] units = GameObject.FindGameObjectsWithTag ("Unit");
 		for (int i = 0; i < units.Length; i++) {
-			if(b) {
-				units[i].collider.enabled = true;
-			} else {
-				units[i].collider.enabled = false;
-			}
+			units[i].collider.enabled = b;
 		}
 	}
 

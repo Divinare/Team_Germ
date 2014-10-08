@@ -96,6 +96,10 @@ public class UnitStatus : MonoBehaviour {
 		selected = false;
 	}
 
+	public bool IsSelected() {
+		return selected;
+	}
+
 	public bool isAtTargetSquare(GameObject Square) {
 		return false;
 	}
