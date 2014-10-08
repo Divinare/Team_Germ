@@ -24,6 +24,9 @@ http://answers.unity3d.com/questions/639139/how-to-move-an-2d-object-to-mouse-cl
 Hienoja tekstuureita, saa vissiin käyttää jopa kaupallisesti, kunhan ei sano, et ite olis tehny niit
 http://www.cgtextures.com/
 
+Pixel perfect camera:
+http://indiehoodgames.wordpress.com/2013/07/27/pixel-perfect-calculator-for-orthographic-camera-unity3d/
+
 Clicking an object:
 http://www.youtube.com/watch?v=DrR0soJDCUo
 
