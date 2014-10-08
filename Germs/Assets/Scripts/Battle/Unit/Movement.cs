@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 public class Movement : MonoBehaviour {
 
-	public float movementSpeed = 1;
-	public Vector3 targetPosition;
+	private float movementSpeed = 1;
+	private Vector3 targetPosition;
 	private GameObject Matrix;
 
-	public List<GameObject> route;
+	private List<GameObject> route;
 	private int routeIndex;
 
 	void Start() {
@@ -26,75 +26,37 @@ public class Movement : MonoBehaviour {
 
 			//constant movement
 		if (targetPosition != transform.position) {
-			//Debug.Log ("moving");
-			//Debug.Log (targetPosition); // Nämä spämmäävät koko konsolilogin täyteen - älkää pls jättäkö näitä kommentoimatta silloin, kun pushaatte
+				//Debug.Log ("moving");
+				//Debug.Log (targetPosition); // Nämä spämmäävät koko konsolilogin täyteen - älkää pls jättäkö näitä kommentoimatta silloin, kun pushaatte
 
-			transform.position = Vector3.MoveTowards(transform.position, targetPosition, movementSpeed * Time.deltaTime);
+				transform.position = Vector3.MoveTowards (transform.position, targetPosition, movementSpeed * Time.deltaTime);
+		} else {
+			if (this.route != null) {
+				if (this.route.Count > 0) {
+					if(route[0] == null) {
+						this.route = null;
+					} else {
+						moveToSquare (route [0]);
+						this.route.RemoveAt(0);
+					}
+				}
+
+			}
 		}
 
 	}
 	
 	public void startMoving(List<GameObject> newRoute) {
 		this.route = newRoute;
-		this.routeIndex = this.route.Count-2;
-		//debugRoutes (this.route);
 
-		targetPosition = this.route [routeIndex].transform.position;
-		targetPosition.z = -1;
-		routeIndex--;
+		moveToSquare (route [0]);
+		this.route.RemoveAt(0);
+	
 
-
-		/*
-		//Debug.Log ("countti oli : " + count);
-		if (newRoute == null) {
-			Debug.Log ("can't move, route was empty");
-			return;
-		}
-		Debug.Log (newRoute);
-	//	Debug.Log ("pituuus?!?! " + newRoute.Count);
-		//Debug.Log ("routenPPP: " + GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ().route.Count);
-		this.route = newRoute;
-		GameObject firstTargetSquare = this.route [this.route.Count-2];
-		Debug.Log ("first target square: ");
-		Debug.Log (firstTargetSquare);
-		this.route.RemoveAt (this.route.Count - 1);
-		moveToSquare (firstTargetSquare);
-
-*/
-
-	}
-
-	private void checkIfReachedTargetPosition() {
-		// No need to do anything if no having no route left
-		if (route == null && routeIndex == 0) {
-			return;
-		}
-	//	debugRoutes (this.route);
-
-
-		GameObject currentTargetSquare = this.route [routeIndex+1];
-		Vector3 currentTargetSquarePosition = currentTargetSquare.transform.position;
-		currentTargetSquarePosition.z = -1;
-		//Debug.Log ("next x: " + nextSquare.transform.position.z + " target x: " + targetPosition.z);
-		if (currentTargetSquarePosition == targetPosition) {
-
-
-			Debug.Log ("edettiiiiin");
-			targetPosition = this.route [routeIndex].transform.position;
-			targetPosition.z = -1;
-			Debug.Log ("äks: " + targetPosition.x);
-			Debug.Log ("yy: " + targetPosition.y);
-			//route.RemoveAt(this.route.Count-1);
-			this.routeIndex--;
-			//moveToSquare ();
-
-		}
 	}
 
 	private void moveToSquare(GameObject targetSquare) {
-	//	if (targetSquare.GetComponent<SquareStatus> ().getStatus ().Equals("movable")) {
 			Debug.Log ("Moving towards " + targetSquare);
-			Debug.Log (targetSquare);
 			targetPosition = targetSquare.transform.position;
 			targetPosition.z = -1;
 			this.gameObject.GetComponent<UnitStatus>().getSquare().GetComponent<SquareStatus>().setStatus ("movable", null); // clear status of currently occupied square

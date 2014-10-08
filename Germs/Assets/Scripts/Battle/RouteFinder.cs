@@ -143,58 +143,24 @@ public class RouteFinder : MonoBehaviour {
 		}
 		*/
 		GameObject current = endSquare;
-		route.Add (current);
+		//route.Insert (0, current);
 
 		while (current != null) {
+			route.Insert(0, current);
 			current = current.GetComponent<SquareStatus> ().getPreviousSquare ();
-			route.Add(current);
+
 		}
-		// take of first square
-		//route.RemoveAt (0);
 
-
-		/*
+		// turn around the route
 		List<GameObject> twistedRoute = new List<GameObject>();
 		if (route != null) {
-			for(int i = route.Count-1; i >= 0; i--) {
+			for(int i = 0; i < route.Count; i++) {
 				twistedRoute.Add(route[i]);
 			}
 		}
-	*/
-
-		/*
-		
-		List<GameObject> twistedRoute = new List<GameObject>();
-		if (route != null) {
-			for(int i = 0; i < route.Count-1; i++) {
-				twistedRoute.Add(route[i]);
-			}
-		}
-	*/
-
-		return route;
-	}
 
 
-
-
-	private bool contains(List<GameObject> objects, int x, int y) {
-		//Debug.Log (objectToCompare.GetInstanceID ());
-		foreach (GameObject square in objects) {
-			//Debug.Log (gb.GetInstanceID ());
-
-			int x2 = (int)square.transform.position.x;
-			int y2 = (int)square.transform.position.y;
-
-		//	Debug.Log ("x: " + x1 + "x: " + x2 + " y: " + y1 + " y: " + y2);
-			if(x == x2 && y == y2) {
-				return true;
-			}
-	
-		}
-
-
-		return false;
+		return twistedRoute;
 	}
 
 	public void debugDistances() {
