@@ -62,6 +62,8 @@ public class Movement : MonoBehaviour {
 			this.gameObject.GetComponent<UnitStatus>().getSquare().GetComponent<SquareStatus>().setStatus ("movable", null); // clear status of currently occupied square
 			targetSquare.GetComponent<SquareStatus>().setStatus ("friendly", this.gameObject); // set this object as occupying the target square
 			this.gameObject.GetComponent<UnitStatus>().setSquare (targetSquare);
+
+
 	//	}
 	}
 

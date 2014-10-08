@@ -5,6 +5,7 @@ public class RangedHit : MonoBehaviour {
 
 	private int attackerGivesDamage;
 	private GameObject targetedUnit;
+	private UnitStatus attackingUnit;
 	private Selector selector;
 	public ParticleSystem slimeballHit;
 
@@ -27,12 +28,14 @@ public class RangedHit : MonoBehaviour {
 			Destroy(Instantiate(slimeballHit, transform.position, transform.rotation), 2f); // instantiating the explosion and destroying it after 2f time
 			unit.GetComponent<UnitStatus>().TakeDamage(attackerGivesDamage);
 			selector.SetTargetedUnitToNull();
+			attackingUnit.Deselect(); // deselecting the attacker here, so the bullet has time to hit its target before turn is given to another
 			Destroy (gameObject);
 
 		}
 		// Hitting the attacker, as the bullet is spawned inside the attacker's collider
-		else if (unit.GetComponent<UnitStatus>().IsSelected()) {		
-			attackerGivesDamage = unit.GetComponent<UnitStatus>().damage;
+		else if (unit.GetComponent<UnitStatus>().IsSelected()) {	
+			attackingUnit = unit.GetComponent<UnitStatus>();
+			attackerGivesDamage = attackingUnit.damage;
 		}
 	}
 }
