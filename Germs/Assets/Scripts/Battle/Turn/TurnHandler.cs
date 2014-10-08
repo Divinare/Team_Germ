@@ -25,7 +25,7 @@ public class TurnHandler : MonoBehaviour {
 		if (!battleIsOver) {
 			
 			// Checks whether the selected unit's turn has ended
-			if (!activeUnit.transform.GetComponent<UnitStatus> ().selected) {
+			if (!activeUnit.transform.GetComponent<UnitStatus>().IsSelected()) {
 				
 				checkIfBattleOver ();
 				if (!battleIsOver) {
@@ -41,7 +41,7 @@ public class TurnHandler : MonoBehaviour {
 						// Checks wheter the next unit is still alive so it can be given the next turn
 						if (unitListIndex <= unitList.Count - 1 && unitList [unitListIndex] != null) {
 							activeUnit = unitList [unitListIndex];
-							activeUnit.transform.GetComponent<UnitStatus> ().Select ();
+							activeUnit.transform.GetComponent<UnitStatus>().Select();
 						}
 					}
 				}

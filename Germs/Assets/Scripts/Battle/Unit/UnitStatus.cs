@@ -75,7 +75,7 @@ public class UnitStatus : MonoBehaviour {
 	public void TakeDamage(int damage) {
 		PlaySound (0); // 0 = 'damage taken'-sound
 		currentHealth -= damage;
-		battlelog ("taken " + damage + " dmg");
+		battlelog (gameObject.name + " took " + damage + " damage!");
 	}
 	
 	public void Poisoned(int damage) {
@@ -94,6 +94,10 @@ public class UnitStatus : MonoBehaviour {
 	
 	public void Deselect() {
 		selected = false;
+	}
+
+	public bool IsSelected() {
+		return selected;
 	}
 
 	public bool isAtTargetSquare(GameObject Square) {
