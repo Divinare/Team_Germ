@@ -15,12 +15,16 @@ public class RangedHit : MonoBehaviour {
 		targetedUnit = selector.GetTargetedUnit();
 	}
 
+	void Update() {
+	
+	}
+
 	void OnTriggerEnter(Collider unit) {		               
 
 		// Hitting the enemy
 		if (unit.GetComponent<UnitStatus>() == targetedUnit.GetComponent<UnitStatus>()) {
 
-			ParticleSystem explosionEffect = Instantiate(slimeballHit, transform.position, transform.rotation) as ParticleSystem; // instantiating explosion effect
+			Destroy(Instantiate(slimeballHit, transform.position, transform.rotation), 2f); // instantiating the explosion and destroying it after 2f time
 			unit.GetComponent<UnitStatus>().TakeDamage(attackerGivesDamage);
 			selector.SetTargetedUnitToNull();
 			Destroy (gameObject);
