@@ -71,15 +71,15 @@ public class Shop_GUI : MonoBehaviour {
 	}
 
 	private void createShopMenu() {
-		int x = 280;
-		int y = 140;
+		float x = Screen.width*0.2f;
+		float y = Screen.height*0.31f;
 
 		// Vertical scrollbar
 		//hScrollbarValue = GUI.VerticalScrollbar (new Rect (205, 100, 100, 30), hScrollbarValue, 1.0f, 0.0f, 10.0f);
 
 		//Sroll view		// alwaysShowVertical: true
-		scrollPosition = GUI.BeginScrollView (new Rect (x, y, x-60, y+30), scrollPosition, new Rect (0, 0, 0, MenuHeight*3));
-
+		scrollPosition = GUI.BeginScrollView (new Rect (x, y, x-Screen.width*0.05f, y+Screen.height*0.05f), scrollPosition, new Rect (0, 0, 0, MenuHeight*3));
+	
 
 		createIcon (0, 0);
 		GUI.TextArea (new Rect (100, 100, 75, 75), "items come here!");
