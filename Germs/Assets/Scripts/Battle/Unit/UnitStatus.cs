@@ -26,6 +26,7 @@ public class UnitStatus : MonoBehaviour {
 
 	}
 
+	// mikä tämän metodin funktio on? meillä on jo bool enemy, joka kertoo, onko unit pelaajan vai koneen puolella...?
 	public void setFriendlyStatus(bool status) {
 			isFriendly = status;
 	}
@@ -45,8 +46,6 @@ public class UnitStatus : MonoBehaviour {
 	
 	}
 
-
-
 	
 	// Update is called once per frame
 	void Update () {
@@ -54,12 +53,6 @@ public class UnitStatus : MonoBehaviour {
 			GameObject deathSound = Instantiate (DeathSound, this.transform.position, this.transform.rotation) as GameObject;
 			Debug.Log("Unit died");
 			Destroy(this.gameObject);
-		}
-		if (selected) {
-			this.gameObject.transform.FindChild("selectionCircle").gameObject.active = true;
-			}
-		else {
-			this.gameObject.transform.FindChild("selectionCircle").gameObject.active = false;
 		}
 	}
 
@@ -98,6 +91,14 @@ public class UnitStatus : MonoBehaviour {
 
 	public bool IsSelected() {
 		return selected;
+	}
+
+	public bool IsEnemy() {
+		return enemy;
+	}
+
+	public void SetAsEnemy() {
+		enemy = true;
 	}
 
 	public bool isAtTargetSquare(GameObject Square) {

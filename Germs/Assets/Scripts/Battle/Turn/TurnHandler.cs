@@ -8,7 +8,7 @@ public class TurnHandler : MonoBehaviour {
 	private int unitListIndex;
 	private List<GameObject> unitList;
 	private bool battleIsOver;
-	
+
 	
 	// Puts all units in to a list, sorts them by speed and gives the turn to the fastest one
 	void Start () {
@@ -26,7 +26,9 @@ public class TurnHandler : MonoBehaviour {
 			
 			// Checks whether the selected unit's turn has ended
 			if (!activeUnit.transform.GetComponent<UnitStatus>().IsSelected()) {
-				
+
+				RemoveSelectionCircleFromUnit(activeUnit);
+
 				checkIfBattleOver ();
 				if (!battleIsOver) {
 					
@@ -42,6 +44,7 @@ public class TurnHandler : MonoBehaviour {
 						if (unitListIndex <= unitList.Count - 1 && unitList [unitListIndex] != null) {
 							activeUnit = unitList [unitListIndex];
 							activeUnit.transform.GetComponent<UnitStatus>().Select();
+							DrawSelectionCircleForUnit(activeUnit);
 						}
 					}
 				}
@@ -68,6 +71,7 @@ public class TurnHandler : MonoBehaviour {
 	private void initNewRound() {
 		unitListIndex = 0;
 		activeUnit = unitList[unitListIndex];
+		DrawSelectionCircleForUnit(activeUnit);
 		activeUnit.transform.GetComponent<UnitStatus>().Select();
 	}
 	
@@ -95,6 +99,29 @@ public class TurnHandler : MonoBehaviour {
 			GameObject.FindGameObjectWithTag("TurnHandler").transform.GetComponent<BattleEndWindow>().drawGameEndWindow("player");
 		}
 	}
+
+	private void DrawSelectionCircleForUnit(GameObject unit) {
+		if (unit.GetComponent<UnitStatus>().IsEnemy()) {
+			//unit.transform.FindChild("enemyCircle").gameObject.active = true; // draw enemycircle
+			print ("a red selection circle for enemy selection is needed");
+		}
+		else {
+			unit.transform.FindChild("selectionCircle").gameObject.active = true; // draw playercircle
+		}
+	}
+
+	private void RemoveSelectionCircleFromUnit(GameObject unit) {
+		if (unit.GetComponent<UnitStatus>().IsEnemy()) {
+			// unit.transform.FindChild("enemyCircle").gameObject.active = false;// remove enemycircle
+			print ("a red selection circle for enemy selection is needed so it could be disabled");
+
+		}
+		else {
+			unit.transform.FindChild("selectionCircle").gameObject.active = false; // remove playercircle			
+		}
+	}
+
+
 	
 	// The unit whose turn it is
 	public GameObject getActiveUnit() {

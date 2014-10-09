@@ -47,6 +47,7 @@ public class BattleInitializer : MonoBehaviour {
 			spawnedGerm.GetComponent<UnitStatus>().setSquare (squares[14,y]); 
 			squares[14, y].GetComponent <SquareStatus>().setStatus ("enemy", spawnedGerm); // Set square status to indicate there is a hostile unit
 			y -= 2;
+			spawnedGerm.GetComponent<UnitStatus>().SetAsEnemy();
 		}
 
 
