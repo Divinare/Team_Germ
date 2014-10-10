@@ -102,8 +102,7 @@ public class TurnHandler : MonoBehaviour {
 
 	private void DrawSelectionCircleForUnit(GameObject unit) {
 		if (unit.GetComponent<UnitStatus>().IsEnemy()) {
-			//unit.transform.FindChild("enemyCircle").gameObject.active = true; // draw enemycircle
-			print ("a red selection circle for enemy selection is needed");
+			unit.transform.FindChild("enemyCircle").gameObject.active = true; // draw enemycircle
 		}
 		else {
 			unit.transform.FindChild("selectionCircle").gameObject.active = true; // draw playercircle
@@ -112,8 +111,7 @@ public class TurnHandler : MonoBehaviour {
 
 	private void RemoveSelectionCircleFromUnit(GameObject unit) {
 		if (unit.GetComponent<UnitStatus>().IsEnemy()) {
-			// unit.transform.FindChild("enemyCircle").gameObject.active = false;// remove enemycircle
-			print ("a red selection circle for enemy selection is needed so it could be disabled");
+			unit.transform.FindChild("enemyCircle").gameObject.active = false;// remove enemycircle
 
 		}
 		else {
