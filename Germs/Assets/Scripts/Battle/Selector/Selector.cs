@@ -78,7 +78,7 @@ public class Selector : MonoBehaviour {
 		this.targetedUnit = objectClicked; // now projectiles know what they are trying to hit
 		
 		string action = activeUnit.GetComponent<UnitStatus> ().selectedAction;
-		if (action == "melee") {
+		if (action == "melee" && objectClicked.GetComponent<UnitStatus>().IsEnemy()) {
 			Debug.Log ("Melee attack selected");
 			List<GameObject> tempRoute = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (objectClicked.GetComponent<UnitStatus>().getSquare ());
 			if (tempRoute.Count > 1) { // check if the target is in an adjacent square, if not, move to the square next to the target
@@ -94,7 +94,7 @@ public class Selector : MonoBehaviour {
 
 			// to be implemented
 			
-		} else if (action == "ranged") {
+		} else if (action == "ranged" && objectClicked.GetComponent<UnitStatus>().IsEnemy()) {
 			Debug.Log ("Ranged attack selected");
 			activeUnit.GetComponent<RangedAttack> ().attack(objectClicked);
 			

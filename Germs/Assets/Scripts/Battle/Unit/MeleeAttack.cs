@@ -23,6 +23,7 @@ public class MeleeAttack : MonoBehaviour {
 				target.GetComponent<UnitStatus>().TakeDamage (this.gameObject.GetComponent<UnitStatus>().damage);
 				target = null;
 				targetSquare = null;
+				this.gameObject.GetComponent<UnitStatus>().Deselect (); // giving turn to next unit
 			}
 		}
 	
