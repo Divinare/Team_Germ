@@ -24,13 +24,12 @@ public class MeleeAttack : MonoBehaviour {
 				target.GetComponent<UnitStatus>().TakeDamage (this.gameObject.GetComponent<UnitStatus>().damage);
 				target = null;
 				targetSquare = null;
-				GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector>().unlockInput (); // unlock input before ending turn, turn is ended at Movement.cs
 			}
 		}
 	}
 
 	public void initiateAttack(GameObject activeUnit, GameObject targetGerm) {
-		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector>().lockInput (); // lock input after attack action has been initiated
+
 		List<GameObject> route = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (targetGerm.GetComponent<UnitStatus>().getSquare ());
 		if (route.Count > 1) { // check if the target is in an adjacent square, if not, move to the square next to the target
 			route.RemoveAt (route.Count - 1); 

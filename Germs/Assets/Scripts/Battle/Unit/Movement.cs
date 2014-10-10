@@ -24,7 +24,8 @@ public class Movement : MonoBehaviour {
 
 		Debug.DrawLine(transform.position, targetPosition, Color.red);
 
-		if (finalTargetPosition == transform.position) { // check if reached end of route, if yes end turn
+		if (finalTargetPosition == transform.position) { // check if reached end of route, if yes unlock input and end turn
+			GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector>().unlockInput (); // lock input after movement has been initiated
 			this.gameObject.GetComponent<UnitStatus>().Deselect ();
 		}
 			//constant movement
@@ -54,6 +55,7 @@ public class Movement : MonoBehaviour {
 	}
 	
 	public void startMoving(List<GameObject> newRoute) {
+		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector>().lockInput (); // lock input after movement has been initiated
 		this.route = newRoute;
 		finalTargetPosition = this.route [this.route.Count - 1].transform.position;
 		finalTargetPosition.z = -1;
