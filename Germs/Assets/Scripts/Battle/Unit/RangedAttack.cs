@@ -25,7 +25,8 @@ public class RangedAttack : MonoBehaviour {
 	
 
 	public void attack(GameObject target) {
-				
+
+		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector>().lockInput (); // lock input after attack action has been initiated
 		this.target = target;
 				
 		// Setting up the bullet/projectile

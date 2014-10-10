@@ -28,6 +28,7 @@ public class RangedHit : MonoBehaviour {
 			Destroy(Instantiate(slimeballHit, transform.position, transform.rotation), 2f); // instantiating the explosion and destroying it after 2f time
 			unit.GetComponent<UnitStatus>().TakeDamage(attackerGivesDamage);
 			selector.SetTargetedUnitToNull();
+			GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector>().unlockInput (); // unlock input before ending turn
 			attackingUnit.Deselect(); // deselecting the attacker here, so the bullet has time to hit its target before turn is given to another
 			Destroy (gameObject);
 

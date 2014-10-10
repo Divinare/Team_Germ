@@ -17,11 +17,14 @@ public class Selector : MonoBehaviour {
 
 	private GameObject targetedUnit;
 
+	private bool inputLocked;
+
 	// for developing
 	private bool debug = false;
 	
 	void Start() {
 		//this.route = null;
+		inputLocked = false;
 		this.turnHandler = GameObject.FindGameObjectWithTag ("TurnHandler").transform.GetComponent<TurnHandler> ();
 	}
 
@@ -50,15 +53,15 @@ public class Selector : MonoBehaviour {
 				GameObject activeUnit = turnHandler.getActiveUnit();
 
 				Debug.Log (activeUnit);
-				if (objectClicked.tag == "Unit") {
+				if (objectClicked.tag == "Unit" && !inputLocked) {
 
 					unitAction(activeUnit, objectClicked);
 				} 
 				else if (objectClicked.tag == "MenuItem") {
 					Debug.Log("menu item clicked!");
-					activeUnit.GetComponent<UnitStatus> ().switchSelectedAction(objectClicked.name);
+					// activeUnit.GetComponent<UnitStatus> ().switchSelectedAction(objectClicked.name); // handled via GUI/ActivityMenu.cs
 				} 
-				else if (objectClicked.tag == "Square"){
+				else if (objectClicked.tag == "Square" && !inputLocked){
 					// Clicked a square, check if square contains a germ and use unitaction on the target square's germ if so
 					if (objectClicked.GetComponent<SquareStatus>().getObjectOnSquare () != null) {
 						unitAction (activeUnit, objectClicked.GetComponent<SquareStatus>().getObjectOnSquare());
@@ -73,6 +76,15 @@ public class Selector : MonoBehaviour {
 		}
 	}
 
+	public void lockInput() { // lock and unlock input are used by other scripts which need to lock actions while something is being performed, ie. attacks, movement etc.
+		inputLocked = true;
+	}
+
+	public void unlockInput() {
+		inputLocked = false;
+	}
+
+
 	private void unitAction(GameObject activeUnit, GameObject objectClicked) {
 		Debug.Log ("Unit clicked!");
 		this.targetedUnit = objectClicked; // now projectiles know what they are trying to hit
@@ -80,20 +92,8 @@ public class Selector : MonoBehaviour {
 		string action = activeUnit.GetComponent<UnitStatus> ().selectedAction;
 		if (action == "melee" && objectClicked.GetComponent<UnitStatus>().IsEnemy()) {
 			Debug.Log ("Melee attack selected");
-			List<GameObject> tempRoute = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (objectClicked.GetComponent<UnitStatus>().getSquare ());
-			if (tempRoute.Count > 1) { // check if the target is in an adjacent square, if not, move to the square next to the target
-				tempRoute.RemoveAt (tempRoute.Count - 1); 
-				activeUnit.GetComponent<MeleeAttack>().targetSquare = tempRoute[tempRoute.Count - 1];
-				activeUnit.GetComponent<Movement> ().startMoving(tempRoute);
-			}
-			else { 
-				activeUnit.GetComponent<MeleeAttack>().targetSquare = activeUnit.GetComponent<UnitStatus>().getSquare ();
-			}
-			activeUnit.GetComponent<MeleeAttack>().target = objectClicked;
-			activeUnit.GetComponent<MeleeAttack>().goingToAttack = true;
+			activeUnit.GetComponent<MeleeAttack>().initiateAttack (activeUnit, objectClicked);
 
-			// to be implemented
-			
 		} else if (action == "ranged" && objectClicked.GetComponent<UnitStatus>().IsEnemy()) {
 			Debug.Log ("Ranged attack selected");
 			activeUnit.GetComponent<RangedAttack> ().attack(objectClicked);

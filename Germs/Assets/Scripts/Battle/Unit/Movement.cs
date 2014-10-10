@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour {
 	private float movementSpeed = 1;
 	private Vector3 targetPosition;
 	private GameObject Matrix;
+	private Vector3 finalTargetPosition;
 
 	private List<GameObject> route;
 	private int routeIndex;
@@ -23,6 +24,9 @@ public class Movement : MonoBehaviour {
 
 		Debug.DrawLine(transform.position, targetPosition, Color.red);
 
+		if (finalTargetPosition == transform.position) { // check if reached end of route, if yes end turn
+			this.gameObject.GetComponent<UnitStatus>().Deselect ();
+		}
 			//constant movement
 		if (targetPosition != transform.position) {
 				//Debug.Log ("moving");
@@ -51,6 +55,8 @@ public class Movement : MonoBehaviour {
 	
 	public void startMoving(List<GameObject> newRoute) {
 		this.route = newRoute;
+		finalTargetPosition = this.route [this.route.Count - 1].transform.position;
+		finalTargetPosition.z = -1;
 
 		moveToSquare (route [0]);
 		this.route.RemoveAt(0);
