@@ -14,7 +14,6 @@ public class UnitStatus : MonoBehaviour {
 	public bool enemy = false;
 	public AudioClip[] sounds;
 	public GameObject DeathSound;
-	public bool isFriendly = false;
 	public string unitName;
 	public int x;
 	public int y;
@@ -24,11 +23,6 @@ public class UnitStatus : MonoBehaviour {
 	void Start () {
 
 
-	}
-
-	// mikä tämän metodin funktio on? meillä on jo bool enemy, joka kertoo, onko unit pelaajan vai koneen puolella...?
-	public void setFriendlyStatus(bool status) {
-			isFriendly = status;
 	}
 
 	// Sounds array contains the following sounds for each clipId: 0 = sound of being hit;

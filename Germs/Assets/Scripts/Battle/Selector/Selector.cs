@@ -59,10 +59,11 @@ public class Selector : MonoBehaviour {
 					activeUnit.GetComponent<UnitStatus> ().switchSelectedAction(objectClicked.name);
 				} 
 				else if (objectClicked.tag == "Square"){
-					// Clicked a square, squares have no tags
-
-					//Debug.Log ("Moving taken out because of some errors");
-					if(this.route != null) {
+					// Clicked a square, check if square contains a germ and use unitaction on the target square's germ if so
+					if (objectClicked.GetComponent<SquareStatus>().getObjectOnSquare () != null) {
+						unitAction (activeUnit, objectClicked.GetComponent<SquareStatus>().getObjectOnSquare());
+					}
+					else if(this.route != null) {
 						List<GameObject> tempRoute = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (hit.collider.gameObject);
 						//Debug.Log ("aikaisempi countti: " + tempRoute.Count);
 						activeUnit.GetComponent<Movement> ().startMoving(tempRoute);
@@ -79,7 +80,18 @@ public class Selector : MonoBehaviour {
 		string action = activeUnit.GetComponent<UnitStatus> ().selectedAction;
 		if (action == "melee") {
 			Debug.Log ("Melee attack selected");
-			
+			List<GameObject> tempRoute = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (objectClicked.GetComponent<UnitStatus>().getSquare ());
+			if (tempRoute.Count > 1) { // check if the target is in an adjacent square, if not, move to the square next to the target
+				tempRoute.RemoveAt (tempRoute.Count - 1); 
+				activeUnit.GetComponent<MeleeAttack>().targetSquare = tempRoute[tempRoute.Count - 1];
+				activeUnit.GetComponent<Movement> ().startMoving(tempRoute);
+			}
+			else { 
+				activeUnit.GetComponent<MeleeAttack>().targetSquare = activeUnit.GetComponent<UnitStatus>().getSquare ();
+			}
+			activeUnit.GetComponent<MeleeAttack>().target = objectClicked;
+			activeUnit.GetComponent<MeleeAttack>().goingToAttack = true;
+
 			// to be implemented
 			
 		} else if (action == "ranged") {

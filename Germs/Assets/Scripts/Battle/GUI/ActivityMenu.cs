@@ -30,9 +30,13 @@ public class ActivityMenu : MonoBehaviour {
 
 		//buttons
 		if (GUI.Button (new Rect (Screen.width-buttonWidth*3, Screen.height - buttonHeight, buttonWidth, buttonHeight), new GUIContent (meleeIcon, "Fancy melee attack"))) {
+			GameObject currentUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().getActiveUnit ();
+			currentUnit.GetComponent<UnitStatus>().switchSelectedAction ("melee");
 			clickSound.Play ();		
 		}
 		if (GUI.Button (new Rect (Screen.width-buttonWidth*2, Screen.height - buttonHeight, buttonWidth, buttonHeight), new GUIContent (rangedIcon, "Fancy ranged attack"))) {
+			GameObject currentUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().getActiveUnit ();
+			currentUnit.GetComponent<UnitStatus>().switchSelectedAction ("ranged");
 			clickSound.Play ();		
 		}
 		if (GUI.Button (new Rect (Screen.width-buttonWidth, Screen.height - buttonHeight, buttonWidth, buttonHeight), new GUIContent ("3", "Fancy magic attack"))) {

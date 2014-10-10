@@ -16,7 +16,6 @@ public class Movement : MonoBehaviour {
 		this.route = null;
 		this.routeIndex = 0;
 	}
-	
 	// Update is called once per frame
 	void Update () {
 
@@ -44,6 +43,10 @@ public class Movement : MonoBehaviour {
 			}
 		}
 
+	}
+
+	public Vector3 getTargetPosition() {
+		return targetPosition;
 	}
 	
 	public void startMoving(List<GameObject> newRoute) {
