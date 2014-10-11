@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CursorIconHandler : MonoBehaviour {
 
-	public Texture2D[] cursorIcons; // currently contains: 0 = melee attack
+	public Texture2D[] cursorIcons; // currently contains: 0 = melee attack, 1 = ranged attack
 	private string currentCursor; 
 	// Use this for initialization
 	void Start () {
@@ -24,12 +24,13 @@ public class CursorIconHandler : MonoBehaviour {
 	}
 
 	public void drawRangedAttackCursor() {
-
+		Cursor.SetCursor (cursorIcons[1], new Vector2(15,12), CursorMode.Auto);
+		currentCursor = "ranged";
 	}
 
 	public void drawDefaultCursor() {
 		Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);	
-		currentCursor = "melee";
+		currentCursor = "default";
 	}
 
 	public void chooseCursorForSquare(GameObject square) {
@@ -40,8 +41,11 @@ public class CursorIconHandler : MonoBehaviour {
 		}
 		GameObject activeUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler> ().getActiveUnit ();
 		if (square.GetComponent<SquareStatus> ().getStatus ().Equals ("enemy")) {
-			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("melee")) {
+			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("melee") && !currentCursor.Equals ("melee")) {
 				drawMeleeAttackCursor ();
+			}
+			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("ranged") && !currentCursor.Equals ("ranged")) {
+				drawRangedAttackCursor ();
 			}
 		}
 	}
