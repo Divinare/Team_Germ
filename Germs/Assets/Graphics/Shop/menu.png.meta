@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 78ee54f5192b96747814b41fe4a73e7c
+guid: 78b1901a68e41394fa344d802d21f7eb
 TextureImporter:
   fileIDToRecycleName:
-    21300000: shopMenu
+    21300000: menu
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
