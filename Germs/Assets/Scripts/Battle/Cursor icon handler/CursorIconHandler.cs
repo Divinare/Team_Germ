@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CursorIconHandler : MonoBehaviour {
 
-	public Texture2D[] cursorIcons; // currently contains: 0 = melee attack, 1 = ranged attack
+	public Texture2D[] cursorIcons; // currently contains: 0 = melee attack, 1 = ranged attack, 2 = magic wand, 3 = heal
 	private string currentCursor; 
 	// Use this for initialization
 	void Start () {
