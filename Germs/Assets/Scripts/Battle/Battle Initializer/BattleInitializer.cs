@@ -24,10 +24,10 @@ public class BattleInitializer : MonoBehaviour {
 		if (friendlyGermsToSpawn.Length == 0) {
 			friendlyGermsToSpawn = new string[5];
 			friendlyGermsToSpawn[0] = "Gatbac";
-			friendlyGermsToSpawn[1] = "Gatbac";
+			friendlyGermsToSpawn[1] = "Strep_p";
 			friendlyGermsToSpawn[2] = "Gatbac";
-			friendlyGermsToSpawn[3] = "Gatbac";
-			friendlyGermsToSpawn[4] = "Gatbac";
+			friendlyGermsToSpawn[3] = "smallRed";
+			friendlyGermsToSpawn[4] = "Phage";
 		}
 		int y = 8; // Start spawning mobs from the top to bottom
 		for (int i = 0; i < friendlyGermsToSpawn.Length; i++) {

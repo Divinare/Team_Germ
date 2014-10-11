@@ -15,7 +15,7 @@ public class MeleeAttack : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		// checks every frame to see if unit has reached target and attack is primed, if yes then perform attack
+		// checks every frame to see if unit has reached a square adjacent to the target and whether an attack is primed, if yes then perform attack
 		if (goingToAttack) {
 			Vector3 targetPos = targetSquare.transform.position;
 			targetPos.z = -1;
@@ -23,7 +23,7 @@ public class MeleeAttack : MonoBehaviour {
 				goingToAttack = false;
 				target.GetComponent<UnitStatus>().TakeDamage (this.gameObject.GetComponent<UnitStatus>().damage);
 				target = null;
-				targetSquare = null;
+				targetSquare = null; // turn ends here due to code in Movement.cs
 			}
 		}
 	}
@@ -31,6 +31,10 @@ public class MeleeAttack : MonoBehaviour {
 	public void initiateAttack(GameObject activeUnit, GameObject targetGerm) {
 
 		List<GameObject> route = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (targetGerm.GetComponent<UnitStatus>().getSquare ());
+		if (route == null) {
+			return; // no route to enemy found, abort attack
+		}
+
 		if (route.Count > 1) { // check if the target is in an adjacent square, if not, move to the square next to the target
 			route.RemoveAt (route.Count - 1); 
 			targetSquare = route[route.Count - 1];

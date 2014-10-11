@@ -45,7 +45,13 @@ public class Selector : MonoBehaviour {
 				return;
 			}
 
-			handleMouseHover (hit.collider.gameObject);
+			if (hit.collider.gameObject.tag.Equals ("Square")) {
+				handleMouseHover (hit.collider.gameObject);
+			}
+			else if (hit.collider.gameObject.tag.Equals ("Unit")) { // if hovering over unit, perform mouseover actions on the square the unit is on
+				handleMouseHover (hit.collider.gameObject.GetComponent<UnitStatus>().getSquare());
+			}
+
 
 			if (Input.GetMouseButtonUp (0)) {
 				GameObject objectClicked = hit.collider.gameObject;
@@ -137,12 +143,13 @@ public class Selector : MonoBehaviour {
 		}
 		mouseHoveredSquare = hoveredSquare;
 
+		if(hoveredSquare.tag.Equals("Square")) {
+		GameObject.FindGameObjectWithTag ("CursorHandler").GetComponent<CursorIconHandler>().chooseCursorForSquare(hoveredSquare);
+
 		int x = (int)mouseHoveredSquare.transform.position.x;
 		int y = (int)mouseHoveredSquare.transform.position.y;
 		GameObject[,] squares = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<Matrix> ().getSquares();
 		GameObject targetSquare = squares [x, y];
-
-		if(hoveredSquare.tag.Equals("Square")) {
 
 		// getting route for a new square, will be null if not found!
 		this.route = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (targetSquare);
