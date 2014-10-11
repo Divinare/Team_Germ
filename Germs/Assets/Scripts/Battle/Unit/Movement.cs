@@ -76,7 +76,11 @@ public class Movement : MonoBehaviour {
 			targetPosition = targetSquare.transform.position;
 			targetPosition.z = -1;
 			this.gameObject.GetComponent<UnitStatus>().getSquare().GetComponent<SquareStatus>().setStatus ("movable", null); // clear status of currently occupied square
-			targetSquare.GetComponent<SquareStatus>().setStatus ("friendly", this.gameObject); // set this object as occupying the target square
+			if (this.gameObject.GetComponent<UnitStatus> ().IsEnemy ()) {
+				targetSquare.GetComponent<SquareStatus>().setStatus ("enemy", this.gameObject); // set this object as occupying the target square
+			} else {
+				targetSquare.GetComponent<SquareStatus>().setStatus ("friendly", this.gameObject);
+			}			
 			this.gameObject.GetComponent<UnitStatus>().setSquare (targetSquare);
 
 
