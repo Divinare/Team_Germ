@@ -11,11 +11,13 @@ public class Movement : MonoBehaviour {
 
 	private List<GameObject> route;
 	private int routeIndex;
+	private bool moving;
 
 	void Start() {
 		targetPosition = transform.position;
 		this.route = null;
 		this.routeIndex = 0;
+		this.moving = false;
 	}
 	// Update is called once per frame
 	void Update () {
@@ -24,8 +26,9 @@ public class Movement : MonoBehaviour {
 
 		Debug.DrawLine(transform.position, targetPosition, Color.red);
 
-		if (finalTargetPosition == transform.position) { // check if reached end of route, if yes unlock input and end turn
+		if (finalTargetPosition == transform.position && this.moving) { // check if moving and reached end of route, if yes unlock input and end turn
 			GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector>().unlockInput (); 
+			this.moving = false;
 			this.gameObject.GetComponent<UnitStatus>().Deselect ();
 		}
 			//constant movement
@@ -55,6 +58,7 @@ public class Movement : MonoBehaviour {
 	}
 	
 	public void startMoving(List<GameObject> newRoute) {
+
 		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector>().lockInput (); // lock input after movement has been initiated
 		this.route = newRoute;
 		finalTargetPosition = this.route [this.route.Count - 1].transform.position;
@@ -67,6 +71,7 @@ public class Movement : MonoBehaviour {
 	}
 
 	private void moveToSquare(GameObject targetSquare) {
+			this.moving = true;
 			Debug.Log ("Moving towards " + targetSquare);
 			targetPosition = targetSquare.transform.position;
 			targetPosition.z = -1;
