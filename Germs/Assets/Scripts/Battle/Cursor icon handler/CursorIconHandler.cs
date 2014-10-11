@@ -28,10 +28,17 @@ public class CursorIconHandler : MonoBehaviour {
 		currentCursor = "ranged";
 	}
 
+	public void drawHealCursor() {
+		Cursor.SetCursor (cursorIcons[3], new Vector2(16,16), CursorMode.Auto);	
+		currentCursor = "heal";
+	}
+
 	public void drawDefaultCursor() {
 		Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);	
 		currentCursor = "default";
 	}
+
+
 
 	public void chooseCursorForSquare(GameObject square) {
 		// square is empty, draw default cursor if it's not already drawn
@@ -46,6 +53,11 @@ public class CursorIconHandler : MonoBehaviour {
 			}
 			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("ranged") && !currentCursor.Equals ("ranged")) {
 				drawRangedAttackCursor ();
+			}
+		}
+		if (square.GetComponent<SquareStatus>().getStatus ().Equals ("friendly")) {
+			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("heal") && !currentCursor.Equals ("heal")) {
+				drawHealCursor();
 			}
 		}
 	}

@@ -40,6 +40,8 @@ public class ActivityMenu : MonoBehaviour {
 			clickSound.Play ();		
 		}
 		if (GUI.Button (new Rect (Screen.width-buttonWidth, Screen.height - buttonHeight, buttonWidth, buttonHeight), new GUIContent ("3", "Fancy magic attack"))) {
+			GameObject currentUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().getActiveUnit ();
+			currentUnit.GetComponent<UnitStatus>().switchSelectedAction ("heal");
 			clickSound.Play ();		
 		}
 	

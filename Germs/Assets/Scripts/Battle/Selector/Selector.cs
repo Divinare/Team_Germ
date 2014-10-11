@@ -106,11 +106,13 @@ public class Selector : MonoBehaviour {
 			
 		} else if (action == "magic") {
 			Debug.Log ("Magic attack selected");
+
 			
 			// to be implemented
 			
 		} else if (action == "heal") {
 			Debug.Log ("Heal selected");
+			activeUnit.GetComponent<Heal>().healTarget (targetedUnit);
 			
 			// to be implemented
 			
