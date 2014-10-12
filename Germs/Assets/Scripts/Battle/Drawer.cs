@@ -18,6 +18,35 @@ public class Drawer : MonoBehaviour {
 	
 	}
 
+	public void handleDrawingForSquare(GameObject targetSquare) {
+		
+		
+		GameObject[,] squares = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<Matrix> ().getSquares();
+		GameObject activeUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().getActiveUnit ();
+		if (targetSquare.GetComponent<SquareStatus>().getStatus ().Equals ("movable") 
+		    || activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("melee")
+		    && !targetSquare.GetComponent<SquareStatus>().getStatus ().Equals ("friendly") ) {
+			
+			// getting route for a new square, will be null if not found!
+			List<GameObject> route = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (targetSquare);
+			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("melee") && route != null && route.Count > 0) {
+				route.RemoveAt (route.Count - 1);			
+			}
+
+			//Debug.Log ("laitettii route: " + this.route.Count);
+			// draws a route if there is one
+			GameObject.FindGameObjectWithTag ("Drawer").GetComponent<Drawer> ().drawRoute (route);
+		}
+		else {
+			GameObject.FindGameObjectWithTag ("Drawer").GetComponent<Drawer> ().removeDrawedItems ("MovingIndicationGfx");
+		}
+		
+		// draws a circle on the hovered square
+		GameObject.FindGameObjectWithTag ("Drawer").GetComponent<Drawer> ().drawSelectionSquare (targetSquare);
+	}
+
+
+
 	public void drawMovableSquares() {
 		removeDrawedItems ("MovableSquareGfx");
 		GameObject.FindGameObjectWithTag ("Matrix").GetComponent<MovableSquaresFinder> ().findMovableSquares ();

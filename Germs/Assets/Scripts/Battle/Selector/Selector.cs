@@ -10,13 +10,9 @@ public class Selector : MonoBehaviour {
 	private GameObject mouseHoveredSquare;
 
 	private int unitMaxSize = 5;
-
 	private TurnHandler turnHandler;
-
 	public List<GameObject> route;
-
 	private GameObject targetedUnit;
-
 	private bool inputLocked;
 
 	// for developing
@@ -90,6 +86,10 @@ public class Selector : MonoBehaviour {
 		inputLocked = false;
 	}
 
+	public void resetHoveredSquare() { // used to force redraw of path and mouse cursor icon, f.ex. when changing turn
+		this.mouseHoveredSquare = null;
+	}
+
 
 	private void unitAction(GameObject activeUnit, GameObject objectClicked) {
 		Debug.Log ("Unit clicked!");
@@ -147,21 +147,8 @@ public class Selector : MonoBehaviour {
 
 		if(hoveredSquare.tag.Equals("Square")) {
 		GameObject.FindGameObjectWithTag ("CursorHandler").GetComponent<CursorIconHandler>().chooseCursorForSquare(hoveredSquare);
-
-		int x = (int)mouseHoveredSquare.transform.position.x;
-		int y = (int)mouseHoveredSquare.transform.position.y;
-		GameObject[,] squares = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<Matrix> ().getSquares();
-		GameObject targetSquare = squares [x, y];
-
-		// getting route for a new square, will be null if not found!
-		this.route = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (targetSquare);
+		GameObject.FindGameObjectWithTag ("Drawer").GetComponent <Drawer>().handleDrawingForSquare(hoveredSquare); // draws route and square selection icon
 		
-		//Debug.Log ("laitettii route: " + this.route.Count);
-		// draws a route if there is one
-		GameObject.FindGameObjectWithTag ("Drawer").GetComponent<Drawer> ().drawRoute (this.route);
-
-		// draws a circle hovered square
-		GameObject.FindGameObjectWithTag ("Drawer").GetComponent<Drawer> ().drawSelectionSquare (hoveredSquare);
 		}
 	}
 

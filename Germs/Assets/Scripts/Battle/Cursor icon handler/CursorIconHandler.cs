@@ -61,6 +61,9 @@ public class CursorIconHandler : MonoBehaviour {
 			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("ranged") && !currentCursor.Equals ("ranged")) {
 				drawRangedAttackCursor ();
 			}
+			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("heal") && !currentCursor.Equals ("error")) {
+				drawErrorCursor ();
+			}
 		}
 		if (square.GetComponent<SquareStatus>().getStatus ().Equals ("friendly")) {
 			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("heal") && !currentCursor.Equals ("heal")) {
