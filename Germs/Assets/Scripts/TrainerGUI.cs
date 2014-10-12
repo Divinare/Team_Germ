@@ -20,6 +20,9 @@ public class TrainerGUI : MonoBehaviour {
 	public Texture2D smallRed;
 	public Texture2D phage;
 	public Texture2D strep_p;
+	public Texture2D smallBlue;
+	public Texture2D smallPurple;
+	public Texture2D blueBac;
 
 	//Knowledge Stuff
 	private Transform battleTracker;
@@ -59,6 +62,9 @@ public class TrainerGUI : MonoBehaviour {
 		allBacsImages.Add ("Gatbac", gatbac);
 		allBacsImages.Add ("Strep_p", strep_p);
 		allBacsImages.Add ("smallRed", smallRed);
+		allBacsImages.Add ("blueBac", blueBac);
+		allBacsImages.Add ("smallPurple", smallPurple);
+		allBacsImages.Add ("smallBlue", smallBlue);
 	}
 
 	// Update is called once per frame
@@ -79,6 +85,7 @@ public class TrainerGUI : MonoBehaviour {
 		//right
 		GUI.Box (new Rect (Screen.width/2,Screen.height/10,Screen.width/2,Screen.height-Screen.height/10-Screen.height/10), "", trainerBox);
 
+		var imgVar = allBacsTest[selGridInt];
 		GUI.Box (new Rect (Screen.width/2+Screen.width/8,Screen.height/10,Screen.width/4,Screen.width/4), allBacsImages[allBacsTest[selGridInt]]);
 
 		tempStats = allBacsStats[selGridInt];

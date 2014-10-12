@@ -32,19 +32,17 @@ public class BattleStatus : MonoBehaviour {
 		//test (Health, Dmg, speed, level)
 		allBacsTest.Add ("Gatbac");
 		allBacsStats.Add (new int[] {100,10,5,1});
-		allBacsTest.Add ("Gatbac");
-		allBacsStats.Add (new int[] {100,10,5,1});
 		allBacsTest.Add ("Strep_p");
 		allBacsStats.Add (new int[] {100,10,5,1});
 		allBacsTest.Add ("smallRed");
 		allBacsStats.Add (new int[] {100,10,5,1});
 		allBacsTest.Add ("Phage");
 		allBacsStats.Add (new int[] {100,10,5,1});
-		allBacsTest.Add ("Strep_p");
+		allBacsTest.Add ("blueBac");
 		allBacsStats.Add (new int[] {100,10,5,1});
-		allBacsTest.Add ("smallRed");
+		allBacsTest.Add ("smallPurple");
 		allBacsStats.Add (new int[] {100,10,5,1});
-		allBacsTest.Add ("Phage");
+		allBacsTest.Add ("smallBlue");
 		allBacsStats.Add (new int[] {100,10,5,1});
 		selectedBacsTest.Add ("");
 		selectedBacsTest.Add ("");

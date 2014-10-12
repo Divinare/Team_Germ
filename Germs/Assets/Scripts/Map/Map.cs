@@ -54,7 +54,7 @@ public class Map : MonoBehaviour {
 		getStoredNode();
 		//Debug.Log(storedNode);
 		if (storedNode != null) {
-			Debug.Log ("storedNode != empty");
+			//Debug.Log ("storedNode != empty");
 			if (battleTracker.gameObject.GetComponent<BattleStatus>().onReturnToMap()) {
 				setNodeCompleted(transform.FindChild(storedNode));
 				setGold(transform.FindChild(storedNode));
