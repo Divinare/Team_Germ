@@ -8,7 +8,7 @@ public class TurnHandler : MonoBehaviour {
 	private int unitListIndex;
 	private List<GameObject> unitList;
 	private bool battleIsOver;
-	
+
 	
 	// Puts all units in to a list, sorts them by speed and gives the turn to the fastest one
 	void Start () {
@@ -25,8 +25,10 @@ public class TurnHandler : MonoBehaviour {
 		if (!battleIsOver) {
 			
 			// Checks whether the selected unit's turn has ended
-			if (!activeUnit.transform.GetComponent<UnitStatus> ().selected) {
-				
+			if (!activeUnit.transform.GetComponent<UnitStatus>().IsSelected()) {
+
+				RemoveSelectionCircleFromUnit(activeUnit);
+
 				checkIfBattleOver ();
 				if (!battleIsOver) {
 					
@@ -41,7 +43,8 @@ public class TurnHandler : MonoBehaviour {
 						// Checks wheter the next unit is still alive so it can be given the next turn
 						if (unitListIndex <= unitList.Count - 1 && unitList [unitListIndex] != null) {
 							activeUnit = unitList [unitListIndex];
-							activeUnit.transform.GetComponent<UnitStatus> ().Select ();
+							activeUnit.transform.GetComponent<UnitStatus>().Select();
+							DrawSelectionCircleForUnit(activeUnit);
 						}
 					}
 				}
@@ -68,6 +71,7 @@ public class TurnHandler : MonoBehaviour {
 	private void initNewRound() {
 		unitListIndex = 0;
 		activeUnit = unitList[unitListIndex];
+		DrawSelectionCircleForUnit(activeUnit);
 		activeUnit.transform.GetComponent<UnitStatus>().Select();
 	}
 	
@@ -95,6 +99,27 @@ public class TurnHandler : MonoBehaviour {
 			GameObject.FindGameObjectWithTag("TurnHandler").transform.GetComponent<BattleEndWindow>().drawGameEndWindow("player");
 		}
 	}
+
+	private void DrawSelectionCircleForUnit(GameObject unit) {
+		if (unit.GetComponent<UnitStatus>().IsEnemy()) {
+			unit.transform.FindChild("enemyCircle").gameObject.active = true; // draw enemycircle
+		}
+		else {
+			unit.transform.FindChild("selectionCircle").gameObject.active = true; // draw playercircle
+		}
+	}
+
+	private void RemoveSelectionCircleFromUnit(GameObject unit) {
+		if (unit.GetComponent<UnitStatus>().IsEnemy()) {
+			unit.transform.FindChild("enemyCircle").gameObject.active = false;// remove enemycircle
+
+		}
+		else {
+			unit.transform.FindChild("selectionCircle").gameObject.active = false; // remove playercircle			
+		}
+	}
+
+
 	
 	// The unit whose turn it is
 	public GameObject getActiveUnit() {

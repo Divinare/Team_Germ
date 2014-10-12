@@ -41,7 +41,7 @@ public class Map : MonoBehaviour {
 		}
 
 		//recall statustrackers
-		statusTracker = GameObject.Find("StatusTracker").transform;
+		statusTracker = GameObject.Find("GameStatus").transform;
 		battleTracker = GameObject.Find ("BattleTracker").transform;
 
 		//retrieval
@@ -52,10 +52,10 @@ public class Map : MonoBehaviour {
 		clickSound = GameObject.FindGameObjectWithTag ("AudioDummy").GetComponent<AudioSource> (); 
 
 		//complete the node that was entered, temporary! needs better way of telling when level is complete
-		storedNode = battleTracker.gameObject.GetComponent<storeBattleStatus>().getNode();
+		storedNode = battleTracker.gameObject.GetComponent<BattleStatus>().getNode();
 		//Debug.Log(storedNode);
 		if (storedNode != "") {
-			if (battleTracker.gameObject.GetComponent<storeBattleStatus>().onReturnToMap()) {
+			if (battleTracker.gameObject.GetComponent<BattleStatus>().onReturnToMap()) {
 				setNodeCompleted(transform.FindChild(storedNode));
 				setGold(transform.FindChild(storedNode));
 			}
@@ -113,7 +113,7 @@ public class Map : MonoBehaviour {
 	}
 
 	void retrieveGameStatus() {
-		gameBools = statusTracker.gameObject.GetComponent<storeMapStatus>().retrieveGameBools();
+		gameBools = statusTracker.gameObject.GetComponent<GameStatus>().retrieveGameBools();
 		for (int i = 0; i < gameBools.Count; i++) {
 			if (gameBools[i]) {
 				setNodeActive(allNodes[i]);

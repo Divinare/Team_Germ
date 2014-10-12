@@ -9,7 +9,6 @@ public class HealthBar : MonoBehaviour {
 	private float barLength;
 	private float healthBarlength;
 	private float bckgrndLength;
-	private float offsetY;
 	private Texture2D redTexture;
 	private Texture2D greenTexture;
 
@@ -21,8 +20,6 @@ public class HealthBar : MonoBehaviour {
 		barLength = Screen.width / 22; // This variable makes it easy to adjust the Healthbar's size
 		healthBarlength = barLength; 
 		bckgrndLength = barLength;
-
-		offsetY = unit.renderer.bounds.size.y;
 
 		loadBarColors ();	
 	}
@@ -72,11 +69,10 @@ public class HealthBar : MonoBehaviour {
 		Vector3 point = Camera.main.WorldToScreenPoint(new Vector3(
 			transform.position.x,
 			transform.position.y,
-			transform.position.z)
-		                                               );
+			transform.position.z));
 		
 		// Setting healthbar to correct location on Y axis
-		healthbarBackground.y = (Screen.height - point.y - (Screen.height/10) - 2 * offsetY);
+		healthbarBackground.y = Screen.height - point.y - Screen.height * 0.065f;
 		currentHealth.y = healthbarBackground.y;
 		
 		// Setting healthbar to correct location on X axis

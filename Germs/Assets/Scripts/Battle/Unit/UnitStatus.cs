@@ -14,16 +14,10 @@ public class UnitStatus : MonoBehaviour {
 	public bool enemy = false;
 	public AudioClip[] sounds;
 	public GameObject DeathSound;
+	public string unitName;
 	public int x;
 	public int y;
-	// How many squares from center to left
-	public int widthLeft = 0;
-	// How many squares from center to right
-	public int widthRight = 0;
-	// How many squares from center to up
-	public int heightUp = 0;
-	// How many squares from center to down
-	public int heightDown = 0;
+	private GameObject currentSquare; // the square currently occupied by the unit
 
 	// Use this for initialization
 	void Start () {
@@ -31,9 +25,19 @@ public class UnitStatus : MonoBehaviour {
 
 	}
 
+	// Sounds array contains the following sounds for each clipId: 0 = sound of being hit;
 	void PlaySound(int clipId) {
 		audio.clip = sounds [clipId];
 		audio.Play ();
+	}
+
+	public void setSquare(GameObject square) {
+		this.currentSquare = square;
+	}
+
+	public GameObject getSquare() {
+		return currentSquare;
+	
 	}
 
 	
@@ -43,12 +47,6 @@ public class UnitStatus : MonoBehaviour {
 			GameObject deathSound = Instantiate (DeathSound, this.transform.position, this.transform.rotation) as GameObject;
 			Debug.Log("Unit died");
 			Destroy(this.gameObject);
-		}
-		if (selected) {
-			transform.FindChild("selectionCircle").gameObject.active = true;
-		}
-		else {
-			transform.FindChild("selectionCircle").gameObject.active = false;
 		}
 	}
 
@@ -62,9 +60,9 @@ public class UnitStatus : MonoBehaviour {
 	}
 
 	public void TakeDamage(int damage) {
-		PlaySound (0);
+		PlaySound (0); // 0 = 'damage taken'-sound
 		currentHealth -= damage;
-		battlelog ("taken " + damage + " dmg");
+		battlelog (gameObject.name + " took " + damage + " damage!");
 	}
 	
 	public void Poisoned(int damage) {
@@ -78,10 +76,23 @@ public class UnitStatus : MonoBehaviour {
 	
 	public void Select() {
 		selected = true;
+		GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnStartHandler> ().handeTurnStart ();
 	}
 	
 	public void Deselect() {
 		selected = false;
+	}
+
+	public bool IsSelected() {
+		return selected;
+	}
+
+	public bool IsEnemy() {
+		return enemy;
+	}
+
+	public void SetAsEnemy() {
+		enemy = true;
 	}
 
 	public bool isAtTargetSquare(GameObject Square) {
