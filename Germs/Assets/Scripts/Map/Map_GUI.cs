@@ -91,11 +91,11 @@ public class Map_GUI : MonoBehaviour {
 			var pos = 0;
 			foreach (string bac in allBacsTest) {
 				if (!selectedBacsTest.Contains(bac)) {
-					if (GUI.Button (new Rect (Screen.width/2 - Screen.width/4 +pos,Screen.height - Screen.height/4,Screen.width/12,Screen.height/10), bac)) {
+					if (GUI.Button (new Rect (Screen.width/8 +pos,Screen.height - Screen.height/4,Screen.width/12,Screen.height/10), bac)) {
 						battleTracker.gameObject.GetComponent<BattleStatus>().setSelectedBacTest(bac, clickedIndex);
 						bacChooser = false;
 					}
-					pos += 90;
+					pos += Screen.width/12;
 				}
 			}
 		}

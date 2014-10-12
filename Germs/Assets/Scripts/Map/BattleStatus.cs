@@ -30,27 +30,27 @@ public class BattleStatus : MonoBehaviour {
 		}
 
 		//test (Health, Dmg, speed, level)
-		allBacsTest.Add ("Gatbac");
+		allBacsTest.Add ("Gatbac_1");
 		allBacsStats.Add (new int[] {100,10,5,1});
-		allBacsTest.Add ("Gatbac");
+		allBacsTest.Add ("Gatbac_2");
 		allBacsStats.Add (new int[] {100,10,5,1});
-		allBacsTest.Add ("Strep_p");
-		allBacsStats.Add (new int[] {100,10,5,1});
-		allBacsTest.Add ("smallRed");
-		allBacsStats.Add (new int[] {100,10,5,1});
-		allBacsTest.Add ("Phage");
-		allBacsStats.Add (new int[] {100,10,5,1});
-		allBacsTest.Add ("Strep_p");
+		allBacsTest.Add ("Strep_p_1");
 		allBacsStats.Add (new int[] {100,10,5,1});
 		allBacsTest.Add ("smallRed");
 		allBacsStats.Add (new int[] {100,10,5,1});
-		allBacsTest.Add ("Phage");
+		allBacsTest.Add ("Phage_1");
 		allBacsStats.Add (new int[] {100,10,5,1});
-		selectedBacsTest.Add ("Gatbac");
-		selectedBacsTest.Add ("Gatbac");
-		selectedBacsTest.Add ("Strep_p");
-		selectedBacsTest.Add ("smallRed");
-		selectedBacsTest.Add ("Phage");
+		allBacsTest.Add ("Strep_p_2");
+		allBacsStats.Add (new int[] {100,10,5,1});
+		allBacsTest.Add ("smallRed");
+		allBacsStats.Add (new int[] {100,10,5,1});
+		allBacsTest.Add ("Phage_2");
+		allBacsStats.Add (new int[] {100,10,5,1});
+		selectedBacsTest.Add ("");
+		selectedBacsTest.Add ("");
+		selectedBacsTest.Add ("");
+		selectedBacsTest.Add ("");
+		selectedBacsTest.Add ("");
 	}
 
 	//the level that was entered was...
