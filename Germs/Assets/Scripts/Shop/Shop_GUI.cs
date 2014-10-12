@@ -50,9 +50,9 @@ public class Shop_GUI : MonoBehaviour {
 	public AudioSource clickSound;
 
 	//Size of GUI elements
-	private Vector2 windowSize = new Vector2 (Screen.width * 0.4f, Screen.height * 0.65f);
-	private Vector2 itemSize = new Vector2 (Screen.width*0.1f, Screen.width*0.1f);
-	private Vector2 selectedItemWindowSize = new Vector2(Screen.width*0.13f, Screen.height*0.4f);
+	private Vector2 windowSize;
+	private Vector2 itemSize;
+	private Vector2 selectedItemWindowSize;
 
 	// Use this for initialization
 	void Start () {
@@ -65,11 +65,16 @@ public class Shop_GUI : MonoBehaviour {
 		this.selectedItems.Add ("Potion1");
 
 		clickSound = GameObject.FindGameObjectWithTag ("AudioDummy").GetComponent<AudioSource> ();
+
+		windowSize = new Vector2 (Screen.width * 0.4f, Screen.height * 0.65f);
+		itemSize = new Vector2 (Screen.width*0.1f, Screen.width*0.1f);
+		selectedItemWindowSize = new Vector2(Screen.width*0.13f, Screen.height*0.4f);
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
+		Debug.Log ("width: " + windowSize.x);
 	}
 
 	void OnGUI() {
