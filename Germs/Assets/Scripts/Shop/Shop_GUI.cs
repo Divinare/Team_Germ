@@ -64,12 +64,12 @@ public class Shop_GUI : MonoBehaviour {
 		this.selectedItems.Add ("Potion1");
 		this.selectedItems.Add ("Potion1");
 
-
+		clickSound = GameObject.FindGameObjectWithTag ("AudioDummy").GetComponent<AudioSource> ();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		clickSound = GameObject.FindGameObjectWithTag ("AudioDummy").GetComponent<AudioSource> (); 
+
 	}
 
 	void OnGUI() {
@@ -176,7 +176,6 @@ public class Shop_GUI : MonoBehaviour {
 
 
 	private void createItem(int x, int y, string description) {
-		Debug.Log ("x: " + x + " y: " + y);
 		GUI.TextArea (new Rect (x, y, itemSize.x, itemSize.y), description);
 
 	}
