@@ -64,6 +64,8 @@
      <Compile Include="Assets\Scripts\Battle\Turn\BattleEndWindow.cs" />
      <Compile Include="Assets\Scripts\Battle\Turn\TurnHandler.cs" />
      <Compile Include="Assets\Scripts\Battle\Turn\TurnStartHandler.cs" />
+     <Compile Include="Assets\Scripts\Battle\Unit\Actions\Heal.cs" />
+     <Compile Include="Assets\Scripts\Battle\Unit\Actions\SpecialAbility.cs" />
      <Compile Include="Assets\Scripts\Battle\Unit\HealthBar.cs" />
      <Compile Include="Assets\Scripts\Battle\Unit\MeleeAttack.cs" />
      <Compile Include="Assets\Scripts\Battle\Unit\Movement.cs" />
