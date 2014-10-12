@@ -42,6 +42,7 @@ public class MeleeAttack : MonoBehaviour {
 		}
 		else { // if target is already at an adjacent square, set current square as the square from which to initiate melee attack
 			targetSquare = activeUnit.GetComponent<UnitStatus>().getSquare ();
+			activeUnit.GetComponent<UnitStatus>().Deselect ();
 		}
 		target = targetGerm;
 		goingToAttack = true;
