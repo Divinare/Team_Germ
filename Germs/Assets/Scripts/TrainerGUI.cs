@@ -7,6 +7,7 @@ public class TrainerGUI : MonoBehaviour {
 	public GUIStyle trainerBox;
 	public GUIStyle trainerText;
 	public GUIStyle yellowText;
+	public GUIStyle blueText;
 	public GUIStyle bigNumbers;
 	public GUIStyle lvlUpButton;
 	public GUIStyle deactiveLvlUpButton;
@@ -72,7 +73,7 @@ public class TrainerGUI : MonoBehaviour {
 		//left
 		GUI.Box (new Rect (0,Screen.height/10,Screen.width/2,Screen.height-Screen.height/10-Screen.height/10), "", trainerBox);
 		selGridInt = GUI.SelectionGrid(new Rect(0,Screen.height/10,Screen.width/2, (Screen.height-Screen.height/10-Screen.height/10)/4), selGridInt, allBacsTest.ToArray(), 6);
-		Debug.Log (selGridInt);
+		//Debug.Log (selGridInt);
 
 
 		//right
@@ -81,21 +82,22 @@ public class TrainerGUI : MonoBehaviour {
 
 		tempStats = allBacsStats[selGridInt];
 		//Statbox
-		GUI.Box (new Rect (Screen.width/2+Screen.width/8,Screen.height/10+Screen.width/4,Screen.width/4,Screen.height/8), "Level "+tempStats[3]+" Stats: \n Health : "+tempStats[0]+"\nDamage : "+tempStats[1]+"\nSpeed : "+tempStats[2]);
+		GUI.Box (new Rect (Screen.width/2+50,Screen.height/10+Screen.width/4,Screen.width/4,Screen.height/8), "Level "+tempStats[3]+" Stats: \nHealth : "+tempStats[0]+"\nDamage : "+tempStats[1]+"\nSpeed : "+tempStats[2], blueText);
 
 		//NextLevelBox
-		GUI.Box (new Rect (Screen.width/2+Screen.width/8,Screen.height/10+Screen.width/4+Screen.height/8,Screen.width/4,Screen.height/8), "Next Level : "+(tempStats[3]+1)+"\nHealth : "+(tempStats[0]+lvlUpHealth)+"\nDamage : "+(tempStats[1]+lvlUpDmg)+"\nSpeed : "+(tempStats[2]+lvlUpSpeed)+"\n XP required to level :"+lvlUpXp*tempStats[3], yellowText);
+		GUI.Box (new Rect (Screen.width/2+Screen.width/4,Screen.height/10+Screen.width/4,Screen.width/4,Screen.height/8), "Next Level : "+(tempStats[3]+1)+"\nHealth : "+(tempStats[0]+lvlUpHealth)+"\nDamage : "+(tempStats[1]+lvlUpDmg)+"\nSpeed : "+(tempStats[2]+lvlUpSpeed)+"\nXP required to level : "+lvlUpXp*tempStats[3], yellowText);
 
 		//LvlUpButton
 		if (xp >= lvlUpXp*tempStats[3]) {
 			if (GUI.Button(new Rect (Screen.width/2+Screen.width/8,Screen.height/10+Screen.width/4+Screen.height/8+Screen.height/8,Screen.width/4,Screen.height/8), "", lvlUpButton)) {
-				Debug.Log ("lvlUpButtonPress");
-				xp -= lvlUpXp;
+				//Debug.Log ("lvlUpButtonPress");
+				xp -= lvlUpXp*tempStats[3];
+				gameStatus.SendMessage("setXp", xp);
 				battleTracker.gameObject.GetComponent<BattleStatus>().setAllBacsStats(selGridInt, tempStats[0]+lvlUpHealth, tempStats[1]+lvlUpDmg, tempStats[2]+lvlUpSpeed, tempStats[3]+1);
 			}
 		} else {
 			if (GUI.Button(new Rect (Screen.width/2+Screen.width/8,Screen.height/10+Screen.width/4+Screen.height/8+Screen.height/8,Screen.width/4,Screen.height/8), "", deactiveLvlUpButton)) {
-				Debug.Log ("nothing happens");
+				//Debug.Log ("nothing happens");
 			}
 		}
 		//bottom

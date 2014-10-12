@@ -52,4 +52,8 @@ public class GameStatus : MonoBehaviour {
 	public float getXp() {
 		return xp;
 	}
+
+	void setXp(float newXp) {
+		xp = newXp;
+	}
 }

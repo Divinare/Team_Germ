@@ -11,7 +11,7 @@ public class Map : MonoBehaviour {
 	//checking tools
 	private List<Transform> allNodes = new List<Transform>();
 	private List<bool> gameBools = new List<bool>();
-	private Transform statusTracker;
+	private Transform gameStatus;
 	private Transform battleTracker;
 	private string storedNode;
 
@@ -41,7 +41,7 @@ public class Map : MonoBehaviour {
 		}
 
 		//recall statustrackers
-		statusTracker = GameObject.Find("GameStatus").transform;
+		gameStatus = GameObject.Find("GameStatus").transform;
 		battleTracker = GameObject.Find ("BattleTracker").transform;
 
 		//retrieval
@@ -51,13 +51,15 @@ public class Map : MonoBehaviour {
 		setNodeActive(transform.FindChild("Node1"));
 		clickSound = GameObject.FindGameObjectWithTag ("AudioDummy").GetComponent<AudioSource> (); 
 
-		//complete the node that was entered, temporary! needs better way of telling when level is complete
-		storedNode = battleTracker.gameObject.GetComponent<BattleStatus>().getNode();
+		getStoredNode();
 		//Debug.Log(storedNode);
-		if (storedNode != "") {
+		if (storedNode != null) {
+			Debug.Log ("storedNode != empty");
 			if (battleTracker.gameObject.GetComponent<BattleStatus>().onReturnToMap()) {
 				setNodeCompleted(transform.FindChild(storedNode));
 				setGold(transform.FindChild(storedNode));
+				battleTracker.gameObject.GetComponent<BattleStatus>().clearNode();
+				storeGameStatus();
 			}
 		}
 	}
@@ -105,21 +107,25 @@ public class Map : MonoBehaviour {
 	}
 
 	void storeGameStatus() {
-		statusTracker.SendMessage("storeGameStatus", allNodes);
+		gameStatus.SendMessage("storeGameStatus", allNodes);
 	}
 
 	void setGold(Transform node) {
-		statusTracker.SendMessage("setGold", node);
+		gameStatus.SendMessage("setGold", node);
 	}
 
 	void retrieveGameStatus() {
-		gameBools = statusTracker.gameObject.GetComponent<GameStatus>().retrieveGameBools();
+		gameBools = gameStatus.gameObject.GetComponent<GameStatus>().retrieveGameBools();
 		for (int i = 0; i < gameBools.Count; i++) {
 			if (gameBools[i]) {
 				setNodeActive(allNodes[i]);
 				setNodeCompleted(allNodes[i]);
 			}
 		}
+	}
+
+	void getStoredNode() {
+		storedNode = battleTracker.gameObject.GetComponent<BattleStatus>().getNode();
 	}
 
 	void OnGUI() {

@@ -51,9 +51,6 @@ public class BattleStatus : MonoBehaviour {
 		selectedBacsTest.Add ("Strep_p");
 		selectedBacsTest.Add ("smallRed");
 		selectedBacsTest.Add ("Phage");
-
-		//stat transfer test
-
 	}
 
 	//the level that was entered was...
@@ -83,14 +80,22 @@ public class BattleStatus : MonoBehaviour {
 
 	//store entered node
 	void storeNode(Transform node) {
+		clearLevelBools();
+		storedNode = node.transform.name;
+	}
+
+	public void clearLevelBools() {
 		levelComplete = false;
 		levelInterrupt = false;
-		storedNode = node.transform.name;
 	}
 	
 	//get entered node
 	public string getNode() {
 		return storedNode;
+	}
+
+	public void clearNode() {
+		storedNode = null;
 	}
 
 	void setBacSelected(GameObject bac) {
