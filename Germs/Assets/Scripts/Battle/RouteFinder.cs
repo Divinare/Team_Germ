@@ -11,6 +11,7 @@ public class RouteFinder : MonoBehaviour {
 	private List<GameObject> visited;
 	private List<GameObject> toBeVisited;
 	private bool found = false;
+	private GameObject finalSquare;
 
 	// matrix that tells the smallest length for a square
 	private double[,] distances;
@@ -31,6 +32,7 @@ public class RouteFinder : MonoBehaviour {
 
 	
 	public List<GameObject> findRoute(GameObject targetSquare) {
+		finalSquare = targetSquare;
 		removeAllPaths ();
 		this.found = false;
 
@@ -121,14 +123,18 @@ public class RouteFinder : MonoBehaviour {
 	}
 
 	private bool isValidSquare(int x, int y, GameObject gb) {
+
 		if (x < 0 || x >= squares.GetLength(0)) {
 			return false;
 		}
 		if (y < 0 || y >= squares.GetLength (1)) {
 			return false;
 		}
+		if (squares[x,y] == finalSquare) {
+			return true;
+		}
 		string squareStatus = squares [x, y].GetComponent<SquareStatus> ().getStatus ();
-		if (!squareStatus.Equals ("movable") && !squareStatus.Equals ("enemy")) {
+		if (!squareStatus.Equals ("movable")) {
 			return false;
 		}
 
