@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CursorIconHandler : MonoBehaviour {
 
-	public Texture2D[] cursorIcons; // currently contains: 0 = melee attack, 1 = ranged attack, 2 = magic wand, 3 = heal
+	public Texture2D[] cursorIcons; // currently contains: 0 = melee attack, 1 = ranged attack, 2 = magic wand, 3 = heal, 4 = error
 	private string currentCursor; 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +18,8 @@ public class CursorIconHandler : MonoBehaviour {
 	
 	}
 
+
+
 	public void drawMeleeAttackCursor() {
 		Cursor.SetCursor (cursorIcons[0], new Vector2(15,12), CursorMode.Auto);
 		currentCursor = "melee";
@@ -31,6 +33,11 @@ public class CursorIconHandler : MonoBehaviour {
 	public void drawHealCursor() {
 		Cursor.SetCursor (cursorIcons[3], new Vector2(16,16), CursorMode.Auto);	
 		currentCursor = "heal";
+	}
+
+	public void drawErrorCursor() {
+		Cursor.SetCursor (cursorIcons[4], new Vector2(16,16), CursorMode.Auto);
+		currentCursor = "error";
 	}
 
 	public void drawDefaultCursor() {
@@ -54,10 +61,19 @@ public class CursorIconHandler : MonoBehaviour {
 			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("ranged") && !currentCursor.Equals ("ranged")) {
 				drawRangedAttackCursor ();
 			}
+			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("heal") && !currentCursor.Equals ("error")) {
+				drawErrorCursor ();
+			}
 		}
 		if (square.GetComponent<SquareStatus>().getStatus ().Equals ("friendly")) {
 			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("heal") && !currentCursor.Equals ("heal")) {
 				drawHealCursor();
+			}
+			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("melee") && !currentCursor.Equals ("error")) {
+				drawErrorCursor();
+			}
+			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("ranged") && !currentCursor.Equals ("error")) {
+				drawErrorCursor();
 			}
 		}
 	}
