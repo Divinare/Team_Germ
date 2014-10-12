@@ -1,0 +1,136 @@
+fileFormatVersion: 2
+guid: 255a5fd848a842c40971d3658286b577
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: blueBac_spritesheet
+    21300002: blueBac_spritesheet_0
+    21300004: blueBac_spritesheet_1
+    21300006: blueBac_spritesheet_2
+    21300008: blueBac_spritesheet_3
+    21300010: blueBac_spritesheet_4
+    21300012: blueBac_spritesheet_5
+    21300014: blueBac_spritesheet_6
+    21300016: blueBac_spritesheet_7
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 1024
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 200
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: blueBac_spritesheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 668
+        height: 619
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: blueBac_spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 0
+        width: 671
+        height: 619
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: blueBac_spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 1542
+        y: 0
+        width: 654
+        height: 619
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: blueBac_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 2273
+        y: 3
+        width: 627
+        height: 616
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: blueBac_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 2993
+        y: 3
+        width: 599
+        height: 616
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: blueBac_spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 3680
+        y: 8
+        width: 594
+        height: 614
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: blueBac_spritesheet_6
+      rect:
+        serializedVersion: 2
+        x: 4351
+        y: 3
+        width: 588
+        height: 611
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: blueBac_spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 5045
+        y: 3
+        width: 584
+        height: 619
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
