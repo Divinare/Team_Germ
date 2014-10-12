@@ -74,7 +74,7 @@ public class Shop_GUI : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		Debug.Log ("width: " + windowSize.x);
+
 	}
 
 	void OnGUI() {
@@ -102,8 +102,6 @@ public class Shop_GUI : MonoBehaviour {
 		GUI.BeginGroup (new Rect (windowPosition.x, windowPosition.y, windowSize.x, windowSize.y));
 		drawTexture ((int)windowSize.x, (int)windowSize.y, menu);
 
-
-		    // Scroll view
 		if(type.Equals("shop")) {
 			// Creating topic picture
 			GUI.Label (new Rect (0, 0, topicSize.x, topicSize.y), shopText);
@@ -117,8 +115,8 @@ public class Shop_GUI : MonoBehaviour {
 
 		} else if(type.Equals("stash")) {
 			// Creating topic picture
-			//GUI.Label (new Rect (0, 0, topicSize.x, topicSize.y), stashText);
 			drawTexture((int)topicSize.x, (int)topicSize.y, stashText);
+
 			createScrollView(topicSize, tabSize, windowSize, "stash");
 
 		}
@@ -142,11 +140,8 @@ public class Shop_GUI : MonoBehaviour {
 			stashScrollPosition = GUI.BeginScrollView (new Rect (0, topicSize.y, windowSize.x, windowSize.y - topicSize.y), stashScrollPosition, new Rect (0, 0, 0, 500));
 			createStashContent();
 		}
-
 		GUI.EndScrollView ();
-		
 		GUI.EndGroup ();
-
 	}
 
 	private void createShopContent() {
@@ -182,23 +177,18 @@ public class Shop_GUI : MonoBehaviour {
 
 	private void createItem(int x, int y, string description) {
 		GUI.TextArea (new Rect (x, y, itemSize.x, itemSize.y), description);
-
 	}
 
 	private void drawSelectedItems() {
 		if (GUI.Button (new Rect (Screen.width/2 - Screen.width/4,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedItems[0])) {
 			
-		}
-		if (GUI.Button (new Rect (Screen.width/2 - Screen.width/6,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedItems[1])) {
+		} else if (GUI.Button (new Rect (Screen.width/2 - Screen.width/6,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedItems[1])) {
 			
-		}
-		if (GUI.Button (new Rect (Screen.width/2 - Screen.width/12,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedItems[2])) {
+		} else if (GUI.Button (new Rect (Screen.width/2 - Screen.width/12,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedItems[2])) {
 			
-		}
-		if (GUI.Button (new Rect (Screen.width/2,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedItems[3])) {
+		} else if (GUI.Button (new Rect (Screen.width/2,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedItems[3])) {
 			
-		}
-		if (GUI.Button (new Rect (Screen.width/2 + Screen.width/12,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedItems[4])) {
+		} else if (GUI.Button (new Rect (Screen.width/2 + Screen.width/12,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedItems[4])) {
 			
 		}
 	}
