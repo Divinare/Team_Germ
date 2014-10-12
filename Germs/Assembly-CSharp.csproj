@@ -82,6 +82,7 @@
      <Compile Include="Assets\Scripts\Map\Node.cs" />
      <Compile Include="Assets\Scripts\Map\onClickDestroy.cs" />
      <Compile Include="Assets\Scripts\Shop\Shop_GUI.cs" />
+     <Compile Include="Assets\Scripts\ShopStatus.cs" />
      <Compile Include="Assets\Trash\MovableSquareFinder.cs" />
      <Compile Include="Assets\testLevels\levelComplete.cs" />
   </ItemGroup>
