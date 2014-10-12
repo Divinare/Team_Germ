@@ -78,6 +78,7 @@ public class TrainerGUI : MonoBehaviour {
 
 		//right
 		GUI.Box (new Rect (Screen.width/2,Screen.height/10,Screen.width/2,Screen.height-Screen.height/10-Screen.height/10), "", trainerBox);
+
 		GUI.Box (new Rect (Screen.width/2+Screen.width/8,Screen.height/10,Screen.width/4,Screen.width/4), allBacsImages[allBacsTest[selGridInt]]);
 
 		tempStats = allBacsStats[selGridInt];
