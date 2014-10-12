@@ -9,6 +9,7 @@ public class BattleStatus : MonoBehaviour {
 	//Real list is transform or gameobject and will display image not text, this is for testing
 	public List<string> allBacsTest = new List<string>();
 	public List<string> selectedBacsTest = new List<string>();
+	public List<int[]> allBacsStats = new List<int[]>();
 
 	public string storedNode;
 	
@@ -28,17 +29,30 @@ public class BattleStatus : MonoBehaviour {
 			Destroy(gameObject);
 		}
 
-		//test
-		allBacsTest.Add ("");
-		allBacsTest.Add ("");
-		allBacsTest.Add ("");
-		allBacsTest.Add ("");
-		allBacsTest.Add ("");
+		//test (Health, Dmg, speed, level)
+		allBacsTest.Add ("Gatbac");
+		allBacsStats.Add (new int[] {100,10,5,1});
+		allBacsTest.Add ("Gatbac");
+		allBacsStats.Add (new int[] {100,10,5,1});
+		allBacsTest.Add ("Strep_p");
+		allBacsStats.Add (new int[] {100,10,5,1});
+		allBacsTest.Add ("smallRed");
+		allBacsStats.Add (new int[] {100,10,5,1});
+		allBacsTest.Add ("Phage");
+		allBacsStats.Add (new int[] {100,10,5,1});
+		allBacsTest.Add ("Strep_p");
+		allBacsStats.Add (new int[] {100,10,5,1});
+		allBacsTest.Add ("smallRed");
+		allBacsStats.Add (new int[] {100,10,5,1});
+		allBacsTest.Add ("Phage");
+		allBacsStats.Add (new int[] {100,10,5,1});
 		selectedBacsTest.Add ("Gatbac");
 		selectedBacsTest.Add ("Gatbac");
 		selectedBacsTest.Add ("Strep_p");
 		selectedBacsTest.Add ("smallRed");
 		selectedBacsTest.Add ("Phage");
+
+		//stat transfer test
 
 	}
 
@@ -108,5 +122,13 @@ public class BattleStatus : MonoBehaviour {
 
 	public void removeSelectedBacTest(string bac) {
 		selectedBacsTest.Remove(bac);
+	}
+
+	public List<int[]> getAllBacsStats() {
+		return allBacsStats;
+	}
+
+	public void setAllBacsStats(int indx, int health, int dmg, int speed, int lvl) {
+		allBacsStats[indx] = new int[] {health, dmg, speed, lvl};
 	}
 }
