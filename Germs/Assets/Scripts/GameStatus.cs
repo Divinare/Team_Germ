@@ -9,7 +9,6 @@ public class GameStatus : MonoBehaviour {
 
 	//storage units
 	public List<bool> gameBools = new List<bool>();
-	public string nodeFrom;
 
 	// Use this for initialization
 	void Start () {
