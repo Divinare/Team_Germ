@@ -17,6 +17,9 @@ Teemana on bakteerit ja virukset RPG-seikkailussa.
 
 <h2>Linkkejä:</h2>
 
+Saving stuff with binary serialization:
+http://www.youtube.com/watch?v=J6FfcJpbPXE#t=302
+
 moving object with mouse to some position:
 http://answers.unity3d.com/questions/639139/how-to-move-an-2d-object-to-mouse-click-position-i.html
 
