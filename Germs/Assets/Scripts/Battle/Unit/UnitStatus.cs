@@ -7,16 +7,16 @@ public class UnitStatus : MonoBehaviour {
 	public Dictionary <string, int[]> allBacteriaStats = new Dictionary<string, int[]>();
 	public int[] unitStats = new int[4];
 
-	public int currentHealth;
-	public int damage;
-	public int speed;
-	public int maxHealth;
-	public int heal;
+	public int currentHealth; // current HP
+	public int damage; // how much damage this unit does
+	public int speed; // how far this unit can move
+	public int maxHealth; // max HP
+	public int heal; // how many HP this unit heals
 
 // This is the attack that we have selected from the attack toolbar
 	public string selectedAction = "melee";
 	public bool selected = false;
-	public bool enemy = false;
+	public bool enemy = false; // true = unit is on computer's side, false = unit is on player's side
 	public AudioClip[] sounds;
 	public GameObject DeathSound;
 	public string unitName;

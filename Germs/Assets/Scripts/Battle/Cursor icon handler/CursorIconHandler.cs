@@ -54,7 +54,10 @@ public class CursorIconHandler : MonoBehaviour {
 			return;
 		}
 		GameObject activeUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler> ().getActiveUnit ();
-		if (square.GetComponent<SquareStatus> ().getStatus ().Equals ("enemy")) {
+		string activeUnitSquareStatus = activeUnit.GetComponent<UnitStatus> ().getSquare ().GetComponent<SquareStatus> ().getStatus ();
+		string targetSquareStatus = square.GetComponent<SquareStatus>().getStatus();
+
+		if (!activeUnitSquareStatus.Equals (targetSquareStatus)) {
 			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("melee") && !currentCursor.Equals ("melee")) {
 				drawMeleeAttackCursor ();
 			}
@@ -65,7 +68,7 @@ public class CursorIconHandler : MonoBehaviour {
 				drawErrorCursor ();
 			}
 		}
-		if (square.GetComponent<SquareStatus>().getStatus ().Equals ("friendly")) {
+		if (activeUnitSquareStatus.Equals (targetSquareStatus)) {
 			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("heal") && !currentCursor.Equals ("heal")) {
 				drawHealCursor();
 			}

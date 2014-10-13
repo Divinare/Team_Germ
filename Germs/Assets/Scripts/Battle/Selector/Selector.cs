@@ -92,34 +92,33 @@ public class Selector : MonoBehaviour {
 
 
 	private void unitAction(GameObject activeUnit, GameObject objectClicked) {
+
 		Debug.Log ("Unit clicked!");
-		this.targetedUnit = objectClicked; // now projectiles know what they are trying to hit
-		
+		this.targetedUnit = objectClicked; // now projectiles know what they are trying to hit		
 		string action = activeUnit.GetComponent<UnitStatus> ().selectedAction;
-		if (action == "melee" && objectClicked.GetComponent<UnitStatus>().IsEnemy()) {
-			Debug.Log ("Melee attack selected");
-			activeUnit.GetComponent<MeleeAttack>().initiateAttack (activeUnit, objectClicked);
 
-		} else if (action == "ranged" && objectClicked.GetComponent<UnitStatus>().IsEnemy()) {
-			Debug.Log ("Ranged attack selected");
-			activeUnit.GetComponent<RangedAttack> ().attack(objectClicked);
-			
-		} else if (action == "magic") {
-			Debug.Log ("Magic attack selected");
-
-			
-			// to be implemented
-			
-		} else if (action == "heal") {
-			Debug.Log ("Heal selected");
-			activeUnit.GetComponent<Heal>().healTarget (targetedUnit);
-			
-			// to be implemented
-			
-		}
-		
-		// etc...
-		
+		if (objectClicked.GetComponent<UnitStatus>().IsEnemy() != activeUnit.GetComponent<UnitStatus>().IsEnemy()) { // aggressive actions
+			if (action == "melee") {
+				Debug.Log ("Melee attack selected");
+				activeUnit.GetComponent<MeleeAttack>().initiateAttack (activeUnit, objectClicked);
+			} 
+			else if (action == "ranged") {
+				Debug.Log ("Ranged attack selected");
+				activeUnit.GetComponent<RangedAttack> ().attack(objectClicked);				
+			} 
+			else if (action == "magic") {
+				Debug.Log ("Magic attack selected");
+					// to be implemented
+			}				
+		} 
+		else if (objectClicked.GetComponent<UnitStatus>().IsEnemy() == activeUnit.GetComponent<UnitStatus>().IsEnemy()) { // friendly actions
+			if (action == "heal") {
+				Debug.Log ("Heal selected");
+				activeUnit.GetComponent<Heal>().healTarget (targetedUnit);
+				
+				// to be implemented
+			}			
+		}		
 	}
 
 	public GameObject GetTargetedUnit() {
