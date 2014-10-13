@@ -9,7 +9,7 @@ public class Map_GUI : MonoBehaviour {
 	public int clickedIndex;
 
 	//Real list is transform or gameobject and will display image not text, this is for testing
-	public List<string> allBacsTest = new List<string>();
+	public Dictionary<string, int[]> allBacteriaStats = new Dictionary<string, int[]>();
 	public List<string> selectedBacsTest = new List<string>();
 
 	public Texture2D goldIcon;
@@ -34,9 +34,8 @@ public class Map_GUI : MonoBehaviour {
 		xp = gameStatus.gameObject.GetComponent<GameStatus>().getXp();
 		bacChooser = false;
 
-		//get test lists
-		allBacsTest = battleTracker.gameObject.GetComponent<BattleStatus>().getAllBacsTest();
-		selectedBacsTest = battleTracker.gameObject.GetComponent<BattleStatus>().getSelectedBacsTest();
+		allBacteriaStats = battleTracker.gameObject.GetComponent<BattleStatus>().getAllBacteriaStats();
+		selectedBacsTest =battleTracker.gameObject.GetComponent<BattleStatus>().getSelectedBacsTest();
 	}
 	
 	// Update is called once per frame
@@ -89,7 +88,7 @@ public class Map_GUI : MonoBehaviour {
 
 		if (bacChooser) {
 			var pos = 0;
-			foreach (string bac in allBacsTest) {
+			foreach (string bac in allBacteriaStats.Keys) {
 				if (!selectedBacsTest.Contains(bac)) {
 					if (GUI.Button (new Rect (Screen.width/8 +pos,Screen.height - Screen.height/4,Screen.width/12,Screen.height/10), bac)) {
 						battleTracker.gameObject.GetComponent<BattleStatus>().setSelectedBacTest(bac, clickedIndex);
@@ -103,6 +102,6 @@ public class Map_GUI : MonoBehaviour {
 	}
 	void bacteriaChooserOn() {
 		bacChooser = true;
-		allBacsTest = battleTracker.gameObject.GetComponent<BattleStatus>().getAllBacsTest();
+		allBacteriaStats = battleTracker.gameObject.GetComponent<BattleStatus>().getAllBacteriaStats();
 	}
 }

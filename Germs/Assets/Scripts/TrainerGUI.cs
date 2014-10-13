@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 public class TrainerGUI : MonoBehaviour {
 	//GUI Stuff
@@ -35,14 +36,13 @@ public class TrainerGUI : MonoBehaviour {
 	public int lvlUpSpeed;
 	public int lvlUpXp;
 
-
-	public List<int[]> allBacsStats = new List<int[]>();
+	public Dictionary <string, int[]> allBacteriaStats = new Dictionary<string, int[]>();
 	public int[] tempStats = new int[4];
 
 	//Selection grid stuff
-	public List<string> allBacsTest = new List<string>();
 	public Dictionary<string, Texture2D> allBacsImages = new Dictionary<string, Texture2D>();
 	public int selGridInt = 0;
+	public string[] selGridStr;
 
 	// Use this for initialization
 	void Start () {
@@ -52,8 +52,15 @@ public class TrainerGUI : MonoBehaviour {
 		gold = gameStatus.gameObject.GetComponent<GameStatus>().getGold();
 		xp = gameStatus.gameObject.GetComponent<GameStatus>().getXp();
 
-		allBacsTest = battleTracker.gameObject.GetComponent<BattleStatus>().getAllBacsTest();
-		allBacsStats = battleTracker.gameObject.GetComponent<BattleStatus>().getAllBacsStats();
+		allBacteriaStats = battleTracker.gameObject.GetComponent<BattleStatus>().getAllBacteriaStats();
+		selGridStr = new string[allBacteriaStats.Keys.Count];
+
+		var temp = 0;
+		foreach (string key in allBacteriaStats.Keys) {
+			selGridStr[temp] = key;
+			temp += 1;
+		}
+
 		setBacsAndImages();
 	}
 
@@ -78,17 +85,17 @@ public class TrainerGUI : MonoBehaviour {
 
 		//left
 		GUI.Box (new Rect (0,Screen.height/10,Screen.width/2,Screen.height-Screen.height/10-Screen.height/10), "", trainerBox);
-		selGridInt = GUI.SelectionGrid(new Rect(0,Screen.height/10,Screen.width/2, (Screen.height-Screen.height/10-Screen.height/10)/4), selGridInt, allBacsTest.ToArray(), 6);
-		//Debug.Log (selGridInt);
 
+		//selection grid
+		selGridInt = GUI.SelectionGrid(new Rect(0,Screen.height/10,Screen.width/2, (Screen.height-Screen.height/10-Screen.height/10)/4), selGridInt, selGridStr, 6);
 
 		//right
 		GUI.Box (new Rect (Screen.width/2,Screen.height/10,Screen.width/2,Screen.height-Screen.height/10-Screen.height/10), "", trainerBox);
+		GUI.Box (new Rect (Screen.width/2+Screen.width/8,Screen.height/10,Screen.width/4,Screen.width/4), allBacsImages[selGridStr[selGridInt]]);
+		Debug.Log (selGridStr);
 
-		var imgVar = allBacsTest[selGridInt];
-		GUI.Box (new Rect (Screen.width/2+Screen.width/8,Screen.height/10,Screen.width/4,Screen.width/4), allBacsImages[allBacsTest[selGridInt]]);
 
-		tempStats = allBacsStats[selGridInt];
+		tempStats = allBacteriaStats[selGridStr[selGridInt]];
 		//Statbox
 		GUI.Box (new Rect (Screen.width/2+50,Screen.height/10+Screen.width/4,Screen.width/4,Screen.height/8), "Level "+tempStats[3]+" Stats: \nHealth : "+tempStats[0]+"\nDamage : "+tempStats[1]+"\nSpeed : "+tempStats[2], blueText);
 
@@ -101,13 +108,14 @@ public class TrainerGUI : MonoBehaviour {
 				//Debug.Log ("lvlUpButtonPress");
 				xp -= lvlUpXp*tempStats[3];
 				gameStatus.SendMessage("setXp", xp);
-				battleTracker.gameObject.GetComponent<BattleStatus>().setAllBacsStats(selGridInt, tempStats[0]+lvlUpHealth, tempStats[1]+lvlUpDmg, tempStats[2]+lvlUpSpeed, tempStats[3]+1);
+				battleTracker.gameObject.GetComponent<BattleStatus>().setAllBacteriaStats(selGridStr[selGridInt], tempStats[0]+lvlUpHealth, tempStats[1]+lvlUpDmg, tempStats[2]+lvlUpSpeed, tempStats[3]+1);
 			}
 		} else {
 			if (GUI.Button(new Rect (Screen.width/2+Screen.width/8,Screen.height/10+Screen.width/4+Screen.height/8+Screen.height/8,Screen.width/4,Screen.height/8), "", deactiveLvlUpButton)) {
 				//Debug.Log ("nothing happens");
 			}
 		}
+
 		//bottom
 		if (GUI.Button (new Rect (0 + Screen.height/6,Screen.height - Screen.height/12,Screen.height/6,Screen.height/12), "", shopHover)) {
 			//clickSound.Play ();	

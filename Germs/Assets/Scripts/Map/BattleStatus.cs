@@ -11,6 +11,8 @@ public class BattleStatus : MonoBehaviour {
 	public List<string> selectedBacsTest = new List<string>();
 	public List<int[]> allBacsStats = new List<int[]>();
 
+	public Dictionary<string, int[]> allBacteriaStats = new Dictionary<string, int[]>();
+
 	public string storedNode;
 	
 	//level status/count
@@ -30,20 +32,14 @@ public class BattleStatus : MonoBehaviour {
 		}
 
 		//test (Health, Dmg, speed, level)
-		allBacsTest.Add ("Gatbac");
-		allBacsStats.Add (new int[] {100,10,5,1});
-		allBacsTest.Add ("Strep_p");
-		allBacsStats.Add (new int[] {100,10,5,1});
-		allBacsTest.Add ("smallRed");
-		allBacsStats.Add (new int[] {100,10,5,1});
-		allBacsTest.Add ("Phage");
-		allBacsStats.Add (new int[] {100,10,5,1});
-		allBacsTest.Add ("blueBac");
-		allBacsStats.Add (new int[] {100,10,5,1});
-		allBacsTest.Add ("smallPurple");
-		allBacsStats.Add (new int[] {100,10,5,1});
-		allBacsTest.Add ("smallBlue");
-		allBacsStats.Add (new int[] {100,10,5,1});
+		allBacteriaStats.Add ("Gatbac", new int[] {200, 10, 5, 1});
+		allBacteriaStats.Add ("Strep_p", new int[] {100, 10, 8, 1});
+		allBacteriaStats.Add ("smallRed", new int[] {100, 10, 6, 1});
+		allBacteriaStats.Add ("smallBlue", new int[] {100, 10, 6, 1});
+		allBacteriaStats.Add ("smallPurple", new int[] {100, 10, 6, 1});
+		allBacteriaStats.Add ("Phage", new int[] {100, 10, 4, 1});
+		allBacteriaStats.Add ("blueBac", new int[] {100, 15, 10, 1});
+
 		selectedBacsTest.Add ("");
 		selectedBacsTest.Add ("");
 		selectedBacsTest.Add ("");
@@ -111,9 +107,6 @@ public class BattleStatus : MonoBehaviour {
 	}
 
 	//testing methods
-	public List<string> getAllBacsTest() {
-		return allBacsTest;
-	}
 	
 	public List<string> getSelectedBacsTest() {
 		return selectedBacsTest;
@@ -127,11 +120,11 @@ public class BattleStatus : MonoBehaviour {
 		selectedBacsTest.Remove(bac);
 	}
 
-	public List<int[]> getAllBacsStats() {
-		return allBacsStats;
+	public void setAllBacteriaStats(string key, int health, int dmg, int speed, int lvl) {
+		allBacteriaStats[key] = new int[] {health, dmg, speed, lvl};
 	}
 
-	public void setAllBacsStats(int indx, int health, int dmg, int speed, int lvl) {
-		allBacsStats[indx] = new int[] {health, dmg, speed, lvl};
+	public Dictionary<string, int[]> getAllBacteriaStats() {
+		return allBacteriaStats;
 	}
 }
