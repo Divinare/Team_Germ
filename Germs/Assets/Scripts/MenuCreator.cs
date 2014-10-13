@@ -23,8 +23,9 @@ public class MenuCreator : MonoBehaviour {
 	}
 
 	public void createMenu() {
-		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y, menuButtonSize.x, menuButtonSize.y), "open!")) {
+		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y, menuButtonSize.x, menuButtonSize.y), "Main\nMenu")) {
 			clickSound.Play ();
+			Application.LoadLevel ("MainMenu");
 		}
 
 	}
