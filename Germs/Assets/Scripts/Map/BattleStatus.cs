@@ -33,7 +33,7 @@ public class BattleStatus : MonoBehaviour {
 
 		//test (Health, Dmg, speed, level)
 		allBacteriaStats.Add ("Gatbac", new int[] {200, 10, 5, 1});
-		allBacteriaStats.Add ("Strep_p", new int[] {100, 10, 8, 1});
+		allBacteriaStats.Add ("Strepto", new int[] {100, 10, 8, 1});
 		allBacteriaStats.Add ("smallRed", new int[] {100, 10, 6, 1});
 		allBacteriaStats.Add ("smallBlue", new int[] {100, 10, 6, 1});
 		allBacteriaStats.Add ("smallPurple", new int[] {100, 10, 6, 1});
