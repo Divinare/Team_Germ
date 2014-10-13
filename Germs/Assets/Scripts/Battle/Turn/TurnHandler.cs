@@ -102,20 +102,24 @@ public class TurnHandler : MonoBehaviour {
 
 	private void DrawSelectionCircleForUnit(GameObject unit) {
 		if (unit.GetComponent<UnitStatus>().IsEnemy()) {
-			unit.transform.FindChild("enemyCircle").gameObject.active = true; // draw enemycircle
+			//unit.transform.FindChild("enemyCircle").gameObject.active = true; // draw enemycircle
+			unit.transform.FindChild("enemyCircle").GetComponent<BlinkingCircle>().enabled = true;
 		}
 		else {
-			unit.transform.FindChild("selectionCircle").gameObject.active = true; // draw playercircle
+			//unit.transform.FindChild("selectionCircle").gameObject.active = true; // draw playercircle
+			unit.transform.FindChild("selectionCircle").GetComponent<BlinkingCircle>().enabled = true;
 		}
 	}
 
 	private void RemoveSelectionCircleFromUnit(GameObject unit) {
 		if (unit.GetComponent<UnitStatus>().IsEnemy()) {
-			unit.transform.FindChild("enemyCircle").gameObject.active = false;// remove enemycircle
+			//unit.transform.FindChild("enemyCircle").gameObject.active = false;// remove enemycircle
+			unit.transform.FindChild("enemyCircle").GetComponent<BlinkingCircle>().enabled = false;
 
 		}
 		else {
-			unit.transform.FindChild("selectionCircle").gameObject.active = false; // remove playercircle			
+			//unit.transform.FindChild("selectionCircle").gameObject.active = false; // remove playercircle			
+			unit.transform.FindChild("selectionCircle").GetComponent<BlinkingCircle>().enabled = false;
 		}
 	}
 
