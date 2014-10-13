@@ -9,7 +9,7 @@ public class MainMenu : MonoBehaviour {
 	private Vector2 menuPosition;
 	
 	private int buttons = 5;
-	private string showing = "menu"; //"menu" "loadgame" "savegame" etc
+	private string showing = "menu"; //"menu" "loadgame" "savegame" "exitClicked" etc
 
 
 	// Use this for initialization
@@ -26,12 +26,14 @@ public class MainMenu : MonoBehaviour {
 
 	void OnGUI() {
 
-		if(showing.Equals("menu")) {
-			createMenu();
-		} else if(showing.Equals("loadgame")) {
-			createLoadGameMenu();
-		} else if(showing.Equals("savegame")) {
-			createSaveGameMenu();
+		if (showing.Equals ("menu")) {
+				createMenu ();
+		} else if (showing.Equals ("loadgame")) {
+				createLoadGameMenu ();
+		} else if (showing.Equals ("savegame")) {
+				createSaveGameMenu ();
+		} else if (showing.Equals ("exitClicked")) {
+				createExitConfirmWindow();
 		}
 
 
@@ -41,6 +43,7 @@ public class MainMenu : MonoBehaviour {
 
 		// Create menu
 		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y, buttonSize.x, buttonSize.y), "New Game")) {
+			Application.LoadLevel ("Map");
 		}
 		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * 1, buttonSize.x, buttonSize.y), "Load Game")) {
 			this.showing = "loadgame";
@@ -51,6 +54,7 @@ public class MainMenu : MonoBehaviour {
 		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * 3, buttonSize.x, buttonSize.y), "Options")) {
 		}
 		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * 4, buttonSize.x, buttonSize.y), "Quit Game")) {
+			this.showing = "exitClicked";
 		}
 	}
 
@@ -65,6 +69,20 @@ public class MainMenu : MonoBehaviour {
 
 	private void createSaveGameMenu() {
 		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y- buttonSize.y/3, buttonSize.x/3, buttonSize.y/3), "Back")) {
+			this.showing = "menu";
+		}
+	}
+
+	private void createExitConfirmWindow() {
+		Vector2 quitWindowSize = new Vector2(300,100);
+		Vector2 quitWindowPos = new Vector2((Screen.width-quitWindowSize.x)/2, (Screen.height-quitWindowSize.y)/2);
+		Vector2 quitWindowButton = new Vector2(60, 40);
+		GUI.Box (new Rect (quitWindowPos.x, quitWindowPos.y, quitWindowSize.x, quitWindowSize.y), "Do you really wish to exit?");
+		if (GUI.Button (new Rect (quitWindowPos.x+quitWindowButton.x, quitWindowPos.y + (quitWindowSize.y-quitWindowButton.y)/2, quitWindowButton.x, quitWindowButton.y), "Yes")) {
+			// exit game
+			Application.Quit();
+		}
+		if (GUI.Button (new Rect (quitWindowPos.x+quitWindowSize.x - quitWindowButton.x*2, quitWindowPos.y + (quitWindowSize.y-quitWindowButton.y)/2, quitWindowButton.x, quitWindowButton.y), "No")) {
 			this.showing = "menu";
 		}
 	}
