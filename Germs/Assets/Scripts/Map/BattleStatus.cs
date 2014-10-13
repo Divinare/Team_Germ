@@ -7,11 +7,9 @@ public class BattleStatus : MonoBehaviour {
 	public List<GameObject> selectedBacs = new List<GameObject>();
 
 	//Real list is transform or gameobject and will display image not text, this is for testing
-	public List<string> allBacsTest = new List<string>();
 	public List<string> selectedBacsTest = new List<string>();
-	public List<int[]> allBacsStats = new List<int[]>();
-
 	public Dictionary<string, int[]> allBacteriaStats = new Dictionary<string, int[]>();
+	public int[] unravelArray = new int[4];
 
 	public string storedNode;
 	
@@ -31,7 +29,7 @@ public class BattleStatus : MonoBehaviour {
 			Destroy(gameObject);
 		}
 
-		//test (Health, Dmg, speed, level)
+		//test int[] {Health, Dmg, speed, level}
 		allBacteriaStats.Add ("Gatbac", new int[] {200, 10, 5, 1});
 		allBacteriaStats.Add ("Strepto", new int[] {100, 10, 8, 1});
 		allBacteriaStats.Add ("smallRed", new int[] {100, 10, 6, 1});
@@ -58,6 +56,7 @@ public class BattleStatus : MonoBehaviour {
 	}
 
 	void levelFailed() {
+		//failure count
 		levelsFailed += 1;
 	}
 
@@ -101,10 +100,7 @@ public class BattleStatus : MonoBehaviour {
 
 	void removeSelectedBac(GameObject bac) {
 	}
-
-	void setAllBacs(List<GameObject> allBacteria) {
-		allBacs = allBacteria;
-	}
+	
 
 	//testing methods
 	
@@ -122,6 +118,27 @@ public class BattleStatus : MonoBehaviour {
 
 	public void setAllBacteriaStats(string key, int health, int dmg, int speed, int lvl) {
 		allBacteriaStats[key] = new int[] {health, dmg, speed, lvl};
+	}
+
+	//int[] {Health, Dmg, speed, level}
+	public int getBacteriaHealth(string key) {
+		unravelArray = allBacteriaStats[key];
+		return unravelArray[0];
+	}
+
+	public int getBacteriaDamage(string key) {
+		unravelArray = allBacteriaStats[key];
+		return unravelArray[1];
+	}
+
+	public int getBacteriaSpeed(string key) {
+		unravelArray = allBacteriaStats[key];
+		return unravelArray[2];
+	}
+
+	public int getBacteriaLevel(string key) {
+		unravelArray = allBacteriaStats[key];
+		return unravelArray[3];
 	}
 
 	public Dictionary<string, int[]> getAllBacteriaStats() {

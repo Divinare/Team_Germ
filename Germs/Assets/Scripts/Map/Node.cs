@@ -14,6 +14,7 @@ public class Node : MonoBehaviour {
 	//level info
 	public string levelName;
 	public string levelInfo;
+	public Texture2D levelBG;
 
 	//tooltip info
 	private bool mouseOver;
@@ -66,6 +67,11 @@ public class Node : MonoBehaviour {
 	public string getLevelInfo() {
 		return levelInfo;
 	}
+
+	public Texture2D getLevelBG() {
+		return levelBG;
+	}
+
 	void loadLevel() {
 		Application.LoadLevel (1);
 	}

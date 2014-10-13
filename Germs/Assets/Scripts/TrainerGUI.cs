@@ -43,6 +43,10 @@ public class TrainerGUI : MonoBehaviour {
 
 	public float gold;
 	public float xp;
+	private int bacHealth;
+	private int bacDmg;
+	private int bacSpeed;
+	private int bacLevel;
 	public int lvlUpHealth;
 	public int lvlUpDmg;
 	public int lvlUpSpeed;
@@ -57,6 +61,7 @@ public class TrainerGUI : MonoBehaviour {
 	public int selGridInt = 0;
 	private int prevGridInt;
 	public string[] selGridStr;
+	public string selectedBacteria;
 
 	// Use this for initialization
 	void Start () {
@@ -100,7 +105,8 @@ public class TrainerGUI : MonoBehaviour {
 		
 		//selection grid
 		selGridInt = GUI.SelectionGrid(new Rect(0,Screen.height/10,Screen.width/2, (Screen.height-2*(Screen.height/10))/4), selGridInt, selGridStr, 4);
-	
+		selectedBacteria = selGridStr[selGridInt];
+
 		if (selGridInt != prevGridInt) {
 			setLevelMenu();
 		}
@@ -108,25 +114,29 @@ public class TrainerGUI : MonoBehaviour {
 
 	void drawBacteriaLevelMenu() {
 
-		tempStats = allBacteriaStats[selGridStr[selGridInt]];
+		bacHealth = battleTracker.gameObject.GetComponent<BattleStatus>().getBacteriaHealth(selectedBacteria);
+		bacDmg = battleTracker.gameObject.GetComponent<BattleStatus>().getBacteriaDamage(selectedBacteria);
+		bacSpeed = battleTracker.gameObject.GetComponent<BattleStatus>().getBacteriaSpeed(selectedBacteria);
+		bacLevel = battleTracker.gameObject.GetComponent<BattleStatus>().getBacteriaLevel(selectedBacteria);
+
 		//right
 		GUI.Box (new Rect (Screen.width/2,Screen.height/10,Screen.width/2, (Screen.height - 2*Screen.height/10)), "", trainerBox);
-		GUI.Box (new Rect (Screen.width/2,Screen.height/10,Screen.width/6,Screen.width/6), allBacsImages[selGridStr[selGridInt]]);
-		GUI.Box (new Rect (Screen.width/2+Screen.width/6,Screen.height/10,2*(Screen.width/6),(Screen.width/6)/2), " "+selGridStr[selGridInt]+"\n Level "+tempStats[3], orangeText);
-		GUI.Box (new Rect (Screen.width/2+Screen.width/6,Screen.height/10+(Screen.width/6)/2,2*(Screen.width/6),(Screen.width/6)/2), allBacsStories[selGridStr[selGridInt]]);
+		GUI.Box (new Rect (Screen.width/2,Screen.height/10,Screen.width/6,Screen.width/6), allBacsImages[selectedBacteria]);
+		GUI.Box (new Rect (Screen.width/2+Screen.width/6,Screen.height/10,2*(Screen.width/6),(Screen.width/6)/2), " "+selectedBacteria+"\n Level "+bacLevel, orangeText);
+		GUI.Box (new Rect (Screen.width/2+Screen.width/6,Screen.height/10+(Screen.width/6)/2,2*(Screen.width/6),(Screen.width/6)/2), allBacsStories[selectedBacteria]);
 		//Statbox
-		GUI.Box (new Rect (Screen.width/2+50,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "Level "+tempStats[3]+" Stats: \nHealth : "+tempStats[0]+"\nDamage : "+tempStats[1]+"\nSpeed : "+tempStats[2], blueText);
+		GUI.Box (new Rect (Screen.width/2+50,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "Level "+bacLevel+" Stats: \nHealth : "+bacHealth+"\nDamage : "+bacDmg+"\nSpeed : "+bacSpeed, blueText);
 		
 		//NextLevelBox
-		GUI.Box (new Rect (Screen.width/2+50+Screen.width/6,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "Next Level : "+(tempStats[3]+1)+"\nHealth : "+(tempStats[0]+lvlUpHealth)+"\nDamage : "+(tempStats[1]+lvlUpDmg)+"\nSpeed : "+(tempStats[2]+lvlUpSpeed)+"\nXP required to level : "+lvlUpXp*tempStats[3], yellowText);
+		GUI.Box (new Rect (Screen.width/2+50+Screen.width/6,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "Next Level : "+(bacLevel+1)+"\nHealth : "+(bacHealth+lvlUpHealth)+"\nDamage : "+(bacDmg+lvlUpDmg)+"\nSpeed : "+(bacSpeed+lvlUpSpeed)+"\nXP required to level : "+lvlUpXp*bacLevel, yellowText);
 		
 		//LvlUpButton
-		if (xp >= lvlUpXp*tempStats[3]) {
+		if (xp >= lvlUpXp*bacLevel) {
 			if (GUI.Button(new Rect (Screen.width/2+Screen.width/8,Screen.height/10+Screen.width/6+Screen.height/8+Screen.height/8,Screen.width/4,Screen.height/8), "", lvlUpButton)) {
 				//Debug.Log ("lvlUpButtonPress");
-				xp -= lvlUpXp*tempStats[3];
+				xp -= lvlUpXp*bacLevel;
 				gameStatus.SendMessage("setXp", xp);
-				battleTracker.gameObject.GetComponent<BattleStatus>().setAllBacteriaStats(selGridStr[selGridInt], tempStats[0]+lvlUpHealth, tempStats[1]+lvlUpDmg, tempStats[2]+lvlUpSpeed, tempStats[3]+1);
+				battleTracker.gameObject.GetComponent<BattleStatus>().setAllBacteriaStats(selectedBacteria, bacHealth+lvlUpHealth, bacDmg+lvlUpDmg, bacSpeed+lvlUpSpeed, bacLevel+1);
 			}
 		} else {
 			if (GUI.Button(new Rect (Screen.width/2+Screen.width/8,Screen.height/10+Screen.width/6+Screen.height/8+Screen.height/8,Screen.width/4,Screen.height/8), "", deactiveLvlUpButton)) {
@@ -140,7 +150,7 @@ public class TrainerGUI : MonoBehaviour {
 	void drawBacteriaSkillMenu() {
 		GUI.Box (new Rect (Screen.width/2,Screen.height/10,Screen.width/2,(Screen.height - 2*Screen.height/10)), "", trainerBox);
 
-		GUI.Box (new Rect (Screen.width/2, Screen.height/10, Screen.width/2, buttonSize.y), "Here's some text about leveling up skills for bacteria: "+selGridStr[selGridInt]);
+		GUI.Box (new Rect (Screen.width/2, Screen.height/10, Screen.width/2, buttonSize.y), "Here's some text about leveling up skills for bacteria: "+selectedBacteria);
 
 		//skill slots
 		GUI.Box (new Rect (Screen.width/2, Screen.height/10+buttonSize.y, buttonSize.x, buttonSize.y), "Icon 1");
