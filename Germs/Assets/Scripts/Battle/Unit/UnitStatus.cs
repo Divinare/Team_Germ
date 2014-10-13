@@ -1,13 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class UnitStatus : MonoBehaviour {
-	
-	public int currentHealth = 100;
-	public int damage = 10;
-	public int speed = 10;
-	public int maxHealth = 100;
-	public int size = 1;
+	private Transform battleStatus;
+	public Dictionary <string, int[]> allBacteriaStats = new Dictionary<string, int[]>();
+	public int[] unitStats = new int[4];
+
+	public int currentHealth;
+	public int damage;
+	public int speed;
+	public int maxHealth;
+	public int heal;
+
 // This is the attack that we have selected from the attack toolbar
 	public string selectedAction = "melee";
 	public bool selected = false;
@@ -21,8 +26,16 @@ public class UnitStatus : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		/*
+		allBacteriaStats = battleStatus.gameObject.GetComponent<BattleStatus>().getAllBacteriaStats();
+		unitStats = allBacteriaStats[unitName];
 
-
+		//test (Health, Dmg, speed, level)
+		currentHealth = unitStats[0];
+		maxHealth = unitStats[0];
+		damage = unitStats[1];
+		speed = unitStats[2];
+		*/
 	}
 
 	// Sounds array contains the following sounds for each clipId: 0 = sound of being hit;

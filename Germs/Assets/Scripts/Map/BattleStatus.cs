@@ -40,11 +40,11 @@ public class BattleStatus : MonoBehaviour {
 		allBacteriaStats.Add ("Phage", new int[] {100, 10, 4, 1});
 		allBacteriaStats.Add ("blueBac", new int[] {100, 15, 10, 1});
 
-		selectedBacsTest.Add ("");
-		selectedBacsTest.Add ("");
-		selectedBacsTest.Add ("");
-		selectedBacsTest.Add ("");
-		selectedBacsTest.Add ("");
+		selectedBacsTest.Add ("Gatbac");
+		selectedBacsTest.Add ("smallRed");
+		selectedBacsTest.Add ("Phage");
+		selectedBacsTest.Add ("Phage");
+		selectedBacsTest.Add ("smallRed");
 	}
 
 	//the level that was entered was...
