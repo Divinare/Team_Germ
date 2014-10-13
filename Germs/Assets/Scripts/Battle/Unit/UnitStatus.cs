@@ -27,14 +27,14 @@ public class UnitStatus : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		/*
-		allBacteriaStats = battleStatus.gameObject.GetComponent<BattleStatus>().getAllBacteriaStats();
-		unitStats = allBacteriaStats[unitName];
-
-		//test (Health, Dmg, speed, level)
-		currentHealth = unitStats[0];
-		maxHealth = unitStats[0];
-		damage = unitStats[1];
-		speed = unitStats[2];
+		 * This gets stat values from battleStatus:
+		 * 
+		 * 
+		battleStatus = GameObject.Find ("BattleTracker").transform;
+		currentHealth = battleTracker.gameObject.GetComponent<BattleStatus>().getBacteriaHealth(selectedBacteria);
+		maxHealth = battleTracker.gameObject.GetComponent<BattleStatus>().getBacteriaHealth(selectedBacteria);
+		damage = battleTracker.gameObject.GetComponent<BattleStatus>().getBacteriaDamage(selectedBacteria);
+		speed = battleTracker.gameObject.GetComponent<BattleStatus>().getBacteriaSpeed(selectedBacteria);
 		*/
 	}
 
@@ -76,6 +76,7 @@ public class UnitStatus : MonoBehaviour {
 		PlaySound (0); // 0 = 'damage taken'-sound
 		currentHealth -= damage;
 		battlelog (gameObject.name + " took " + damage + " damage!");
+		//animTakeDamage.wrapMode = WrapMode.Once;
 	}
 	
 	public void Poisoned(int damage) {
