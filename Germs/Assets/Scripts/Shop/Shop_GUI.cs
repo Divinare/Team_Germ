@@ -46,8 +46,7 @@ public class Shop_GUI : MonoBehaviour {
 	string[] skills = new string[] {"kamikaze"};
 
 	bool itemOwned = false;
-
-	//sound
+	
 	public AudioSource clickSound;
 
 	//Size of GUI elements

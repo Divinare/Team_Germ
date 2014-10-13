@@ -14,9 +14,9 @@ public class MainMenu : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		buttonSize = new Vector2 (Screen.width/3, Screen.height/9);
+		buttonSize = new Vector2 (Screen.width/5, Screen.height/9);
 		menuWindowSize = new Vector2 (buttonSize.x, buttonSize.y * buttons); 
-		menuPosition = new Vector2 (Screen.width /2 - Screen.width/5, Screen.height / 2 - Screen.height/4);
+		menuPosition = new Vector2 ((Screen.width - buttonSize.x)/2, (Screen.height-buttonSize.y*buttons)/2);
 	}
 	
 	// Update is called once per frame
