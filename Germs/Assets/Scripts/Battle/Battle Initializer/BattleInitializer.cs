@@ -36,6 +36,7 @@ public class BattleInitializer : MonoBehaviour {
 			GameObject spawnedGerm = SpawnObjectAtSquare (germToSpawn, squares [0, y]); 
 			spawnedGerm.transform.GetChild(0).position = spawnedGerm.transform.position;
 			spawnedGerm.GetComponent<UnitStatus>().setSquare (squares[0,y]); // give unit a reference to the square it is currently standing on
+			spawnedGerm.GetComponent<UnitStatus>().transform.FindChild("selectionCircle").gameObject.active = true;
 			squares[0, y].GetComponent <SquareStatus>().setStatus ("friendly", spawnedGerm); // Set square status to indicate there is a friendly unit
 			y -= 2;
 		}
@@ -46,6 +47,7 @@ public class BattleInitializer : MonoBehaviour {
 			squares[14, y].GetComponent <SquareStatus>().setStatus ("enemy", spawnedGerm); // Set square status to indicate there is a hostile unit
 			y -= 2;
 			spawnedGerm.GetComponent<UnitStatus>().SetAsEnemy();
+			spawnedGerm.GetComponent<UnitStatus>().transform.FindChild("enemyCircle").gameObject.active = true;
 		}
 
 
