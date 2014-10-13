@@ -20,8 +20,9 @@ public class Shop_GUI : MonoBehaviour {
 	public Texture2D xpIcon;
 
 	public GUIStyle trainerHover;
-	public GUIStyle shopHover;
+	public GUIStyle mapHover;
 	public GUIStyle bigNumbers;
+
 
 	public Texture menu;
 	public Texture shopText;
@@ -174,6 +175,33 @@ public class Shop_GUI : MonoBehaviour {
 		}
 	}
 
+	private void createSelectedItemWindow (float x, float y) {
+		GUI.Label (new Rect (x, y, selectedItemWindowSize.x, selectedItemWindowSize.y), selectedItemWindow);
+		
+		if (itemOwned) {
+			createUpgradeAndSellButtons(x, y+selectedItemWindowSize.y * 0.5f, selectedItemWindowSize.x, selectedItemWindowSize.y*0.2f);
+		} else {
+			createBuyButton(x, y+selectedItemWindowSize.y * 0.55f, selectedItemWindowSize.x, selectedItemWindowSize.y*0.2f);
+		}
+	}
+	
+	private void createUpgradeAndSellButtons(float x, float y, float width, float height) {
+		if (GUI.Button (new Rect (x, y, width, height), "Upgrade")) {
+			Debug.Log ("upgraded item");
+			clickSound.Play ();	
+		}
+		if (GUI.Button (new Rect (x, y+height*1.2f, width, height), "Sell")) {
+			Debug.Log ("sold item");
+			clickSound.Play ();	
+		}
+	}
+	
+	private void createBuyButton(float x, float y, float width, float height) {
+		if (GUI.Button (new Rect (x, y, width, height), "Buy")) {
+			Debug.Log ("bought item");
+			clickSound.Play ();	
+		}
+	}
 
 	private void createItem(int x, int y, string description) {
 		GUI.TextArea (new Rect (x, y, itemSize.x, itemSize.y), description);
@@ -202,42 +230,13 @@ public class Shop_GUI : MonoBehaviour {
 	}
 
 	private void createMapAndTrainingButtons() {
-		if (GUI.Button (new Rect (0 + Screen.height/6,Screen.height - Screen.height/12,Screen.height/6,Screen.height/12), "", shopHover)) {
+		if (GUI.Button (new Rect (0 + Screen.height/6,Screen.height - Screen.height/12,Screen.height/6,Screen.height/12), "", trainerHover)) {
+			clickSound.Play ();	
+			Application.LoadLevel ("Trainer");
+		}
+		if (GUI.Button (new Rect (0,Screen.height - Screen.height/12,Screen.height/6,Screen.height/12), "", mapHover)) {
 			clickSound.Play ();	
 			Application.LoadLevel ("Map");
-			Debug.Log ("Map");
-		}
-		if (GUI.Button (new Rect (0,Screen.height - Screen.height/12,Screen.height/6,Screen.height/12), "", trainerHover)) {
-			clickSound.Play ();	
-			Debug.Log ("Training");
-		}
-	}
-
-	private void createSelectedItemWindow (float x, float y) {
-		GUI.Label (new Rect (x, y, selectedItemWindowSize.x, selectedItemWindowSize.y), selectedItemWindow);
-	
-		if (itemOwned) {
-			createUpgradeAndSellButtons(x, y+selectedItemWindowSize.y * 0.5f, selectedItemWindowSize.x, selectedItemWindowSize.y*0.2f);
-		} else {
-			createBuyButton(x, y+selectedItemWindowSize.y * 0.55f, selectedItemWindowSize.x, selectedItemWindowSize.y*0.2f);
-		}
-	}
-
-	private void createUpgradeAndSellButtons(float x, float y, float width, float height) {
-		if (GUI.Button (new Rect (x, y, width, height), "Upgrade")) {
-			Debug.Log ("upgraded item");
-			clickSound.Play ();	
-		}
-		if (GUI.Button (new Rect (x, y+height*1.2f, width, height), "Sell")) {
-			Debug.Log ("sold item");
-			clickSound.Play ();	
-		}
-	}
-
-	private void createBuyButton(float x, float y, float width, float height) {
-		if (GUI.Button (new Rect (x, y, width, height), "Buy")) {
-			Debug.Log ("bought item");
-			clickSound.Play ();	
 		}
 	}
 
