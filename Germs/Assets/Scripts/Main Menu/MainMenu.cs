@@ -7,13 +7,14 @@ public class MainMenu : MonoBehaviour {
 	private Vector2 buttonSize;
 	private Vector2 menuWindowSize;
 	private Vector2 menuPosition;
-	
+
 	private int buttons = 5;
 	private string showing = "menu"; //"menu" "loadgame" "savegame" "exitClicked" etc
-
+	public bool gameGoing = false; // for now its true
 
 	// Use this for initialization
 	void Start () {
+
 		buttonSize = new Vector2 (Screen.width/5, Screen.height/9);
 		menuWindowSize = new Vector2 (buttonSize.x, buttonSize.y * buttons); 
 		menuPosition = new Vector2 ((Screen.width - buttonSize.x)/2, (Screen.height-buttonSize.y*buttons)/2);
@@ -40,20 +41,31 @@ public class MainMenu : MonoBehaviour {
 	}
 
 	private void createMenu() {
+		// for testing
+		gameGoing = true;
 
+		int addOn = 0;
+		if (gameGoing) {
+			addOn = 1;
+		}
 		// Create menu
-		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y, buttonSize.x, buttonSize.y), "New Game")) {
+		if (gameGoing) {
+			if (GUI.Button (new Rect (menuPosition.x, menuPosition.y, buttonSize.x, buttonSize.y), "Resume Game")) {
+			Application.LoadLevel ("Map");
+			}
+		}
+		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * (0+addOn), buttonSize.x, buttonSize.y), "New Game")) {
 			Application.LoadLevel ("Map");
 		}
-		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * 1, buttonSize.x, buttonSize.y), "Load Game")) {
+		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * (1+addOn), buttonSize.x, buttonSize.y), "Load Game")) {
 			this.showing = "loadgame";
 		}
-		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * 2, buttonSize.x, buttonSize.y), "Save Game")) {
+		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * (2+addOn), buttonSize.x, buttonSize.y), "Save Game")) {
 			this.showing = "savegame";
 		}
-		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * 3, buttonSize.x, buttonSize.y), "Options")) {
+		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * (3+addOn), buttonSize.x, buttonSize.y), "Options")) {
 		}
-		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * 4, buttonSize.x, buttonSize.y), "Quit Game")) {
+		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * (4+addOn), buttonSize.x, buttonSize.y), "Quit Game")) {
 			this.showing = "exitClicked";
 		}
 	}
