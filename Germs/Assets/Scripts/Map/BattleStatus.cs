@@ -8,7 +8,7 @@ public class BattleStatus : MonoBehaviour {
 	public List<GameObject> allUnits = new List<GameObject>();
 	public List<string> selectedUnits = new List<string>();
 	public Dictionary<string, int[]> allBacteriaStats = new Dictionary<string, int[]>();
-	public int[] unravelArray = new int[4];
+	public int[] unravelArray = new int[7];
 
 	// Use this for initialization
 	void Start () {
@@ -19,14 +19,14 @@ public class BattleStatus : MonoBehaviour {
 			Destroy (gameObject);
 		}
 
-		//test int[] {Health, Dmg, speed, level}
-		allBacteriaStats.Add ("Gatbac", new int[] {200, 10, 5, 1});
-		allBacteriaStats.Add ("Strepto", new int[] {100, 10, 8, 1});
-		allBacteriaStats.Add ("smallRed", new int[] {100, 10, 6, 1});
-		allBacteriaStats.Add ("smallBlue", new int[] {100, 10, 6, 1});
-		allBacteriaStats.Add ("smallPurple", new int[] {100, 10, 6, 1});
-		allBacteriaStats.Add ("Phage", new int[] {100, 10, 4, 1});
-		allBacteriaStats.Add ("blueBac", new int[] {100, 15, 10, 1});
+		//test int[] {Health, Dmg, speed, level, melee, ranged, special}
+		allBacteriaStats.Add ("Gatbac", new int[] {200, 10, 5, 1, 1, 1, 2});
+		allBacteriaStats.Add ("Strepto", new int[] {100, 10, 8, 1, 1, 0, 3});
+		allBacteriaStats.Add ("smallRed", new int[] {100, 10, 6, 1, 1, 0, 4});
+		allBacteriaStats.Add ("smallBlue", new int[] {100, 10, 6, 1, 1, 0, 5});
+		allBacteriaStats.Add ("smallPurple", new int[] {100, 10, 6, 1, 0, 1, 6});
+		allBacteriaStats.Add ("Phage", new int[] {100, 10, 4, 1, 1, 0, 7});
+		allBacteriaStats.Add ("blueBac", new int[] {100, 15, 10, 1, 1, 1, 8});
 
 		selectedUnits.Add ("");
 		selectedUnits.Add ("");
@@ -72,6 +72,29 @@ public class BattleStatus : MonoBehaviour {
 	public int getBacteriaLevel(string key) {
 		unravelArray = allBacteriaStats[key];
 		return unravelArray[3];
+	}
+
+	public bool isThisBacteriaMelee(string key) {
+		unravelArray = allBacteriaStats[key];
+		if (unravelArray[4] == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public bool isThisBacteriaRanged(string key) {
+		unravelArray = allBacteriaStats[key];
+		if (unravelArray[5] == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public int bacteriaSpecialAttack(string key) {
+		unravelArray = allBacteriaStats[key];
+		return unravelArray[6];
 	}
 
 	public Dictionary<string, int[]> getAllBacteriaStats() {
