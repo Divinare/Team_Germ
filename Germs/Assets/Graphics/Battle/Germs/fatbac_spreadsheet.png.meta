@@ -1,12 +1,11 @@
 fileFormatVersion: 2
-guid: 6833d2e319ee064418066884f1ba70bd
+guid: 53f445394f698264296ca930761d3d6e
 TextureImporter:
   fileIDToRecycleName:
-    21300000: strep_spritesheet
-    21300002: strep_spritesheet_0
-    21300004: strep_spritesheet_1
-    21300006: strep_spritesheet_2
-    21300008: strep_spritesheet_3
+    21300000: fatbac_spreadsheet
+    21300002: fatbac_spreadsheet_0
+    21300004: fatbac_spreadsheet_1
+    21300006: fatbac_spreadsheet_2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -48,43 +47,33 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: strep_spritesheet_0
+    - name: fatbac_spreadsheet_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
-        width: 490
-        height: 574
+        y: 13
+        width: 689
+        height: 694
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: strep_spritesheet_1
+    - name: fatbac_spreadsheet_1
       rect:
         serializedVersion: 2
-        x: 515
-        y: 3
-        width: 491
-        height: 574
+        x: 704
+        y: 0
+        width: 692
+        height: 694
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: strep_spritesheet_2
+    - name: fatbac_spreadsheet_2
       rect:
         serializedVersion: 2
-        x: 1044
-        y: 0
-        width: 491
-        height: 577
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: strep_spritesheet_3
-      rect:
-        serializedVersion: 2
-        x: 1564
-        y: 0
-        width: 490
-        height: 577
+        x: 1428
+        y: 5
+        width: 689
+        height: 695
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
