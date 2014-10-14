@@ -38,8 +38,8 @@ public class TrainerGUI : MonoBehaviour {
 	//private Vector2 imgSize = new Vector2 (Screen.width/6, Screen.width/6);
 
 	//Knowledge Stuff
-	private Transform battleTracker;
-	private Transform gameStatus;
+	private BattleStatus battleStatus;
+	private GameStatus gameStatus;
 
 	public float gold;
 	public float xp;
@@ -65,13 +65,13 @@ public class TrainerGUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		gameStatus = GameObject.Find("GameStatus").transform;
-		battleTracker = GameObject.Find ("BattleTracker").transform;
+		gameStatus = GameObject.Find("GameStatus").GetComponent<GameStatus>();
+		battleStatus = GameObject.Find("BattleStatus").GetComponent<BattleStatus>();
 
-		gold = gameStatus.gameObject.GetComponent<GameStatus>().getGold();
-		xp = gameStatus.gameObject.GetComponent<GameStatus>().getXp();
+		gold = gameStatus.getGold();
+		xp = gameStatus.getXp();
 
-		allBacteriaStats = battleTracker.gameObject.GetComponent<BattleStatus>().getAllBacteriaStats();
+		allBacteriaStats = battleStatus.getAllBacteriaStats();
 		selGridStr = new string[allBacteriaStats.Keys.Count];
 
 		var temp = 0;
@@ -114,10 +114,10 @@ public class TrainerGUI : MonoBehaviour {
 
 	void drawBacteriaLevelMenu() {
 
-		bacHealth = battleTracker.gameObject.GetComponent<BattleStatus>().getBacteriaHealth(selectedBacteria);
-		bacDmg = battleTracker.gameObject.GetComponent<BattleStatus>().getBacteriaDamage(selectedBacteria);
-		bacSpeed = battleTracker.gameObject.GetComponent<BattleStatus>().getBacteriaSpeed(selectedBacteria);
-		bacLevel = battleTracker.gameObject.GetComponent<BattleStatus>().getBacteriaLevel(selectedBacteria);
+		bacHealth = battleStatus.getBacteriaHealth(selectedBacteria);
+		bacDmg = battleStatus.getBacteriaDamage(selectedBacteria);
+		bacSpeed = battleStatus.getBacteriaSpeed(selectedBacteria);
+		bacLevel = battleStatus.getBacteriaLevel(selectedBacteria);
 
 		//right
 		GUI.Box (new Rect (Screen.width/2,Screen.height/10,Screen.width/2, (Screen.height - 2*Screen.height/10)), "", trainerBox);
@@ -136,7 +136,7 @@ public class TrainerGUI : MonoBehaviour {
 				//Debug.Log ("lvlUpButtonPress");
 				xp -= lvlUpXp*bacLevel;
 				gameStatus.SendMessage("setXp", xp);
-				battleTracker.gameObject.GetComponent<BattleStatus>().setAllBacteriaStats(selectedBacteria, bacHealth+lvlUpHealth, bacDmg+lvlUpDmg, bacSpeed+lvlUpSpeed, bacLevel+1);
+				battleStatus.setAllBacteriaStats(selectedBacteria, bacHealth+lvlUpHealth, bacDmg+lvlUpDmg, bacSpeed+lvlUpSpeed, bacLevel+1);
 			}
 		} else {
 			if (GUI.Button(new Rect (Screen.width/2+Screen.width/8,Screen.height/10+Screen.width/6+Screen.height/8+Screen.height/8,Screen.width/4,Screen.height/8), "", deactiveLvlUpButton)) {

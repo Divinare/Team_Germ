@@ -3,30 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class BattleStatus : MonoBehaviour {
-	public List<GameObject> allBacs = new List<GameObject>();
-	public List<GameObject> selectedBacs = new List<GameObject>();
+	public static BattleStatus battleStatus;
 
-	//Real list is transform or gameobject and will display image not text, this is for testing
-	public List<string> selectedBacsTest = new List<string>();
+	public List<GameObject> allUnits = new List<GameObject>();
+	public List<string> selectedUnits = new List<string>();
 	public Dictionary<string, int[]> allBacteriaStats = new Dictionary<string, int[]>();
 	public int[] unravelArray = new int[4];
 
-	public string storedNode;
-	
-	//level status/count
-	public bool levelComplete;
-	public bool levelInterrupt;
-	public int levelsCompleted = 0;
-	public int levelsFailed = 0;
-
 	// Use this for initialization
 	void Start () {
-		//muy importanto!
-		DontDestroyOnLoad(this);
-		
-		//remove duplicates
-		if (FindObjectsOfType(GetType()).Length > 1) {
-			Destroy(gameObject);
+		if (battleStatus == null) {
+			DontDestroyOnLoad (gameObject);
+			battleStatus = this;
+		} else if (battleStatus != this) {
+			Destroy (gameObject);
 		}
 
 		//test int[] {Health, Dmg, speed, level}
@@ -38,82 +28,25 @@ public class BattleStatus : MonoBehaviour {
 		allBacteriaStats.Add ("Phage", new int[] {100, 10, 4, 1});
 		allBacteriaStats.Add ("blueBac", new int[] {100, 15, 10, 1});
 
-		selectedBacsTest.Add ("Gatbac");
-		selectedBacsTest.Add ("smallRed");
-		selectedBacsTest.Add ("Phage");
-		selectedBacsTest.Add ("Phage");
-		selectedBacsTest.Add ("smallRed");
+		selectedUnits.Add ("");
+		selectedUnits.Add ("");
+		selectedUnits.Add ("");
+		selectedUnits.Add ("");
+		selectedUnits.Add ("");
 	}
-
-	//the level that was entered was...
-	void levelCompleted() {
-		levelsCompleted += 1;
-		levelComplete = true;
-	}
-
-	void levelInterrupted() {
-		levelInterrupt = true;
-	}
-
-	void levelFailed() {
-		//failure count
-		levelsFailed += 1;
-	}
-
-	//called on Start in map
-	public bool onReturnToMap() {
-		if (levelComplete) {
-			return true;
-		} else if (levelInterrupt) {
-			return false;
-		} else {
-			return false;
-		}
-	}
-
-	//store entered node
-	void storeNode(Transform node) {
-		clearLevelBools();
-		storedNode = node.transform.name;
-	}
-
-	public void clearLevelBools() {
-		levelComplete = false;
-		levelInterrupt = false;
-	}
-	
-	//get entered node
-	public string getNode() {
-		return storedNode;
-	}
-
-	public void clearNode() {
-		storedNode = null;
-	}
-
-	void setBacSelected(GameObject bac) {
-	}
-
-	public List<GameObject> getSelectedBacs() {
-		return selectedBacs;
-	}
-
-	void removeSelectedBac(GameObject bac) {
-	}
-	
 
 	//testing methods
 	
-	public List<string> getSelectedBacsTest() {
-		return selectedBacsTest;
+	public List<string> getSelectedUnits() {
+		return selectedUnits;
 	}
 
-	public void setSelectedBacTest(string bac, int indx) {
-		selectedBacsTest[indx] = bac;
+	public void setSelectedUnit(string bac, int indx) {
+		selectedUnits[indx] = bac;
 	}
 
-	public void removeSelectedBacTest(string bac) {
-		selectedBacsTest.Remove(bac);
+	public void removeSelectedUnit(string bac) {
+		selectedUnits.Remove(bac);
 	}
 
 	public void setAllBacteriaStats(string key, int health, int dmg, int speed, int lvl) {

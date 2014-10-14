@@ -5,19 +5,16 @@ using System.Collections.Generic;
 
 public class levelComplete : MonoBehaviour {
 	public List<GameObject> allEnemies = new List<GameObject>();
-	public List<string> selectedBacsTest = new List<string>();
+	public List<string> selectedUnits = new List<string>();
 	public bool enemiesAlive;
 	public bool unitsAlive;
-
-	private Transform battleTracker;
 
 	public Texture2D victoryIcon;
 	public Texture2D defeatIcon;
 
 	// Use this for initialization
 	void Start () {
-		battleTracker = GameObject.Find ("BattleTracker").transform;
-		selectedBacsTest = battleTracker.gameObject.GetComponent<BattleStatus>().getSelectedBacsTest();
+		selectedUnits = BattleStatus.battleStatus.getSelectedUnits();
 		enemiesAlive = true;
 		unitsAlive = true;
 	}
@@ -35,7 +32,7 @@ public class levelComplete : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		GUI.Label( new Rect(0, 0, 100, 100), "Your bacteria: "+selectedBacsTest[0]+selectedBacsTest[1]+selectedBacsTest[2]+selectedBacsTest[3]+selectedBacsTest[4]);
+		//GUI.Label( new Rect(0, 0, 100, 100), "Your bacteria: "+selectedUnits[0]+selectedUnits[1]+selectedBacsTest[2]+selectedBacsTest[3]+selectedBacsTest[4]);
 		if (GUI.Button (new Rect (0,Screen.height - 50,100,50), "Return to Map")) {
 			levelInterrupted();
 			Application.LoadLevel ("Map");
@@ -60,14 +57,14 @@ public class levelComplete : MonoBehaviour {
 		}
 	}
 	void levelCompleted() {
-		battleTracker.SendMessage("levelCompleted");
+		GameStatus.gameStatus.levelCompleted();
 	}
 
 	void levelInterrupted() {
-		battleTracker.SendMessage("levelInterrupted");
+		GameStatus.gameStatus.levelInterrupted();
 	}
 
 	void levelFailed() {
-		battleTracker.SendMessage("levelFailed");
+		GameStatus.gameStatus.levelFailed();
 	}
 }

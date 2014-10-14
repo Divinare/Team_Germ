@@ -10,9 +10,7 @@ public class Map : MonoBehaviour {
 
 	//checking tools
 	private List<Transform> allNodes = new List<Transform>();
-	private List<bool> gameBools = new List<bool>();
-	private Transform gameStatus;
-	private Transform battleTracker;
+	private List<bool> mapStateBools = new List<bool>();
 	private string storedNode;
 
 	//GUI tools
@@ -33,18 +31,19 @@ public class Map : MonoBehaviour {
 	//sound
 	public AudioSource clickSound;
 
+	public GameStatus gameStatus;
+
 	// Use this for initialization
 	void Start () {
+		//sanitycheck
+		gameStatus = GameObject.Find("GameStatus").GetComponent<GameStatus>();
+
 		//store all nodes
 		foreach (Transform child in transform) {
 			allNodes.Add (child);
 		}
 
-		//recall statustrackers
-		gameStatus = GameObject.Find("GameStatus").transform;
-		battleTracker = GameObject.Find ("BattleTracker").transform;
-
-		//retrieval
+		//retrieve game status
 		retrieveGameStatus();
 
 		//first node
@@ -52,13 +51,11 @@ public class Map : MonoBehaviour {
 		clickSound = GameObject.FindGameObjectWithTag ("AudioController").GetComponent<AudioSource> (); 
 
 		getStoredNode();
-		//Debug.Log(storedNode);
 		if (storedNode != null) {
-			//Debug.Log ("storedNode != empty");
-			if (battleTracker.gameObject.GetComponent<BattleStatus>().onReturnToMap()) {
+			if (gameStatus.onReturnToMap()) {
 				setNodeCompleted(transform.FindChild(storedNode));
 				setGold(transform.FindChild(storedNode));
-				battleTracker.gameObject.GetComponent<BattleStatus>().clearNode();
+				gameStatus.clearNode();
 				storeGameStatus();
 			}
 		}
@@ -93,39 +90,39 @@ public class Map : MonoBehaviour {
 		}
 		
 	}
-	
-	void setNodeActive(Transform node) {
+
+	public void setNodeActive(Transform node) {
 		node.SendMessage("setNodeActive");
 	}
 	
-	void setNodeCompleted(Transform node) {
+	public void setNodeCompleted(Transform node) {
 		node.SendMessage("setNodeCompleted");
 	}
 
-	void nodeLoadLevel(Transform node) {
+	public void nodeLoadLevel(Transform node) {
 		node.SendMessage("loadLevel");
 	}
 
-	void storeGameStatus() {
-		gameStatus.SendMessage("storeGameStatus", allNodes);
+	public void storeGameStatus() {
+		gameStatus.storeGameStatus(allNodes);
 	}
 
-	void setGold(Transform node) {
-		gameStatus.SendMessage("setGold", node);
+	public void setGold(Transform node) {
+		gameStatus.setGold(node);
 	}
 
-	void retrieveGameStatus() {
-		gameBools = gameStatus.gameObject.GetComponent<GameStatus>().retrieveGameBools();
-		for (int i = 0; i < gameBools.Count; i++) {
-			if (gameBools[i]) {
+	public void retrieveGameStatus() {
+		mapStateBools = gameStatus.retrieveMapStateBools();
+		for (int i = 0; i < mapStateBools.Count; i++) {
+			if (mapStateBools[i]) {
 				setNodeActive(allNodes[i]);
 				setNodeCompleted(allNodes[i]);
 			}
 		}
 	}
 
-	void getStoredNode() {
-		storedNode = battleTracker.gameObject.GetComponent<BattleStatus>().getNode();
+	public void getStoredNode() {
+		storedNode = gameStatus.getNode();
 	}
 
 	void OnGUI() {
@@ -154,7 +151,7 @@ public class Map : MonoBehaviour {
 				GUI.Box (new Rect (Screen.width/2 - Screen.width/12,Screen.height/3 + Screen.height/16,Screen.width/12,Screen.height/10), skillIcon);
 			}
 			if(GUI.Button(new Rect(Screen.width/2 - Screen.width/4, Screen.height/2, Screen.width/8, Screen.height/12), "", startHover)) {
-				battleTracker.SendMessage("storeNode", storedHit.collider.transform);
+				gameStatus.storeNode(storedHit.collider.transform);
 				clickSound.Play();
 				nodeLoadLevel (storedHit.collider.transform);
 			}

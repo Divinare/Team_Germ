@@ -20,7 +20,8 @@ public class BattleInitializer : MonoBehaviour {
 		GameObject matrix = GameObject.FindGameObjectWithTag ("Matrix");
 		GameObject[,] squares = matrix.GetComponent<Matrix> ().getSquares ();
 		GameObject battleStatus = GameObject.FindGameObjectWithTag ("Battle Tracker");
-		friendlyGermsToSpawn = battleStatus.GetComponent<BattleStatus>().getSelectedBacsTest ().ToArray ();
+		//kommentoin tän ny pois ku error
+		//friendlyGermsToSpawn = battleStatus.GetComponent<BattleStatus>().getSelectedBacsTest ().ToArray ();
 		if (friendlyGermsToSpawn.Length == 0) {
 			friendlyGermsToSpawn = new string[5];
 			friendlyGermsToSpawn[0] = "Gatbac";
