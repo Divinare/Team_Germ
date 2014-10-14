@@ -10,7 +10,7 @@ public class ItemMenu : MonoBehaviour {
 	public Texture2D rangedIcon;
 	
 	void Start () {
-		clickSound = GameObject.FindGameObjectWithTag ("AudioDummy").GetComponent<AudioSource> (); 
+		clickSound = GameObject.FindGameObjectWithTag ("AudioController").GetComponent<AudioSource> (); 
 	}
 	
 	void OnGUI() {

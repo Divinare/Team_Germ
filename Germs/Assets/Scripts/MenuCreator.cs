@@ -19,7 +19,7 @@ public class MenuCreator : MonoBehaviour {
 
 		menuButtonSize = new Vector2 (80, 60);
 		menuPosition = new Vector2(Screen.width-menuButtonSize.x, Screen.height-menuButtonSize.y);
-		clickSound = GameObject.FindGameObjectWithTag ("AudioDummy").GetComponent<AudioSource> ();
+		clickSound = GameObject.FindGameObjectWithTag ("AudioController").GetComponent<AudioSource> ();
 	}
 
 	public void createMenu() {

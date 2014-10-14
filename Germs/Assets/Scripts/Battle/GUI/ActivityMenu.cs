@@ -10,7 +10,7 @@ public class ActivityMenu : MonoBehaviour {
 	private Vector2 buttonSize;
 	// Use this for initialization
 	void Start () {
-		clickSound = GameObject.FindGameObjectWithTag ("AudioDummy").GetComponent<AudioSource> (); 
+		clickSound = GameObject.FindGameObjectWithTag ("AudioController").GetComponent<AudioSource> (); 
 		buttonSize = new Vector2 (80, 60);
 	}
 	

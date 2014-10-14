@@ -49,7 +49,7 @@ public class Map : MonoBehaviour {
 
 		//first node
 		setNodeActive(transform.FindChild("Node1"));
-		clickSound = GameObject.FindGameObjectWithTag ("AudioDummy").GetComponent<AudioSource> (); 
+		clickSound = GameObject.FindGameObjectWithTag ("AudioController").GetComponent<AudioSource> (); 
 
 		getStoredNode();
 		//Debug.Log(storedNode);

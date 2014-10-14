@@ -28,7 +28,7 @@ public class Map_GUI : MonoBehaviour {
 	void Start () {
 		gameStatus = GameObject.Find("GameStatus").transform;
 		battleTracker = GameObject.Find ("BattleTracker").transform;
-		clickSound = GameObject.FindGameObjectWithTag ("AudioDummy").GetComponent<AudioSource> (); 
+		clickSound = GameObject.FindGameObjectWithTag ("AudioController").GetComponent<AudioSource> (); 
 
 		gold = gameStatus.gameObject.GetComponent<GameStatus>().getGold();
 		xp = gameStatus.gameObject.GetComponent<GameStatus>().getXp();
