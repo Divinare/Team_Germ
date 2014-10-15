@@ -1,0 +1,180 @@
+fileFormatVersion: 2
+guid: c6f223d063d185947a651ba09e3b3057
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: strep_spritesheet
+    21300002: strep_spritesheet_1
+    21300004: strep_spritesheet_2
+    21300006: strep_spritesheet_3
+    21300008: strep_spritesheet_4
+    21300010: strep_spritesheet_5
+    21300012: strep_spritesheet_7
+    21300014: strep_spritesheet_8
+    21300016: strep_spritesheet_9
+    21300018: strep_spritesheet_10
+    21300020: strep_spritesheet_11
+    21300022: strep_spritesheet_12
+    21300024: strep_spritesheet_13
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: strep_spritesheet_1
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 1062
+        width: 609
+        height: 501
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: strep_spritesheet_2
+      rect:
+        serializedVersion: 2
+        x: 753
+        y: 1060
+        width: 609
+        height: 501
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: strep_spritesheet_3
+      rect:
+        serializedVersion: 2
+        x: 1376
+        y: 1064
+        width: 609
+        height: 501
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: strep_spritesheet_4
+      rect:
+        serializedVersion: 2
+        x: 2023
+        y: 1064
+        width: 609
+        height: 501
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: strep_spritesheet_5
+      rect:
+        serializedVersion: 2
+        x: 2690
+        y: 1064
+        width: 609
+        height: 501
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: strep_spritesheet_7
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 545
+        width: 473
+        height: 502
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: strep_spritesheet_8
+      rect:
+        serializedVersion: 2
+        x: 796
+        y: 543
+        width: 541
+        height: 502
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: strep_spritesheet_9
+      rect:
+        serializedVersion: 2
+        x: 1391
+        y: 547
+        width: 584
+        height: 501
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: strep_spritesheet_10
+      rect:
+        serializedVersion: 2
+        x: 2026
+        y: 547
+        width: 607
+        height: 501
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: strep_spritesheet_11
+      rect:
+        serializedVersion: 2
+        x: 2711
+        y: 547
+        width: 560
+        height: 501
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: strep_spritesheet_12
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 0
+        width: 584
+        height: 501
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: strep_spritesheet_13
+      rect:
+        serializedVersion: 2
+        x: 842
+        y: 13
+        width: 584
+        height: 502
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
