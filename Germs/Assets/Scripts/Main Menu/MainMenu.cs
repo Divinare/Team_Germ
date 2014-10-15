@@ -51,10 +51,12 @@ public class MainMenu : MonoBehaviour {
 		// Create menu
 		if (gameGoing) {
 			if (GUI.Button (new Rect (menuPosition.x, menuPosition.y, buttonSize.x, buttonSize.y), "Resume Game")) {
-			Application.LoadLevel ("Map");
+				MenuBar.menuBar.showing = "map";
+				Application.LoadLevel ("Map");
 			}
 		}
 		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * (0+addOn), buttonSize.x, buttonSize.y), "New Game")) {
+			MenuBar.menuBar.showing = "map";
 			Application.LoadLevel ("Map");
 		}
 		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * (1+addOn), buttonSize.x, buttonSize.y), "Load Game")) {

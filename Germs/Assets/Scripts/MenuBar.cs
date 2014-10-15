@@ -11,7 +11,8 @@ public class MenuBar : MonoBehaviour {
 
 	public AudioSource clickSound;
 	public BattleStatus battleStatus;
-	
+	public string showing = "map"; // battle, map, shop or trainer
+
 	public Texture2D goldIcon;
 	public Texture2D xpIcon;
 	public Texture2D meleeIcon;
@@ -26,7 +27,6 @@ public class MenuBar : MonoBehaviour {
 	// Common stuff
 	private Vector2 menuBarSize;
 	private Vector2 menuBarPosition;
-	private string showing = "battle"; // battle, map, shop or trainer
 	private float menuBarDescriptionHeight;
 	private Vector2 xpGoldButtonSize;
 	private Vector2 shopMapTrainerButtonSize;
@@ -102,8 +102,6 @@ public class MenuBar : MonoBehaviour {
 	}
 
 	void OnGUI() {
-		GUI.Box(new Rect(menuBarPosition.x, menuBarPosition.y, menuBarSize.x, menuBarSize.y), "");
-
 		if (showing.Equals ("battle")) {
 			createBattleMenu ();
 		} else if (showing.Equals ("map")) {
@@ -127,8 +125,7 @@ public class MenuBar : MonoBehaviour {
 	private void createBattlelog() {
 		// Text area background
 		GUI.contentColor = Color.yellow;
-		GUI.Box(new Rect(battlelogPosition.x, battlelogPosition.y, battlelogSize.x, battlelogSize.y), new GUIContent());
-		
+
 		// Battlelog
 		GUILayout.BeginArea (new Rect (battlelogPosition.x, battlelogPosition.y, battlelogSize.x, battlelogSize.y));
 		battlelogScrollPosition = GUILayout.BeginScrollView(battlelogScrollPosition, GUILayout.Width(battlelogSize.x), GUILayout.Height(battlelogSize.y));
