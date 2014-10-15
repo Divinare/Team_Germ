@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 
 public class Shop_GUI : MonoBehaviour {
 
@@ -13,7 +14,7 @@ public class Shop_GUI : MonoBehaviour {
 	public float xp = 0;
 
 	private int clickedIndex = 1;
-	private int amountOfIndexes = 4;
+	private int amountOfIndexes = 3;
 	private int amountOfItemColumns = 4;
 
 	public Texture2D goldIcon;
@@ -24,7 +25,7 @@ public class Shop_GUI : MonoBehaviour {
 	public GUIStyle bigNumbers;
 
 
-	public Texture menu;
+	public Texture shopBox;
 	public Texture shopText;
 	public Texture stashText;
 	public Texture selectedItemWindow;
@@ -38,10 +39,9 @@ public class Shop_GUI : MonoBehaviour {
 
 	// for testing, items hardcoded
 	string[] stashItems =  new string[] {"axe", "potion1", "potion2", "boots", "potion3"};
-	string[] armours = new string[] {"chainmail", "jacket", "leather coat"};
+	string[] armors = new string[] {"chainmail", "jacket", "leather coat"};
 	string[] potions = new string[] {"health potion", "rage potion"};
 	string[] weapons = new string[] {"dagger"};
-	string[] skills = new string[] {"kamikaze"};
 
 	bool itemOwned = false;
 	
@@ -58,7 +58,6 @@ public class Shop_GUI : MonoBehaviour {
 		//xp = gameStatus.gameObject.GetComponent<GameStatus>().getXp();
 
 		clickSound = GameObject.FindGameObjectWithTag ("AudioDummy").GetComponent<AudioSource> ();
-
 		windowSize = new Vector2 (Screen.width * 0.4f, Screen.height * 0.65f);
 		itemSize = new Vector2 (Screen.width*0.1f, Screen.width*0.1f);
 		selectedItemWindowSize = new Vector2(Screen.width*0.13f, Screen.height*0.4f);
@@ -73,38 +72,42 @@ public class Shop_GUI : MonoBehaviour {
 	void OnGUI() {
 
 		// Creating stash
-		createMenu ("shop", Screen.width*0.025f, Screen.height * 0.05f, shopScrollPosition);
+		createMenu ("shop", Screen.width*0.025f, Screen.height * 0.15f, shopScrollPosition);
 
 		// Creating shop
-		createMenu ("stash", Screen.width * 0.575f, Screen.height * 0.05f, stashScrollPosition);
+		createMenu ("stash", Screen.width * 0.575f, Screen.height * 0.15f, stashScrollPosition);
 
-		createSelectedItemWindow ((Screen.width *  0.4362f), (Screen.height * 0.2f));
+		createSelectedItemWindow ((Screen.width *  0.4362f), (Screen.height * 0.3f));
 	}
 
 	private void createMenu(string type, float x, float y, Vector2 scrollPosition) {
 
 		Vector2 windowPosition = new Vector2 (x, y);
-		Vector2 topicSize = new Vector2 (windowSize.x, Screen.height * 0.1f);
+
 		Vector2 tabSize = new Vector2 (windowSize.x, Screen.height * 0.05f);
+
+		// Draw topics
+		if (type.Equals ("shop")) {
+			drawTexture(x, Screen.height * 0.05f, windowSize.x, Screen.height * 0.10f, stashText);
+		} else if (type.Equals ("stash")) {
+			drawTexture(x, Screen.height * 0.05f, windowSize.x, Screen.height * 0.10f, stashText);
+		}
+
 		GUI.BeginGroup (new Rect (windowPosition.x, windowPosition.y, windowSize.x, windowSize.y));
-		drawTexture ((int)windowSize.x, (int)windowSize.y, menu);
+		drawTexture (0, 0, (int)windowSize.x, (int)windowSize.y, shopBox);
 
 		if(type.Equals("shop")) {
-			// Creating topic picture
-			GUI.Label (new Rect (0, 0, topicSize.x, topicSize.y), shopText);
-			// Creating tab bar
-			createTabButton(0,topicSize.y,tabSize.x/amountOfIndexes,tabSize.y, "Armor", 1);
-			createTabButton(0,topicSize.y,tabSize.x/amountOfIndexes,tabSize.y, "Weapons", 2);
-			createTabButton(0,topicSize.y,tabSize.x/amountOfIndexes,tabSize.y, "Skills", 3);
-			createTabButton(0,topicSize.y,tabSize.x/amountOfIndexes,tabSize.y, "Potions", 4);
 
-			createScrollView(topicSize, tabSize, windowSize, "shop");
+			// Creating tab bar
+			createTabButton(0,0,tabSize.x/amountOfIndexes,tabSize.y, "Potion", 1);
+			createTabButton(0,0,tabSize.x/amountOfIndexes,tabSize.y, "Weapons", 2);
+			createTabButton(0,0,tabSize.x/amountOfIndexes,tabSize.y, "Armor", 3);
+
+			createScrollView(tabSize, windowSize, "shop");
 
 		} else if(type.Equals("stash")) {
-			// Creating topic picture
-			drawTexture((int)topicSize.x, (int)topicSize.y, stashText);
 
-			createScrollView(topicSize, tabSize, windowSize, "stash");
+			createScrollView(tabSize, windowSize, "stash");
 
 		}
 		
@@ -118,13 +121,13 @@ public class Shop_GUI : MonoBehaviour {
 		}
 	}
 
-	private void createScrollView(Vector2 topicSize, Vector2 tabSize, Vector2 windowSize, string type) {
+	private void createScrollView(Vector2 tabSize, Vector2 windowSize, string type) {
 
 		if (type.Equals ("shop")) {
-			shopScrollPosition = GUI.BeginScrollView (new Rect (0, topicSize.y + tabSize.y, windowSize.x, windowSize.y - topicSize.y - tabSize.y), shopScrollPosition, new Rect (0, 0, 0, 500));
+			shopScrollPosition = GUI.BeginScrollView (new Rect (0, tabSize.y, windowSize.x, windowSize.y - tabSize.y), shopScrollPosition, new Rect (0, 0, 0, 500));
 			createShopContent();
 		} else if (type.Equals ("stash")) {
-			stashScrollPosition = GUI.BeginScrollView (new Rect (0, topicSize.y, windowSize.x, windowSize.y - topicSize.y), stashScrollPosition, new Rect (0, 0, 0, 500));
+			stashScrollPosition = GUI.BeginScrollView (new Rect (0, 0, windowSize.x, windowSize.y), stashScrollPosition, new Rect (0, 0, 0, 500));
 			createStashContent();
 		}
 		GUI.EndScrollView ();
@@ -133,13 +136,11 @@ public class Shop_GUI : MonoBehaviour {
 
 	private void createShopContent() {
 		if (clickedIndex == 1) {
-			createContent(armours);
+			createContent(potions);
 		} else if (clickedIndex == 2) {
 			createContent(weapons);
 		} else if (clickedIndex == 3) {
-			createContent(skills);
-		} else if (clickedIndex == 4) {
-			createContent(potions);
+			createContent(armors);
 		}
 	}
 
@@ -194,7 +195,7 @@ public class Shop_GUI : MonoBehaviour {
 	}
 
 
-	private void drawTexture(float x, float y, Texture texture) {
-		GUI.DrawTexture (new Rect (0, 0, x, y), texture, ScaleMode.ScaleToFit, true, x/y);
+	private void drawTexture(float x, float y, float width, float height, Texture texture) {
+		GUI.DrawTexture (new Rect (x, y, width, height), texture, ScaleMode.ScaleToFit, true, width/height);
 	}
 }

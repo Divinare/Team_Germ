@@ -73,7 +73,7 @@ public class MenuBar : MonoBehaviour {
 		xpGoldButtonSize = new Vector2 (menuBarSize.y, menuBarSize.y);
 		menuButtonSize = new Vector2(menuBarSize.y-menuBarDescriptionHeight, menuBarSize.y-menuBarDescriptionHeight);
 		menuPosition = new Vector2 (menuBarSize.x - menuButtonSize.x, menuBarPosition.y + menuBarDescriptionHeight);
-		shopMapTrainerButtonSize = new Vector2 (menuBarSize.y, menuBarSize.y);
+		shopMapTrainerButtonSize = new Vector2 (menuBarSize.y*2, menuBarSize.y);
 
 		// Battle
 		battlelogScrollPosition = new Vector2(0,0);
