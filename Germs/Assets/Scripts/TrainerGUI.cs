@@ -96,7 +96,6 @@ public class TrainerGUI : MonoBehaviour {
 		if (skillMenu == true) {
 			drawBacteriaSkillMenu();
 		}
-		drawBottom();
 	}
 
 	void drawSelectionMenu() {
@@ -180,25 +179,6 @@ public class TrainerGUI : MonoBehaviour {
 			skillMenu = true;
 			levelMenu = false;
 		}
-	}
-	void drawBottom() {
-		if (GUI.Button (new Rect (0 + Screen.height/6,Screen.height - Screen.height/12,Screen.height/6,Screen.height/12), "", shopHover)) {
-			//clickSound.Play ();	
-			Application.LoadLevel ("Shop");
-			Debug.Log ("Shop");
-		}
-		if (GUI.Button (new Rect (0,Screen.height - Screen.height/12,Screen.height/6,Screen.height/12), "", mapHover)) {
-			//clickSound.Play ();	
-			Application.LoadLevel ("Map");
-			Debug.Log ("Map");
-		}
-		
-		GUI.Box (new Rect (Screen.width - Screen.width/6,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), xpIcon);
-		GUI.Label(new Rect(Screen.width - Screen.width/6,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), xp.ToString(), bigNumbers);
-		
-		GUI.Box (new Rect (Screen.width - Screen.width/12,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), goldIcon);
-		GUI.Label(new Rect(Screen.width - Screen.width/12,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), gold.ToString(), bigNumbers);
-
 	}
 
 	void setBacsAndImages() {

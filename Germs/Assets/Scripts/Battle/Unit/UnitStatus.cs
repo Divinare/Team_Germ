@@ -119,6 +119,6 @@ public class UnitStatus : MonoBehaviour {
 	}
 
 	private void battlelog(string txt) {
-		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Battlelog> ().addToBattleLog(txt);
+		MenuBar.menuBar.addToBattleLog (txt);
 	}
 }

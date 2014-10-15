@@ -28,9 +28,7 @@ public class Shop_GUI : MonoBehaviour {
 	public Texture shopText;
 	public Texture stashText;
 	public Texture selectedItemWindow;
-
-	public List<string> selectedItems = new List<string>();
-
+	
 	private Transform gameStatus;
 	private Transform battleTracker;
 
@@ -58,11 +56,6 @@ public class Shop_GUI : MonoBehaviour {
 	void Start () {
 		//gold = gameStatus.gameObject.GetComponent<GameStatus>().getGold();
 		//xp = gameStatus.gameObject.GetComponent<GameStatus>().getXp();
-		this.selectedItems.Add ("Miekka");
-		this.selectedItems.Add ("Potion1");
-		this.selectedItems.Add ("Potion1");
-		this.selectedItems.Add ("Potion1");
-		this.selectedItems.Add ("Potion1");
 
 		clickSound = GameObject.FindGameObjectWithTag ("AudioDummy").GetComponent<AudioSource> ();
 
@@ -84,12 +77,6 @@ public class Shop_GUI : MonoBehaviour {
 
 		// Creating shop
 		createMenu ("stash", Screen.width * 0.575f, Screen.height * 0.05f, stashScrollPosition);
-
-		drawSelectedItems ();
-
-		createExpAndGoldIcons ();
-
-		createMapAndTrainingButtons ();
 
 		createSelectedItemWindow ((Screen.width *  0.4362f), (Screen.height * 0.2f));
 	}
@@ -206,38 +193,6 @@ public class Shop_GUI : MonoBehaviour {
 		GUI.TextArea (new Rect (x, y, itemSize.x, itemSize.y), description);
 	}
 
-	private void drawSelectedItems() {
-		if (GUI.Button (new Rect (Screen.width/2 - Screen.width/4,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedItems[0])) {
-			
-		} else if (GUI.Button (new Rect (Screen.width/2 - Screen.width/6,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedItems[1])) {
-			
-		} else if (GUI.Button (new Rect (Screen.width/2 - Screen.width/12,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedItems[2])) {
-			
-		} else if (GUI.Button (new Rect (Screen.width/2,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedItems[3])) {
-			
-		} else if (GUI.Button (new Rect (Screen.width/2 + Screen.width/12,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedItems[4])) {
-			
-		}
-	}
-
-	private void createExpAndGoldIcons() {
-		GUI.Box (new Rect (Screen.width - Screen.width / 6, Screen.height - Screen.height / 10, Screen.width / 12, Screen.height / 10), xpIcon);
-		GUI.Label (new Rect (Screen.width - Screen.width / 6, Screen.height - Screen.height / 10, Screen.width / 12, Screen.height / 10), xp.ToString (), bigNumbers);
-		
-		GUI.Box (new Rect (Screen.width - Screen.width / 12, Screen.height - Screen.height / 10, Screen.width / 12, Screen.height / 10), goldIcon);
-		GUI.Label (new Rect (Screen.width - Screen.width / 12, Screen.height - Screen.height / 10, Screen.width / 12, Screen.height / 10), gold.ToString (), bigNumbers);
-	}
-
-	private void createMapAndTrainingButtons() {
-		if (GUI.Button (new Rect (0 + Screen.height/6,Screen.height - Screen.height/12,Screen.height/6,Screen.height/12), "", trainerHover)) {
-			clickSound.Play ();	
-			Application.LoadLevel ("Trainer");
-		}
-		if (GUI.Button (new Rect (0,Screen.height - Screen.height/12,Screen.height/6,Screen.height/12), "", mapHover)) {
-			clickSound.Play ();	
-			Application.LoadLevel ("Map");
-		}
-	}
 
 	private void drawTexture(float x, float y, Texture texture) {
 		GUI.DrawTexture (new Rect (0, 0, x, y), texture, ScaleMode.ScaleToFit, true, x/y);
