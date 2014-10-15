@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class UnitStatus : MonoBehaviour {
-	private Transform battleStatus;
+	private BattleStatus battleStatus;
 	public Dictionary <string, int[]> allBacteriaStats = new Dictionary<string, int[]>();
 	public int[] unitStats = new int[4];
 
@@ -24,18 +24,19 @@ public class UnitStatus : MonoBehaviour {
 	public int y;
 	private GameObject currentSquare; // the square currently occupied by the unit
 
+	//for statusEffects
+	public int unitRounds;
+	public bool stunned;
+	public bool poisoned;
+
 	// Use this for initialization
 	void Start () {
-		/*
-		 * This gets stat values from battleStatus:
-		 * 
-		 * 
-		battleStatus = GameObject.Find ("BattleTracker").transform;
-		currentHealth = battleTracker.gameObject.GetComponent<BattleStatus>().getBacteriaHealth(selectedBacteria);
-		maxHealth = battleTracker.gameObject.GetComponent<BattleStatus>().getBacteriaHealth(selectedBacteria);
-		damage = battleTracker.gameObject.GetComponent<BattleStatus>().getBacteriaDamage(selectedBacteria);
-		speed = battleTracker.gameObject.GetComponent<BattleStatus>().getBacteriaSpeed(selectedBacteria);
-		*/
+		//this gets stats from BattleStatus
+		battleStatus = GameObject.Find("BattleStatus").GetComponent<BattleStatus>();
+		currentHealth = battleStatus.getBacteriaHealth(unitName);
+		maxHealth = battleStatus.getBacteriaHealth(unitName);
+		damage = battleStatus.getBacteriaDamage(unitName);
+		speed = battleStatus.getBacteriaSpeed(unitName);
 	}
 
 	// Sounds array contains the following sounds for each clipId: 0 = sound of being hit;
@@ -79,9 +80,12 @@ public class UnitStatus : MonoBehaviour {
 		//animTakeDamage.wrapMode = WrapMode.Once;
 	}
 	
-	public void Poisoned(int damage) {
-		transform.FindChild("poisonBubbles").gameObject.SetActive(true);
-		//poisoned units taka damage over time, set amount of rounds
+	public void Poisoned(int damage, int rounds) {
+		//poisoned units taka damage over time for x rounds
+	}
+
+	public void Stunned(int rounds) {
+		//stunned units can't do anything for x rounds
 	}
 
 	public void switchSelectedAction(string clickedMenuItem) {
@@ -90,6 +94,7 @@ public class UnitStatus : MonoBehaviour {
 	
 	public void Select() {
 		selected = true;
+		unitRounds += 1;
 		GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnStartHandler> ().handeTurnStart ();
 	}
 	
