@@ -14,7 +14,7 @@ public class levelComplete : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		selectedUnits = BattleStatus.battleStatus.getSelectedUnits();
+//		selectedUnits = BattleStatus.battleStatus.getSelectedUnits();
 		enemiesAlive = true;
 		unitsAlive = true;
 	}
@@ -25,10 +25,12 @@ public class levelComplete : MonoBehaviour {
 				enemiesAlive = false;
 				levelCompleted();
 		}
+		/*
 		if (GameObject.FindGameObjectsWithTag("Unit").Length == 0 && unitsAlive == true) {
 			unitsAlive = false;
 			levelFailed();
 		}
+		*/
 	}
 
 	void OnGUI() {
@@ -45,7 +47,9 @@ public class levelComplete : MonoBehaviour {
 			if(GUI.Button(new Rect(Screen.width/2 - Screen.width/14, Screen.height/4, Screen.width/8, Screen.height/16), "Yay!")) {
 				Application.LoadLevel ("Map");
 			}
+
 		} 
+		/*
 		if (!unitsAlive) {
 			//fail
 			GUI.Box( new Rect(Screen.width/2 - Screen.width/4, 0, Screen.width/2, Screen.height/4), "");
@@ -55,6 +59,7 @@ public class levelComplete : MonoBehaviour {
 				Application.LoadLevel ("Map");
 			}
 		}
+		*/
 	}
 	void levelCompleted() {
 		GameStatus.gameStatus.levelCompleted();
