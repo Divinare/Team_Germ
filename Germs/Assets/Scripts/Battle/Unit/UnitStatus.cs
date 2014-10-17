@@ -39,6 +39,16 @@ public class UnitStatus : MonoBehaviour {
 			damage = battleStatus.getBacteriaDamage(unitName);
 			speed = battleStatus.getBacteriaSpeed(unitName);
 		}
+
+		//i hate animations SO MUCH
+		/*
+		if (unitName == "smallRed") {
+			foreach (AnimationState clip in animation) {
+				Debug.Log (clip.name);
+			}
+		}
+		*/
+
 	}
 
 	// Sounds array contains the following sounds for each clipId: 0 = sound of being hit;
