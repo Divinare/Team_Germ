@@ -43,6 +43,7 @@ public class MenuBar : MonoBehaviour {
 	private Vector2 menuButtonSize;
 	
 	// Map
+	private Vector2 middleBar;
 	public int clickedIndex;
 	public Dictionary<string, int[]> allBacteriaStats = new Dictionary<string, int[]>();
 	public List<string> selectedUnits = new List<string>();
@@ -88,6 +89,7 @@ public class MenuBar : MonoBehaviour {
 
 		// Map
 
+		middleBar = new Vector2 (shopMapTrainerButtonSize.x+Screen.width/4, Screen.height-menuButtonSize.y);
 		allBacteriaStats = battleStatus.getAllBacteriaStats();
 		selectedUnits = battleStatus.getSelectedUnits();
 		bacChooser = false;
@@ -114,20 +116,6 @@ public class MenuBar : MonoBehaviour {
 			createShopMenu();
 		} else if (showing.Equals ("trainer")) {
 			createTrainerMenu();
-		}
-
-		if (bacChooser) {
-			allBacteriaStats = battleStatus.getAllBacteriaStats();
-			var pos = 0;
-			foreach (string bac in allBacteriaStats.Keys) {
-				if (!selectedUnits.Contains(bac)) {
-					if (GUI.Button (new Rect (Screen.width/8 +pos,Screen.height - Screen.height/4,Screen.width/12,Screen.height/10), bac)) {
-						battleStatus.setSelectedUnit(bac, clickedIndex);
-						bacChooser = false;
-					}
-					pos += Screen.width/12;
-				}
-			}
 		}
 	}
 
@@ -226,25 +214,39 @@ public class MenuBar : MonoBehaviour {
 
 	private void createBacteriaBar() {
 		//frame for chosen bacteria
-		if (GUI.Button (new Rect (Screen.width/2 - Screen.width/4,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedUnits[0])) {
+		if (GUI.Button (new Rect (middleBar.x,middleBar.y,menuButtonSize.x,menuButtonSize.y), selectedUnits[0])) {
 			clickedIndex = 0;
 			drawChooserBar();
 		}
-		if (GUI.Button (new Rect (Screen.width/2 - Screen.width/6,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedUnits[1])) {
+		if (GUI.Button (new Rect (middleBar.x+menuButtonSize.x,middleBar.y,menuButtonSize.x,menuButtonSize.y), selectedUnits[1])) {
 			clickedIndex = 1;
 			drawChooserBar();
 		}
-		if (GUI.Button (new Rect (Screen.width/2 - Screen.width/12,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedUnits[2])) {
+		if (GUI.Button (new Rect (middleBar.x+2*menuButtonSize.x,middleBar.y,menuButtonSize.x,menuButtonSize.y), selectedUnits[2])) {
 			clickedIndex = 2;
 			drawChooserBar();
 		}
-		if (GUI.Button (new Rect (Screen.width/2,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedUnits[3])) {
+		if (GUI.Button (new Rect (middleBar.x+3*menuButtonSize.x,middleBar.y,menuButtonSize.x,menuButtonSize.y), selectedUnits[3])) {
 			clickedIndex = 3;
 			drawChooserBar();
 		}
-		if (GUI.Button (new Rect (Screen.width/2 + Screen.width/12,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedUnits[4])) {
+		if (GUI.Button (new Rect (middleBar.x+4*menuButtonSize.x,middleBar.y,menuButtonSize.x,menuButtonSize.y), selectedUnits[4])) {
 			clickedIndex = 4;
 			drawChooserBar();
+		}
+
+		if (bacChooser) {
+			allBacteriaStats = battleStatus.getAllBacteriaStats();
+			float pos = 0;
+			foreach (string bac in allBacteriaStats.Keys) {
+				if (!selectedUnits.Contains(bac)) {
+					if (GUI.Button (new Rect (Screen.width/8 +pos,Screen.height - Screen.height/4,menuButtonSize.x,menuButtonSize.y), bac)) {
+						battleStatus.setSelectedUnit(bac, clickedIndex);
+						bacChooser = false;
+					}
+					pos += menuButtonSize.x;
+				}
+			}
 		}
 	}
 
