@@ -8,6 +8,7 @@ public class MenuBar : MonoBehaviour {
 
 	public float gold;
 	public float xp;
+	public bool bacChooser;
 
 	public AudioSource clickSound;
 	public BattleStatus battleStatus;
@@ -42,7 +43,7 @@ public class MenuBar : MonoBehaviour {
 	private Vector2 menuButtonSize;
 	
 	// Map
-	private int clickedIndex;
+	public int clickedIndex;
 	public Dictionary<string, int[]> allBacteriaStats = new Dictionary<string, int[]>();
 	public List<string> selectedUnits = new List<string>();
 
@@ -89,8 +90,7 @@ public class MenuBar : MonoBehaviour {
 
 		allBacteriaStats = battleStatus.getAllBacteriaStats();
 		selectedUnits = battleStatus.getSelectedUnits();
-
-		drawChooserBar();
+		bacChooser = false;
 		
 		// Shop
 
@@ -115,7 +115,20 @@ public class MenuBar : MonoBehaviour {
 		} else if (showing.Equals ("trainer")) {
 			createTrainerMenu();
 		}
-	
+
+		if (bacChooser) {
+			allBacteriaStats = battleStatus.getAllBacteriaStats();
+			var pos = 0;
+			foreach (string bac in allBacteriaStats.Keys) {
+				if (!selectedUnits.Contains(bac)) {
+					if (GUI.Button (new Rect (Screen.width/8 +pos,Screen.height - Screen.height/4,Screen.width/12,Screen.height/10), bac)) {
+						battleStatus.setSelectedUnit(bac, clickedIndex);
+						bacChooser = false;
+					}
+					pos += Screen.width/12;
+				}
+			}
+		}
 	}
 
 	private void createBattleMenu() {
@@ -236,17 +249,7 @@ public class MenuBar : MonoBehaviour {
 	}
 
 	private void drawChooserBar() {
-		allBacteriaStats = battleStatus.getAllBacteriaStats();
-		var pos = 0;
-		foreach (string bac in allBacteriaStats.Keys) {
-			if (!selectedUnits.Contains(bac)) {
-				Debug.Log (bac);
-				if (GUI.Button (new Rect (Screen.width/8 +pos,Screen.height - Screen.height/4,Screen.width/12,Screen.height/10), bac)) {
-					battleStatus.setSelectedUnit(bac, clickedIndex);
-				}
-				pos += Screen.width/12;
-			}
-		}
+		bacChooser = true;
 	}
 
 	// Shop
