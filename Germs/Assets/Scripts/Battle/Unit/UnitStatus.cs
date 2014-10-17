@@ -82,7 +82,7 @@ public class UnitStatus : MonoBehaviour {
 			animator.SetTrigger ("dead");
 			GameObject deathSound = Instantiate (DeathSound, this.transform.position, this.transform.rotation) as GameObject;
 			Debug.Log ("Unit died");
-			currentSquare.GetComponent<SquareStatus>().setStatus ("movable");
+			currentSquare.GetComponent<SquareStatus>().setStatus ("movable",null);
 			Destroy (this.gameObject);
 			return;
 		} else {
