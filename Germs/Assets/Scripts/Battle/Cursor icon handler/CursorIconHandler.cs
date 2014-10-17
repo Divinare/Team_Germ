@@ -49,34 +49,41 @@ public class CursorIconHandler : MonoBehaviour {
 
 	public void chooseCursorForSquare(GameObject square) {
 		// square is empty, draw default cursor if it's not already drawn
-		if (square.GetComponent <SquareStatus> ().getStatus ().Equals ("movable") && !currentCursor.Equals ("default")) { 
+		if (square.GetComponent <SquareStatus> ().getStatus ().Equals ("movable")) { 
 			drawDefaultCursor ();
 			return;
 		}
 		GameObject activeUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler> ().getActiveUnit ();
 		string activeUnitSquareStatus = activeUnit.GetComponent<UnitStatus> ().getSquare ().GetComponent<SquareStatus> ().getStatus ();
 		string targetSquareStatus = square.GetComponent<SquareStatus>().getStatus();
+		string currentAction = activeUnit.GetComponent<UnitStatus> ().selectedAction;
 
 		if (!activeUnitSquareStatus.Equals (targetSquareStatus)) {
-			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("melee") && !currentCursor.Equals ("melee")) {
+			if (currentAction.Equals ("melee") && !currentCursor.Equals ("melee")) {
 				drawMeleeAttackCursor ();
+				return;
 			}
-			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("ranged") && !currentCursor.Equals ("ranged")) {
+			if (currentAction.Equals ("ranged") && !currentCursor.Equals ("ranged")) {
 				drawRangedAttackCursor ();
+				return;
 			}
-			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("heal") && !currentCursor.Equals ("error")) {
+			if (currentAction.Equals ("heal") && !currentCursor.Equals ("error")) {
 				drawErrorCursor ();
+				return;
 			}
 		}
 		if (activeUnitSquareStatus.Equals (targetSquareStatus)) {
-			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("heal") && !currentCursor.Equals ("heal")) {
+			if (currentAction.Equals ("heal") && !currentCursor.Equals ("heal")) {
 				drawHealCursor();
+				return;
 			}
-			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("melee") && !currentCursor.Equals ("error")) {
+			if (currentAction.Equals ("melee") && !currentCursor.Equals ("error")) {
 				drawErrorCursor();
+				return;
 			}
-			if (activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("ranged") && !currentCursor.Equals ("error")) {
+			if (currentAction.Equals ("ranged") && !currentCursor.Equals ("error")) {
 				drawErrorCursor();
+				return;
 			}
 		}
 	}
