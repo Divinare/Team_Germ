@@ -5,8 +5,9 @@ using System.Collections.Generic;
 public class MeleeAttack : MonoBehaviour {
 
 	public bool goingToAttack;
-	public GameObject target;
-	public GameObject targetSquare; // not the square holding the melee target, but the one the Germ needs to stand on in order to be able to melee
+	private GameObject attacker;
+	private GameObject target;
+	private GameObject targetSquare; // not the square holding the melee target, but the one the Germ needs to stand on in order to be able to melee
 	// Use this for initialization
 	void Start () {
 		goingToAttack = false;
@@ -19,9 +20,9 @@ public class MeleeAttack : MonoBehaviour {
 		if (goingToAttack) {
 			Vector3 targetPos = targetSquare.transform.position;
 			targetPos.z = -1;
-			if (this.gameObject.transform.position == targetPos) {
+			if (attacker.transform.position == targetPos) {
 				goingToAttack = false;
-				target.GetComponent<UnitStatus>().TakeDamage (this.gameObject.GetComponent<UnitStatus>().damage);
+				target.GetComponent<UnitStatus>().TakeDamage (attacker.GetComponent<UnitStatus>().damage);
 				target = null;
 				targetSquare = null; // turn ends here due to code in Movement.cs
 			}
@@ -29,6 +30,7 @@ public class MeleeAttack : MonoBehaviour {
 	}
 
 	public void initiateAttack(GameObject activeUnit, GameObject targetGerm) {
+		attacker = activeUnit;
 
 		List<GameObject> route = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (targetGerm.GetComponent<UnitStatus>().getSquare ());
 		if (route == null) {

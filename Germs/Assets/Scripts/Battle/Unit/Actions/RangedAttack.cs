@@ -7,14 +7,12 @@ public class RangedAttack : MonoBehaviour {
 	private float bulletSpeed;	
 	private float rotationSpeed;
 	private Rigidbody bullet;
-	private GameObject target;
 	
 
 	void Start () {
 		bulletSpeed = 8;
 		rotationSpeed = 520.0f; // degrees per second
 		bullet = null;
-		target = null;
 	}
 
 	void Update() {
@@ -24,15 +22,14 @@ public class RangedAttack : MonoBehaviour {
 	}
 	
 
-	public void attack(GameObject target) {
+	public void attack(GameObject attacker, GameObject target) {
 
 		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector>().lockInput (); // lock input after attack action has been initiated
-		this.target = target;
 				
 		// Setting up the bullet/projectile
 		bullet = new Rigidbody();
-		bullet = Instantiate(projectile, transform.position, transform.rotation) as Rigidbody;
+		bullet = Instantiate(projectile, attacker.transform.position, attacker.transform.rotation) as Rigidbody;
 		bullet.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f); // projectile size
-		bullet.velocity = (target.transform.position - transform.position).normalized * bulletSpeed; // projectile direction & speed
+		bullet.velocity = (target.transform.position - attacker.transform.position).normalized * bulletSpeed; // projectile direction & speed
 	}
 }
