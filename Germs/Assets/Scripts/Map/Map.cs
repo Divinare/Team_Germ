@@ -14,7 +14,6 @@ public class Map : MonoBehaviour {
 	private string storedNode;
 
 	//GUI tools
-	private bool drawBattleWindow = false;
 	public GUIStyle bigNumbers;
 	public GUIStyle titleLetters;
 	public GUIStyle startHover;
@@ -31,12 +30,14 @@ public class Map : MonoBehaviour {
 	//sound
 	public AudioSource clickSound;
 
-	public GameStatus gameStatus;
+	private GameStatus gameStatus;
+	private BattleStartWindow battleStartWindow;
 
 	// Use this for initialization
 	void Start () {
 		//sanitycheck
 		gameStatus = GameObject.Find("GameStatus").GetComponent<GameStatus>();
+		battleStartWindow = GameObject.Find ("Map").GetComponent<BattleStartWindow>();
 
 		//store all nodes
 		foreach (Transform child in transform) {
@@ -72,7 +73,6 @@ public class Map : MonoBehaviour {
 			if (hit.collider.gameObject.tag == "Node") {
 				//Debug.Log("Node hit");
 				if (Input.GetMouseButtonUp(0)) {
-					if (!drawBattleWindow) {
 						storedHit = hit;
 					
 						if (hit.collider.gameObject.GetComponent<Node>().active == true) {
@@ -80,8 +80,7 @@ public class Map : MonoBehaviour {
 							storeGameStatus();
 							clickSound.Play();
 							//enter level through GUI window
-							drawBattleWindow = true;
-						}
+							drawBattleWindow();
 					}
 				}
 				
@@ -125,8 +124,20 @@ public class Map : MonoBehaviour {
 		storedNode = gameStatus.getNode();
 	}
 
+	public void drawBattleWindow() {
+		lvlName = storedHit.transform.GetComponent<Node>().getLevelName();
+		lvlInfo = storedHit.transform.GetComponent<Node>().getLevelInfo();
+		gold = storedHit.transform.GetComponent<Node>().getGold();
+		xp = storedHit.transform.GetComponent<Node>().getXp();
+		skill = storedHit.transform.GetComponent<Node>().getSkill();
+		gameStatus.storeNode(storedHit.collider.transform);
+
+		battleStartWindow.drawStartWindow(lvlName, lvlInfo, gold, xp, skill, storedHit.collider.transform);
+	}
+
 	void OnGUI() {
 		//level loading window with info
+		/*
 		if (drawBattleWindow) {
 			//get level info
 			lvlName = storedHit.transform.GetComponent<Node>().getLevelName();
@@ -160,7 +171,7 @@ public class Map : MonoBehaviour {
 				drawBattleWindow = false;
 			}
 		}
-		
+		*/
 	}
 	
 }
