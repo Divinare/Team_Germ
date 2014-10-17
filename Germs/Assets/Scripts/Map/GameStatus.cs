@@ -112,4 +112,8 @@ public class GameStatus : MonoBehaviour {
 	public void clearNode() {
 		storedNode = null;
 	}
+
+	public int getCompletedLevels() {
+		return levelsCompleted;
+	}
 }

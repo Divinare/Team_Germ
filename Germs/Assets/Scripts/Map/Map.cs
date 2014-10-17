@@ -12,6 +12,7 @@ public class Map : MonoBehaviour {
 	private List<Transform> allNodes = new List<Transform>();
 	private List<bool> mapStateBools = new List<bool>();
 	private string storedNode;
+	public string nodeName;
 
 	//GUI tools
 	public GUIStyle bigNumbers;
@@ -31,12 +32,14 @@ public class Map : MonoBehaviour {
 	public AudioSource clickSound;
 
 	private GameStatus gameStatus;
+	private UnitStats unitStats;
 	private BattleStartWindow battleStartWindow;
 
 	// Use this for initialization
 	void Start () {
 		//sanitycheck
 		gameStatus = GameObject.Find("GameStatus").GetComponent<GameStatus>();
+		unitStats = GameObject.Find("UnitStats").GetComponent<UnitStats>();
 		battleStartWindow = GameObject.Find ("Map").GetComponent<BattleStartWindow>();
 
 		//store all nodes
@@ -79,6 +82,9 @@ public class Map : MonoBehaviour {
 							//storage
 							storeGameStatus();
 							clickSound.Play();
+							getNodeName(hit.collider.transform);
+							unitStats.storeEnemyUnitStats(nodeName);
+							
 							//enter level through GUI window
 							drawBattleWindow();
 					}
@@ -88,6 +94,10 @@ public class Map : MonoBehaviour {
 			
 		}
 		
+	}
+	public string getNodeName(Transform node) {
+		nodeName = node.name;
+		return nodeName;
 	}
 
 	public void setNodeActive(Transform node) {

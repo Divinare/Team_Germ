@@ -1,14 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BattleInitializer : MonoBehaviour {
 
 	public string[] friendlyGermsToSpawn;
 	public GameObject[] hostileGermsToSpawn;
+	public Dictionary<string, int[]> enemiesToSpawn = new Dictionary<string, int[]>();
+
+	private UnitStats unitStats;
 
 	// Use this for initialization
 	void Start () {
-	
+		//unitStats = GameObject.Find("UnitStats").GetComponent<UnitStats>();
+		//enemiesToSpawn = unitStats.getEnemyUnitStats();
 	}
 	
 	// Update is called once per frame

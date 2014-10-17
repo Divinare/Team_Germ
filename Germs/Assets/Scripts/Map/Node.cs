@@ -14,6 +14,7 @@ public class Node : MonoBehaviour {
 	//level info
 	public string levelName;
 	public string levelInfo;
+	public string nodeName;
 	public Texture2D levelBG;
 
 	//tooltip info
@@ -23,6 +24,7 @@ public class Node : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		nodeName = this.transform.name;
 	}
 	
 	// Update is called once per frame
@@ -74,6 +76,10 @@ public class Node : MonoBehaviour {
 
 	void loadLevel() {
 		Application.LoadLevel (1);
+	}
+
+	public string getNodeName() {
+		return nodeName;
 	}
 
 	void OnMouseEnter() {
