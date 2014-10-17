@@ -240,7 +240,7 @@ public class MenuBar : MonoBehaviour {
 			float pos = 0;
 			foreach (string bac in allBacteriaStats.Keys) {
 				if (!selectedUnits.Contains(bac)) {
-					if (GUI.Button (new Rect (Screen.width/8 +pos,Screen.height - Screen.height/4,menuButtonSize.x,menuButtonSize.y), bac)) {
+					if (GUI.Button (new Rect (middleBar.x +pos,middleBar.y-menuButtonSize.y,menuButtonSize.x,menuButtonSize.y), bac)) {
 						battleStatus.setSelectedUnit(bac, clickedIndex);
 						bacChooser = false;
 					}
