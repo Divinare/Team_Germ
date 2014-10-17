@@ -39,7 +39,6 @@ public class MeleeAttack : MonoBehaviour {
 		attacker = activeUnit;
 		List<GameObject> route = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (targetGerm.GetComponent<UnitStatus>().getSquare ());
 		if (route == null) {
-			Debug.Log ("Null route returned");
 			target = null;
 			targetSquare = null;
 			attacker = null;

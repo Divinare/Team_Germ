@@ -52,7 +52,6 @@ public class Selector : MonoBehaviour {
 
 				GameObject activeUnit = turnHandler.getActiveUnit();
 
-				Debug.Log (activeUnit);
 				if (objectClicked.tag == "Unit" && !inputLocked) {
 
 					unitAction(activeUnit, objectClicked);
