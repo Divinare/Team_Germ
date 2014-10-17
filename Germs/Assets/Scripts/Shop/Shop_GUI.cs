@@ -12,13 +12,16 @@ public class Shop_GUI : MonoBehaviour {
 
 	public float gold = 0;
 	public float xp = 0;
-
-	private int clickedIndex = 1;
+	
 	private int amountOfIndexes = 3;
 	private int amountOfItemColumns = 4;
 
 	public Texture2D goldIcon;
 	public Texture2D xpIcon;
+
+	public Texture2D healPotion;
+	public Texture2D ragePotion;
+	public Texture2D speedPotion;
 
 	public GUIStyle trainerHover;
 	public GUIStyle mapHover;
@@ -38,10 +41,18 @@ public class Shop_GUI : MonoBehaviour {
 	public Vector2 stashScrollPosition = Vector2.zero;
 
 	// for testing, items hardcoded
-	string[] stashItems =  new string[] {"axe", "potion1", "potion2", "boots", "potion3"};
-	string[] armors = new string[] {"chainmail", "jacket", "leather coat"};
-	string[] potions = new string[] {"health potion", "rage potion"};
-	string[] weapons = new string[] {"dagger"};
+	private Texture2D[] potionIcons = new Texture2D[5];
+
+	private Dictionary<string, int[]> currentPotionStats;
+
+	//string[] stashItems =  new string[] {"axe", "potion1", "potion2", "boots", "potion3"};
+	//string[] armors = new string[] {"chainmail", "jacket", "leather coat"};
+	//string[] weapons = new string[] {"dagger"};
+
+	private int[] selectedItemInfo;
+
+	private int clickedIndex = 1;
+
 
 	bool itemOwned = false;
 	
@@ -62,6 +73,9 @@ public class Shop_GUI : MonoBehaviour {
 		itemSize = new Vector2 (Screen.width*0.1f, Screen.width*0.1f);
 		selectedItemWindowSize = new Vector2(Screen.width*0.13f, Screen.height*0.4f);
 
+		currentPotionStats = ItemStats.itemStats.getCurrentPotionStats();
+		addPotionIcons ();
+	
 	}
 	
 	// Update is called once per frame
@@ -75,7 +89,7 @@ public class Shop_GUI : MonoBehaviour {
 		createMenu ("shop", Screen.width*0.025f, Screen.height * 0.15f, shopScrollPosition);
 
 		// Creating shop
-		createMenu ("stash", Screen.width * 0.575f, Screen.height * 0.15f, stashScrollPosition);
+		//createMenu ("stash", Screen.width * 0.575f, Screen.height * 0.15f, stashScrollPosition);
 
 		createSelectedItemWindow ((Screen.width *  0.4362f), (Screen.height * 0.3f));
 	}
@@ -88,9 +102,9 @@ public class Shop_GUI : MonoBehaviour {
 
 		// Draw topics
 		if (type.Equals ("shop")) {
-			drawTexture(x, Screen.height * 0.05f, windowSize.x, Screen.height * 0.10f, stashText);
+			drawTexture(x, Screen.height * 0.05f, windowSize.x/2, Screen.height * 0.10f, stashText);
 		} else if (type.Equals ("stash")) {
-			drawTexture(x, Screen.height * 0.05f, windowSize.x, Screen.height * 0.10f, stashText);
+			drawTexture(x, Screen.height * 0.05f, windowSize.x/2, Screen.height * 0.10f, stashText);
 		}
 
 		GUI.BeginGroup (new Rect (windowPosition.x, windowPosition.y, windowSize.x, windowSize.y));
@@ -99,7 +113,7 @@ public class Shop_GUI : MonoBehaviour {
 		if(type.Equals("shop")) {
 
 			// Creating tab bar
-			createTabButton(0,0,tabSize.x/amountOfIndexes,tabSize.y, "Potion", 1);
+			createTabButton(0,0,tabSize.x/amountOfIndexes,tabSize.y, "Potions", 1);
 			createTabButton(0,0,tabSize.x/amountOfIndexes,tabSize.y, "Weapons", 2);
 			createTabButton(0,0,tabSize.x/amountOfIndexes,tabSize.y, "Armor", 3);
 
@@ -126,45 +140,69 @@ public class Shop_GUI : MonoBehaviour {
 		if (type.Equals ("shop")) {
 			shopScrollPosition = GUI.BeginScrollView (new Rect (0, tabSize.y, windowSize.x, windowSize.y - tabSize.y), shopScrollPosition, new Rect (0, 0, 0, 500));
 			createShopContent();
-		} else if (type.Equals ("stash")) {
+		} 
+		/*
+		else if (type.Equals ("stash")) {
 			stashScrollPosition = GUI.BeginScrollView (new Rect (0, 0, windowSize.x, windowSize.y), stashScrollPosition, new Rect (0, 0, 0, 500));
 			createStashContent();
 		}
+		*/
 		GUI.EndScrollView ();
 		GUI.EndGroup ();
 	}
 
 	private void createShopContent() {
 		if (clickedIndex == 1) {
-			createContent(potions);
-		} else if (clickedIndex == 2) {
+			createContent(currentPotionStats, potionIcons);
+		} 
+		/*
+		else if (clickedIndex == 2) {
 			createContent(weapons);
 		} else if (clickedIndex == 3) {
 			createContent(armors);
 		}
+		*/
 	}
-
+	/*
 	private void createStashContent() {
 		createContent (stashItems);
 	}
+	*/
 
-	private void createContent(string[] items) {
+	private void createContent(Dictionary<string, int[]> items, Texture2D[] icons) {
+
+
+		int itemIndex = 0;
 		int column = 0;
 		int row = 0;
-		for (int i = 1; i <= items.Length; i++) {
-			createItem ((int)itemSize.x * column, (int)itemSize.y * row, items[i-1]);
-			if(i % amountOfItemColumns == 0) {
+		foreach (string key in items.Keys) {
+				createItem ((int)itemSize.x * column, (int)itemSize.y * row, key, itemIndex, icons[itemIndex]);
+			if((itemIndex+1) % amountOfItemColumns == 0) {
 				row++;
 				column = 0;
 			} else {
 				column++;
 			}
+			itemIndex++;
 		}
+	}
+
+	private void createItem(int x, int y, string description, int itemIndex, Texture2D icon) {
+		if (GUI.Button (new Rect (x, y, itemSize.x, itemSize.y), icon)) {
+			//this.selectedItemIndex = itemIndex;
+
+
+
+			clickSound.Play ();	
+		}
+		//GUI.TextArea (new Rect (x, y, itemSize.x, itemSize.y), description);
 	}
 
 	private void createSelectedItemWindow (float x, float y) {
 		GUI.Label (new Rect (x, y, selectedItemWindowSize.x, selectedItemWindowSize.y), selectedItemWindow);
-		
+
+
+		//GUI.Box (new Rect(x, y, 100,100), 
 		if (itemOwned) {
 			createUpgradeAndSellButtons(x, y+selectedItemWindowSize.y * 0.5f, selectedItemWindowSize.x, selectedItemWindowSize.y*0.2f);
 		} else {
@@ -185,15 +223,16 @@ public class Shop_GUI : MonoBehaviour {
 	
 	private void createBuyButton(float x, float y, float width, float height) {
 		if (GUI.Button (new Rect (x, y, width, height), "Buy")) {
-			Debug.Log ("bought item");
+
 			clickSound.Play ();	
 		}
 	}
 
-	private void createItem(int x, int y, string description) {
-		GUI.TextArea (new Rect (x, y, itemSize.x, itemSize.y), description);
+	private void addPotionIcons() {
+		potionIcons [0] = healPotion;
+		potionIcons [1] = ragePotion;
+		potionIcons [2] = speedPotion;
 	}
-
 
 	private void drawTexture(float x, float y, float width, float height, Texture texture) {
 		GUI.DrawTexture (new Rect (x, y, width, height), texture, ScaleMode.ScaleToFit, true, width/height);
