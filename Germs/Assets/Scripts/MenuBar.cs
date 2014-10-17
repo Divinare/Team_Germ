@@ -13,7 +13,7 @@ public class MenuBar : MonoBehaviour {
 	public AudioSource clickSound;
 	public BattleStatus battleStatus;
 	public GameStatus gameStatus;
-	public string showing = "map"; // battle, map, shop or trainer
+	public string showing = "battle"; // battle, map, shop or trainer
 
 	public Texture2D goldIcon;
 	public Texture2D xpIcon;

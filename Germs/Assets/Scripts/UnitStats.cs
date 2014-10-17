@@ -49,9 +49,12 @@ public class UnitStats : MonoBehaviour {
 		enemiesForLevel.Clear();
 
 		foreach (string unitName in enemiesInLvl) {
+			//Debug.Log (unitName);
 			unravelStatsArray = baseUnitStats[unitName];
 			enemiesForLevel[unitName] = new int[] {unravelStatsArray[0]*baseStatIncreaseFactor,unravelStatsArray[1]*baseStatIncreaseFactor, unravelStatsArray[2]*baseStatIncreaseFactor, unravelStatsArray[3], unravelStatsArray[4], unravelStatsArray[5], unravelStatsArray[6]};
 		}
+
+
 	}
 
 	public Dictionary<string, int[]> getEnemyUnitStats() {

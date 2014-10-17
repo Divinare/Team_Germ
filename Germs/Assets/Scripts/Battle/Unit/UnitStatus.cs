@@ -32,11 +32,13 @@ public class UnitStatus : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//this gets stats from BattleStatus
-		battleStatus = GameObject.Find("BattleStatus").GetComponent<BattleStatus>();
-		currentHealth = battleStatus.getBacteriaHealth(unitName);
-		maxHealth = battleStatus.getBacteriaHealth(unitName);
-		damage = battleStatus.getBacteriaDamage(unitName);
-		speed = battleStatus.getBacteriaSpeed(unitName);
+		if (!enemy) {
+			battleStatus = GameObject.Find("BattleStatus").GetComponent<BattleStatus>();
+			currentHealth = battleStatus.getBacteriaHealth(unitName);
+			maxHealth = battleStatus.getBacteriaHealth(unitName);
+			damage = battleStatus.getBacteriaDamage(unitName);
+			speed = battleStatus.getBacteriaSpeed(unitName);
+		}
 	}
 
 	// Sounds array contains the following sounds for each clipId: 0 = sound of being hit;
@@ -120,5 +122,18 @@ public class UnitStatus : MonoBehaviour {
 
 	private void battlelog(string txt) {
 		MenuBar.menuBar.addToBattleLog (txt);
+	}
+
+	public void setHp(int hp) {
+		currentHealth = hp;
+		maxHealth = hp;
+	}
+
+	public void setDmg(int dmg) {
+		damage = dmg;
+	}
+
+	public void setSpeed(int spd) {
+		speed = spd;
 	}
 }

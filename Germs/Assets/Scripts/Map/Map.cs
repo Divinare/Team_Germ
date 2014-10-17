@@ -84,7 +84,7 @@ public class Map : MonoBehaviour {
 							clickSound.Play();
 							getNodeName(hit.collider.transform);
 							unitStats.storeEnemyUnitStats(nodeName);
-							
+						Debug.Log (nodeName);
 							//enter level through GUI window
 							drawBattleWindow();
 					}
