@@ -106,7 +106,6 @@ public class MapMenuBar : MonoBehaviour {
 			float pos = 0;
 	
 			foreach (string bac in allBacteriaStats.Keys) {
-				Debug.Log("wasfaf");
 				if (!selectedUnits.Contains(bac)) {
 					if (GUI.Button (new Rect (middleBar.x +pos,middleBar.y-menuButtonSize.y,menuButtonSize.x,menuButtonSize.y), bac)) {
 						battleStatus.setSelectedUnit(bac, clickedIndex);
