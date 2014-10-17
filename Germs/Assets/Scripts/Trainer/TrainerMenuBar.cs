@@ -23,14 +23,7 @@ public class TrainerMenuBar : MonoBehaviour {
 		
 		void Start () {
 			gameStatus = GameObject.Find ("GameStatus").GetComponent<GameStatus> ();
-		}
-		
-		// Update is called once per frame
-		void Update () {
-			
-		}
-		
-		void OnGUI() {
+
 			// Common GUI stuff
 			menuBarSize = MenuBar.menuBar.menuBarSize;
 			menuBarPosition = MenuBar.menuBar.menuBarPosition;
@@ -39,6 +32,16 @@ public class TrainerMenuBar : MonoBehaviour {
 			menuButtonSize = MenuBar.menuBar.menuButtonSize;
 			menuPosition = MenuBar.menuBar.menuPosition;
 			shopMapTrainerButtonSize = MenuBar.menuBar.shopMapTrainerButtonSize;
+	
+	}
+		
+		// Update is called once per frame
+		void Update () {
+			
+		}
+		
+		void OnGUI() {
+
 
 			createTrainerMenu ();
 		}
