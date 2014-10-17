@@ -131,7 +131,7 @@ public class UnitStatus : MonoBehaviour {
 	}
 
 	private void battlelog(string txt) {
-		MenuBar.menuBar.addToBattleLog (txt);
+		GameObject.FindGameObjectWithTag ("Drawer").GetComponent<BattleMenuBar> ().addToBattleLog (txt);
 	}
 
 	public void setHp(int hp) {
