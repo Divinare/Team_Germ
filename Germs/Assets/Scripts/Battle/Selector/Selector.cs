@@ -92,11 +92,12 @@ public class Selector : MonoBehaviour {
 
 
 	private void unitAction(GameObject activeUnit, GameObject objectClicked) {
-
+		ActionHandler actionHandler = GameObject.FindGameObjectWithTag ("ActionHandler").GetComponent<ActionHandler>();
 		Debug.Log ("Unit clicked!");
 		this.targetedUnit = objectClicked; // now projectiles know what they are trying to hit		
 		string action = activeUnit.GetComponent<UnitStatus> ().selectedAction;
-
+		actionHandler.performAction (activeUnit, objectClicked, action);
+		/*
 		if (objectClicked.GetComponent<UnitStatus>().IsEnemy() != activeUnit.GetComponent<UnitStatus>().IsEnemy()) { // aggressive actions
 			if (action == "melee") {
 				Debug.Log ("Melee attack selected");
@@ -104,7 +105,8 @@ public class Selector : MonoBehaviour {
 			} 
 			else if (action == "ranged") {
 				Debug.Log ("Ranged attack selected");
-				activeUnit.GetComponent<RangedAttack> ().attack(objectClicked);				
+				actionHandler.performAction (activeUnit,targetedUnit, "ranged");
+				// activeUnit.GetComponent<RangedAttack> ().attack(objectClicked);				
 			} 
 			else if (action == "magic") {
 				Debug.Log ("Magic attack selected");
@@ -118,7 +120,7 @@ public class Selector : MonoBehaviour {
 				
 				// to be implemented
 			}			
-		}		
+		}	*/	
 	}
 
 	public GameObject GetTargetedUnit() {

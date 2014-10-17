@@ -30,14 +30,9 @@ public class ShopMenuBar : MonoBehaviour {
 	
 	void Start () {
 		gameStatus = GameObject.Find ("GameStatus").GetComponent<GameStatus> ();
+
 		getGoldAndXp ();
-	}
-	// Update is called once per frame
-	void Update () {
-		
-	}
-	
-	void OnGUI() {
+
 		// Common GUI stuff
 		menuBarSize = MenuBar.menuBar.menuBarSize;
 		menuBarPosition = MenuBar.menuBar.menuBarPosition;
@@ -52,6 +47,16 @@ public class ShopMenuBar : MonoBehaviour {
 		this.selectedItems.Add ("Potion3");
 		
 		inventoryButtonSize = new Vector2 (menuBarSize.y, menuBarSize.y);
+
+	}
+
+
+	// Update is called once per frame
+	void Update () {
+		
+	}
+	
+	void OnGUI() {
 
 		createShopMenu ();
 	}

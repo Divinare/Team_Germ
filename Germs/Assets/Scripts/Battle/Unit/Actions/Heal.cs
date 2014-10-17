@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Heal : MonoBehaviour {
 
-	public int healingAmount;
 	public GameObject healingEffect;
 
 	// Use this for initialization
@@ -16,9 +15,9 @@ public class Heal : MonoBehaviour {
 	
 	}
 
-	public void healTarget(GameObject target) {
-		if (target.GetComponent<UnitStatus>().IsEnemy() == this.gameObject.GetComponent<UnitStatus>().IsEnemy()) {
-			target.GetComponent<UnitStatus>().Heal (healingAmount);
+	public void healTarget(GameObject healer, GameObject target) {
+		if (target.GetComponent<UnitStatus>().IsEnemy() == healer.GetComponent<UnitStatus>().IsEnemy()) {
+			target.GetComponent<UnitStatus>().Heal (healer.GetComponent<UnitStatus>().heal);
 			float x = target.transform.position.x;
 			float y = target.transform.position.y;
 			float z = target.transform.position.z;
