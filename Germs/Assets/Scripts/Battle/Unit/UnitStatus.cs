@@ -63,12 +63,7 @@ public class UnitStatus : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (currentHealth <= 0) {
-			animator.SetTrigger("dead");
-			GameObject deathSound = Instantiate (DeathSound, this.transform.position, this.transform.rotation) as GameObject;
-			Debug.Log("Unit died");
-			Destroy(this.gameObject);
-		}
+
 	}
 
 	public void Heal(int heal) {
@@ -81,10 +76,19 @@ public class UnitStatus : MonoBehaviour {
 	}
 
 	public void TakeDamage(int damage) {
-		PlaySound (0); // 0 = 'damage taken'-sound
 		currentHealth -= damage;
 		battlelog (gameObject.name + " took " + damage + " damage!");
-		animator.SetTrigger("takeDamage");
+		if (currentHealth <= 0) {
+			animator.SetTrigger ("dead");
+			GameObject deathSound = Instantiate (DeathSound, this.transform.position, this.transform.rotation) as GameObject;
+			Debug.Log ("Unit died");
+			currentSquare.GetComponent<SquareStatus>().setStatus ("movable");
+			Destroy (this.gameObject);
+			return;
+		} else {
+			PlaySound (0); // 0 = 'damage taken'-sound
+			animator.SetTrigger ("takeDamage");
+		}
 	}
 	
 	public void Poisoned(int damage, int rounds) {
