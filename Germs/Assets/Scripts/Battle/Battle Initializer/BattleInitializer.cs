@@ -57,9 +57,9 @@ public class BattleInitializer : MonoBehaviour {
 		}
 		*/
 		foreach (string unitName in enemiesToSpawn.Keys) {
-			Debug.Log (unitName);
+			//Debug.Log (unitName);
 			GameObject germToSpawn = GameObject.FindGameObjectWithTag("Unit Prefab Container").GetComponent<UnitPrefabContainer>().getGerm(unitName);
-			Debug.Log("Attempting to spawn " + unitName);
+			//Debug.Log("Attempting to spawn " + unitName);
 
 			GameObject spawnedGerm = SpawnObjectAtSquare (germToSpawn, squares[14, y]);
 			squares[14, y].GetComponent <SquareStatus>().setStatus ("enemy", spawnedGerm); // Set square status to indicate there is a hostile unit
@@ -67,7 +67,7 @@ public class BattleInitializer : MonoBehaviour {
 			spawnedGerm.GetComponent<UnitStatus>().SetAsEnemy();
 			unravelArray = enemiesToSpawn[unitName];
 
-			Debug.Log (unitName+" hp "+unravelArray[0]);
+			//Debug.Log (unitName+" hp "+unravelArray[0]);
 			spawnedGerm.GetComponent<UnitStatus>().setHp(unravelArray[0]);
 			spawnedGerm.GetComponent<UnitStatus>().setDmg(unravelArray[1]);
 			spawnedGerm.GetComponent<UnitStatus>().setSpeed(unravelArray[2]);
