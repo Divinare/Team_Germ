@@ -64,6 +64,7 @@ public class UnitStatus : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (currentHealth <= 0) {
+			animator.SetTrigger("dead");
 			GameObject deathSound = Instantiate (DeathSound, this.transform.position, this.transform.rotation) as GameObject;
 			Debug.Log("Unit died");
 			Destroy(this.gameObject);
