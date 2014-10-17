@@ -11,7 +11,6 @@ public class Selector : MonoBehaviour {
 
 	private int unitMaxSize = 5;
 	private TurnHandler turnHandler;
-	public List<GameObject> route;
 	private GameObject targetedUnit;
 	private bool inputLocked;
 
@@ -19,7 +18,6 @@ public class Selector : MonoBehaviour {
 	private bool debug = false;
 	
 	void Start() {
-		//this.route = null;
 		inputLocked = false;
 		this.turnHandler = GameObject.FindGameObjectWithTag ("TurnHandler").transform.GetComponent<TurnHandler> ();
 	}
@@ -68,10 +66,12 @@ public class Selector : MonoBehaviour {
 					if (objectClicked.GetComponent<SquareStatus>().getObjectOnSquare () != null) {
 						unitAction (activeUnit, objectClicked.GetComponent<SquareStatus>().getObjectOnSquare());
 					}
-					else if(this.route != null) {
+					else {
 						List<GameObject> tempRoute = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (hit.collider.gameObject);
 						//Debug.Log ("aikaisempi countti: " + tempRoute.Count);
-						activeUnit.GetComponent<Movement> ().startMoving(tempRoute);
+						if (tempRoute != null) {
+							activeUnit.GetComponent<Movement> ().startMoving(tempRoute);
+						}
 					}
 				}
 			}
@@ -93,9 +93,10 @@ public class Selector : MonoBehaviour {
 
 	private void unitAction(GameObject activeUnit, GameObject objectClicked) {
 		ActionHandler actionHandler = GameObject.FindGameObjectWithTag ("ActionHandler").GetComponent<ActionHandler>();
-		Debug.Log ("Unit clicked!");
+
 		this.targetedUnit = objectClicked; // now projectiles know what they are trying to hit		
 		string action = activeUnit.GetComponent<UnitStatus> ().selectedAction;
+		Debug.Log ("Unit clicked, selected action is " + action);
 		actionHandler.performAction (activeUnit, objectClicked, action);
 		/*
 		if (objectClicked.GetComponent<UnitStatus>().IsEnemy() != activeUnit.GetComponent<UnitStatus>().IsEnemy()) { // aggressive actions

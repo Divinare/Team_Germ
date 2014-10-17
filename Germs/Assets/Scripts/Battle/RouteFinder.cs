@@ -39,7 +39,6 @@ public class RouteFinder : MonoBehaviour {
 		this.movableSquares = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<MovableSquaresFinder> ().getMovableSquares ();
 
 		List<GameObject> route = new List<GameObject> ();
-		int speed = turnHandler.getActiveUnit ().GetComponent<UnitStatus> ().speed;
 
 		this.visited = new List<GameObject> ();
 
@@ -50,6 +49,13 @@ public class RouteFinder : MonoBehaviour {
 
 		// speed of the current active unit
 		int maxSpeed = turnHandler.getActiveUnit ().GetComponent<UnitStatus> ().speed;
+
+		// Checks if routefinding is being done for a melee attack, in this case increases speed by 1 since the attacker doesn't need to move to the last square on the route, just the second last one
+		if (GameObject.FindGameObjectWithTag ("ActionHandler").GetComponent<MeleeAttack> ().getAttacker () != null) {
+			if (GameObject.FindGameObjectWithTag ("ActionHandler").GetComponent<MeleeAttack> ().getAttacker ().Equals (turnHandler.getActiveUnit ())) {
+				maxSpeed++;
+			}
+		}
 
 		GameObject first = turnHandler.getActiveUnit ().GetComponent<UnitStatus> ().getSquare ();
 

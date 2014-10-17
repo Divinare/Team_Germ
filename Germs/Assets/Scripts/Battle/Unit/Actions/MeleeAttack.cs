@@ -24,18 +24,28 @@ public class MeleeAttack : MonoBehaviour {
 				goingToAttack = false;
 				target.GetComponent<UnitStatus>().TakeDamage (attacker.GetComponent<UnitStatus>().damage);
 				target = null;
-				targetSquare = null; // turn ends here due to code in Movement.cs
+				targetSquare = null; 
+				attacker = null; // turn ends here due to code in Movement.cs
 			}
 		}
 	}
 
-	public void initiateAttack(GameObject activeUnit, GameObject targetGerm) {
-		attacker = activeUnit;
+	public GameObject getAttacker () {
+		return attacker;
+	}
 
+	public void initiateAttack(GameObject activeUnit, GameObject targetGerm) {
+
+		attacker = activeUnit;
 		List<GameObject> route = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (targetGerm.GetComponent<UnitStatus>().getSquare ());
 		if (route == null) {
+			Debug.Log ("Null route returned");
+			target = null;
+			targetSquare = null;
+			attacker = null;
 			return; // no route to enemy found, abort attack
 		}
+
 
 		if (route.Count > 1) { // check if the target is in an adjacent square, if not, move to the square next to the target
 			route.RemoveAt (route.Count - 1); 
