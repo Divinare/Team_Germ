@@ -67,6 +67,7 @@ public class BattleInitializer : MonoBehaviour {
 			spawnedGerm.GetComponent<UnitStatus>().SetAsEnemy();
 			unravelArray = enemiesToSpawn[unitName];
 
+			Debug.Log (unitName+" hp "+unravelArray[0]);
 			spawnedGerm.GetComponent<UnitStatus>().setHp(unravelArray[0]);
 			spawnedGerm.GetComponent<UnitStatus>().setDmg(unravelArray[1]);
 			spawnedGerm.GetComponent<UnitStatus>().setSpeed(unravelArray[2]);

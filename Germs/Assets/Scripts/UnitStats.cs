@@ -44,8 +44,7 @@ public class UnitStats : MonoBehaviour {
 			levelsCompleted = 1;
 		}
 
-		baseStatIncreaseFactor = (3/2)*levelsCompleted;
-
+		baseStatIncreaseFactor = levelsCompleted;
 		enemiesForLevel.Clear();
 
 		foreach (string unitName in enemiesInLvl) {

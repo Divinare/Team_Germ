@@ -47,10 +47,10 @@ public class TrainerGUI : MonoBehaviour {
 	private int bacDmg;
 	private int bacSpeed;
 	private int bacLevel;
-	public int lvlUpHealth;
-	public int lvlUpDmg;
-	public int lvlUpSpeed;
-	public int lvlUpXp;
+	private int lvlUpHealth;
+	private int lvlUpDmg;
+	private int lvlUpSpeed;
+	private int lvlUpXp;
 
 	public Dictionary <string, int[]> allBacteriaStats = new Dictionary<string, int[]>();
 	public int[] tempStats = new int[4];
@@ -65,6 +65,8 @@ public class TrainerGUI : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		lvlUpXp = 25;
+
 		gameStatus = GameObject.Find("GameStatus").GetComponent<GameStatus>();
 		battleStatus = GameObject.Find("BattleStatus").GetComponent<BattleStatus>();
 
@@ -82,6 +84,7 @@ public class TrainerGUI : MonoBehaviour {
 
 		setBacsAndImages();
 		setLevelMenu();
+
 	}
 
 	void OnGUI() {
@@ -117,6 +120,10 @@ public class TrainerGUI : MonoBehaviour {
 		bacDmg = battleStatus.getBacteriaDamage(selectedBacteria);
 		bacSpeed = battleStatus.getBacteriaSpeed(selectedBacteria);
 		bacLevel = battleStatus.getBacteriaLevel(selectedBacteria);
+		lvlUpHealth = bacHealth/5;
+		lvlUpDmg = bacDmg/5;
+		lvlUpSpeed = bacDmg/5;
+
 
 		//right
 		GUI.Box (new Rect (Screen.width/2,Screen.height/10,Screen.width/2, (Screen.height - 2*Screen.height/10)), "", trainerBox);
@@ -128,7 +135,8 @@ public class TrainerGUI : MonoBehaviour {
 		
 		//NextLevelBox
 		GUI.Box (new Rect (Screen.width/2+50+Screen.width/6,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "Next Level : "+(bacLevel+1)+"\nHealth : "+(bacHealth+lvlUpHealth)+"\nDamage : "+(bacDmg+lvlUpDmg)+"\nSpeed : "+(bacSpeed+lvlUpSpeed)+"\nXP required to level : "+lvlUpXp*bacLevel, yellowText);
-		
+
+
 		//LvlUpButton
 		if (xp >= lvlUpXp*bacLevel) {
 			if (GUI.Button(new Rect (Screen.width/2+Screen.width/8,Screen.height/10+Screen.width/6+Screen.height/8+Screen.height/8,Screen.width/4,Screen.height/8), "", lvlUpButton)) {
