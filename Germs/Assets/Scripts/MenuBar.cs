@@ -11,6 +11,7 @@ public class MenuBar : MonoBehaviour {
 
 	public AudioSource clickSound;
 	public BattleStatus battleStatus;
+	public GameStatus gameStatus;
 	public string showing = "map"; // battle, map, shop or trainer
 
 	public Texture2D goldIcon;
@@ -41,11 +42,9 @@ public class MenuBar : MonoBehaviour {
 	private Vector2 menuButtonSize;
 	
 	// Map
-	private int clickedIndex = 1;
+	private int clickedIndex;
 	public Dictionary<string, int[]> allBacteriaStats = new Dictionary<string, int[]>();
 	public List<string> selectedUnits = new List<string>();
-	public bool bacChooser;
-
 
 	// Shop
 	public List<string> selectedItems = new List<string>();
@@ -56,15 +55,17 @@ public class MenuBar : MonoBehaviour {
 
 
 	void Start () {
+		battleStatus = GameObject.Find("BattleStatus").GetComponent<BattleStatus>();
+		gameStatus = GameObject.Find("GameStatus").GetComponent<GameStatus>();
+
 		if (menuBar == null) {
 			DontDestroyOnLoad (gameObject);
 			menuBar = this;
+			getGoldAndXp();
 		} else if (menuBar != this) {
+			menuBar.getGoldAndXp();
 			Destroy (gameObject);
 		}
-
-		battleStatus = GameObject.Find("BattleStatus").GetComponent<BattleStatus>();
-		selectedUnits = battleStatus.getSelectedUnits();
 
 		// Common stuff
 		menuBarSize = new Vector2 (Screen.width, 70);
@@ -86,7 +87,10 @@ public class MenuBar : MonoBehaviour {
 
 		// Map
 
-		
+		allBacteriaStats = battleStatus.getAllBacteriaStats();
+		selectedUnits = battleStatus.getSelectedUnits();
+
+		drawChooserBar();
 		
 		// Shop
 
@@ -205,41 +209,46 @@ public class MenuBar : MonoBehaviour {
 		createBacteriaBar ();
 		createXpAndGoldButtons ();
 		createMainMenuButton ();
-
-
 	}
 
 	private void createBacteriaBar() {
 		//frame for chosen bacteria
 		if (GUI.Button (new Rect (Screen.width/2 - Screen.width/4,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedUnits[0])) {
 			clickedIndex = 0;
-			bacteriaChooserOn();
+			drawChooserBar();
 		}
 		if (GUI.Button (new Rect (Screen.width/2 - Screen.width/6,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedUnits[1])) {
 			clickedIndex = 1;
-			bacteriaChooserOn();
+			drawChooserBar();
 		}
 		if (GUI.Button (new Rect (Screen.width/2 - Screen.width/12,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedUnits[2])) {
 			clickedIndex = 2;
-			bacteriaChooserOn();
+			drawChooserBar();
 		}
 		if (GUI.Button (new Rect (Screen.width/2,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedUnits[3])) {
 			clickedIndex = 3;
-			bacteriaChooserOn();
+			drawChooserBar();
 		}
 		if (GUI.Button (new Rect (Screen.width/2 + Screen.width/12,Screen.height - Screen.height/10,Screen.width/12,Screen.height/10), selectedUnits[4])) {
 			clickedIndex = 4;
-			bacteriaChooserOn();
+			drawChooserBar();
 		}
 	}
 
-	private void bacteriaChooserOn() {
-		bacChooser = true;
+	private void drawChooserBar() {
 		allBacteriaStats = battleStatus.getAllBacteriaStats();
+		var pos = 0;
+		foreach (string bac in allBacteriaStats.Keys) {
+			if (!selectedUnits.Contains(bac)) {
+				Debug.Log (bac);
+				if (GUI.Button (new Rect (Screen.width/8 +pos,Screen.height - Screen.height/4,Screen.width/12,Screen.height/10), bac)) {
+					battleStatus.setSelectedUnit(bac, clickedIndex);
+				}
+				pos += Screen.width/12;
+			}
+		}
 	}
-	
-	
-	
+
 	// Shop
 	public void createShopMenu() {
 		createReturnToMapButton (1);
@@ -317,6 +326,11 @@ public class MenuBar : MonoBehaviour {
 	
 	private void switchShowingTo(string newShowing) {
 		this.showing = newShowing;
+	}
+
+	public void getGoldAndXp() {
+		gold = gameStatus.getGold();
+		xp = gameStatus.getXp();
 	}
 	/*
 	private void changeMenubarHeight(int height) {
