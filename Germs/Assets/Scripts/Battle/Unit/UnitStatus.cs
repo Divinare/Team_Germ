@@ -29,6 +29,9 @@ public class UnitStatus : MonoBehaviour {
 	public bool stunned;
 	public bool poisoned;
 
+	//animations
+	private Animator animator;
+
 	// Use this for initialization
 	void Start () {
 		//this gets stats from BattleStatus
@@ -39,16 +42,7 @@ public class UnitStatus : MonoBehaviour {
 			damage = battleStatus.getBacteriaDamage(unitName);
 			speed = battleStatus.getBacteriaSpeed(unitName);
 		}
-
-		//i hate animations SO MUCH
-		/*
-		if (unitName == "smallRed") {
-			foreach (AnimationState clip in animation) {
-				Debug.Log (clip.name);
-			}
-		}
-		*/
-
+		animator = this.GetComponent<Animator>();
 	}
 
 	// Sounds array contains the following sounds for each clipId: 0 = sound of being hit;
@@ -89,7 +83,7 @@ public class UnitStatus : MonoBehaviour {
 		PlaySound (0); // 0 = 'damage taken'-sound
 		currentHealth -= damage;
 		battlelog (gameObject.name + " took " + damage + " damage!");
-		//animTakeDamage.wrapMode = WrapMode.Once;
+		animator.SetTrigger("takeDamage");
 	}
 	
 	public void Poisoned(int damage, int rounds) {
