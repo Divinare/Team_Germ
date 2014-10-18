@@ -47,7 +47,7 @@ public class BattleInitializer : MonoBehaviour {
 			y -= 2;
 		}
 		y = 8;
-		/*
+
 		for (int i = 0; i < hostileGermsToSpawn.Length; i++) {
 			GameObject spawnedGerm = SpawnObjectAtSquare (hostileGermsToSpawn[i], squares[14, y]);
 			spawnedGerm.GetComponent<UnitStatus>().setSquare (squares[14,y]); 
@@ -55,7 +55,7 @@ public class BattleInitializer : MonoBehaviour {
 			y -= 2;
 			spawnedGerm.GetComponent<UnitStatus>().SetAsEnemy();
 		}
-		*/
+		/*
 		foreach (string unitName in enemiesToSpawn.Keys) {
 			//Debug.Log (unitName);
 			GameObject germToSpawn = GameObject.FindGameObjectWithTag("Unit Prefab Container").GetComponent<UnitPrefabContainer>().getGerm(unitName);
@@ -73,7 +73,7 @@ public class BattleInitializer : MonoBehaviour {
 			spawnedGerm.GetComponent<UnitStatus>().setSpeed(unravelArray[2]);
 
 		}
-
+		*/
 
 
 
