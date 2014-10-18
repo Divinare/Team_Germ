@@ -39,7 +39,7 @@ public class BattleInitializer : MonoBehaviour {
 		int y = 8; // Start spawning mobs from the top to bottom
 		for (int i = 0; i < friendlyGermsToSpawn.Length; i++) {
 			GameObject germToSpawn = GameObject.FindGameObjectWithTag("Unit Prefab Container").GetComponent<UnitPrefabContainer>().getGerm(friendlyGermsToSpawn[i]);
-			Debug.Log("Attempting to spawn " + germToSpawn);
+			//Debug.Log("Attempting to spawn " + germToSpawn);
 			GameObject spawnedGerm = SpawnObjectAtSquare (germToSpawn, squares [0, y]); 
 			spawnedGerm.transform.GetChild(0).position = spawnedGerm.transform.position;
 			spawnedGerm.GetComponent<UnitStatus>().setSquare (squares[0,y]); // give unit a reference to the square it is currently standing on
@@ -47,7 +47,7 @@ public class BattleInitializer : MonoBehaviour {
 			y -= 2;
 		}
 		y = 8;
-
+		/*
 		for (int i = 0; i < hostileGermsToSpawn.Length; i++) {
 			GameObject spawnedGerm = SpawnObjectAtSquare (hostileGermsToSpawn[i], squares[14, y]);
 			spawnedGerm.GetComponent<UnitStatus>().setSquare (squares[14,y]); 
@@ -55,25 +55,25 @@ public class BattleInitializer : MonoBehaviour {
 			y -= 2;
 			spawnedGerm.GetComponent<UnitStatus>().SetAsEnemy();
 		}
-		/*
+		*/
+
 		foreach (string unitName in enemiesToSpawn.Keys) {
-			//Debug.Log (unitName);
 			GameObject germToSpawn = GameObject.FindGameObjectWithTag("Unit Prefab Container").GetComponent<UnitPrefabContainer>().getGerm(unitName);
-			//Debug.Log("Attempting to spawn " + unitName);
-
 			GameObject spawnedGerm = SpawnObjectAtSquare (germToSpawn, squares[14, y]);
+			spawnedGerm.transform.GetChild(0).position = spawnedGerm.transform.position;
+			spawnedGerm.GetComponent<UnitStatus>().setSquare (squares[14,y]);
 			squares[14, y].GetComponent <SquareStatus>().setStatus ("enemy", spawnedGerm); // Set square status to indicate there is a hostile unit
-			y -= 2;
 			spawnedGerm.GetComponent<UnitStatus>().SetAsEnemy();
-			unravelArray = enemiesToSpawn[unitName];
+			y -= 2;
 
+
+			unravelArray = enemiesToSpawn[unitName];
 			//Debug.Log (unitName+" hp "+unravelArray[0]);
 			spawnedGerm.GetComponent<UnitStatus>().setHp(unravelArray[0]);
 			spawnedGerm.GetComponent<UnitStatus>().setDmg(unravelArray[1]);
 			spawnedGerm.GetComponent<UnitStatus>().setSpeed(unravelArray[2]);
 
 		}
-		*/
 
 
 
