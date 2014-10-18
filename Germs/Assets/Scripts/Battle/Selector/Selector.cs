@@ -38,6 +38,8 @@ public class Selector : MonoBehaviour {
 
 			// empty space
 			if (activeUnit.GetComponent<UnitStatus>().IsEnemy () && !hostileTurnActive) {
+				GameObject.FindGameObjectWithTag ("CursorHandler").GetComponent<CursorIconHandler>().drawDefaultCursor ();
+				GameObject.FindGameObjectWithTag ("Drawer").GetComponent<Drawer>().resetAllDrawings ();
 				hostileTurnActive = true;
 				GameObject.FindGameObjectWithTag("AIController").GetComponent<AI_TurnLogic>().handleTurnForGerm (activeUnit);
 			}
@@ -164,10 +166,9 @@ public class Selector : MonoBehaviour {
 		}
 		mouseHoveredSquare = hoveredSquare;
 
-		if(hoveredSquare.tag.Equals("Square")) {
-		GameObject.FindGameObjectWithTag ("CursorHandler").GetComponent<CursorIconHandler>().chooseCursorForSquare(hoveredSquare);
-		GameObject.FindGameObjectWithTag ("Drawer").GetComponent <Drawer>().handleDrawingForSquare(hoveredSquare); // draws route and square selection icon
-		
+		if(hoveredSquare.tag.Equals("Square") && !hostileTurnActive) {
+			GameObject.FindGameObjectWithTag ("CursorHandler").GetComponent<CursorIconHandler>().chooseCursorForSquare(hoveredSquare);
+			GameObject.FindGameObjectWithTag ("Drawer").GetComponent <Drawer>().handleDrawingForSquare(hoveredSquare); // draws route and square selection icon
 		}
 	}
 

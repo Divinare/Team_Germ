@@ -113,6 +113,15 @@ public class Drawer : MonoBehaviour {
 
 	}
 
+	public void resetAllDrawings() {
+		GameObject.FindGameObjectWithTag ("Drawer").GetComponent<Drawer>().removeDrawedItems ("MovableSquareGfx");
+		GameObject.FindGameObjectWithTag ("Drawer").GetComponent<Drawer>().removeDrawedItems ("MovingIndicationGfx");
+		GameObject toDelete = GameObject.FindGameObjectWithTag ("SquareGfx");
+		if (toDelete != null) {
+			Destroy(toDelete);
+		}
+	}
+
 
 
 }
