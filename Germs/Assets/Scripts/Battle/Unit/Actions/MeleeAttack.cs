@@ -23,7 +23,6 @@ public class MeleeAttack : MonoBehaviour {
 			if (attacker.transform.position == targetPos) {
 				goingToAttack = false;
 				target.GetComponent<UnitStatus>().TakeDamage (attacker.GetComponent<UnitStatus>().damage);
-				target = null;
 				targetSquare = null; 
 				attacker = null; // turn ends here due to code in Movement.cs
 			}
@@ -37,7 +36,7 @@ public class MeleeAttack : MonoBehaviour {
 	public void initiateAttack(GameObject activeUnit, GameObject targetGerm) {
 
 		attacker = activeUnit;
-		List<GameObject> route = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (targetGerm.GetComponent<UnitStatus>().getSquare ());
+		List<GameObject> route = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (targetGerm.GetComponent<UnitStatus>().getSquare (), true);
 		if (route == null) {
 			target = null;
 			targetSquare = null;

@@ -23,16 +23,74 @@ public class AI_TurnLogic : MonoBehaviour {
 		thisStatus = currentUnit.GetComponent<UnitStatus> ();
 		currentSquare = currentUnit.GetComponent<UnitStatus> ().getSquare ().GetComponent<SquareStatus> ();
 
+		if (attemptMeleeattack ()) {
+			return; // melee attack successful, end turn
+		}
+
+		if (findTargetAndMoveTowardsIt ()) {
+			return; // was able to find a target and move towards it, end turn
+		}
+
+		// no possible behaviours found, skipping turn
+		thisStatus.Deselect ();
+		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ().resetHostileTurn (); 
+
 		// choose action (ranged, melee or special attack)
-		attemptRangedAttack ();
+		if (attemptRangedAttack ()) {
+			return; // ranged attack successful, end turn
+		}
 
 
+
+	}
+
+	bool findTargetAndMoveTowardsIt() {
+		GameObject[] allBacs = GameObject.FindGameObjectsWithTag ("Unit");
+		List<GameObject> enemyBacs = new List<GameObject> ();
+
+		foreach (GameObject bac in allBacs) {
+			UnitStatus targetStatus = bac.GetComponent<UnitStatus>();
+			if (targetStatus.IsEnemy () != thisStatus.IsEnemy ()) {
+				enemyBacs.Add (bac);
+			}
+		}
+
+		List<GameObject> movableSquares = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<MovableSquaresFinder> ().getMovableSquares ();
+		if (movableSquares.Count == 0) {
+			return false; // no movable squares, can't move
+		}
+		GameObject target = findClosestTarget (enemyBacs);
+
+		GameObject closestSquareToTarget = movableSquares [0];
+		int lowestDistance = 999;
+		foreach (GameObject square in movableSquares) {
+			SquareStatus targetSquare = target.GetComponent<UnitStatus>().getSquare ().GetComponent<SquareStatus>();
+			SquareStatus iSquare = square.GetComponent<SquareStatus>();
+			int distance = Mathf.Abs (targetSquare.x - iSquare.x) + Mathf.Abs (targetSquare.y - iSquare.y);
+			if (distance < lowestDistance) {
+				closestSquareToTarget = square;
+			}
+		}
+		List<GameObject> routeToTargetSquare = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (closestSquareToTarget, false);
+		currentUnit.GetComponent<Movement> ().startMoving (routeToTargetSquare);
+		return true;
+	}
+
+	bool attemptMeleeattack() {
+		List<GameObject> targets = findValidMeleeTargets ();
+		if (targets.Count == 0) {
+			return false;
+		}
+		GameObject target = pickTargetForMelee (targets);
+		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ().setTargetedUnit (target);
+		GameObject.FindGameObjectWithTag ("ActionHandler").GetComponent<MeleeAttack> ().initiateAttack (currentUnit, target);
+		return true;
 	}
 
 	bool attemptRangedAttack() {
 		List<GameObject> targets = findValidRangedTargets ();
 		if (targets.Count == 0) {
-			return false; // no valid targets found for ranged attack, try another behaviour
+			return false; // no valid targets found for ranged attack
 		}
 		GameObject target = pickTargetForRanged (targets);
 		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ().setTargetedUnit (target);
@@ -40,6 +98,22 @@ public class AI_TurnLogic : MonoBehaviour {
 
 		return true; // valid target found and ranged attack executed
 
+	}
+
+	List<GameObject> findValidMeleeTargets () {
+		GameObject[] allBacs = GameObject.FindGameObjectsWithTag ("Unit");
+		List<GameObject> validTargets = new List<GameObject> ();
+		foreach (GameObject target in allBacs) {
+			UnitStatus targetStatus = target.GetComponent<UnitStatus>();
+			GameObject targetSquare = target.GetComponent<UnitStatus>().getSquare();
+			if (targetStatus.IsEnemy () != thisStatus.IsEnemy ()) {
+				List<GameObject> route = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (targetSquare, true);
+				if (route != null) {
+					validTargets.Add (target);
+				}
+			}
+		}
+		return validTargets;
 	}
 
 	List<GameObject> findValidRangedTargets() {
@@ -59,7 +133,31 @@ public class AI_TurnLogic : MonoBehaviour {
 		return validTargets;
 	}
 
+	GameObject findClosestTarget(List<GameObject> targets) {
+		GameObject selectedTarget = targets [0];
+		int closestDistance = 999;
+		foreach (GameObject target in targets) {
+			SquareStatus targetSquare = target.GetComponent<UnitStatus>().getSquare ().GetComponent<SquareStatus>();
+			int distance = Mathf.Abs (targetSquare.x - currentSquare.x) + Mathf.Abs (targetSquare.y - currentSquare.y);
+			if (distance < closestDistance) {
+				closestDistance = distance;
+				selectedTarget = target;
+			}
+		}
+		return selectedTarget;
+	}
+
 	GameObject pickTargetForRanged(List<GameObject> targets) {
+		GameObject selectedTarget = targets [0];
+		int lowestHealth = selectedTarget.GetComponent<UnitStatus> ().currentHealth;
+		foreach (GameObject target in targets) {
+			if (target.GetComponent<UnitStatus>().currentHealth < lowestHealth);
+			selectedTarget = target;
+		}
+		return selectedTarget;
+	}
+
+	GameObject pickTargetForMelee(List<GameObject> targets) {
 		GameObject selectedTarget = targets [0];
 		int lowestHealth = selectedTarget.GetComponent<UnitStatus> ().currentHealth;
 		foreach (GameObject target in targets) {

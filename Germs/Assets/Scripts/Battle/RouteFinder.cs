@@ -31,7 +31,7 @@ public class RouteFinder : MonoBehaviour {
 	}
 
 	
-	public List<GameObject> findRoute(GameObject targetSquare) {
+	public List<GameObject> findRoute(GameObject targetSquare, bool findingRouteForMelee) {
 		finalSquare = targetSquare;
 		removeAllPaths ();
 		this.found = false;
@@ -51,10 +51,8 @@ public class RouteFinder : MonoBehaviour {
 		int maxSpeed = turnHandler.getActiveUnit ().GetComponent<UnitStatus> ().speed;
 
 		// Checks if routefinding is being done for a melee attack, in this case increases speed by 1 since the attacker doesn't need to move to the last square on the route, just the second last one
-		if (GameObject.FindGameObjectWithTag ("ActionHandler").GetComponent<MeleeAttack> ().getAttacker () != null) {
-			if (GameObject.FindGameObjectWithTag ("ActionHandler").GetComponent<MeleeAttack> ().getAttacker ().Equals (turnHandler.getActiveUnit ())) {
-				maxSpeed++;
-			}
+		if (findingRouteForMelee) {
+			maxSpeed++;
 		}
 
 		GameObject first = turnHandler.getActiveUnit ().GetComponent<UnitStatus> ().getSquare ();

@@ -78,7 +78,7 @@ public class Selector : MonoBehaviour {
 						unitAction (activeUnit, objectClicked.GetComponent<SquareStatus>().getObjectOnSquare());
 					}
 					else {
-						List<GameObject> tempRoute = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (hit.collider.gameObject);
+						List<GameObject> tempRoute = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (hit.collider.gameObject, false);
 						//Debug.Log ("aikaisempi countti: " + tempRoute.Count);
 						if (tempRoute != null) {
 							activeUnit.GetComponent<Movement> ().startMoving(tempRoute);

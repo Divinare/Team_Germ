@@ -28,7 +28,7 @@ public class Drawer : MonoBehaviour {
 		    && !targetSquare.GetComponent<SquareStatus>().getStatus ().Equals ("friendly") ) {
 			
 			// getting route for a new square, will be null if not found!
-			List<GameObject> route = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (targetSquare);
+			List<GameObject> route = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (targetSquare, false);
 			// if going to Melee, don't draw route to last square which contains enemy
 			if (targetSquare.GetComponent<SquareStatus>().getStatus ().Equals ("enemy") && activeUnit.GetComponent<UnitStatus>().selectedAction.Equals ("melee") && route != null && route.Count > 0) { 
 				route.RemoveAt (route.Count - 1);			

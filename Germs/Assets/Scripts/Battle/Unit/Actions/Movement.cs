@@ -30,6 +30,7 @@ public class Movement : MonoBehaviour {
 			GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector>().unlockInput (); 
 			this.moving = false;
 			this.gameObject.GetComponent<UnitStatus>().Deselect ();
+			GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ().resetHostileTurn (); // in case movement was initiated by AI, resets AI turn status so next unit gets turn correctly
 		}
 			//constant movement
 		if (targetPosition != transform.position) {
