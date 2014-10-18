@@ -111,6 +111,7 @@ public class UnitStatus : MonoBehaviour {
 	
 	public void Deselect() {
 		selected = false;
+		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ().resetHostileTurn (); // this is used to inform AI that in case a hostile unit was active, its turn has ended
 	}
 
 	public bool IsSelected() {

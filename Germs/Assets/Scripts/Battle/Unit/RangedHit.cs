@@ -30,7 +30,6 @@ public class RangedHit : MonoBehaviour {
 			selector.SetTargetedUnitToNull();
 			GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector>().unlockInput (); // unlock input before ending turn
 			attackingUnit.Deselect(); // deselecting the attacker here, so the bullet has time to hit its target before turn is given to another
-			GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ().resetHostileTurn (); // in case attack was initiated by AI, resets AI turn status so next unit gets turn correctly
 			Destroy (gameObject);
 
 

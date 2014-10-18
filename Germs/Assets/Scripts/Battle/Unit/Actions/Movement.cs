@@ -30,7 +30,6 @@ public class Movement : MonoBehaviour {
 			GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector>().unlockInput (); 
 			this.moving = false;
 			this.gameObject.GetComponent<UnitStatus>().Deselect ();
-			GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ().resetHostileTurn (); // in case movement was initiated by AI, resets AI turn status so next unit gets turn correctly
 		}
 			//constant movement
 		if (targetPosition != transform.position) {
@@ -73,7 +72,6 @@ public class Movement : MonoBehaviour {
 
 	private void moveToSquare(GameObject targetSquare) {
 			this.moving = true;
-			Debug.Log ("Moving towards " + targetSquare);
 			targetPosition = targetSquare.transform.position;
 			targetPosition.z = -1;
 			this.gameObject.GetComponent<UnitStatus>().getSquare().GetComponent<SquareStatus>().setStatus ("movable", null); // clear status of currently occupied square

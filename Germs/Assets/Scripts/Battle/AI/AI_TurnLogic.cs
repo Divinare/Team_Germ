@@ -19,15 +19,20 @@ public class AI_TurnLogic : MonoBehaviour {
 	}
 
 	public void handleTurnForGerm(GameObject unit) {
-		Debug.Log ("AI's turn now!");
+	
 		currentUnit = unit;
 		thisStatus = currentUnit.GetComponent<UnitStatus> ();
 		currentSquareStatus = currentUnit.GetComponent<UnitStatus> ().getSquare ().GetComponent<SquareStatus> ();
+		if (Random.Range (1,10) > 5) {
+			if (attemptRangedAttack ()) {
+				return; // ranged attack successful, end turn
+			}
+		}
 
 		if (attemptMeleeattack ()) {
-			Debug.Log ("found someone to melee attack!");
 			return; // melee attack successful, end turn
 		}
+		
 
 		if (findTargetAndMoveTowardsIt ()) {
 			return; // was able to find a target and move towards it, end turn
@@ -35,19 +40,15 @@ public class AI_TurnLogic : MonoBehaviour {
 
 		// no possible behaviours found, skipping turn
 		thisStatus.Deselect ();
-		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ().resetHostileTurn (); 
 
 		// choose action (ranged, melee or special attack)
-		if (attemptRangedAttack ()) {
-			return; // ranged attack successful, end turn
-		}
+		
 
 
 
 	}
 
 	bool findTargetAndMoveTowardsIt() {
-		Debug.Log ("I'm going to try to move!");
 		GameObject[] allBacs = GameObject.FindGameObjectsWithTag ("Unit");
 		List<GameObject> targetBacs = new List<GameObject> ();
 
@@ -60,11 +61,9 @@ public class AI_TurnLogic : MonoBehaviour {
 
 		List<GameObject> movableSquares = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<MovableSquaresFinder> ().getMovableSquares ();
 		if (movableSquares.Count == 0) {
-			Debug.Log ("No movable Squares found :(");
 			return false; // no movable squares, can't move
 		}
 		GameObject target = findClosestTarget (targetBacs);
-		Debug.Log ("My closest found target is " + target.name);
 
 		GameObject closestSquareToTarget = movableSquares [0];
 		double lowestDistance = 999;
@@ -76,7 +75,6 @@ public class AI_TurnLogic : MonoBehaviour {
 				closestSquareToTarget = square;
 			}
 		}
-		Debug.Log("I found a square with distance " + lowestDistance);
 		List<GameObject> routeToTargetSquare = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (closestSquareToTarget, false);
 		currentUnit.GetComponent<Movement> ().startMoving (routeToTargetSquare);
 		return true;
@@ -84,7 +82,6 @@ public class AI_TurnLogic : MonoBehaviour {
 
 	bool attemptMeleeattack() {
 		List<GameObject> targets = findValidMeleeTargets ();
-		Debug.Log ("I found this many targets: " + targets.Count);
 		if (targets.Count == 0) {
 			return false;
 		}
@@ -115,7 +112,6 @@ public class AI_TurnLogic : MonoBehaviour {
 			GameObject targetSquare = target.GetComponent<UnitStatus>().getSquare();
 			if (targetStatus.IsEnemy () != thisStatus.IsEnemy ()) {
 				if (targetIstAtMeleeRange (currentUnit, target)) { // check if target is already at melee range, if yes then it's a valid attack target
-					Debug.Log ("Someone is at melee range!");
 					validTargets.Add (target);
 				}
 				else { // if target is not at melee range, check if there is a valid route to it and if yes, add it as a valid target
@@ -132,9 +128,7 @@ public class AI_TurnLogic : MonoBehaviour {
 	bool targetIstAtMeleeRange(GameObject unit, GameObject target) {
 		SquareStatus targetSquare = target.GetComponent<UnitStatus>().getSquare ().GetComponent<SquareStatus>();
 		int distanceX = Mathf.Abs (targetSquare.x - currentSquareStatus.x);
-		Debug.Log (target.name + "'s X distance from me is " + distanceX);
 		int distanceY = Mathf.Abs (targetSquare.y - currentSquareStatus.y);
-		Debug.Log (target.name + "'s Y distance from me is " + distanceY);
 		return (distanceX <= 1 && distanceY <= 1);
 	}
 
@@ -147,12 +141,12 @@ public class AI_TurnLogic : MonoBehaviour {
 		return distance;
 	}
 
-	List<GameObject> findValidRangedTargets() {
+	List<GameObject> findValidRangedTargets() { // finds all opposing side targets that are not in melee rnage
 		GameObject[] allBacs = GameObject.FindGameObjectsWithTag ("Unit");
 		List<GameObject> validTargets = new List<GameObject> ();
 		foreach (GameObject target in allBacs) {
 			UnitStatus targetStatus = target.GetComponent<UnitStatus>();
-			if (targetStatus.IsEnemy () != thisStatus.IsEnemy ()) { // ignore that are on the same side
+			if (targetStatus.IsEnemy () != thisStatus.IsEnemy ()) { 
 				if (!targetIstAtMeleeRange (currentUnit, target)) { 
 					validTargets.Add (target);
 				}
@@ -175,7 +169,7 @@ public class AI_TurnLogic : MonoBehaviour {
 		return selectedTarget;
 	}
 
-	GameObject pickTargetForRanged(List<GameObject> targets) {
+	GameObject pickTargetForRanged(List<GameObject> targets) { // currently picks lowest health target
 		GameObject selectedTarget = targets [0];
 		int lowestHealth = selectedTarget.GetComponent<UnitStatus> ().currentHealth;
 		foreach (GameObject target in targets) {
@@ -185,7 +179,7 @@ public class AI_TurnLogic : MonoBehaviour {
 		return selectedTarget;
 	}
 
-	GameObject pickTargetForMelee(List<GameObject> targets) {
+	GameObject pickTargetForMelee(List<GameObject> targets) { // currently picks lowest health target
 		GameObject selectedTarget = targets [0];
 		int lowestHealth = selectedTarget.GetComponent<UnitStatus> ().currentHealth;
 		foreach (GameObject target in targets) {
