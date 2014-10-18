@@ -30,7 +30,9 @@ public class RangedHit : MonoBehaviour {
 			selector.SetTargetedUnitToNull();
 			GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector>().unlockInput (); // unlock input before ending turn
 			attackingUnit.Deselect(); // deselecting the attacker here, so the bullet has time to hit its target before turn is given to another
+			GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ().resetHostileTurn ();
 			Destroy (gameObject);
+
 
 		}
 		// Hitting the attacker, as the bullet is spawned inside the attacker's collider

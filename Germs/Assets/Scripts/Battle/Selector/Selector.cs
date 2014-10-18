@@ -13,6 +13,7 @@ public class Selector : MonoBehaviour {
 	private TurnHandler turnHandler;
 	private GameObject targetedUnit;
 	private bool inputLocked;
+	private bool hostileTurnActive;
 
 	// for developing
 	private bool debug = false;
@@ -33,8 +34,17 @@ public class Selector : MonoBehaviour {
 			//changeUnitsBoxColliders(false);
 
 			//Debug.DrawRay (ray.origin, ray.direction * raycastLength);
+			GameObject activeUnit = turnHandler.getActiveUnit();
 
 			// empty space
+			if (activeUnit.GetComponent<UnitStatus>().IsEnemy () && !hostileTurnActive) {
+				hostileTurnActive = true;
+				GameObject.FindGameObjectWithTag("AIController").GetComponent<AI_TurnLogic>().handleTurnForGerm (activeUnit);
+			}
+			else if (!activeUnit.GetComponent<UnitStatus>().IsEnemy () && hostileTurnActive) {
+				hostileTurnActive = false;
+			}
+
 			if (hit.collider == null) {
 				return;
 			}
@@ -50,7 +60,7 @@ public class Selector : MonoBehaviour {
 			if (Input.GetMouseButtonUp (0)) {
 				GameObject objectClicked = hit.collider.gameObject;
 
-				GameObject activeUnit = turnHandler.getActiveUnit();
+				
 
 				if (objectClicked.tag == "Unit" && !inputLocked) {
 
@@ -87,6 +97,14 @@ public class Selector : MonoBehaviour {
 
 	public void resetHoveredSquare() { // used to force redraw of path and mouse cursor icon, f.ex. when changing turn
 		this.mouseHoveredSquare = null;
+	}
+
+	public void setTargetedUnit(GameObject target) {
+		this.targetedUnit = target;
+	}
+
+	public void resetHostileTurn() {
+		this.hostileTurnActive = false;
 	}
 
 
