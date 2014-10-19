@@ -37,7 +37,6 @@ public class Map : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		//sanitycheck
 		gameStatus = GameObject.Find("GameStatus").GetComponent<GameStatus>();
 		unitStats = GameObject.Find("UnitStats").GetComponent<UnitStats>();
 		battleStartWindow = GameObject.Find ("Map").GetComponent<BattleStartWindow>();
@@ -52,6 +51,10 @@ public class Map : MonoBehaviour {
 
 		//first node
 		setNodeActive(transform.FindChild("Node1"));
+		if (!transform.FindChild("Node1").GetComponent<Node>().isNodeCompleted()) {
+			transform.FindChild("Node1").FindChild("yellowArrow").gameObject.SetActive (true);
+		}
+
 		clickSound = GameObject.FindGameObjectWithTag ("AudioController").GetComponent<AudioSource> (); 
 
 		getStoredNode();

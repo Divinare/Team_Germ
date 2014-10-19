@@ -90,6 +90,10 @@ public class Node : MonoBehaviour {
 		mouseOver = false;
 	}
 
+	public bool isNodeCompleted() {
+		return completed;
+	}
+
 	void OnGUI() {
 		if (mouseOver && active) {
 			var x = Event.current.mousePosition.x;
