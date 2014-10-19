@@ -11,18 +11,11 @@ public class TrainerGUI : MonoBehaviour {
 	public GUIStyle yellowText;
 	public GUIStyle blueText;
 	public GUIStyle orangeText;
-	public GUIStyle bigNumbers;
 	public GUIStyle lvlUpButton;
 	public GUIStyle deactiveLvlUpButton;
 	public GUIStyle shopHover;
 	public GUIStyle mapHover;
-	public GUIStyle levelHover;
-	public GUIStyle skillsHover;
-	
-	public Texture2D goldIcon;
-	public Texture2D xpIcon;
-	public Texture2D upgradeIcon;
-	public Texture2D upgradeDeactIcon;
+
 	public Texture2D gatbac;
 	public Texture2D smallRed;
 	public Texture2D phage;
@@ -83,6 +76,7 @@ public class TrainerGUI : MonoBehaviour {
 		
 		setBacsAndImages();
 		setLevelMenu();
+
 	}
 	
 	void OnGUI() {
@@ -93,10 +87,11 @@ public class TrainerGUI : MonoBehaviour {
 		if (levelMenu == true) {
 			drawBacteriaLevelMenu();
 		}
-		
+		/*
 		if (skillMenu == true) {
 			drawBacteriaSkillMenu();
 		}
+		*/
 	}
 	
 	void drawSelectionMenu() {
@@ -124,11 +119,12 @@ public class TrainerGUI : MonoBehaviour {
 		GUI.Box (new Rect (Screen.width/2,Screen.height/10,Screen.width/6,Screen.width/6), allBacsImages[selectedBacteria]);
 		GUI.Box (new Rect (Screen.width/2+Screen.width/6,Screen.height/10,2*(Screen.width/6),(Screen.width/6)/2), " "+selectedBacteria+"\n Level "+bacLevel, orangeText);
 		GUI.Box (new Rect (Screen.width/2+Screen.width/6,Screen.height/10+(Screen.width/6)/2,2*(Screen.width/6),(Screen.width/6)/2), allBacsStories[selectedBacteria]);
+
 		//Statbox
-		GUI.Box (new Rect (Screen.width/2+50,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "Level "+bacLevel+" Stats: \nHealth : "+bacHealth+"\nDamage : "+bacDmg+"\nSpeed : "+bacSpeed, blueText);
+		GUI.Label(new Rect (Screen.width/2+Screen.width/6,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "Level "+bacLevel+" Stats: \nHealth : "+bacHealth+"\nDamage : "+bacDmg+"\nSpeed : "+bacSpeed, blueText);
 		
 		//NextLevelBox
-		GUI.Box (new Rect (Screen.width/2+50+Screen.width/6,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "Next Level : "+(bacLevel+1)+"\nHealth : "+(bacHealth+lvlUpHealth)+"\nDamage : "+(bacDmg+lvlUpDmg)+"\nSpeed : "+(bacSpeed+lvlUpSpeed)+"\nXP required to level : "+lvlUpXp*bacLevel, yellowText);
+		GUI.Label (new Rect (Screen.width/2+2*Screen.width/6,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "Next Level : "+(bacLevel+1)+"\nHealth : "+(bacHealth+lvlUpHealth)+"\nDamage : "+(bacDmg+lvlUpDmg)+"\nSpeed : "+(bacSpeed+lvlUpSpeed)+"\nXP required to level : "+lvlUpXp*bacLevel, yellowText);
 		
 		//LvlUpButton
 		if (xp >= lvlUpXp*bacLevel) {
@@ -146,7 +142,7 @@ public class TrainerGUI : MonoBehaviour {
 		
 		prevGridInt = selGridInt;
 	}
-	
+	/*
 	void drawBacteriaSkillMenu() {
 		GUI.Box (new Rect (Screen.width/2,Screen.height/10,Screen.width/2,(Screen.height - 2*Screen.height/10)), "", trainerBox);
 		
@@ -169,10 +165,11 @@ public class TrainerGUI : MonoBehaviour {
 		GUI.Box (new Rect (Screen.width/2+buttonSize.x, Screen.height/10+4*buttonSize.y, Screen.width/2-2*buttonSize.x, buttonSize.y), "Text about skill");
 		GUI.Box (new Rect (Screen.width-buttonSize.x, Screen.height/10+4*buttonSize.y, buttonSize.x, buttonSize.y), upgradeIcon);
 	}
+	*/
 	
 	void drawTop() {
 		GUI.Box (new Rect (0,0,Screen.width/4,Screen.height/10), "", trainerText);
-		
+		/*
 		if (GUI.Button (new Rect (Screen.width/2,0,Screen.width/10,Screen.height/10), "", levelHover)) {
 			setLevelMenu();
 		}
@@ -180,6 +177,7 @@ public class TrainerGUI : MonoBehaviour {
 			skillMenu = true;
 			levelMenu = false;
 		}
+		*/
 	}
 	
 	void setBacsAndImages() {
