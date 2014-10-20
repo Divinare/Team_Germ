@@ -15,10 +15,6 @@ public class Map : MonoBehaviour {
 	public string nodeName;
 
 	//GUI tools
-	public GUIStyle bigNumbers;
-	public GUIStyle titleLetters;
-	public GUIStyle startHover;
-	public GUIStyle returnHover;
 	public string lvlInfo;
 	public string lvlName;
 	public float gold;
@@ -148,43 +144,4 @@ public class Map : MonoBehaviour {
 		battleStartWindow.drawStartWindow(lvlName, lvlInfo, gold, xp, skill, storedHit.collider.transform);
 	}
 
-	void OnGUI() {
-		//level loading window with info
-		/*
-		if (drawBattleWindow) {
-			//get level info
-			lvlName = storedHit.transform.GetComponent<Node>().getLevelName();
-			lvlInfo = storedHit.transform.GetComponent<Node>().getLevelInfo();
-			gold = storedHit.transform.GetComponent<Node>().getGold();
-			xp = storedHit.transform.GetComponent<Node>().getXp();
-			skill = storedHit.transform.GetComponent<Node>().getSkill();
-
-			//huoh miten tota opacityä muutetaan
-			GUI.Box( new Rect(Screen.width/2 - Screen.width/4, 0, Screen.width/2, Screen.height/2), "");
-			GUI.Box( new Rect(Screen.width/2 - Screen.width/4, 0, Screen.width/2, Screen.height/2), "");
-			GUI.Box( new Rect(Screen.width/2 - Screen.width/4, 0, Screen.width/2, Screen.height/2), "");
-
-			GUI.Box( new Rect(Screen.width/2 - Screen.width/4, 0, Screen.width/2, Screen.height/2), "Level Info: "+lvlName, titleLetters);
-			GUI.Box( new Rect(Screen.width/2 - Screen.width/4, Screen.height/24, Screen.width/2, Screen.height/4), lvlInfo);
-			GUI.Box( new Rect(Screen.width/2 - Screen.width/4, Screen.height/3, Screen.width/2, Screen.height/6), "You will recieve:");
-			GUI.Box (new Rect (Screen.width/2 - Screen.width/4,Screen.height/3 + Screen.height/16,Screen.width/12,Screen.height/10), xpIcon);
-			GUI.Box (new Rect (Screen.width/2 - Screen.width/4,Screen.height/3 + Screen.height/16,Screen.width/12,Screen.height/10), xp.ToString(), bigNumbers);
-			GUI.Box (new Rect (Screen.width/2 - Screen.width/6,Screen.height/3 + Screen.height/16,Screen.width/12,Screen.height/10), goldIcon);
-			GUI.Box (new Rect (Screen.width/2 - Screen.width/6,Screen.height/3 + Screen.height/16,Screen.width/12,Screen.height/10), gold.ToString(), bigNumbers);
-			if (skill) {
-				GUI.Box (new Rect (Screen.width/2 - Screen.width/12,Screen.height/3 + Screen.height/16,Screen.width/12,Screen.height/10), skillIcon);
-			}
-			if(GUI.Button(new Rect(Screen.width/2 - Screen.width/4, Screen.height/2, Screen.width/8, Screen.height/12), "", startHover)) {
-				gameStatus.storeNode(storedHit.collider.transform);
-				clickSound.Play();
-				nodeLoadLevel (storedHit.collider.transform);
-			}
-			if(GUI.Button(new Rect(Screen.width/2 + Screen.width/8, Screen.height/2, Screen.width/8, Screen.height/12), "", returnHover)) {
-				clickSound.Play();
-				drawBattleWindow = false;
-			}
-		}
-		*/
-	}
-	
 }
