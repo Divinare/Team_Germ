@@ -114,15 +114,15 @@ public class TrainerGUI : MonoBehaviour {
 		
 		//right
 		GUI.Box (new Rect (Screen.width/2,Screen.height/10,Screen.width/2, (Screen.height - 2*Screen.height/10)), "", trainerBox);
-		GUI.Box (new Rect (Screen.width/2,Screen.height/10,Screen.width/6,Screen.width/6), allBacsImages[selectedBacteria]);
+		GUI.Box (new Rect (Screen.width/2,Screen.height/10,Screen.width/6,Screen.width/6), allBacsImages[selectedBacteria], yellowText);
 		GUI.Box (new Rect (Screen.width/2+Screen.width/6,Screen.height/10,2*(Screen.width/6),(Screen.width/6)/2), " "+selectedBacteria+"\n Level "+bacLevel, orangeText);
-		GUI.Box (new Rect (Screen.width/2+Screen.width/6,Screen.height/10+(Screen.width/6)/2,2*(Screen.width/6),(Screen.width/6)/2), allBacsStories[selectedBacteria]);
+		GUI.Box (new Rect (Screen.width/2+Screen.width/6,Screen.height/10+(Screen.width/6)/2,2*(Screen.width/6),(Screen.width/6)/2), allBacsStories[selectedBacteria], yellowText);
 
 		//Statbox
 		GUI.Label(new Rect (Screen.width/2+Screen.width/6,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "Level "+bacLevel+" Stats: \nHealth : "+bacHealth+"\nDamage : "+bacDmg+"\nSpeed : "+bacSpeed, blueText);
 		
 		//NextLevelBox
-		GUI.Label (new Rect (Screen.width/2+2*Screen.width/6,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "Next Level : "+(bacLevel+1)+"\nHealth : "+(bacHealth+lvlUpHealth)+"\nDamage : "+(bacDmg+lvlUpDmg)+"\nSpeed : "+(bacSpeed+lvlUpSpeed)+"\nXP required to level : "+lvlUpXp*bacLevel, yellowText);
+		GUI.Label (new Rect (Screen.width/2+2*Screen.width/6,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "Next Level : "+(bacLevel+1)+"\nHealth : "+(bacHealth+lvlUpHealth)+"\nDamage : "+(bacDmg+lvlUpDmg)+"\nSpeed : "+(bacSpeed+lvlUpSpeed)+"\nXP required to level : "+lvlUpXp*bacLevel, blueText);
 		
 		//LvlUpButton
 		if (xp >= lvlUpXp*bacLevel) {
@@ -187,9 +187,9 @@ public class TrainerGUI : MonoBehaviour {
 		allBacsImages.Add ("smallPurple", smallPurple);
 		allBacsImages.Add ("smallBlue", smallBlue);
 		
-		allBacsStories.Add ("Gatbac", "Gatbac is a very fat Epstein-Barr virus,\nthat causes mononucleosis, also known as the \nkissing disease.");
-		allBacsStories.Add ("Phage", "A Bacteriophage is a virus that infects and \nreplicates within a bacterium.Bacteriophages are \ncomposed of proteins that encapsulate a \nDNA or RNA genome.");
-		allBacsStories.Add ("Strepto", "Streptococcus pneumoniae, or pneumococcus, is \na significant human pathogenic bacterium and is \nthe cause of pneumonia.");
+		allBacsStories.Add ("Gatbac", "Gatbac is a very fat Epstein-Barr virus, that causes mononucleosis, also known as the kissing disease.");
+		allBacsStories.Add ("Phage", "A Bacteriophage is a virus that infects and replicates within a bacterium. Bacteriophages are composed of proteins that encapsulate a DNA or RNA genome.");
+		allBacsStories.Add ("Strepto", "Streptococcus pneumoniae, or pneumococcus, is a significant human pathogenic bacterium and is the cause of pneumonia.");
 		allBacsStories.Add ("smallRed", "...");
 		allBacsStories.Add ("smallBlue", "...");
 		allBacsStories.Add ("smallPurple", "...");

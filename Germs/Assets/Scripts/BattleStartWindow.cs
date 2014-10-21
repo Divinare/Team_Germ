@@ -7,16 +7,16 @@ public class BattleStartWindow : MonoBehaviour {
 	public float rewardGold;
 	public float rewardXp;
 	public bool rewardSkill;
-	public Transform levelNode;
+	private Transform levelNode;
 
 	public Texture2D xpIcon;
 	public Texture2D goldIcon;
 
 	private BattleStartWindow battleStartWindow;
-	public Rect windowRect;
-	public bool drawWindow;
+	private Rect windowRect;
+	private bool drawWindow;
 	public GUISkin battleStartWindowBackground;
-	
+
 	// Use this for initialization
 	void Start () {
 		drawWindow = false;
