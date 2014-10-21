@@ -62,7 +62,7 @@ public class TurnHandler : MonoBehaviour {
 		//stun
 		if (activeUnit.transform.GetComponent<UnitStatus>().IsUnitStunned()) {
 			//remove one round of stun
-			unit.transform.GetComponent<UnitStatus>().Stunned(1);
+			unit.transform.GetComponent<UnitStatus>().countDownStun();
 			return false;
 		}
 		//other things

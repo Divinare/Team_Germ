@@ -20,9 +20,10 @@ public class AI_TurnLogic : MonoBehaviour {
 
 	public void handleTurnForGerm(GameObject unit) {
 		stunned = unit.transform.GetComponent<UnitStatus>().IsUnitStunned();
+		currentUnit = unit;
+		thisStatus = currentUnit.GetComponent<UnitStatus> ();
+
 		if (!stunned) {
-			currentUnit = unit;
-			thisStatus = currentUnit.GetComponent<UnitStatus> ();
 			currentSquareStatus = currentUnit.GetComponent<UnitStatus> ().getSquare ().GetComponent<SquareStatus> ();
 			if (Random.Range (1,10) > 5) {
 				if (attemptRangedAttack ()) {

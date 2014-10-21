@@ -49,6 +49,8 @@ public class Map : MonoBehaviour {
 		setNodeActive(transform.FindChild("Node1"));
 		if (!transform.FindChild("Node1").GetComponent<Node>().isNodeCompleted()) {
 			transform.FindChild("Node1").FindChild("yellowArrow").gameObject.SetActive (true);
+		} else {
+			transform.FindChild("Node1").FindChild("yellowArrow").gameObject.SetActive (false);
 		}
 
 		clickSound = GameObject.FindGameObjectWithTag ("AudioController").GetComponent<AudioSource> (); 

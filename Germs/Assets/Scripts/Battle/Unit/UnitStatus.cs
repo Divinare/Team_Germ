@@ -97,16 +97,20 @@ public class UnitStatus : MonoBehaviour {
 	}
 
 	public void Stunned(int rounds) {
-		if (!stunned) {
-			stunned = true;
-			animator.SetBool("stunned", true);
-			stunRounds = rounds;
-		} else {
-			stunRounds -= rounds;
-			Debug.Log (unitName + " STUNNED FOR "+stunRounds);
-			if (stunRounds == 0) {
-				stunned = false;
-				animator.SetBool("stunned", false);
+		stunned = true;
+		animator.SetBool("stunned", true);
+		stunRounds = rounds;
+	}
+
+	public void countDownStun() {
+		stunRounds -= 1;
+		Debug.Log (unitName + " STUNNED FOR "+stunRounds);
+		if (stunRounds == 0) {
+			stunned = false;
+			animator.SetBool("stunned", false);
+			if (enemy) {
+				//Debug.Log ("Deselect?");
+				//Deselect();
 			}
 		}
 	}
