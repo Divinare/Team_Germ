@@ -9,9 +9,13 @@ public class TurnHandler : MonoBehaviour {
 	private List<GameObject> unitList;
 	private bool battleIsOver;
 
+	private GameStatus gameStatus;
+
 	
 	// Puts all units in to a list, sorts them by speed and gives the turn to the fastest one
 	void Start () {
+		gameStatus = GameObject.Find("GameStatus").GetComponent<GameStatus>();
+
 		battleIsOver = false;
 		GameObject[] units = GameObject.FindGameObjectsWithTag("Unit");
 		unitList = new List<GameObject>(units);
@@ -90,11 +94,13 @@ public class TurnHandler : MonoBehaviour {
 		}
 		if (playerIsDead) {
 			Debug.Log("BATTLE IS OVER, the enemy side has triumphed!");
+			gameStatus.levelFailed();
 			this.battleIsOver = true;
 			GameObject.FindGameObjectWithTag("TurnHandler").transform.GetComponent<BattleEndWindow>().drawGameEndWindow("enemy");
 		}
 		else if (enemyIsDead) {
 			Debug.Log("BATTLE IS OVER, the player is very victorious! Much win! So wow!");
+			gameStatus.levelCompleted();
 			this.battleIsOver = true;
 			GameObject.FindGameObjectWithTag("TurnHandler").transform.GetComponent<BattleEndWindow>().drawGameEndWindow("player");
 		}

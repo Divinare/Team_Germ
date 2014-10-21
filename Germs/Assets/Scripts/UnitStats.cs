@@ -9,11 +9,12 @@ public class UnitStats : MonoBehaviour {
 
 	private Dictionary<string, int[]> baseUnitStats = new Dictionary<string, int[]>();
 
-	public Dictionary<string, int[]> enemiesForLevel = new Dictionary<string, int[]>();
+	public Dictionary<string, int[]> enemyWithStats = new Dictionary<string, int[]>();
 	public Dictionary<int, string[]> unitSpecialAttacks = new Dictionary<int, string[]>();
 	private string[] unravelArray = new string[4];
-	private string[] enemiesInLvl = new string[5];
+	private List<string> enemiesToSpawn = new List<string>();
 	private int[] unravelStatsArray = new int[7];
+	private int[] enemyStatsArray = new int[7];
 	public int levelsCompleted;
 	public int baseStatIncreaseFactor;
 
@@ -36,28 +37,20 @@ public class UnitStats : MonoBehaviour {
 		unitSpecialAttacks.Add(3, new string[] {"Poison", "Poison deals 50 damage over 2 rounds.", "50", "2"});
 	}
 
-	public void storeEnemyUnitStats(string levelName) {
+	public int[] getEnemyUnitStats(string enemyName) {
 		levelsCompleted = gameStatus.getCompletedLevels();
-		enemiesInLvl = battleStatus.getEnemiesToLoad(levelName);
 
 		if (levelsCompleted == 0) {
 			levelsCompleted = 1;
 		}
 
 		baseStatIncreaseFactor = levelsCompleted;
-		enemiesForLevel.Clear();
+		enemyWithStats.Clear();
 
-		foreach (string unitName in enemiesInLvl) {
-			//Debug.Log (unitName);
-			unravelStatsArray = baseUnitStats[unitName];
-			enemiesForLevel[unitName] = new int[] {unravelStatsArray[0]*baseStatIncreaseFactor,unravelStatsArray[1]*baseStatIncreaseFactor, unravelStatsArray[2]*baseStatIncreaseFactor, unravelStatsArray[3], unravelStatsArray[4], unravelStatsArray[5], unravelStatsArray[6]};
-		}
+		unravelStatsArray = baseUnitStats[enemyName];
+		enemyStatsArray = new int[] {unravelStatsArray[0]*baseStatIncreaseFactor,unravelStatsArray[1]*baseStatIncreaseFactor, unravelStatsArray[2]*baseStatIncreaseFactor, unravelStatsArray[3], unravelStatsArray[4], unravelStatsArray[5], unravelStatsArray[6]};
 
-
-	}
-
-	public Dictionary<string, int[]> getEnemyUnitStats() {
-		return enemiesForLevel;
+		return enemyStatsArray;
 	}
 
 	public string getSpecialAttackName(int key) {

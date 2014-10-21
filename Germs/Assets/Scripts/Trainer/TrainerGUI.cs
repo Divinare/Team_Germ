@@ -13,8 +13,6 @@ public class TrainerGUI : MonoBehaviour {
 	public GUIStyle orangeText;
 	public GUIStyle lvlUpButton;
 	public GUIStyle deactiveLvlUpButton;
-	public GUIStyle shopHover;
-	public GUIStyle mapHover;
 
 	public Texture2D gatbac;
 	public Texture2D smallRed;

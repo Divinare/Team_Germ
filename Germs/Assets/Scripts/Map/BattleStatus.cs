@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class BattleStatus : MonoBehaviour {
 	public static BattleStatus battleStatus;
@@ -8,7 +9,7 @@ public class BattleStatus : MonoBehaviour {
 	public List<GameObject> allUnits = new List<GameObject>();
 	public List<string> selectedUnits = new List<string>();
 	public Dictionary<string, int[]> currentUnitStats = new Dictionary<string, int[]>();
-	public Dictionary<string, string[]> enemiesToLoad = new Dictionary<string, string[]>();
+	public List<string> enemiesToSpawn = new List<string>();
 	public int[] unravelArray = new int[7];
 
 	// Use this for initialization
@@ -34,12 +35,15 @@ public class BattleStatus : MonoBehaviour {
 		selectedUnits.Add ("");
 		selectedUnits.Add ("");
 		selectedUnits.Add ("");
-
-		enemiesToLoad.Add ("Node1", new string[] {"Gatbac", "Phage", "smallRed", "smallBlue", "smallPurple"});
 	}
 
-	public string[] getEnemiesToLoad(string nodeName) {
-		return enemiesToLoad[nodeName];
+	public List<string> getEnemiesToSpawn() {
+		enemiesToSpawn.Clear();
+		for (int i=0; i<5; i++) {
+			var randomKey = currentUnitStats.Keys.ToArray()[(int)Random.Range(0,currentUnitStats.Keys.Count-1)];
+			enemiesToSpawn.Add (randomKey);
+		}
+		return enemiesToSpawn;
 	}
 	
 	public List<string> getSelectedUnits() {

@@ -6,15 +6,17 @@ public class BattleInitializer : MonoBehaviour {
 
 	public string[] friendlyGermsToSpawn;
 	public GameObject[] hostileGermsToSpawn;
-	public Dictionary<string, int[]> enemiesToSpawn = new Dictionary<string, int[]>();
+	public List<string> enemiesToSpawn = new List<string>();
 	public int[] unravelArray = new int[7];
 
 	private UnitStats unitStats;
+	private BattleStatus battleStatus;
 
 	// Use this for initialization
 	void Start () {
 		unitStats = GameObject.Find("UnitStats").GetComponent<UnitStats>();
-		enemiesToSpawn = unitStats.getEnemyUnitStats();
+		battleStatus = GameObject.Find("BattleStatus").GetComponent<BattleStatus>();
+		enemiesToSpawn = battleStatus.getEnemiesToSpawn();
 	}
 	
 	// Update is called once per frame
@@ -26,12 +28,11 @@ public class BattleInitializer : MonoBehaviour {
 		GameObject matrix = GameObject.FindGameObjectWithTag ("Matrix");
 		GameObject[,] squares = matrix.GetComponent<Matrix> ().getSquares ();
 		GameObject battleStatus = GameObject.FindGameObjectWithTag ("Battle Tracker");
-		//kommentoin tän ny pois ku error
-		//friendlyGermsToSpawn = battleStatus.GetComponent<BattleStatus>().getSelectedBacsTest ().ToArray ();
+//		friendlyGermsToSpawn = battleStatus.GetComponent<BattleStatus>().getSelectedBacsTest ().ToArray ();
 		if (friendlyGermsToSpawn.Length == 0) {
 			friendlyGermsToSpawn = new string[5];
 			friendlyGermsToSpawn[0] = "Gatbac";
-			friendlyGermsToSpawn[1] = "Strep_p";
+			friendlyGermsToSpawn[1] = "Strepto";
 			friendlyGermsToSpawn[2] = "Gatbac";
 			friendlyGermsToSpawn[3] = "smallRed";
 			friendlyGermsToSpawn[4] = "Phage";
@@ -46,19 +47,11 @@ public class BattleInitializer : MonoBehaviour {
 			squares[0, y].GetComponent <SquareStatus>().setStatus ("friendly", spawnedGerm); // Set square status to indicate there is a friendly unit
 			y -= 2;
 		}
-		y = 8;
-		/*
-		for (int i = 0; i < hostileGermsToSpawn.Length; i++) {
-			GameObject spawnedGerm = SpawnObjectAtSquare (hostileGermsToSpawn[i], squares[14, y]);
-			spawnedGerm.GetComponent<UnitStatus>().setSquare (squares[14,y]); 
-			squares[14, y].GetComponent <SquareStatus>().setStatus ("enemy", spawnedGerm); // Set square status to indicate there is a hostile unit
-			y -= 2;
-			spawnedGerm.GetComponent<UnitStatus>().SetAsEnemy();
-		}
-		*/
 
-		foreach (string unitName in enemiesToSpawn.Keys) {
-			GameObject germToSpawn = GameObject.FindGameObjectWithTag("Unit Prefab Container").GetComponent<UnitPrefabContainer>().getGerm(unitName);
+		y = 8;
+		for (int i=0; i<enemiesToSpawn.Count; i++) {
+			Debug.Log ("BATTLEINIT "+enemiesToSpawn[i]);
+			GameObject germToSpawn = GameObject.FindGameObjectWithTag("Unit Prefab Container").GetComponent<UnitPrefabContainer>().getGerm(enemiesToSpawn[i]);
 			GameObject spawnedGerm = SpawnObjectAtSquare (germToSpawn, squares[14, y]);
 			spawnedGerm.transform.GetChild(0).position = spawnedGerm.transform.position;
 			spawnedGerm.GetComponent<UnitStatus>().setSquare (squares[14,y]);
@@ -67,7 +60,7 @@ public class BattleInitializer : MonoBehaviour {
 			y -= 2;
 
 
-			unravelArray = enemiesToSpawn[unitName];
+			unravelArray = unitStats.getEnemyUnitStats(enemiesToSpawn[i]);
 			//Debug.Log (unitName+" hp "+unravelArray[0]);
 			spawnedGerm.GetComponent<UnitStatus>().setHp(unravelArray[0]);
 			spawnedGerm.GetComponent<UnitStatus>().setDmg(unravelArray[1]);
