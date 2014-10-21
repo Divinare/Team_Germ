@@ -3,7 +3,8 @@ using System.Collections;
 
 public class RangedAttack : MonoBehaviour {
 	
-	public Rigidbody projectile;
+	public Rigidbody rangedProjectile;
+	public Rigidbody stunProjectile;
 	private float bulletSpeed;	
 	private float rotationSpeed;
 	private Rigidbody bullet;
@@ -23,9 +24,16 @@ public class RangedAttack : MonoBehaviour {
 	
 
 	public void attack(GameObject attacker, GameObject target) {
+		spawnProjectile(attacker, target, rangedProjectile);
+	}
 
+	public void initiateStun(GameObject attacker, GameObject target) {
+		spawnProjectile(attacker, target, stunProjectile);
+	}
+
+	public void spawnProjectile (GameObject attacker, GameObject target, Rigidbody projectile) {
 		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector>().lockInput (); // lock input after attack action has been initiated
-				
+
 		// Setting up the bullet/projectile
 		bullet = new Rigidbody();
 		bullet = Instantiate(projectile, attacker.transform.position, attacker.transform.rotation) as Rigidbody;

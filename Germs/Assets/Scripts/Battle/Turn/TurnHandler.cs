@@ -46,9 +46,14 @@ public class TurnHandler : MonoBehaviour {
 						unitListIndex++;
 						// Checks wheter the next unit is still alive so it can be given the next turn
 						if (unitListIndex <= unitList.Count - 1 && unitList [unitListIndex] != null) {
-							activeUnit = unitList [unitListIndex];
-							activeUnit.transform.GetComponent<UnitStatus>().Select();
-							DrawSelectionCircleForUnit(activeUnit);
+								activeUnit = unitList [unitListIndex];
+							if (!activeUnit.transform.GetComponent<UnitStatus>().IsUnitStunned()) {
+								activeUnit.transform.GetComponent<UnitStatus>().Select();
+								DrawSelectionCircleForUnit(activeUnit);
+							} else {
+								//stunned -1 round
+								activeUnit.transform.GetComponent<UnitStatus>().Stunned(1);
+							}
 						}
 					}
 				}

@@ -28,7 +28,7 @@ public class ActionHandler : MonoBehaviour {
 				this.GetComponent<MeleeAttack>().initiateAttack (initiator, target);
 			}
 			if (actionType.Equals ("rangedStun")) {
-				this.GetComponent<RangedStun>().initiateStun (initiator, target);
+				this.GetComponent<RangedAttack>().initiateStun (initiator, target);
 			}
 		}
 		else { // actions that can only be performed on friendly targets

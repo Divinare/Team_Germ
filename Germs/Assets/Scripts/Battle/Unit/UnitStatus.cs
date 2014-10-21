@@ -97,9 +97,18 @@ public class UnitStatus : MonoBehaviour {
 	}
 
 	public void Stunned(int rounds) {
-		stunned = true;
-		animator.SetBool("stunned", true);
-		stunRounds = unitRounds + rounds;
+		if (!stunned) {
+			stunned = true;
+			animator.SetBool("stunned", true);
+			stunRounds = rounds;
+		} else {
+			stunRounds -= rounds;
+			Debug.Log (unitName + " STUNNED FOR "+stunRounds);
+			if (stunRounds == 0) {
+				stunned = false;
+				animator.SetBool("stunned", false);
+			}
+		}
 	}
 
 	public bool IsUnitStunned() {
