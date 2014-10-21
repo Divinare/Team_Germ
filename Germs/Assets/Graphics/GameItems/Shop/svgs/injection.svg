@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="200"
+   height="200"
+   id="svg3038"
+   version="1.1"
+   inkscape:version="0.48.5 r10040"
+   sodipodi:docname="injection.svg">
+  <defs
+     id="defs3040">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 100 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="200 : 100 : 1"
+       inkscape:persp3d-origin="100 : 66.666667 : 1"
+       id="perspective3911" />
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect3122"
+       is_visible="true"
+       pattern="M 0,5 C 0,2.24 2.24,0 5,0 7.76,0 10,2.24 10,5 10,7.76 7.76,10 5,10 2.24,10 0,7.76 0,5 z"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect3120"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect3116"
+       is_visible="true"
+       pattern="M 0,5 C 0,2.24 2.24,0 5,0 7.76,0 10,2.24 10,5 10,7.76 7.76,10 5,10 2.24,10 0,7.76 0,5 z"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect3114"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect3110"
+       is_visible="true"
+       pattern="M 0,5 C 0,2.24 2.24,0 5,0 7.76,0 10,2.24 10,5 10,7.76 7.76,10 5,10 2.24,10 0,7.76 0,5 z"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect3108"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect3104"
+       is_visible="true"
+       pattern="M 0,5 C 0,2.24 2.24,0 5,0 7.76,0 10,2.24 10,5 10,7.76 7.76,10 5,10 2.24,10 0,7.76 0,5 z"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect3102"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect3098"
+       is_visible="true"
+       pattern="M 0,5 C 0,2.24 2.24,0 5,0 7.76,0 10,2.24 10,5 10,7.76 7.76,10 5,10 2.24,10 0,7.76 0,5 z"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect3096"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect3092"
+       is_visible="true"
+       pattern="M 0,5 C 0,2.24 2.24,0 5,0 7.76,0 10,2.24 10,5 10,7.76 7.76,10 5,10 2.24,10 0,7.76 0,5 z"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect3090"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect3086"
+       is_visible="true"
+       pattern="M 0,5 C 0,2.24 2.24,0 5,0 7.76,0 10,2.24 10,5 10,7.76 7.76,10 5,10 2.24,10 0,7.76 0,5 z"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect3084"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect3080"
+       is_visible="true"
+       pattern="M 0,5 C 0,2.24 2.24,0 5,0 7.76,0 10,2.24 10,5 10,7.76 7.76,10 5,10 2.24,10 0,7.76 0,5 z"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect3078"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect3074"
+       is_visible="true"
+       pattern="M 0,5 C 0,2.24 2.24,0 5,0 7.76,0 10,2.24 10,5 10,7.76 7.76,10 5,10 2.24,10 0,7.76 0,5 z"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect3072"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect3068"
+       is_visible="true"
+       pattern="m -169.65742,823.4307 c 0,-2.76 2.24,-5 5,-5 2.76,0 5,2.24 5,5 0,2.76 -2.24,5 -5,5 -2.76,0 -5,-2.24 -5,-5 z"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect3066"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect3062"
+       is_visible="true"
+       pattern="M 0,5 C 0,2.24 2.24,0 5,0 7.76,0 10,2.24 10,5 10,7.76 7.76,10 5,10 2.24,10 0,7.76 0,5 z"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect3060"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect3056"
+       is_visible="true"
+       pattern="M 0,5 C 0,2.24 2.24,0 5,0 7.76,0 10,2.24 10,5 10,7.76 7.76,10 5,10 2.24,10 0,7.76 0,5 z"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect3054"
+       is_visible="true" />
+    <inkscape:path-effect
+       effect="skeletal"
+       id="path-effect3050"
+       is_visible="true"
+       pattern="M 0,5 C 0,2.24 2.24,0 5,0 7.76,0 10,2.24 10,5 10,7.76 7.76,10 5,10 2.24,10 0,7.76 0,5 z"
+       copytype="single_stretched"
+       prop_scale="1"
+       scale_y_rel="false"
+       spacing="0"
+       normal_offset="0"
+       tang_offset="0"
+       prop_units="false"
+       vertical_pattern="false"
+       fuse_tolerance="0" />
+    <inkscape:path-effect
+       effect="spiro"
+       id="path-effect3048"
+       is_visible="true" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="3.065"
+     inkscape:cx="75.611271"
+     inkscape:cy="96.533442"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer2"
+     showgrid="false"
+     inkscape:window-width="1658"
+     inkscape:window-height="944"
+     inkscape:window-x="1763"
+     inkscape:window-y="13"
+     inkscape:window-maximized="0" />
+  <metadata
+     id="metadata3043">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="color">
+    <path
+       style="fill:#ffff00;fill-opacity:1;fill-rule:nonzero;stroke:none"
+       id="path3139"
+       d="m 77.367257,84.996313 c 0.965693,-0.386793 1.970945,-0.626187 2.996372,-0.783138 0.921073,-0.177479 1.83528,-0.03213 2.754081,0.06157 0.142371,0.01223 0.287028,0.0085 0.427114,0.03669 0.09674,0.01947 0.683596,0.232384 0.777215,0.264422 0.386977,0.132432 0.780346,0.227062 1.166929,0.360887 0.478307,0.231071 1.018477,0.226364 1.522063,0.346124 0.147966,0.03519 0.618744,0.223657 0.766907,0.281299 0.682369,0.271584 1.163158,0.814374 1.72963,1.251192 0.600518,0.354894 1.093992,0.861018 1.726278,1.166045 0.590703,0.458846 1.281911,0.748366 1.911469,1.145954 0.674219,0.424183 1.361584,0.811331 2.043423,1.221305 0.616954,0.395931 1.222817,0.826722 1.880854,1.153491 0.716879,0.394044 1.403889,0.834591 2.141983,1.190195 0.806115,0.316235 1.570275,0.734437 2.354725,1.105103 0.72127,0.297836 1.38626,0.703875 2.12331,0.978842 0.77791,0.244449 1.49426,0.657482 2.24284,0.981459 0.68753,0.267245 1.31625,0.672695 1.98965,0.98058 0.68177,0.471388 1.4543,0.792353 2.14919,1.23469 0.59612,0.413692 1.20011,0.802854 1.81085,1.193839 0.59048,0.403234 1.18382,0.824639 1.82584,1.144389 0.28581,0.22546 0.64055,0.31078 0.96018,0.46271 0.33817,0.16075 0.63805,0.37827 0.98198,0.53314 0.73974,0.2324 1.48516,0.45501 2.25158,0.58391 0.89725,0.11616 1.80372,0.12168 2.70695,0.12962 0.97648,0.005 1.95299,0.002 2.92948,-2.2e-4 0.97983,-0.001 1.95966,-0.001 2.93949,-0.002 0.6569,3.5e-4 0.33056,4e-4 0.97902,-1.1e-4 0,0 -2.0784,1.51007 -2.0784,1.51007 l 0,0 c -0.64781,-3.8e-4 -0.32148,-4.2e-4 -0.97898,1.4e-4 -0.97975,-4e-4 -1.9595,7.6e-4 -2.93925,0.002 -0.97737,8.6e-4 -1.95475,0.005 -2.9321,-0.002 -0.91387,-0.0123 -1.832,-0.0208 -2.7373,-0.16076 -0.7781,-0.14913 -1.54612,-0.36941 -2.29019,-0.63868 -0.65756,-0.31954 -1.29837,-0.6704 -1.9482,-1.00473 -0.63742,-0.34521 -1.2476,-0.7483 -1.83987,-1.16458 -0.60388,-0.39613 -1.21438,-0.775219 -1.80534,-1.190071 -0.70334,-0.416281 -1.43929,-0.778462 -2.13612,-1.209079 -0.66373,-0.321711 -1.29851,-0.707698 -1.98514,-0.97658 -0.73834,-0.335708 -1.45835,-0.725739 -2.23217,-0.973012 -0.73513,-0.291427 -1.41082,-0.691344 -2.138768,-0.99335 -0.77884,-0.37977 -1.546458,-0.787178 -2.349789,-1.110988 -0.734312,-0.366625 -1.43103,-0.797831 -2.150867,-1.191189 -0.651191,-0.351143 -1.272663,-0.761303 -1.88934,-1.168655 -0.677906,-0.415335 -1.373887,-0.792879 -2.043333,-1.222463 -0.635305,-0.376139 -1.303537,-0.695251 -1.904099,-1.127932 -0.626953,-0.341023 -1.150921,-0.829511 -1.754679,-1.207545 -0.537178,-0.435958 -1.019453,-0.935138 -1.68313,-1.186694 -0.746568,-0.274471 -1.537866,-0.335608 -2.282757,-0.619641 -0.763706,-0.247128 -1.534966,-0.542737 -2.336358,-0.61692 -0.904452,-0.09323 -1.804613,-0.199335 -2.707906,-0.01179 -1.030717,0.175653 -2.019278,0.478752 -3.01625,0.786464 0,0 2.070933,-1.544329 2.070933,-1.544329 z"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Smoosh\Dropbox\Bacteria_Vectors\vaccine_yellow.png"
+       inkscape:export-xdpi="125"
+       inkscape:export-ydpi="125" />
+    <path
+       style="fill:#ffff00;fill-opacity:1;fill-rule:nonzero;stroke:#ffff00;stroke-width:1.30505705000000010;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       d="M 48.788809,156.24457 C 34.268974,142.64653 32.272796,140.66274 32.642331,140.19828 33.114233,139.60516 71.870726,92.884029 75.386096,88.670473 l 2.245671,-2.69168 2.046248,0 c 1.125435,0 2.714094,0.227558 3.530352,0.505685 1.241902,0.423159 1.58125,0.729319 2.079377,1.876019 0.794277,1.828449 3.17675,5.584855 4.709664,7.425648 l 1.238803,1.487613 -3.611426,4.266902 -3.611426,4.2669 -1.983654,-1.06781 c -2.503494,-1.34764 -3.562437,-1.59073 -4.943697,-1.13488 -0.852776,0.28144 -1.170323,0.61809 -1.413386,1.49839 -0.383521,1.389 0.244052,4.07436 1.485057,6.35449 0.733523,1.34773 0.78476,1.62583 0.397093,2.15529 -0.469609,0.64139 -5.435853,6.9198 -5.841211,7.38456 -0.130316,0.14941 -0.963902,-0.25061 -1.852417,-0.88894 -2.25277,-1.61846 -4.261097,-2.46666 -5.860304,-2.47507 -2.013257,-0.0106 -2.49112,0.62328 -2.313267,3.06842 0.144278,1.98355 0.943714,4.05243 2.721753,7.04369 l 0.875733,1.47327 -2.854749,3.91009 c -6.04428,8.27873 -9.947051,14.84121 -9.507469,15.98675 0.640683,1.66959 4.868333,-1.42765 13.980078,-10.24201 l 3.83707,-3.71184 1.240003,1.12027 c 4.906848,4.43305 9.589569,5.53383 10.366832,2.43697 0.422643,-1.68393 -1.275687,-6.10377 -3.60001,-9.3689 l -1.060551,-1.48982 1.318512,-1.44656 c 0.725184,-0.7956 2.252558,-2.42889 3.394166,-3.62953 l 2.075651,-2.18297 2.107201,1.47304 c 1.158962,0.81017 2.907915,1.75446 3.886564,2.09843 1.533175,0.53887 1.949358,0.56938 3.00801,0.22055 0.960157,-0.31639 1.295077,-0.63706 1.53264,-1.46742 0.440858,-1.54096 -0.523397,-4.76574 -2.274088,-7.60528 l -1.438692,-2.33349 2.857781,-3.26084 c 1.571782,-1.79346 3.19896,-3.68627 3.615955,-4.20624 l 0.758166,-0.9454 1.975751,1.5203 c 4.33864,3.33851 8.88703,4.93662 10.05269,3.53209 0.96661,-1.1647 -0.32578,-5.16848 -2.89188,-8.95892 -0.54387,-0.803342 -0.92786,-1.521604 -0.85333,-1.596133 0.0745,-0.07453 1.27695,0.612631 2.67205,1.527023 4.01701,2.63288 4.5147,2.78141 9.99504,2.98285 l 4.84838,0.17822 -29.266818,33.76835 c -16.096751,18.57259 -29.364976,33.87275 -29.484943,34.00034 -0.119964,0.12759 -7.673782,-6.75035 -16.78626,-15.28432 l 0,0 z"
+       id="path3141"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Smoosh\Dropbox\Bacteria_Vectors\vaccine_yellow.png"
+       inkscape:export-xdpi="125"
+       inkscape:export-ydpi="125" />
+  </g>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-852.36218)">
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:none"
+       d="m 129.20065,17.944535 c 0.4494,0.368342 -1.79668,3.985351 -6.32292,10.237477 -4.52625,6.252125 -11.33269,15.138849 -20.00093,26.092337 C 94.208572,65.227837 83.678543,78.247947 71.708557,92.817506 59.738571,107.38706 46.328644,123.50631 31.903996,140.70801 c 10.792464,10.06798 21.97424,20.54157 33.4851,31.35799 0.606495,-0.70366 1.213957,-1.40832 1.822365,-2.11398 19.810619,-22.97703 38.642429,-44.70094 55.752519,-64.32787 17.11008,-19.626927 32.49975,-37.158342 45.30816,-51.619018 -12.509,-10.441018 -22.48383,-19.159769 -29.2299,-25.443568 -6.74607,-6.283799 -10.2632,-10.130259 -9.84159,-10.617029 0.42161,-0.48677 4.74713,2.459615 12.28127,8.544506 7.53415,6.084891 18.2771,15.310675 31.51838,27.173036 -12.63481,15.012369 -28.37164,33.537428 -46.25773,54.449543 -17.88608,20.91211 -37.920106,44.20981 -59.03138,68.63608 -0.648353,0.75016 -1.295713,1.49906 -1.942048,2.24666 C 51.618466,165.95005 37.884345,153.25623 24.865988,141.18433 39.429739,123.01831 53.115968,106.07848 65.484242,90.953788 77.852517,75.829092 88.902852,62.519759 98.191435,51.564769 107.48002,40.60978 115.00684,32.008991 120.32466,26.250724 c 5.31781,-5.758267 8.42659,-8.674531 8.87599,-8.306189 z"
+       id="path3046"
+       inkscape:path-effect="#path-effect3048;#path-effect3050"
+       inkscape:original-d="M 129.20065,17.944535 28.384992,140.94617 65.579119,175.53018 170.63622,53.833605 z"
+       inkscape:connector-curvature="0"
+       transform="translate(0,852.36218)"
+       sodipodi:nodetypes="ccccc"
+       inkscape:export-filename="C:\Users\Smoosh\Dropbox\Bacteria_Vectors\vaccine_yellow.png"
+       inkscape:export-xdpi="125"
+       inkscape:export-ydpi="125" />
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:none"
+       d="m 151.06036,36.541599 c -2.02355,-1.87692 1.01146,-8.442957 6.7746,-14.656334 5.76313,-6.213377 12.08276,-9.732821 14.10631,-7.855901 2.02355,1.87692 -1.01146,8.442957 -6.7746,14.656334 -5.76313,6.213377 -12.08276,9.732821 -14.10631,7.855901 z"
+       id="path3052"
+       inkscape:path-effect="#path-effect3054;#path-effect3056"
+       inkscape:original-d="M 151.06036,36.541599 171.94127,14.029364"
+       inkscape:connector-curvature="0"
+       transform="translate(0,852.36218)"
+       inkscape:export-filename="C:\Users\Smoosh\Dropbox\Bacteria_Vectors\vaccine_yellow.png"
+       inkscape:export-xdpi="125"
+       inkscape:export-ydpi="125" />
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:none"
+       d="m 143.30529,842.04402 c 1.84022,-2.05699 16.01648,7.61976 31.64344,21.59989 15.62697,13.98013 26.81622,26.99576 24.976,29.05275 -1.84022,2.05699 -16.01648,-7.61976 -31.64344,-21.59989 -15.62697,-13.98013 -26.81622,-26.99576 -24.976,-29.05275 z"
+       id="path3058"
+       inkscape:path-effect="#path-effect3060;#path-effect3062"
+       inkscape:original-d="m 143.30529,842.04402 56.61944,50.65264"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Smoosh\Dropbox\Bacteria_Vectors\vaccine_yellow.png"
+       inkscape:export-xdpi="125"
+       inkscape:export-ydpi="125" />
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:none"
+       d="M 53.181077,149.42904 C 51.089356,147.6284 68.831857,123.5843 92.784874,95.75918 116.73789,67.934057 137.87565,46.812737 139.96737,48.613377 c 2.09172,1.80064 -15.65078,25.844737 -39.6038,53.669863 -23.953014,27.82512 -45.090772,48.94644 -47.182493,47.1458 z"
+       id="path3070"
+       inkscape:path-effect="#path-effect3072;#path-effect3074"
+       inkscape:original-d="M 53.181077,149.42904 139.96737,48.613377"
+       inkscape:connector-curvature="0"
+       transform="translate(0,852.36218)"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\Smoosh\Dropbox\Bacteria_Vectors\vaccine_yellow.png"
+       inkscape:export-xdpi="125"
+       inkscape:export-ydpi="125" />
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:none"
+       d="m 62.316476,118.10767 c 2.071356,-1.82403 8.064365,1.59217 13.377252,7.62545 5.312888,6.03327 7.943697,12.41022 5.872341,14.23425 -2.071356,1.82403 -8.064365,-1.59217 -13.377252,-7.62545 -5.312888,-6.03327 -7.943697,-12.41022 -5.872341,-14.23425 z"
+       id="path3076"
+       inkscape:path-effect="#path-effect3078;#path-effect3080"
+       inkscape:original-d="m 62.316476,118.10767 19.249593,21.8597"
+       inkscape:connector-curvature="0"
+       transform="translate(0,852.36218)"
+       inkscape:export-filename="C:\Users\Smoosh\Dropbox\Bacteria_Vectors\vaccine_yellow.png"
+       inkscape:export-xdpi="125"
+       inkscape:export-ydpi="125" />
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:none"
+       d="m 76.34584,104.0783 c 2.04982,-1.8482 7.733018,1.10989 12.68571,6.60287 4.952691,5.49299 7.308645,11.45105 5.258825,13.29925 -2.04982,1.8482 -7.733018,-1.10989 -12.68571,-6.60287 C 76.651974,111.88456 74.29602,105.9265 76.34584,104.0783 z"
+       id="path3082"
+       inkscape:path-effect="#path-effect3084;#path-effect3086"
+       inkscape:original-d="m 76.34584,104.0783 17.944535,19.90212"
+       inkscape:connector-curvature="0"
+       transform="translate(0,852.36218)"
+       inkscape:export-filename="C:\Users\Smoosh\Dropbox\Bacteria_Vectors\vaccine_yellow.png"
+       inkscape:export-xdpi="125"
+       inkscape:export-ydpi="125" />
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:none"
+       d="m 87.438825,87.438825 c 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 0,0 z"
+       id="path3088"
+       inkscape:path-effect="#path-effect3090;#path-effect3092"
+       inkscape:original-d="m 87.438825,87.438825 c 0.326265,0.435019 0.652529,0.870039 0,0 z"
+       inkscape:connector-curvature="0"
+       transform="translate(0,852.36218)"
+       inkscape:export-filename="C:\Users\Smoosh\Dropbox\Bacteria_Vectors\vaccine_yellow.png"
+       inkscape:export-xdpi="125"
+       inkscape:export-ydpi="125" />
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:none"
+       d="m 85.154976,83.849918 c 1.976473,-1.926435 9.207973,2.283654 16.141744,9.397522 6.93376,7.11387 10.95707,14.45092 8.9806,16.37736 -1.97647,1.92644 -9.20797,-2.28365 -16.14174,-9.39752 C 87.201813,93.113411 83.178503,85.776353 85.154976,83.849918 z"
+       id="path3094"
+       inkscape:path-effect="#path-effect3096;#path-effect3098"
+       inkscape:original-d="M 85.154976,83.849918 110.27732,109.6248"
+       inkscape:connector-curvature="0"
+       transform="translate(0,852.36218)"
+       inkscape:export-filename="C:\Users\Smoosh\Dropbox\Bacteria_Vectors\vaccine_yellow.png"
+       inkscape:export-xdpi="125"
+       inkscape:export-ydpi="125" />
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:none"
+       d="m 100.81566,72.756933 c 1.95161,-1.951615 8.13978,1.068707 13.81286,6.741791 5.67308,5.673083 8.6934,11.861243 6.74179,13.812858 -1.95161,1.951615 -8.13978,-1.068707 -13.81286,-6.741791 -5.67308,-5.673083 -8.693405,-11.861243 -6.74179,-13.812858 z"
+       id="path3100"
+       inkscape:path-effect="#path-effect3102;#path-effect3104"
+       inkscape:original-d="m 100.81566,72.756933 20.55465,20.554649"
+       inkscape:connector-curvature="0"
+       transform="translate(0,852.36218)"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\Smoosh\Dropbox\Bacteria_Vectors\vaccine_yellow.png"
+       inkscape:export-xdpi="125"
+       inkscape:export-ydpi="125" />
+    <path
+       style="fill:#000000;fill-rule:evenodd;stroke:none"
+       d="m 113.2137,57.422512 c 1.95161,-1.951615 7.92053,0.849458 13.32346,6.252394 5.40294,5.402937 8.20401,11.371848 6.2524,13.323463 -1.95161,1.951615 -7.92053,-0.849458 -13.32346,-6.252394 -5.40294,-5.402937 -8.20401,-11.371848 -6.2524,-13.323463 z"
+       id="path3106"
+       inkscape:path-effect="#path-effect3108;#path-effect3110"
+       inkscape:original-d="m 113.2137,57.422512 19.57586,19.575857"
+       inkscape:connector-curvature="0"
+       transform="translate(0,852.36218)"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\Smoosh\Dropbox\Bacteria_Vectors\vaccine_yellow.png"
+       inkscape:export-xdpi="125"
+       inkscape:export-ydpi="125" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.8801496px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 45.084394,1010.8667 -32.420013,36.0089 z"
+       id="path3136"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\Smoosh\Dropbox\Bacteria_Vectors\vaccine_yellow.png"
+       inkscape:export-xdpi="125"
+       inkscape:export-ydpi="125" />
+  </g>
+</svg>
