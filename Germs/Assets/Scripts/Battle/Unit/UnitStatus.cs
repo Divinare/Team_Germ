@@ -26,6 +26,7 @@ public class UnitStatus : MonoBehaviour {
 
 	//for statusEffects
 	public int unitRounds;
+	private int stunRounds;
 	public bool stunned;
 	public bool poisoned;
 
@@ -96,7 +97,13 @@ public class UnitStatus : MonoBehaviour {
 	}
 
 	public void Stunned(int rounds) {
-		//stunned units can't do anything for x rounds
+		stunned = true;
+		animator.SetBool("stunned", true);
+		stunRounds = unitRounds + rounds;
+	}
+
+	public bool IsUnitStunned() {
+		return stunned;
 	}
 
 	public void switchSelectedAction(string clickedMenuItem) {
@@ -104,8 +111,8 @@ public class UnitStatus : MonoBehaviour {
 	}
 	
 	public void Select() {
-		selected = true;
 		unitRounds += 1;
+		selected = true;
 		GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnStartHandler> ().handeTurnStart ();
 	}
 	

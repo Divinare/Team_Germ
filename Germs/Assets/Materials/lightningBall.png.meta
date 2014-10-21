@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 156a45e0c6439094caa2adbfbed92a0c
+guid: d3b00ece24089a445a052d751217bba7
 TextureImporter:
   fileIDToRecycleName:
-    21300000: levelButtonSelected
+    21300000: lightningBall
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

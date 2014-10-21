@@ -75,7 +75,7 @@ public class Node : MonoBehaviour {
 	}
 
 	void loadLevel() {
-		Application.LoadLevel (5);
+		Application.LoadLevel (4);
 	}
 
 	public string getNodeName() {
