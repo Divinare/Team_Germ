@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Menu_movement : MonoBehaviour {
 	private Vector3 mousePos;
-	private float movementSpeed = 1;
+	private float movementSpeed = 2;
 
 	// Use this for initialization
 	void Start () {

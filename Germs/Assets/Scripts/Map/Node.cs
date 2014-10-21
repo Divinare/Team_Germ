@@ -99,12 +99,12 @@ public class Node : MonoBehaviour {
 			var x = Event.current.mousePosition.x;
 			var y = Event.current.mousePosition.y;
 
-			GUI.Box (new Rect(x-149, y+21, 300, 30), tooltipText);
+			GUI.Box (new Rect(x-150, y+20, 300, 30), tooltipText);
 		} else if (mouseOver && !active) {
 			var x = Event.current.mousePosition.x;
 			var y = Event.current.mousePosition.y;
 			
-			GUI.Box(new Rect(x-149, y+21, 300, 30), deactiveTooltip);
+			GUI.Box(new Rect(x-150, y+20, 300, 30), deactiveTooltip);
 		}
 	}
 }
