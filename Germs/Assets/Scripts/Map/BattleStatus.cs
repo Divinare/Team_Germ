@@ -28,13 +28,14 @@ public class BattleStatus : MonoBehaviour {
 		currentUnitStats.Add ("smallBlue", new int[] {100, 10, 6, 1, 1, 0, 5});
 		currentUnitStats.Add ("smallPurple", new int[] {100, 10, 6, 1, 0, 1, 6});
 		currentUnitStats.Add ("Phage", new int[] {100, 10, 4, 1, 1, 0, 7});
-		currentUnitStats.Add ("blueBac", new int[] {100, 15, 10, 1, 1, 1, 8});
+		//currentUnitStats.Add ("blueBac", new int[] {100, 15, 10, 1, 1, 1, 8});
 
-		selectedUnits.Add ("");
-		selectedUnits.Add ("");
-		selectedUnits.Add ("");
-		selectedUnits.Add ("");
-		selectedUnits.Add ("");
+		//initial selection
+		selectedUnits.Add ("Gatbac");
+		selectedUnits.Add ("Strepto");
+		selectedUnits.Add ("smallRed");
+		selectedUnits.Add ("smallBlue");
+		selectedUnits.Add ("Phage");
 	}
 
 	public List<string> getEnemiesToSpawn() {

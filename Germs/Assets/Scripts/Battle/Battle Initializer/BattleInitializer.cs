@@ -5,9 +5,8 @@ using System.Collections.Generic;
 public class BattleInitializer : MonoBehaviour {
 
 	public string[] friendlyGermsToSpawn;
-	public GameObject[] hostileGermsToSpawn;
 	public List<string> enemiesToSpawn = new List<string>();
-	public int[] unravelArray = new int[7];
+	private int[] unravelArray = new int[7];
 
 	private UnitStats unitStats;
 	private BattleStatus battleStatus;
@@ -27,15 +26,9 @@ public class BattleInitializer : MonoBehaviour {
 	public void SpawnGermsAtBattleStart() {
 		GameObject matrix = GameObject.FindGameObjectWithTag ("Matrix");
 		GameObject[,] squares = matrix.GetComponent<Matrix> ().getSquares ();
-		GameObject battleStatus = GameObject.FindGameObjectWithTag ("Battle Tracker");
-//		friendlyGermsToSpawn = battleStatus.GetComponent<BattleStatus>().getSelectedBacsTest ().ToArray ();
+		friendlyGermsToSpawn = battleStatus.getSelectedUnits().ToArray();
 		if (friendlyGermsToSpawn.Length == 0) {
-			friendlyGermsToSpawn = new string[5];
-			friendlyGermsToSpawn[0] = "Gatbac";
-			friendlyGermsToSpawn[1] = "Strepto";
-			friendlyGermsToSpawn[2] = "Gatbac";
-			friendlyGermsToSpawn[3] = "smallRed";
-			friendlyGermsToSpawn[4] = "Phage";
+			Debug.Log ("NO FRIENDLY BACTERIA SELECTED");
 		}
 		int y = 8; // Start spawning mobs from the top to bottom
 		for (int i = 0; i < friendlyGermsToSpawn.Length; i++) {
@@ -50,7 +43,7 @@ public class BattleInitializer : MonoBehaviour {
 
 		y = 8;
 		for (int i=0; i<enemiesToSpawn.Count; i++) {
-			Debug.Log ("BATTLEINIT "+enemiesToSpawn[i]);
+			//Debug.Log ("BATTLEINIT "+enemiesToSpawn[i]);
 			GameObject germToSpawn = GameObject.FindGameObjectWithTag("Unit Prefab Container").GetComponent<UnitPrefabContainer>().getGerm(enemiesToSpawn[i]);
 			GameObject spawnedGerm = SpawnObjectAtSquare (germToSpawn, squares[14, y]);
 			spawnedGerm.transform.GetChild(0).position = spawnedGerm.transform.position;
