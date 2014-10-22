@@ -36,6 +36,7 @@ public class Map : MonoBehaviour {
 		gameStatus = GameObject.Find("GameStatus").GetComponent<GameStatus>();
 		unitStats = GameObject.Find("UnitStats").GetComponent<UnitStats>();
 		battleStartWindow = GameObject.Find ("Map").GetComponent<BattleStartWindow>();
+		clickSound = GameObject.FindGameObjectWithTag ("AudioController").GetComponent<AudioSource> (); 
 
 		//store all nodes
 		foreach (Transform child in transform) {
@@ -45,24 +46,22 @@ public class Map : MonoBehaviour {
 		//retrieve game status
 		retrieveGameStatus();
 
-		//first node
-		setNodeActive(transform.FindChild("Node1"));
-		if (!transform.FindChild("Node1").GetComponent<Node>().isNodeCompleted()) {
-			transform.FindChild("Node1").FindChild("yellowArrow").gameObject.SetActive (true);
-		} else {
-			transform.FindChild("Node1").FindChild("yellowArrow").gameObject.SetActive (false);
-		}
-
-		clickSound = GameObject.FindGameObjectWithTag ("AudioController").GetComponent<AudioSource> (); 
-
 		getStoredNode();
 		if (storedNode != null) {
 			if (gameStatus.onReturnToMap()) {
+				setNodeActive(transform.FindChild(storedNode));
 				setNodeCompleted(transform.FindChild(storedNode));
 				setGold(transform.FindChild(storedNode));
 				gameStatus.clearNode();
 				storeGameStatus();
 			}
+		}
+
+		//first node
+		setNodeActive(transform.FindChild("Node1"));
+		if (!transform.FindChild("Node1").GetComponent<Node>().isNodeCompleted()) {
+			Debug.Log (transform.FindChild("Node1").GetComponent<Node>().isNodeCompleted());
+			transform.FindChild("Node1").FindChild("yellowArrow").gameObject.SetActive (true);
 		}
 	}
 	
@@ -124,8 +123,8 @@ public class Map : MonoBehaviour {
 		mapStateBools = gameStatus.retrieveMapStateBools();
 		for (int i = 0; i < mapStateBools.Count; i++) {
 			if (mapStateBools[i]) {
-				setNodeActive(allNodes[i]);
 				setNodeCompleted(allNodes[i]);
+				setNodeActive(allNodes[i]);
 			}
 		}
 	}
