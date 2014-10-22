@@ -26,8 +26,9 @@ public class Shop_GUI : MonoBehaviour {
 	public GUIStyle trainerHover;
 	public GUIStyle mapHover;
 	public GUIStyle bigNumbers;
-
-
+	//public GUIStyle yellowText;
+	//public GUIStyle blueText;
+	
 	public Texture shopBox;
 	public Texture shopText;
 	public Texture stashText;
@@ -44,23 +45,19 @@ public class Shop_GUI : MonoBehaviour {
 	private Vector2 windowSize;
 	private Vector2 itemSize;
 	private Vector2 shopPos;
-	private Vector2 itemInfoPos;
+	private Vector2 rightWindowPos;
 	private Vector2 itemInfoSize;
+	private Vector2 itemInfoPos;
 	// GUI elements inside itemInfoWindow
-	private Vector2 itemInfoStatsSize;
-	private Vector2 itemInfoStatsPos;
 	private Vector2 itemInfoButtonSize;
 
-	// for testing, items hardcoded
-	private Texture2D[] potionIcons = new Texture2D[5];
-
+	private string selectedItemName = "healPotion";
+	public Dictionary<string, Texture2D> itemIcons = new Dictionary<string, Texture2D>();
 	private Dictionary<string, int[]> currentPotionStats;
 
 	//string[] stashItems =  new string[] {"axe", "potion1", "potion2", "boots", "potion3"};
 	//string[] armors = new string[] {"chainmail", "jacket", "leather coat"};
 	//string[] weapons = new string[] {"dagger"};
-
-	private int[] selectedItemInfo;
 
 	private int clickedIndex = 1;
 
@@ -75,14 +72,12 @@ public class Shop_GUI : MonoBehaviour {
 		//xp = gameStatus.gameObject.GetComponent<GameStatus>().getXp();
 
 		clickSound = GameObject.FindGameObjectWithTag ("AudioDummy").GetComponent<AudioSource> ();
-		windowSize = new Vector2 (Screen.width * 0.4f, Screen.height * 0.65f);
+		windowSize = new Vector2 (Screen.width * 0.45f, Screen.height * 0.45f);
 		itemSize = new Vector2 (Screen.width*0.1f, Screen.width*0.1f);
-		itemInfoSize = new Vector2(windowSize.x*0.8f, Screen.height*0.4f);
-		shopPos = new Vector2 (Screen.width*0.025f, Screen.height * 0.15f);
-		itemInfoPos = new Vector2 (Screen.width * 0.575f, Screen.height * 0.15f);
-		itemInfoStatsSize = new Vector2 (itemInfoSize.x*0.6f, itemInfoSize.y);
-		itemInfoStatsPos = new Vector2 (itemInfoSize.x-(1f-itemInfoStatsSize.x), 0);
-		itemInfoButtonSize = new Vector2 ((itemInfoSize.x - itemInfoStatsSize.x) * 0.8f, itemInfoSize.y * 0.1f);
+		itemInfoSize = new Vector2(windowSize.x, windowSize.y);
+		shopPos = new Vector2 (Screen.width*0.04f, Screen.height * 0.15f);
+		itemInfoPos = new Vector2 (windowSize.x + shopPos.x + 25, shopPos.y);
+		itemInfoButtonSize = new Vector2 (windowSize.x/3, itemInfoSize.y*0.25f);
 
 		currentPotionStats = ItemStats.itemStats.getCurrentPotionStats();
 		addPotionIcons ();
@@ -128,9 +123,12 @@ public class Shop_GUI : MonoBehaviour {
 			createShopContent();
 
 		} else if(type.Equals("itemInfo")) {
-			GUI.BeginGroup (new Rect (0, 0, itemInfoSize.x, itemInfoSize.y));
-			createSelectedItemWindow ();
-			GUI.EndGroup ();
+		
+			createItemInfo();
+			//GUI.BeginGroup (new Rect (itemInfoRightSidePos.x, itemInfoRightSidePos.y, itemInfoSize.x, itemInfoSize.y));
+			//	createItemInfoRightSide();
+			//GUI.EndGroup ();
+
 		}
 		
 	}
@@ -138,7 +136,7 @@ public class Shop_GUI : MonoBehaviour {
 
 	private void createShopContent() {
 		if (clickedIndex == 1) {
-			createContent(currentPotionStats, potionIcons);
+			createContent(currentPotionStats);
 		} 
 		/*
 		else if (clickedIndex == 2) {
@@ -149,14 +147,14 @@ public class Shop_GUI : MonoBehaviour {
 		*/
 	}
 
-	private void createContent(Dictionary<string, int[]> items, Texture2D[] icons) {
+	private void createContent(Dictionary<string, int[]> items) {
 
 
 		int itemIndex = 0;
 		int column = 0;
 		int row = 0;
 		foreach (string key in items.Keys) {
-				createItem ((int)itemSize.x * column, (int)itemSize.y * row, key, itemIndex, icons[itemIndex]);
+				createItem ((int)itemSize.x * column, (int)itemSize.y * row, key, itemIcons[key]);
 			if((itemIndex+1) % amountOfItemColumns == 0) {
 				row++;
 				column = 0;
@@ -167,51 +165,65 @@ public class Shop_GUI : MonoBehaviour {
 		}
 	}
 
-	private void createItem(int x, int y, string description, int itemIndex, Texture2D icon) {
+	private void createItem(int x, int y, string itemName, Texture2D icon) {
 		if (GUI.Button (new Rect (x, y, itemSize.x, itemSize.y), icon)) {
-			//this.selectedItemIndex = itemIndex;
-
-
-
+			this.selectedItemName = itemName;
+			itemOwned = false;
 			clickSound.Play ();	
 		}
 		//GUI.TextArea (new Rect (x, y, itemSize.x, itemSize.y), description);
 	}
 
-	private void createSelectedItemWindow () {
-		GUI.Label (new Rect (0, 0, itemInfoSize.x, itemInfoSize.y), selectedItemWindow);
+	private void createItemInfo() {
+		// Item image:
+		GUI.Box (new Rect(0, 0, itemSize.y+10, itemSize.y+10), itemIcons[selectedItemName]); 
+		float descriptionHeight = itemInfoSize.y * 0.2f;
 
+		// Buy, sell, upgrade Buttons
+		float offFromSide = itemInfoSize.x*0.1f;
 
-		//GUI.Box (new Rect(x, y, 100,100), 
+		Vector2 firstButtonPos = new Vector2 (offFromSide, (itemInfoSize.y - itemSize.y + descriptionHeight -itemInfoButtonSize.y)/2+itemSize.y);
+		Vector2 secondButtonPos = new Vector2 (itemInfoSize.x - itemInfoButtonSize.x - offFromSide, firstButtonPos.y);
 		if (itemOwned) {
-			createUpgradeAndSellButtons(0, itemInfoSize.y * 0.5f, itemInfoSize.x, itemInfoSize.y*0.2f);
+			//createSellButton(0, itemInfoSize.y * 0.5f, itemInfoSize.x, itemInfoSize.y*0.2f);
+
 		} else {
-			createBuyButton(0, itemInfoSize.y * 0.55f, itemInfoSize.x, itemInfoSize.y*0.2f);
+			createBuyButton(firstButtonPos.x, firstButtonPos.y);
+			createUpgradeButton(secondButtonPos.x, secondButtonPos.y);
+		}
+
+		
+		// Item status
+		GUI.BeginGroup (new Rect (itemSize.x + 20, 0, itemInfoSize.x - itemSize.x - 20, itemInfoSize.y + 20));
+			GUI.Label(new Rect (0, 0, itemSize.y, (itemInfoSize.x - itemSize.x) / 2), "level jotain");
+		GUI.EndGroup ();
+
+		// Next level item status
+		//GUI.BeginGroup (new Rect (itemSize.x + 20, 0, itemInfoSize.x - itemSize.x - 20, itemInfoSize.y + 20));
+		//GUI.Label(new Rect (0, 0, itemSize.y, (itemInfoSize.x - itemSize.x) / 2), " next level jotain");
+		//GUI.EndGroup ();
+		
+	}
+	private void createBuyButton(float x, float y) {
+		if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Buy")) {
+			clickSound.Play ();	
+		}
+	}
+	private void createSellButton(float x, float y) {
+		if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Sell")) {
+			clickSound.Play ();	
+		}
+	}
+	private void createUpgradeButton(float x, float y) {
+		if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Upgrade")) {
+			clickSound.Play ();	
 		}
 	}
 	
-	private void createUpgradeAndSellButtons(float x, float y, float width, float height) {
-		if (GUI.Button (new Rect (x, y, width, height), "Upgrade")) {
-			Debug.Log ("upgraded item");
-			clickSound.Play ();	
-		}
-		if (GUI.Button (new Rect (x, y+height*1.2f, width, height), "Sell")) {
-			Debug.Log ("sold item");
-			clickSound.Play ();	
-		}
-	}
-	
-	private void createBuyButton(float x, float y, float width, float height) {
-		if (GUI.Button (new Rect (x, y, width, height), "Buy")) {
-
-			clickSound.Play ();	
-		}
-	}
-
 	private void addPotionIcons() {
-		potionIcons [0] = healPotion;
-		potionIcons [1] = ragePotion;
-		potionIcons [2] = speedPotion;
+		itemIcons.Add ("healPotion", healPotion);
+		itemIcons.Add ("ragePotion", ragePotion);
+		itemIcons.Add ("speedPotion", speedPotion);
 	}
 
 	private void drawTexture(float x, float y, float width, float height, Texture texture) {

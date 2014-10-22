@@ -94,6 +94,7 @@ public class TrainerGUI : MonoBehaviour {
 	
 	void drawSelectionMenu() {
 		//left
+
 		GUI.Box (new Rect (0,Screen.height/10,Screen.width/2, (Screen.height - 2*Screen.height/10)), "", trainerBox);
 		
 		//selection grid
