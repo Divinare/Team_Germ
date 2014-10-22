@@ -22,24 +22,19 @@ public class AI_TurnLogic : MonoBehaviour {
 		currentUnit = unit;
 		thisStatus = currentUnit.GetComponent<UnitStatus> ();
 
-		//tähän joku parempi out
-		stunned = unit.transform.GetComponent<UnitStatus>().IsUnitStunned();
-		if (!stunned) {
-			currentSquareStatus = currentUnit.GetComponent<UnitStatus> ().getSquare ().GetComponent<SquareStatus> ();
-			if (Random.Range (1,10) > 5) {
-				if (attemptRangedAttack ()) {
-					return; // ranged attack successful, end turn
-				}
+		currentSquareStatus = currentUnit.GetComponent<UnitStatus> ().getSquare ().GetComponent<SquareStatus> ();
+		if (Random.Range (1,10) > 5) {
+			if (attemptRangedAttack ()) {
+				return; // ranged attack successful, end turn
 			}
+		}
 
-			if (attemptMeleeattack ()) {
-				return; // melee attack successful, end turn
-			}
+		if (attemptMeleeattack ()) {
+			return; // melee attack successful, end turn
+		}
 			
-
-			if (findTargetAndMoveTowardsIt ()) {
-				return; // was able to find a target and move towards it, end turn
-			}
+		if (findTargetAndMoveTowardsIt ()) {
+			return; // was able to find a target and move towards it, end turn
 		}
 		// no possible behaviours found, skipping turn
 		thisStatus.Deselect ();
