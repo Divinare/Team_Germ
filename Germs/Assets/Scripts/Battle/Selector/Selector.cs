@@ -40,8 +40,10 @@ public class Selector : MonoBehaviour {
 			if (activeUnit.GetComponent<UnitStatus>().IsEnemy () && !hostileTurnActive) {
 				GameObject.FindGameObjectWithTag ("CursorHandler").GetComponent<CursorIconHandler>().drawDefaultCursor ();
 				GameObject.FindGameObjectWithTag ("Drawer").GetComponent<Drawer>().resetAllDrawings ();
-				hostileTurnActive = true;
-				GameObject.FindGameObjectWithTag("AIController").GetComponent<AI_TurnLogic>().handleTurnForGerm (activeUnit);
+				if (canHostileUseThisTurn(activeUnit)) {
+					hostileTurnActive = true;
+					GameObject.FindGameObjectWithTag("AIController").GetComponent<AI_TurnLogic>().handleTurnForGerm (activeUnit);
+				}
 			}
 			else if (!activeUnit.GetComponent<UnitStatus>().IsEnemy () && hostileTurnActive) {
 				hostileTurnActive = false;
@@ -86,6 +88,21 @@ public class Selector : MonoBehaviour {
 					}
 				}
 			}
+		}
+	}
+
+	public bool canHostileUseThisTurn(GameObject unit) {
+		if (unit.transform.GetComponent<UnitStatus>().IsUnitStunned()) {
+			//remove one round of stun
+			unit.transform.GetComponent<UnitStatus>().countDownStun();
+
+			//incase selected?
+			unit.transform.GetComponent<UnitStatus>().Deselect();
+			return false;
+		}
+		//other things
+		else {
+			return true;
 		}
 	}
 

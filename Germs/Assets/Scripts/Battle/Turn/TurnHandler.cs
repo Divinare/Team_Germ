@@ -60,9 +60,11 @@ public class TurnHandler : MonoBehaviour {
 
 	public bool canUnitUseThisTurn(GameObject unit) {
 		//stun
-		if (activeUnit.transform.GetComponent<UnitStatus>().IsUnitStunned()) {
-			//remove one round of stun
-			unit.transform.GetComponent<UnitStatus>().countDownStun();
+		if (unit.transform.GetComponent<UnitStatus>().IsUnitStunned()) {
+			//remove one round of stun from friendly target (untested) / enemy is removed in Selector because that is were enemy turn is assigned, not here?
+			if (!unit.transform.GetComponent<UnitStatus>().IsEnemy()) {
+				unit.transform.GetComponent<UnitStatus>().countDownStun();
+			}
 			return false;
 		}
 		//other things
