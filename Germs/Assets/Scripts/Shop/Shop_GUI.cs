@@ -37,8 +37,19 @@ public class Shop_GUI : MonoBehaviour {
 	private Transform battleTracker;
 
 	private float hScrollbarValue;
-	public Vector2 shopScrollPosition = Vector2.zero;
-	public Vector2 stashScrollPosition = Vector2.zero;
+	public Vector2 shopScrollPos = Vector2.zero;
+	public Vector2 stashScrollPos = Vector2.zero;
+
+	//Size and position of GUI elements
+	private Vector2 windowSize;
+	private Vector2 itemSize;
+	private Vector2 shopPos;
+	private Vector2 itemInfoPos;
+	private Vector2 itemInfoSize;
+	// GUI elements inside itemInfoWindow
+	private Vector2 itemInfoStatsSize;
+	private Vector2 itemInfoStatsPos;
+	private Vector2 itemInfoButtonSize;
 
 	// for testing, items hardcoded
 	private Texture2D[] potionIcons = new Texture2D[5];
@@ -57,12 +68,7 @@ public class Shop_GUI : MonoBehaviour {
 	bool itemOwned = false;
 	
 	public AudioSource clickSound;
-
-	//Size of GUI elements
-	private Vector2 windowSize;
-	private Vector2 itemSize;
-	private Vector2 selectedItemWindowSize;
-
+	
 	// Use this for initialization
 	void Start () {
 		//gold = gameStatus.gameObject.GetComponent<GameStatus>().getGold();
@@ -71,7 +77,12 @@ public class Shop_GUI : MonoBehaviour {
 		clickSound = GameObject.FindGameObjectWithTag ("AudioDummy").GetComponent<AudioSource> ();
 		windowSize = new Vector2 (Screen.width * 0.4f, Screen.height * 0.65f);
 		itemSize = new Vector2 (Screen.width*0.1f, Screen.width*0.1f);
-		selectedItemWindowSize = new Vector2(Screen.width*0.13f, Screen.height*0.4f);
+		itemInfoSize = new Vector2(windowSize.x*0.8f, Screen.height*0.4f);
+		shopPos = new Vector2 (Screen.width*0.025f, Screen.height * 0.15f);
+		itemInfoPos = new Vector2 (Screen.width * 0.575f, Screen.height * 0.15f);
+		itemInfoStatsSize = new Vector2 (itemInfoSize.x*0.6f, itemInfoSize.y);
+		itemInfoStatsPos = new Vector2 (itemInfoSize.x-(1f-itemInfoStatsSize.x), 0);
+		itemInfoButtonSize = new Vector2 ((itemInfoSize.x - itemInfoStatsSize.x) * 0.8f, itemInfoSize.y * 0.1f);
 
 		currentPotionStats = ItemStats.itemStats.getCurrentPotionStats();
 		addPotionIcons ();
@@ -85,71 +96,45 @@ public class Shop_GUI : MonoBehaviour {
 
 	void OnGUI() {
 
-		// Creating stash
-		createMenu ("shop", Screen.width*0.025f, Screen.height * 0.15f, shopScrollPosition);
 
 		// Creating shop
-		//createMenu ("stash", Screen.width * 0.575f, Screen.height * 0.15f, stashScrollPosition);
+		GUI.BeginGroup (new Rect (shopPos.x, shopPos.y, windowSize.x, windowSize.y));
+		createMenu ("shop");
+		GUI.EndGroup ();
 
-		createSelectedItemWindow ((Screen.width *  0.4362f), (Screen.height * 0.3f));
+		// Creating info window
+		GUI.BeginGroup (new Rect (itemInfoPos.x, itemInfoPos.y, windowSize.x, windowSize.y));
+		createMenu ("itemInfo");
+		GUI.EndGroup ();
+
 	}
 
-	private void createMenu(string type, float x, float y, Vector2 scrollPosition) {
-
-		Vector2 windowPosition = new Vector2 (x, y);
+	private void createMenu(string type) {
 
 		Vector2 tabSize = new Vector2 (windowSize.x, Screen.height * 0.05f);
 
 		// Draw topics
 		if (type.Equals ("shop")) {
-			drawTexture(x, Screen.height * 0.05f, windowSize.x/2, Screen.height * 0.10f, stashText);
-		} else if (type.Equals ("stash")) {
-			drawTexture(x, Screen.height * 0.05f, windowSize.x/2, Screen.height * 0.10f, stashText);
+			//drawTexture(0, Screen.height * 0.05f, windowSize.x/2, Screen.height * 0.10f, stashText);
+		} else if (type.Equals ("itemInfo")) {
+			//drawTexture(0, Screen.height * 0.05f, windowSize.x/2, Screen.height * 0.10f, stashText);
 		}
 
-		GUI.BeginGroup (new Rect (windowPosition.x, windowPosition.y, windowSize.x, windowSize.y));
+
 		drawTexture (0, 0, (int)windowSize.x, (int)windowSize.y, shopBox);
 
 		if(type.Equals("shop")) {
 
-			// Creating tab bar
-			createTabButton(0,0,tabSize.x/amountOfIndexes,tabSize.y, "Potions", 1);
-			createTabButton(0,0,tabSize.x/amountOfIndexes,tabSize.y, "Weapons", 2);
-			createTabButton(0,0,tabSize.x/amountOfIndexes,tabSize.y, "Armor", 3);
+			createShopContent();
 
-			createScrollView(tabSize, windowSize, "shop");
-
-		} else if(type.Equals("stash")) {
-
-			createScrollView(tabSize, windowSize, "stash");
-
+		} else if(type.Equals("itemInfo")) {
+			GUI.BeginGroup (new Rect (0, 0, itemInfoSize.x, itemInfoSize.y));
+			createSelectedItemWindow ();
+			GUI.EndGroup ();
 		}
 		
 	}
 
-	
-	private void createTabButton(float x, float y, float width, float height, string txt, int index) {
-		if (GUI.Button (new Rect (x+width*(index-1f), y, width+(index-1f) * x, height), txt)) {
-			clickedIndex = index;
-			clickSound.Play ();
-		}
-	}
-
-	private void createScrollView(Vector2 tabSize, Vector2 windowSize, string type) {
-
-		if (type.Equals ("shop")) {
-			shopScrollPosition = GUI.BeginScrollView (new Rect (0, tabSize.y, windowSize.x, windowSize.y - tabSize.y), shopScrollPosition, new Rect (0, 0, 0, 500));
-			createShopContent();
-		} 
-		/*
-		else if (type.Equals ("stash")) {
-			stashScrollPosition = GUI.BeginScrollView (new Rect (0, 0, windowSize.x, windowSize.y), stashScrollPosition, new Rect (0, 0, 0, 500));
-			createStashContent();
-		}
-		*/
-		GUI.EndScrollView ();
-		GUI.EndGroup ();
-	}
 
 	private void createShopContent() {
 		if (clickedIndex == 1) {
@@ -163,11 +148,6 @@ public class Shop_GUI : MonoBehaviour {
 		}
 		*/
 	}
-	/*
-	private void createStashContent() {
-		createContent (stashItems);
-	}
-	*/
 
 	private void createContent(Dictionary<string, int[]> items, Texture2D[] icons) {
 
@@ -198,15 +178,15 @@ public class Shop_GUI : MonoBehaviour {
 		//GUI.TextArea (new Rect (x, y, itemSize.x, itemSize.y), description);
 	}
 
-	private void createSelectedItemWindow (float x, float y) {
-		GUI.Label (new Rect (x, y, selectedItemWindowSize.x, selectedItemWindowSize.y), selectedItemWindow);
+	private void createSelectedItemWindow () {
+		GUI.Label (new Rect (0, 0, itemInfoSize.x, itemInfoSize.y), selectedItemWindow);
 
 
 		//GUI.Box (new Rect(x, y, 100,100), 
 		if (itemOwned) {
-			createUpgradeAndSellButtons(x, y+selectedItemWindowSize.y * 0.5f, selectedItemWindowSize.x, selectedItemWindowSize.y*0.2f);
+			createUpgradeAndSellButtons(0, itemInfoSize.y * 0.5f, itemInfoSize.x, itemInfoSize.y*0.2f);
 		} else {
-			createBuyButton(x, y+selectedItemWindowSize.y * 0.55f, selectedItemWindowSize.x, selectedItemWindowSize.y*0.2f);
+			createBuyButton(0, itemInfoSize.y * 0.55f, itemInfoSize.x, itemInfoSize.y*0.2f);
 		}
 	}
 	
@@ -238,3 +218,31 @@ public class Shop_GUI : MonoBehaviour {
 		GUI.DrawTexture (new Rect (x, y, width, height), texture, ScaleMode.ScaleToFit, true, width/height);
 	}
 }
+
+// DONT delete, needed in the future:
+
+
+/*
+private void createTabButton(float x, float y, float width, float height, string txt, int index) {
+	if (GUI.Button (new Rect (x+width*(index-1f), y, width+(index-1f) * x, height), txt)) {
+		clickedIndex = index;
+		clickSound.Play ();
+	}
+}
+
+	private void createScrollView(Vector2 tabSize, Vector2 windowSize, string type) {
+
+		if (type.Equals ("shop")) {
+			shopScrollPosition = GUI.BeginScrollView (new Rect (0, tabSize.y, windowSize.x, windowSize.y - tabSize.y), shopScrollPosition, new Rect (0, 0, 0, 500));
+			createShopContent();
+		} 
+
+		else if (type.Equals ("stash")) {
+			stashScrollPosition = GUI.BeginScrollView (new Rect (0, 0, windowSize.x, windowSize.y), stashScrollPosition, new Rect (0, 0, 0, 500));
+			createStashContent();
+		}
+
+		GUI.EndScrollView ();
+		GUI.EndGroup ();
+	}
+*/

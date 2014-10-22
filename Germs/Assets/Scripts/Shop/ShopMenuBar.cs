@@ -74,7 +74,7 @@ public class ShopMenuBar : MonoBehaviour {
 	private void createInventory() {
 		int items = 3;
 		float centerInventoryPosition = (Screen.width - (inventoryButtonSize.x*items))/2;
-		Debug.Log ("cent " + centerInventoryPosition);
+
 		if (GUI.Button (new Rect (centerInventoryPosition, menuBarPosition.y, inventoryButtonSize.x, inventoryButtonSize.y), selectedItems[0])) {
 			
 		} else if (GUI.Button (new Rect (centerInventoryPosition + inventoryButtonSize.x * 1, menuBarPosition.y, inventoryButtonSize.x, inventoryButtonSize.y), selectedItems[1])) {
