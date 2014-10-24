@@ -11,6 +11,7 @@ public class BattleMenuBar : MonoBehaviour {
 	public Texture2D xpIcon;
 	public Texture2D meleeIcon;
 	public Texture2D rangedIcon;
+	public Texture2D skipIcon;
 
 	// Common GUI stuff
 	private Vector2 menuBarSize;
@@ -121,6 +122,11 @@ public class BattleMenuBar : MonoBehaviour {
 		//GUI.Box (new Rect (Screen.width-activityMenuButtonSize.x * amountOfItems, Screen.height - activityMenuButtonSize.y, activityMenuButtonSize.x * (amountOfItems+1), activityMenuButtonSize.y), "");
 		
 		//buttons
+		if (GUI.Button (new Rect (menuBarSize.x-activityMenuButtonSize.x*5, menuBarPosition.y + menuBarDescriptionHeight, activityMenuButtonSize.x, activityMenuButtonSize.y), new GUIContent ("special here", "Skip turn"))) {
+			GameObject currentUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().getActiveUnit ();
+			currentUnit.GetComponent<UnitStatus>().Deselect();
+			//clickSound.Play ();		
+		}
 		if (GUI.Button (new Rect (menuBarSize.x-activityMenuButtonSize.x*4, menuBarPosition.y + menuBarDescriptionHeight, activityMenuButtonSize.x, activityMenuButtonSize.y), new GUIContent (meleeIcon, "Fancy melee attack"))) {
 			GameObject currentUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().getActiveUnit ();
 			currentUnit.GetComponent<UnitStatus>().switchSelectedAction ("melee");
@@ -136,6 +142,7 @@ public class BattleMenuBar : MonoBehaviour {
 			currentUnit.GetComponent<UnitStatus>().switchSelectedAction ("poison"); // tää vissii se special
 			//clickSound.Play ();		
 		}
+
 		
 		//Tooltip position
 		GUI.Label(new Rect(Screen.width - 100, Screen.height - activityMenuButtonSize.y - 50, 100, 100), GUI.tooltip);
