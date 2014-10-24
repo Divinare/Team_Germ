@@ -3,12 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ItemStats : MonoBehaviour {
-	
-	public static ItemStats itemStats;
-	
-	private Dictionary<string, int[]> currentPotionStats = new Dictionary<string, int[]>();
-	private Dictionary<string, int[]> inventoryContent = new Dictionary<string, int[]>();
 
+
+
+	public static ItemStats itemStats;
+
+	private static int itemAttributes = 3;
+	private static int inventorySize = 3;
+	private Dictionary<string, int[]> currentItemStats = new Dictionary<string, int[]>();
+	private string[,] inventoryContent = new string[inventorySize, itemAttributes+1];
+	// http://stackoverflow.com/questions/146204/duplicate-keys-in-net-dictionaries
+//	List<KeyValuePair<string, int[]>> inventoryContent = new List<KeyValuePair<string, int[]>>();
+
+	public Dictionary<string, Texture2D> itemIcons = new Dictionary<string, Texture2D>();
+	
+	public Texture2D empty;
+	public Texture2D healPotion;
+	public Texture2D ragePotion;
+	public Texture2D speedPotion;
 
 	void Start () {
 		if (itemStats == null) {
@@ -17,20 +29,24 @@ public class ItemStats : MonoBehaviour {
 		} else if (itemStats != this) {
 			Destroy (gameObject);
 		}
+		initInventory ();
+		addItemIcons ();
 		initItemStats ();
-	
-
 	}
 	
 	private void initItemStats() {
 		// in the int array the order is: level,  cost, effect (healing/damage buff amount)
-		currentPotionStats.Add("healPotion", new int[] {1, 25, 10});
-		currentPotionStats.Add("ragePotion", new int[] {1, 25, 10});
-		currentPotionStats.Add("speedPotion", new int[] {1, 25, 5});
+		currentItemStats.Add("healPotion", new int[] {1, 25, 10});
+		currentItemStats.Add("ragePotion", new int[] {1, 25, 10});
+		currentItemStats.Add("speedPotion", new int[] {1, 25, 5});
 	}
 
-
-
+	private void initInventory() {
+		for(int i = 0; i < inventorySize; i++) {
+			inventoryContent[i,0] = "empty";
+		}
+	}
+	
 	public string getItemDescription(string itemName, string type, bool currentLevelStats) {
 		string description = "";
 
@@ -49,53 +65,87 @@ public class ItemStats : MonoBehaviour {
 
 	private string getPotionDescription(string itemName, bool currentLevelStats) {
 		string description = "";
-		int[] potionStats = currentPotionStats[itemName];
+		int[] potionStats = currentItemStats[itemName];
 		string n = itemName;
-		if(description.Equals("healPotion")) {
-		string t = "Potion"; // type
-		description += "Level " + getItemLevel(t,n);
+		if(n.Equals("healPotion")) {
+		description += "Level " + getItemLevel(n);
+		
 		}
 
 		return description;
 	}
-
-	public void lvlUpHealPotions() {
-		currentPotionStats ["healPotion"] [0]++;
-		currentPotionStats ["healPotion"] [1] += 5; // cost increase
-		currentPotionStats ["healPotion"] [2] += 3 * currentPotionStats ["healPotion"] [0]; // heal increase
-
-	}
-	public void lvlUpRagePotions() {
-		currentPotionStats ["ragePotion"] [0]++;
-		currentPotionStats ["ragePotion"] [1] += 5; // cost
-		currentPotionStats ["ragePotion"] [2] += 2 * currentPotionStats ["ragePotion"] [0]; // dmg
-	}
+	
 
 	public Dictionary<string, int[]> getCurrentPotionStats() {
-		return currentPotionStats;
+		return currentItemStats;
 	}
 
-	public void addToInventory(string itemName, int[] content) {
-		inventoryContent.Add (itemName, content);
-	}
+	public bool addToInventory(string itemName) {
+		bool full = true;
+		for (int i = 0; i < inventoryContent.GetLength(0); i++) {
 
-
-	public int getItemLevel(string itemType, string key) {
-	if(itemType.Equals("healPotion")) {
-		return currentPotionStats[key][0];
-	}
-		return 0;
-	}
-	public int getItemCost(string itemType, string key) {
-		if(itemType.Equals("healPotion")) {
-			return currentPotionStats[key][1];
+			if(inventoryContent[i,0].Equals("empty")) {
+				full = false;
+			}
 		}
-		return 0;
-	}
-	public int getItemEffect(string itemType, string key) {
-		if(itemType.Equals("healPotion")) {
-			return currentPotionStats[key][2];
+		if (full) {
+			return false;
 		}
-		return 0;
+
+		bool added = false;
+		KeyValuePair<string, int[]> entry = new KeyValuePair<string, int[]>(itemName, currentItemStats [itemName]);
+		for (int i = 0; i < inventoryContent.Length; i++) {
+			if(inventoryContent[i,0].Equals("empty")) {
+				inventoryContent[i,0] = itemName;
+				for(int j = 1; j < currentItemStats[itemName].GetLength(0); j++) {
+					inventoryContent[i,j] = currentItemStats[itemName][j].ToString();
+				}
+				break;
+			}
+		}
+		return true;
 	}
+
+	public void sellItem(int selectedInventoryIndex) {
+		inventoryContent [selectedInventoryIndex-1, 0] = "empty";
+	}
+
+	public void levelUpItem(string key) {
+		currentItemStats [key] [0]++;
+		currentItemStats [key] [1] += (int)(currentItemStats [key] [1] * 0.25); // cost increase
+		currentItemStats [key] [2] += (int)(currentItemStats [key] [2] * 0.25); // effect inrease
+	}
+
+	public int getItemLevel(string key) {
+		return currentItemStats[key][0];
+	}
+	public int getItemCost(string key) {
+		return currentItemStats[key][1];
+	}
+	public int getItemEffect(string key) {
+		return currentItemStats[key][2];
+	}
+
+	private void addItemIcons() {
+		itemIcons.Add ("empty", empty);
+		itemIcons.Add ("healPotion", healPotion);
+		itemIcons.Add ("ragePotion", ragePotion);
+		itemIcons.Add ("speedPotion", speedPotion);
+
+
+	}
+
+	public Texture2D getItemIcon(string key) {
+		return itemIcons [key];
+	}
+
+	public string[,] getInventoryContent() {
+		return inventoryContent;
+	}
+
+	public int getInventorySize() {
+		return inventorySize;
+	}
+
+
 }

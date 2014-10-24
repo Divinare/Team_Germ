@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ShopMenuBar : MonoBehaviour {
-	
+
+	private ItemStats itemStats;
+
 	public float gold;
 	public float xp;
 	
@@ -23,14 +25,12 @@ public class ShopMenuBar : MonoBehaviour {
 	public Vector2 menuPosition;
 
 	// Shop GUI stuff
-
-	public List<string> selectedItems = new List<string>();
 	private Vector2 inventoryButtonSize;
-	
+	private string[,] inventoryContent;
 	
 	void Start () {
 		gameStatus = GameObject.Find ("GameStatus").GetComponent<GameStatus> ();
-
+		itemStats = ItemStats.itemStats;
 		getGoldAndXp ();
 
 		// Common GUI stuff
@@ -42,12 +42,8 @@ public class ShopMenuBar : MonoBehaviour {
 		menuPosition = MenuBar.menuBar.menuPosition;
 		shopMapTrainerButtonSize = MenuBar.menuBar.shopMapTrainerButtonSize;
 		
-		this.selectedItems.Add ("Potion1");
-		this.selectedItems.Add ("Potion2");
-		this.selectedItems.Add ("Potion3");
-		
 		inventoryButtonSize = new Vector2 (menuBarSize.y, menuBarSize.y);
-
+		inventoryContent = itemStats.getInventoryContent ();
 	}
 
 
@@ -57,7 +53,7 @@ public class ShopMenuBar : MonoBehaviour {
 	}
 	
 	void OnGUI() {
-
+		inventoryContent = ItemStats.itemStats.getInventoryContent ();
 		createShopMenu ();
 	}
 
@@ -69,12 +65,32 @@ public class ShopMenuBar : MonoBehaviour {
 		MenuBar.menuBar.createMainMenuButton ();
 		
 	}
-	
-	
-	private void createInventory() {
-		int items = 3;
-		float centerInventoryPosition = (Screen.width - (inventoryButtonSize.x*items))/2;
 
+	private void createInventory() {
+		Shop_GUI shopGUI = GameObject.FindGameObjectWithTag ("ShopGUI").GetComponent<Shop_GUI> ();
+		int items = itemStats.getInventorySize();
+		float centerInventoryPosition = (Screen.width - (inventoryButtonSize.x*items))/2;
+		int index = 0;
+
+
+		for(int i = 0; i < items; i++) {
+			string itemName = inventoryContent[i,0];
+			if (GUI.Button (new Rect (centerInventoryPosition + inventoryButtonSize.x * index, menuBarPosition.y, inventoryButtonSize.x, inventoryButtonSize.y), itemStats.itemIcons[itemName])) {
+				if(!itemName.Equals("empty")) {
+
+					shopGUI.setItemOwned(true);
+					shopGUI.setSelectedItem(itemName);
+					shopGUI.setSelectedInventoryIndex(i+1);
+				}
+
+			}
+			index++;
+		}
+
+
+
+
+		/*
 		if (GUI.Button (new Rect (centerInventoryPosition, menuBarPosition.y, inventoryButtonSize.x, inventoryButtonSize.y), selectedItems[0])) {
 			
 		} else if (GUI.Button (new Rect (centerInventoryPosition + inventoryButtonSize.x * 1, menuBarPosition.y, inventoryButtonSize.x, inventoryButtonSize.y), selectedItems[1])) {
@@ -82,6 +98,7 @@ public class ShopMenuBar : MonoBehaviour {
 		} else if (GUI.Button (new Rect (centerInventoryPosition + inventoryButtonSize.x * 2, menuBarPosition.y, inventoryButtonSize.x, inventoryButtonSize.y), selectedItems[2])) {
 			
 		}
+		*/
 	}
 	
 	

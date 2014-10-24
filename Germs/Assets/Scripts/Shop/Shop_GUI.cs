@@ -5,10 +5,7 @@ using System.Linq.Expressions;
 
 public class Shop_GUI : MonoBehaviour {
 
-	//selection
-	RaycastHit hit;
-	RaycastHit storedHit;
-	private float raycastLength = 200;
+	private ItemStats itemStats;
 
 	public float gold = 0;
 	public float xp = 0;
@@ -18,17 +15,14 @@ public class Shop_GUI : MonoBehaviour {
 
 	public Texture2D goldIcon;
 	public Texture2D xpIcon;
-
-	public Texture2D healPotion;
-	public Texture2D ragePotion;
-	public Texture2D speedPotion;
-
+	
 	public GUIStyle trainerHover;
 	public GUIStyle mapHover;
 	public GUIStyle bigNumbers;
-	//public GUIStyle yellowText;
-	//public GUIStyle blueText;
-	
+	public GUIStyle yellowText;
+	public GUIStyle blueText;
+	public GUIStyle blackText;
+
 	public Texture shopBox;
 	public Texture shopText;
 	public Texture stashText;
@@ -51,8 +45,10 @@ public class Shop_GUI : MonoBehaviour {
 	// GUI elements inside itemInfoWindow
 	private Vector2 itemInfoButtonSize;
 
-	private string selectedItemName = "healPotion";
-	public Dictionary<string, Texture2D> itemIcons = new Dictionary<string, Texture2D>();
+	private string selectedItem = "healPotion";
+	bool itemOwned = false;
+	private int selectedInventoryIndex = 0; // 1 - inventorySize
+
 	private Dictionary<string, int[]> currentPotionStats;
 
 	//string[] stashItems =  new string[] {"axe", "potion1", "potion2", "boots", "potion3"};
@@ -62,17 +58,18 @@ public class Shop_GUI : MonoBehaviour {
 	private int clickedIndex = 1;
 
 
-	bool itemOwned = false;
+
 	
 	public AudioSource clickSound;
 	
 	// Use this for initialization
 	void Start () {
+		itemStats = ItemStats.itemStats;
 		//gold = gameStatus.gameObject.GetComponent<GameStatus>().getGold();
 		//xp = gameStatus.gameObject.GetComponent<GameStatus>().getXp();
 
 		clickSound = GameObject.FindGameObjectWithTag ("AudioDummy").GetComponent<AudioSource> ();
-		windowSize = new Vector2 (Screen.width * 0.45f, Screen.height * 0.45f);
+		windowSize = new Vector2 (Screen.width * 0.45f, Screen.height * 0.50f);
 		itemSize = new Vector2 (Screen.width*0.1f, Screen.width*0.1f);
 		itemInfoSize = new Vector2(windowSize.x, windowSize.y);
 		shopPos = new Vector2 (Screen.width*0.04f, Screen.height * 0.15f);
@@ -80,7 +77,6 @@ public class Shop_GUI : MonoBehaviour {
 		itemInfoButtonSize = new Vector2 (windowSize.x/3, itemInfoSize.y*0.25f);
 
 		currentPotionStats = ItemStats.itemStats.getCurrentPotionStats();
-		addPotionIcons ();
 	
 	}
 	
@@ -148,13 +144,11 @@ public class Shop_GUI : MonoBehaviour {
 	}
 
 	private void createContent(Dictionary<string, int[]> items) {
-
-
 		int itemIndex = 0;
 		int column = 0;
 		int row = 0;
 		foreach (string key in items.Keys) {
-				createItem ((int)itemSize.x * column, (int)itemSize.y * row, key, itemIcons[key]);
+				createItem ((int)itemSize.x * column, (int)itemSize.y * row, key, itemStats.itemIcons[key]);
 			if((itemIndex+1) % amountOfItemColumns == 0) {
 				row++;
 				column = 0;
@@ -167,7 +161,7 @@ public class Shop_GUI : MonoBehaviour {
 
 	private void createItem(int x, int y, string itemName, Texture2D icon) {
 		if (GUI.Button (new Rect (x, y, itemSize.x, itemSize.y), icon)) {
-			this.selectedItemName = itemName;
+			this.selectedItem = itemName;
 			itemOwned = false;
 			clickSound.Play ();	
 		}
@@ -176,7 +170,7 @@ public class Shop_GUI : MonoBehaviour {
 
 	private void createItemInfo() {
 		// Item image:
-		GUI.Box (new Rect(0, 0, itemSize.y+10, itemSize.y+10), itemIcons[selectedItemName]); 
+		GUI.Box (new Rect(0, 0, itemSize.y+10, itemSize.y+10), itemStats.itemIcons[selectedItem]); 
 		float descriptionHeight = itemInfoSize.y * 0.2f;
 
 		// Buy, sell, upgrade Buttons
@@ -186,50 +180,70 @@ public class Shop_GUI : MonoBehaviour {
 		Vector2 secondButtonPos = new Vector2 (itemInfoSize.x - itemInfoButtonSize.x - offFromSide, firstButtonPos.y);
 		if (itemOwned) {
 			//createSellButton(0, itemInfoSize.y * 0.5f, itemInfoSize.x, itemInfoSize.y*0.2f);
+			createSellButton(firstButtonPos.x, firstButtonPos.y);
+			createUpgradeButton(secondButtonPos.x, secondButtonPos.y);
 
 		} else {
 			createBuyButton(firstButtonPos.x, firstButtonPos.y);
 			createUpgradeButton(secondButtonPos.x, secondButtonPos.y);
 		}
 
-		
+		Vector2 itemInfoTextSize = new Vector2 (itemInfoSize.x - itemSize.x*1.35f, itemInfoSize.y*0.6f);
+		GUI.BeginGroup (new Rect (itemSize.x*1.2f, 0, itemInfoTextSize.x, itemInfoTextSize.y));
+			GUI.Box (new Rect(0, 0,  itemInfoTextSize.x,  itemInfoTextSize.y), "");
+			// Name
+		GUI.Label(new Rect (0, 0, itemInfoTextSize.x, itemInfoTextSize.y*0.2f), selectedItem + "\n" + "level " + ItemStats.itemStats.getItemLevel(selectedItem), blackText);
+
 		// Item status
-		GUI.BeginGroup (new Rect (itemSize.x + 20, 0, itemInfoSize.x - itemSize.x - 20, itemInfoSize.y + 20));
-			GUI.Label(new Rect (0, 0, itemSize.y, (itemInfoSize.x - itemSize.x) / 2), "level jotain");
-		GUI.EndGroup ();
+
+			//GUI.Label(new Rect (0, 0, itemSize.y, (itemInfoSize.x - itemSize.x) / 2), "level jotain");
+
 
 		// Next level item status
-		//GUI.BeginGroup (new Rect (itemSize.x + 20, 0, itemInfoSize.x - itemSize.x - 20, itemInfoSize.y + 20));
+
 		//GUI.Label(new Rect (0, 0, itemSize.y, (itemInfoSize.x - itemSize.x) / 2), " next level jotain");
-		//GUI.EndGroup ();
+		GUI.EndGroup ();
 		
 	}
+
+
 	private void createBuyButton(float x, float y) {
 		if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Buy")) {
+			itemStats.addToInventory(selectedItem);
 			clickSound.Play ();	
 		}
 	}
 	private void createSellButton(float x, float y) {
 		if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Sell")) {
+			itemStats.sellItem(selectedInventoryIndex);
 			clickSound.Play ();	
 		}
 	}
 	private void createUpgradeButton(float x, float y) {
 		if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Upgrade")) {
+			ItemStats.itemStats.levelUpItem(selectedItem);
 			clickSound.Play ();	
 		}
-	}
-	
-	private void addPotionIcons() {
-		itemIcons.Add ("healPotion", healPotion);
-		itemIcons.Add ("ragePotion", ragePotion);
-		itemIcons.Add ("speedPotion", speedPotion);
 	}
 
 	private void drawTexture(float x, float y, float width, float height, Texture texture) {
 		GUI.DrawTexture (new Rect (x, y, width, height), texture, ScaleMode.ScaleToFit, true, width/height);
 	}
+
+	public void setItemOwned(bool b) {
+		this.itemOwned = b;
+	}
+	public void setSelectedItem(string itemName) {
+		this.selectedItem = itemName;
+	}
+	public void setSelectedInventoryIndex(int index) {
+		this.selectedInventoryIndex = index;
+	}
 }
+
+
+
+
 
 // DONT delete, needed in the future:
 

@@ -23,7 +23,6 @@ public class MenuBar : MonoBehaviour {
 	public GUIStyle shopHover;
 	public GUIStyle mapHover;
 
-
 	// Common stuff
 	public Vector2 menuBarSize;
 	public Vector2 menuBarPosition;
@@ -90,7 +89,7 @@ public class MenuBar : MonoBehaviour {
 			Application.LoadLevel ("MainMenu");
 		}
 	}
-	
+
 	/*
 	private void changeMenubarHeight(int height) {
 		menuBarSize.y = height;
