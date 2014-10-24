@@ -12,7 +12,9 @@ public class ItemStats : MonoBehaviour {
 	private string[,] inventoryContent = new string[inventorySize, itemAttributes+1];
 
 	public Dictionary<string, Texture2D> itemIcons = new Dictionary<string, Texture2D>();
-	
+
+	private Dictionary<string, string> itemDescriptions = new Dictionary<string, string>();
+
 	public Texture2D empty;
 	public Texture2D healPotion;
 	public Texture2D ragePotion;
@@ -26,12 +28,13 @@ public class ItemStats : MonoBehaviour {
 			Destroy (gameObject);
 		}
 		initInventory ();
+		initItemDescriptions ();
 		addItemIcons ();
 		initItemStats ();
 	}
 	
 	private void initItemStats() {
-		// in the int array the order is: level,  cost, effect (healing/damage buff amount)
+		// in the int array the order is: 0 level,  1 cost, 2 effect (healing/damage buff amount)
 		currentItemStats.Add("healPotion", new int[] {1, 25, 10});
 		currentItemStats.Add("ragePotion", new int[] {1, 25, 10});
 		currentItemStats.Add("speedPotion", new int[] {1, 25, 5});
@@ -43,24 +46,12 @@ public class ItemStats : MonoBehaviour {
 		}
 	}
 
-	//itemDescription.Add ("healPotion", "heals a bacteria");
-	//	itemDescription.Add ("ragePotion", "Increases damage, causes a bacteria to rage");
-	//	itemDescription.Add ("speedPotion", "Makes a bacteria move faster");
+	private void initItemDescriptions() {
+	itemDescriptions.Add ("healPotion", "heals a bacteria");
+	itemDescriptions.Add ("ragePotion", "Increases damage, causes a bacteria to rage");
+	itemDescriptions.Add ("speedPotion", "Makes a bacteria move faster");
 
-
-	private string getItemDescription(string itemName) {
-		string description = "";
-		int[] potionStats = currentItemStats[itemName];
-		string n = itemName;
-		if(n.Equals("healPotion")) {
-		description += "Level " + getItemLevel(n);
-		
-		}
-
-		return description;
 	}
-	
-
 	public Dictionary<string, int[]> getCurrentPotionStats() {
 		return currentItemStats;
 	}
@@ -83,7 +74,7 @@ public class ItemStats : MonoBehaviour {
 			if(inventoryContent[i,0].Equals("empty")) {
 				inventoryContent[i,0] = itemName;
 				for(int j = 1; j < currentItemStats[itemName].GetLength(0); j++) {
-					inventoryContent[i,j] = currentItemStats[itemName][j].ToString();
+					inventoryContent[i,j] = currentItemStats[itemName][j-1].ToString();
 				}
 				break;
 			}
@@ -92,7 +83,7 @@ public class ItemStats : MonoBehaviour {
 	}
 
 	public void sellItem(int selectedInventoryIndex) {
-		inventoryContent [selectedInventoryIndex-1, 0] = "empty";
+		inventoryContent [selectedInventoryIndex, 0] = "empty";
 	}
 
 	public void levelUpItem(string key) {
@@ -101,8 +92,12 @@ public class ItemStats : MonoBehaviour {
 		currentItemStats [key] [2] += (int)(currentItemStats [key] [2] * 0.25); // effect inrease
 	}
 
-	public int getItemLevel(string key) {
-		return currentItemStats[key][0];
+	public int getItemLevel(string key, int selectedInventoryIndex) {
+		if (selectedInventoryIndex != -1) {
+			return int.Parse(inventoryContent[selectedInventoryIndex, 1]);
+		} else {
+			return currentItemStats [key] [0];
+		}
 	}
 	public int getItemCost(string key) {
 		return currentItemStats[key][1];
@@ -130,6 +125,10 @@ public class ItemStats : MonoBehaviour {
 
 	public int getInventorySize() {
 		return inventorySize;
+	}
+
+	public string getItemDescription(string itemName) {
+		return itemDescriptions[itemName];
 	}
 
 

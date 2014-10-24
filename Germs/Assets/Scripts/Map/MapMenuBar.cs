@@ -33,7 +33,7 @@ public class MapMenuBar : MonoBehaviour {
 	public bool bacChooser;
 	
 	void Start () {
-		gameStatus = GameObject.Find ("GameStatus").GetComponent<GameStatus> ();
+
 		battleStatus = GameObject.Find ("BattleStatus").GetComponent<BattleStatus> ();
 		unitStats = GameObject.Find ("UnitStats").GetComponent<UnitStats> ();
 
@@ -41,6 +41,8 @@ public class MapMenuBar : MonoBehaviour {
 	}
 
 	private void getMenuBarValues() {
+		gameStatus = GameStatus.gameStatus;
+
 		// Common GUI stuff
 		menuBarSize = MenuBar.menuBar.menuBarSize;
 		menuBarPosition = MenuBar.menuBar.menuBarPosition;
@@ -129,8 +131,8 @@ public class MapMenuBar : MonoBehaviour {
 	}
 
 		
-		public void getGoldAndXp() {
-			gold = gameStatus.getGold();
-			xp = gameStatus.getXp();
-		}
+	private void getGoldAndXp() {
+		gold = gameStatus.getGold();
+		xp = gameStatus.getXp();
 	}
+}

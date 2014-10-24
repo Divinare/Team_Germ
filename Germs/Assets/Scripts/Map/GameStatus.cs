@@ -30,8 +30,8 @@ public class GameStatus : MonoBehaviour {
 			Destroy (gameObject);
 		}
 
-		gold = 0;
-		xp = 0;
+		gold = 500; // for testing
+		xp = 500;
 	}
 
 	//stores map status
@@ -63,6 +63,10 @@ public class GameStatus : MonoBehaviour {
 
 	public void setXp(float newXp) {
 		xp = newXp;
+	}
+
+	public void decreaseXp(float amount) {
+		xp -= amount;
 	}
 
 	//the level that was entered was...

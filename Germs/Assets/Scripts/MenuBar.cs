@@ -5,13 +5,10 @@ using System.Collections.Generic;
 public class MenuBar : MonoBehaviour {
 
 	public static MenuBar menuBar;
-	
-	public float gold;
-	public float xp;
 
-	public AudioSource clickSound;
-	public BattleStatus battleStatus;
-	public GameStatus gameStatus;
+	private GameStatus gameStatus;
+	private AudioController audioController;
+	private BattleStatus battleStatus;
 
 	public Texture2D goldIcon;
 	public Texture2D xpIcon;
@@ -40,6 +37,9 @@ public class MenuBar : MonoBehaviour {
 		} else if (menuBar != this) {
 			Destroy (gameObject);
 		}
+		gameStatus = GameStatus.gameStatus;
+		audioController = AudioController.audioController;
+		battleStatus = BattleStatus.battleStatus;
 
 		// Common stuff
 		menuBarSize = new Vector2 (Screen.width, 70);
@@ -56,26 +56,29 @@ public class MenuBar : MonoBehaviour {
 	// Common methods
 	public void createTrainerButton(int index) { // index 1 or 2, for which spot the button belongs
 		if (GUI.Button (new Rect (shopMapTrainerButtonSize.x * (index-1), menuBarPosition.y, shopMapTrainerButtonSize.x ,shopMapTrainerButtonSize.y), "", trainerHover)) {
-			//clickSound.Play ();	
+			audioController.playClickSound();
 			Application.LoadLevel ("Trainer");
 		}
 	}
 
 	public void createShopButton(int index) {
 		if (GUI.Button (new Rect (shopMapTrainerButtonSize.x * (index-1), menuBarPosition.y, shopMapTrainerButtonSize.x ,shopMapTrainerButtonSize.y), "", shopHover)) {
-		//	clickSound.Play ();	
+			audioController.playClickSound();
 			Application.LoadLevel ("Shop");
 		}
 	}
 
 	public void createReturnToMapButton(int index) {
 		if (GUI.Button (new Rect (shopMapTrainerButtonSize.x * (index-1), menuBarPosition.y, shopMapTrainerButtonSize.x ,shopMapTrainerButtonSize.y), "", mapHover)) {
-			//	clickSound.Play ();	
+			audioController.playClickSound();
 			Application.LoadLevel ("Map");
 		}
 	}
 
 	public void createXpAndGoldButtons() {
+		float gold = gameStatus.getGold();
+		float xp = gameStatus.getXp ();
+
 		GUI.Box (new Rect (menuBarSize.x - menuButtonSize.x - xpGoldButtonSize.x, menuBarPosition.y, xpGoldButtonSize.x, xpGoldButtonSize.y), goldIcon);
 		GUI.Label(new Rect(menuBarSize.x - menuButtonSize.x - xpGoldButtonSize.x, menuBarPosition.y, xpGoldButtonSize.x, xpGoldButtonSize.y), gold.ToString(), bigNumbers);
 		
@@ -85,7 +88,7 @@ public class MenuBar : MonoBehaviour {
 
 	public void createMainMenuButton() {
 		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y, menuButtonSize.x, menuButtonSize.y), "Main\nMenu")) {
-			//clickSound.Play ();
+			audioController.playClickSound();
 			Application.LoadLevel ("MainMenu");
 		}
 	}

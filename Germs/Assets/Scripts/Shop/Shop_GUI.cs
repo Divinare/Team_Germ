@@ -7,6 +7,8 @@ public class Shop_GUI : MonoBehaviour {
 
 	private ItemStats itemStats;
 	private AudioController audioController;
+	private GameStatus gameStatus;
+
 	public float gold = 0;
 	public float xp = 0;
 	
@@ -27,9 +29,6 @@ public class Shop_GUI : MonoBehaviour {
 	public Texture shopText;
 	public Texture stashText;
 	public Texture selectedItemWindow;
-	
-	private Transform gameStatus;
-	private Transform battleTracker;
 
 	private float hScrollbarValue;
 	public Vector2 shopScrollPos = Vector2.zero;
@@ -47,7 +46,7 @@ public class Shop_GUI : MonoBehaviour {
 
 	private string selectedItem = "healPotion";
 	bool itemOwned = false;
-	private int selectedInventoryIndex = 0; // 1 - inventorySize
+	private int selectedInventoryIndex = -1; // 1 - inventorySize
 
 	private Dictionary<string, int[]> currentPotionStats;
 
@@ -62,8 +61,10 @@ public class Shop_GUI : MonoBehaviour {
 	void Start () {
 		itemStats = ItemStats.itemStats;
 		audioController = AudioController.audioController;
-		//gold = gameStatus.gameObject.GetComponent<GameStatus>().getGold();
-		//xp = gameStatus.gameObject.GetComponent<GameStatus>().getXp();
+		gameStatus = GameStatus.gameStatus;
+
+		gold = gameStatus.getGold ();
+		xp = gameStatus.getXp ();
 
 		windowSize = new Vector2 (Screen.width * 0.45f, Screen.height * 0.50f);
 		itemSize = new Vector2 (Screen.width*0.1f, Screen.width*0.1f);
@@ -186,20 +187,30 @@ public class Shop_GUI : MonoBehaviour {
 
 		Vector2 itemInfoTextSize = new Vector2 (itemInfoSize.x - itemSize.x*1.35f, itemInfoSize.y*0.6f);
 		GUI.BeginGroup (new Rect (itemSize.x*1.2f, 0, itemInfoTextSize.x, itemInfoTextSize.y));
-			GUI.Box (new Rect(0, 0,  itemInfoTextSize.x,  itemInfoTextSize.y), "");
-			// Name
-		GUI.Label(new Rect (0, 0, itemInfoTextSize.x, itemInfoTextSize.y*0.2f), selectedItem + "\n" + "level " + ItemStats.itemStats.getItemLevel(selectedItem), blackText);
-
-		// Item status
-
-			//GUI.Label(new Rect (0, 0, itemSize.y, (itemInfoSize.x - itemSize.x) / 2), "level jotain");
-
-
-		// Next level item status
-
-		//GUI.Label(new Rect (0, 0, itemSize.y, (itemInfoSize.x - itemSize.x) / 2), " next level jotain");
+		createTextItemInfo (itemInfoTextSize);
 		GUI.EndGroup ();
 		
+	}
+
+	private void createTextItemInfo(Vector2 itemInfoTextSize) {
+		GUI.Box (new Rect(0, 0,  itemInfoTextSize.x,  itemInfoTextSize.y), "");
+		// Name
+		string description = "";
+		if (itemOwned) {
+			description = selectedItem + "\n" + "level " + itemStats.getItemLevel(selectedItem, selectedInventoryIndex);
+		} else {
+			description = selectedItem + "\n" + "level " + itemStats.getItemLevel (selectedItem, -1);
+		}
+		GUI.Label (new Rect (0, 0, itemInfoTextSize.x, itemInfoTextSize.y * 0.2f), description, blackText);
+
+
+		// Item status
+		
+		//GUI.Label(new Rect (0, 0, itemSize.y, (itemInfoSize.x - itemSize.x) / 2), "level jotain");
+		
+		// Next level item status
+		
+		//GUI.Label(new Rect (0, 0, itemSize.y, (itemInfoSize.x - itemSize.x) / 2), " next level jotain");
 	}
 
 

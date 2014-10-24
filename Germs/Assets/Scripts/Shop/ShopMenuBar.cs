@@ -80,7 +80,7 @@ public class ShopMenuBar : MonoBehaviour {
 
 					shopGUI.setItemOwned(true);
 					shopGUI.setSelectedItem(itemName);
-					shopGUI.setSelectedInventoryIndex(i+1);
+					shopGUI.setSelectedInventoryIndex(i);
 				}
 
 			}
