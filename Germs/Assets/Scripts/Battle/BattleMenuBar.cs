@@ -3,6 +3,8 @@ using System.Collections;
 
 public class BattleMenuBar : MonoBehaviour {
 	
+	public static ItemStats itemStats = ItemStats.itemStats;
+
 	public AudioSource clickSound;
 
 	public Texture2D goldIcon;
@@ -86,16 +88,21 @@ public class BattleMenuBar : MonoBehaviour {
 		float scaleToMiddle = Screen.width * 0.4f;
 		
 		GUI.contentColor = Color.yellow;
-		
-		//buttons
-		if (GUI.Button (new Rect (battlelogSize.x, menuBarPosition.y + menuBarDescriptionHeight, itemMenuButtonSize.x, itemMenuButtonSize.y), new GUIContent ("1", "Fancy item 1"))) {
-			//clickSound.Play ();		
-		}
-		if (GUI.Button (new Rect (battlelogSize.x+itemMenuButtonSize.x, menuBarPosition.y + menuBarDescriptionHeight, itemMenuButtonSize.x, itemMenuButtonSize.y), new GUIContent ("2", "Fancy item 2"))) {
-			//clickSound.Play ();		
-		}
-		if (GUI.Button (new Rect (battlelogSize.x+itemMenuButtonSize.x*2, menuBarPosition.y + menuBarDescriptionHeight, itemMenuButtonSize.x, itemMenuButtonSize.y), new GUIContent ("3", "Fancy item 3"))) {
-			//clickSound.Play ();		
+
+		string[,] inventoryContent = itemStats.getInventoryContent ();
+
+		int items = itemStats.getInventorySize();
+		float centerInventoryPosition = (Screen.width - (itemMenuButtonSize.x*items))/2;
+		int index = 0;
+
+		for(int i = 0; i < items; i++) {
+			string itemName = inventoryContent[i,0];
+			if (GUI.Button (new Rect (battlelogSize.x + itemMenuButtonSize.x * index, menuBarPosition.y + menuBarDescriptionHeight, itemMenuButtonSize.x, itemMenuButtonSize.y), itemStats.itemIcons[itemName])) {
+				if(!itemName.Equals("empty")) {
+					// using potions function here
+				}
+			}
+			index++;
 		}
 		
 		//Tooltip position
