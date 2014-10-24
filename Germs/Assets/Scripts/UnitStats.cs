@@ -51,9 +51,9 @@ public class UnitStats : MonoBehaviour {
 		allUnitImages.Add ("Phage", phage);
 		allUnitImages.Add ("Gatbac", gatbac);
 		allUnitImages.Add ("Strepto", strepto);
-		allUnitImages.Add ("smallRed", smallRed);
-		allUnitImages.Add ("smallBlue", smallBlue);
-		allUnitImages.Add ("smallPurple", smallPurple);
+		allUnitImages.Add ("Haemophilus", smallRed);
+		allUnitImages.Add ("Salmonella", smallBlue);
+		allUnitImages.Add ("Bacillus", smallPurple);
 		allUnitImages.Add ("empty", empty);
 	}
 

@@ -174,9 +174,9 @@ public class TrainerGUI : MonoBehaviour {
 		allBacsStories.Add ("Gatbac", "Gatbac is a very fat Epstein-Barr virus, that causes mononucleosis, also known as the kissing disease.");
 		allBacsStories.Add ("Phage", "A Bacteriophage is a virus that infects and replicates within a bacterium. Bacteriophages are composed of proteins that encapsulate a DNA or RNA genome.");
 		allBacsStories.Add ("Strepto", "Streptococcus pneumoniae, or pneumococcus, is a significant human pathogenic bacterium and is the cause of pneumonia.");
-		allBacsStories.Add ("smallRed", "...");
-		allBacsStories.Add ("smallBlue", "...");
-		allBacsStories.Add ("smallPurple", "...");
+		allBacsStories.Add ("Haemophilus", "...");
+		allBacsStories.Add ("Salmonella", "...");
+		allBacsStories.Add ("Bacillus", "...");
 		allBacsStories.Add ("blueBac", "...");
 
 		allBacsImages = unitStats.getImageDict();
