@@ -180,6 +180,7 @@ public class TrainerGUI : MonoBehaviour {
 		allBacsStories.Add ("blueBac", "...");
 
 		allBacsImages = unitStats.getImageDict();
+		allBacsImages.Remove("empty");
 	}
 	
 	void setLevelMenu() {

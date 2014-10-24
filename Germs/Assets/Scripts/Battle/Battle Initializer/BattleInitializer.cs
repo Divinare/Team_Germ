@@ -27,18 +27,24 @@ public class BattleInitializer : MonoBehaviour {
 		GameObject matrix = GameObject.FindGameObjectWithTag ("Matrix");
 		GameObject[,] squares = matrix.GetComponent<Matrix> ().getSquares ();
 		friendlyGermsToSpawn = battleStatus.getSelectedUnits().ToArray();
+
 		if (friendlyGermsToSpawn.Length == 0) {
 			Debug.Log ("NO FRIENDLY BACTERIA SELECTED");
 		}
+
 		int y = 8; // Start spawning mobs from the top to bottom
 		for (int i = 0; i < friendlyGermsToSpawn.Length; i++) {
-			GameObject germToSpawn = GameObject.FindGameObjectWithTag("Unit Prefab Container").GetComponent<UnitPrefabContainer>().getGerm(friendlyGermsToSpawn[i]);
-			//Debug.Log("Attempting to spawn " + germToSpawn);
-			GameObject spawnedGerm = SpawnObjectAtSquare (germToSpawn, squares [0, y]); 
-			spawnedGerm.transform.GetChild(0).position = spawnedGerm.transform.position;
-			spawnedGerm.GetComponent<UnitStatus>().setSquare (squares[0,y]); // give unit a reference to the square it is currently standing on
-			squares[0, y].GetComponent <SquareStatus>().setStatus ("friendly", spawnedGerm); // Set square status to indicate there is a friendly unit
-			y -= 2;
+			if (friendlyGermsToSpawn[i] != "empty") {
+				GameObject germToSpawn = GameObject.FindGameObjectWithTag("Unit Prefab Container").GetComponent<UnitPrefabContainer>().getGerm(friendlyGermsToSpawn[i]);
+				//Debug.Log("Attempting to spawn " + germToSpawn);
+				GameObject spawnedGerm = SpawnObjectAtSquare (germToSpawn, squares [0, y]); 
+				spawnedGerm.transform.GetChild(0).position = spawnedGerm.transform.position;
+				spawnedGerm.GetComponent<UnitStatus>().setSquare (squares[0,y]); // give unit a reference to the square it is currently standing on
+				squares[0, y].GetComponent <SquareStatus>().setStatus ("friendly", spawnedGerm); // Set square status to indicate there is a friendly unit
+				y -= 2;
+			} else {
+				Debug.Log ("Empty slot");
+			}
 		}
 
 		y = 8;

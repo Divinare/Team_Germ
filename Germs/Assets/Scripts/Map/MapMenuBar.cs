@@ -7,14 +7,13 @@ public class MapMenuBar : MonoBehaviour {
 	public float gold;
 	public float xp;
 	
-	public GameStatus gameStatus;
-	public BattleStatus battleStatus;
+	private GameStatus gameStatus;
+	private BattleStatus battleStatus;
+	private UnitStats unitStats;
 
 	public AudioSource clickSound;
-	
 	public Texture2D goldIcon;
 	public Texture2D xpIcon;
-
 	private bool initialized = false;
 
 	// Common stuff
@@ -30,12 +29,15 @@ public class MapMenuBar : MonoBehaviour {
 	public int clickedIndex;
 	public Dictionary<string, int[]> allBacteriaStats = new Dictionary<string, int[]>();
 	public List<string> selectedUnits = new List<string>();
+	private Dictionary<string, Texture2D> allUnitImages = new Dictionary<string, Texture2D>();
 	public bool bacChooser;
 	
 	void Start () {
 		gameStatus = GameObject.Find ("GameStatus").GetComponent<GameStatus> ();
 		battleStatus = GameObject.Find ("BattleStatus").GetComponent<BattleStatus> ();
+		unitStats = GameObject.Find ("UnitStats").GetComponent<UnitStats> ();
 
+		allUnitImages = unitStats.getImageDict();
 	}
 
 	private void getMenuBarValues() {
@@ -79,39 +81,44 @@ public class MapMenuBar : MonoBehaviour {
 	
 	private void createBacteriaBar() {
 		//frame for chosen bacteria
-		if (GUI.Button (new Rect (middleBar.x,middleBar.y,menuButtonSize.x,menuButtonSize.y), selectedUnits[0])) {
+
+		if (GUI.Button (new Rect (middleBar.x,middleBar.y,menuButtonSize.x,menuButtonSize.y), allUnitImages[selectedUnits[0]])) {
 			clickedIndex = 0;
 			drawChooserBar();
 		}
-		if (GUI.Button (new Rect (middleBar.x+menuButtonSize.x,middleBar.y,menuButtonSize.x,menuButtonSize.y), selectedUnits[1])) {
+		if (GUI.Button (new Rect (middleBar.x+menuButtonSize.x,middleBar.y,menuButtonSize.x,menuButtonSize.y), allUnitImages[selectedUnits[1]])) {
 			clickedIndex = 1;
 			drawChooserBar();
 		}
-		if (GUI.Button (new Rect (middleBar.x+2*menuButtonSize.x,middleBar.y,menuButtonSize.x,menuButtonSize.y), selectedUnits[2])) {
+		if (GUI.Button (new Rect (middleBar.x+2*menuButtonSize.x,middleBar.y,menuButtonSize.x,menuButtonSize.y), allUnitImages[selectedUnits[2]])) {
 			clickedIndex = 2;
 			drawChooserBar();
 		}
-		if (GUI.Button (new Rect (middleBar.x+3*menuButtonSize.x,middleBar.y,menuButtonSize.x,menuButtonSize.y), selectedUnits[3])) {
+		if (GUI.Button (new Rect (middleBar.x+3*menuButtonSize.x,middleBar.y,menuButtonSize.x,menuButtonSize.y), allUnitImages[selectedUnits[3]])) {
 			clickedIndex = 3;
 			drawChooserBar();
 		}
-		if (GUI.Button (new Rect (middleBar.x+4*menuButtonSize.x,middleBar.y,menuButtonSize.x,menuButtonSize.y), selectedUnits[4])) {
+		if (GUI.Button (new Rect (middleBar.x+4*menuButtonSize.x,middleBar.y,menuButtonSize.x,menuButtonSize.y), allUnitImages[selectedUnits[4]])) {
 			clickedIndex = 4;
 			drawChooserBar();
 		}
 		
 		if (bacChooser) {
 
-			allBacteriaStats = battleStatus.getAllBacteriaStats();
 			float pos = 0;
-	
-			foreach (string bac in allBacteriaStats.Keys) {
-				if (!selectedUnits.Contains(bac)) {
-					if (GUI.Button (new Rect (middleBar.x +pos,middleBar.y-menuButtonSize.y,menuButtonSize.x,menuButtonSize.y), bac)) {
+			foreach (string bac in allUnitImages.Keys) {
+				if (!selectedUnits.Contains(bac) && bac != "empty") {
+					if (GUI.Button (new Rect (middleBar.x +pos,middleBar.y-menuButtonSize.y,menuButtonSize.x,menuButtonSize.y), allUnitImages[bac])) {
 						battleStatus.setSelectedUnit(bac, clickedIndex);
 						bacChooser = false;
 					}
 					pos += menuButtonSize.x;
+				}
+				if (bac == "empty") {
+					if (GUI.Button (new Rect (middleBar.x +pos,middleBar.y-menuButtonSize.y,menuButtonSize.x,menuButtonSize.y), allUnitImages[bac])) {
+						battleStatus.setSelectedUnit(bac, clickedIndex);
+						bacChooser = false;
+					}
 				}
 			}
 		}

@@ -26,6 +26,7 @@ public class UnitStats : MonoBehaviour {
 	public Texture2D strepto;
 	public Texture2D smallBlue;
 	public Texture2D smallPurple;
+	public Texture2D empty;
 	public Dictionary<string, Texture2D> allUnitImages = new Dictionary<string, Texture2D>();
 
 	// Use this for initialization
@@ -53,6 +54,7 @@ public class UnitStats : MonoBehaviour {
 		allUnitImages.Add ("smallRed", smallRed);
 		allUnitImages.Add ("smallBlue", smallBlue);
 		allUnitImages.Add ("smallPurple", smallPurple);
+		allUnitImages.Add ("empty", empty);
 	}
 
 	public int[] getEnemyUnitStats(string enemyName) {

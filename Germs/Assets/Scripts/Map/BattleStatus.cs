@@ -40,13 +40,16 @@ public class BattleStatus : MonoBehaviour {
 		selectedUnits.Add ("Phage");
 	}
 
-	public List<string> getEnemiesToSpawn() {
+	public void randomEnemiesForLevel() {
 		enemiesToSpawn.Clear();
 		spawnNum = 5;
 		for (int i=0; i<spawnNum; i++) {
 			var randomKey = currentUnitStats.Keys.ToArray()[(int)Random.Range(0,currentUnitStats.Keys.Count)];
 			enemiesToSpawn.Add (randomKey);
 		}
+	}
+
+	public List<string> getEnemiesToSpawn() {
 		return enemiesToSpawn;
 	}
 	
