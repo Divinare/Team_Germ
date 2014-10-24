@@ -64,7 +64,7 @@ public class BattleMenuBar : MonoBehaviour {
 
 	private void createBattlelog() {
 		// Text area background
-		GUI.contentColor = Color.yellow;
+		//GUI.contentColor = Color.yellow;
 		GUI.Box (new Rect (battlelogPosition.x, battlelogPosition.y, battlelogSize.x, battlelogSize.y), "");
 		// Battlelog
 		GUILayout.BeginArea (new Rect (battlelogPosition.x, battlelogPosition.y, battlelogSize.x, battlelogSize.y));
@@ -88,7 +88,7 @@ public class BattleMenuBar : MonoBehaviour {
 		float amountOfItems = 3;
 		float scaleToMiddle = Screen.width * 0.4f;
 		
-		GUI.contentColor = Color.yellow;
+		//GUI.contentColor = Color.yellow;
 
 		string[,] inventoryContent = itemStats.getInventoryContent ();
 
@@ -112,7 +112,7 @@ public class BattleMenuBar : MonoBehaviour {
 	}
 
 	private void createActivityMenu() {
-		float amountOfItems = 3;
+		float amountOfItems = 4;
 		
 		// Create menu button
 		//MenuCreator.menuCreator.createMenu ();
@@ -122,7 +122,7 @@ public class BattleMenuBar : MonoBehaviour {
 		//GUI.Box (new Rect (Screen.width-activityMenuButtonSize.x * amountOfItems, Screen.height - activityMenuButtonSize.y, activityMenuButtonSize.x * (amountOfItems+1), activityMenuButtonSize.y), "");
 		
 		//buttons
-		if (GUI.Button (new Rect (menuBarSize.x-activityMenuButtonSize.x*5, menuBarPosition.y + menuBarDescriptionHeight, activityMenuButtonSize.x, activityMenuButtonSize.y), new GUIContent ("special here", "Skip turn"))) {
+		if (GUI.Button (new Rect (menuBarSize.x-activityMenuButtonSize.x*5, menuBarPosition.y + menuBarDescriptionHeight, activityMenuButtonSize.x, activityMenuButtonSize.y), new GUIContent (skipIcon, "Skip turn"))) {
 			GameObject currentUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().getActiveUnit ();
 			currentUnit.GetComponent<UnitStatus>().Deselect();
 			//clickSound.Play ();		

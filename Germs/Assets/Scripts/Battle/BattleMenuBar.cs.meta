@@ -2,7 +2,13 @@ fileFormatVersion: 2
 guid: d64861ee4c5f5864dbe6ab1458b08d1f
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - clickSound: {instanceID: 0}
+  - goldIcon: {instanceID: 0}
+  - xpIcon: {instanceID: 0}
+  - meleeIcon: {instanceID: 0}
+  - rangedIcon: {instanceID: 0}
+  - skipIcon: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
