@@ -124,7 +124,9 @@ public class BattleMenuBar : MonoBehaviour {
 		//buttons
 		if (GUI.Button (new Rect (menuBarSize.x-activityMenuButtonSize.x*5, menuBarPosition.y + menuBarDescriptionHeight, activityMenuButtonSize.x, activityMenuButtonSize.y), new GUIContent (skipIcon, "Skip turn"))) {
 			GameObject currentUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().getActiveUnit ();
-			currentUnit.GetComponent<UnitStatus>().Deselect();
+			if (!currentUnit.GetComponent<UnitStatus>().IsEnemy()) {
+				currentUnit.GetComponent<UnitStatus>().Deselect();
+			}
 			//clickSound.Play ();		
 		}
 		if (GUI.Button (new Rect (menuBarSize.x-activityMenuButtonSize.x*4, menuBarPosition.y + menuBarDescriptionHeight, activityMenuButtonSize.x, activityMenuButtonSize.y), new GUIContent (meleeIcon, "Fancy melee attack"))) {
