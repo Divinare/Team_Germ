@@ -98,7 +98,7 @@ public class BattleMenuBar : MonoBehaviour {
 
 		for(int i = 0; i < items; i++) {
 			string itemName = inventoryContent[i,0];
-			if (GUI.Button (new Rect (battlelogSize.x + itemMenuButtonSize.x * index, menuBarPosition.y + menuBarDescriptionHeight, itemMenuButtonSize.x, itemMenuButtonSize.y), itemStats.getItemName(itemName))) {
+			if (GUI.Button (new Rect (battlelogSize.x + itemMenuButtonSize.x * index, menuBarPosition.y + menuBarDescriptionHeight, itemMenuButtonSize.x, itemMenuButtonSize.y), itemStats.getItemIcon(itemName))) {
 				if(!itemName.Equals("empty")) {
 					// using potions function here
 				}
