@@ -3,17 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ItemStats : MonoBehaviour {
-
-
-
+	
 	public static ItemStats itemStats;
 
 	private static int itemAttributes = 3;
 	private static int inventorySize = 3;
 	private Dictionary<string, int[]> currentItemStats = new Dictionary<string, int[]>();
 	private string[,] inventoryContent = new string[inventorySize, itemAttributes+1];
-	// http://stackoverflow.com/questions/146204/duplicate-keys-in-net-dictionaries
-//	List<KeyValuePair<string, int[]>> inventoryContent = new List<KeyValuePair<string, int[]>>();
 
 	public Dictionary<string, Texture2D> itemIcons = new Dictionary<string, Texture2D>();
 	
@@ -46,24 +42,13 @@ public class ItemStats : MonoBehaviour {
 			inventoryContent[i,0] = "empty";
 		}
 	}
-	
-	public string getItemDescription(string itemName, string type, bool currentLevelStats) {
-		string description = "";
 
-		if (type.Equals ("potion")) {
-			description = getPotionDescription(itemName, currentLevelStats);
-		}
-
-
-
-
-		//itemDescription.Add ("healPotion", "heals a bacteria");
+	//itemDescription.Add ("healPotion", "heals a bacteria");
 	//	itemDescription.Add ("ragePotion", "Increases damage, causes a bacteria to rage");
 	//	itemDescription.Add ("speedPotion", "Makes a bacteria move faster");
-		return description;
-	}
 
-	private string getPotionDescription(string itemName, bool currentLevelStats) {
+
+	private string getItemDescription(string itemName) {
 		string description = "";
 		int[] potionStats = currentItemStats[itemName];
 		string n = itemName;

@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 public class Shop_GUI : MonoBehaviour {
 
 	private ItemStats itemStats;
-
+	private AudioController audioController;
 	public float gold = 0;
 	public float xp = 0;
 	
@@ -56,19 +56,15 @@ public class Shop_GUI : MonoBehaviour {
 	//string[] weapons = new string[] {"dagger"};
 
 	private int clickedIndex = 1;
-
-
-
 	
-	public AudioSource clickSound;
-	
+
 	// Use this for initialization
 	void Start () {
 		itemStats = ItemStats.itemStats;
+		audioController = AudioController.audioController;
 		//gold = gameStatus.gameObject.GetComponent<GameStatus>().getGold();
 		//xp = gameStatus.gameObject.GetComponent<GameStatus>().getXp();
 
-		clickSound = GameObject.FindGameObjectWithTag ("AudioDummy").GetComponent<AudioSource> ();
 		windowSize = new Vector2 (Screen.width * 0.45f, Screen.height * 0.50f);
 		itemSize = new Vector2 (Screen.width*0.1f, Screen.width*0.1f);
 		itemInfoSize = new Vector2(windowSize.x, windowSize.y);
@@ -163,7 +159,7 @@ public class Shop_GUI : MonoBehaviour {
 		if (GUI.Button (new Rect (x, y, itemSize.x, itemSize.y), icon)) {
 			this.selectedItem = itemName;
 			itemOwned = false;
-			clickSound.Play ();	
+			audioController.playClickSound();
 		}
 		//GUI.TextArea (new Rect (x, y, itemSize.x, itemSize.y), description);
 	}
@@ -210,19 +206,19 @@ public class Shop_GUI : MonoBehaviour {
 	private void createBuyButton(float x, float y) {
 		if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Buy")) {
 			itemStats.addToInventory(selectedItem);
-			clickSound.Play ();	
+			audioController.playClickSound();
 		}
 	}
 	private void createSellButton(float x, float y) {
 		if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Sell")) {
 			itemStats.sellItem(selectedInventoryIndex);
-			clickSound.Play ();	
+			audioController.playClickSound();
 		}
 	}
 	private void createUpgradeButton(float x, float y) {
 		if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Upgrade")) {
 			ItemStats.itemStats.levelUpItem(selectedItem);
-			clickSound.Play ();	
+			audioController.playClickSound();
 		}
 	}
 
