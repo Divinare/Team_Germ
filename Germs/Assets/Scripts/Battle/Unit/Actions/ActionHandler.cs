@@ -30,6 +30,9 @@ public class ActionHandler : MonoBehaviour {
 			if (actionType.Equals ("rangedStun")) {
 				this.GetComponent<RangedAttack>().initiateStun (initiator, target);
 			}
+			if (actionType.Equals ("poison")) {
+				this.GetComponent<Poison>().poisonAttack(initiator, target);
+			}
 		}
 		else { // actions that can only be performed on friendly targets
 			if (actionType.Equals ("heal")) {

@@ -39,5 +39,7 @@ public class RangedAttack : MonoBehaviour {
 		bullet = Instantiate(projectile, attacker.transform.position, attacker.transform.rotation) as Rigidbody;
 		bullet.transform.localScale = new Vector3(0.4f, 0.4f, 0.4f); // projectile size
 		bullet.velocity = (target.transform.position - attacker.transform.position).normalized * bulletSpeed; // projectile direction & speed
+
+		//tell stun projectile stun duration
 	}
 }

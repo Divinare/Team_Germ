@@ -57,11 +57,13 @@ public class TurnHandler : MonoBehaviour {
 			}
 		}
 	}
-
+	
+	//friendly and enemy targets have different places where unit turns are set,
+	//what is the real place for this?
 	public bool canUnitUseThisTurn(GameObject unit) {
 		//stun
 		if (unit.transform.GetComponent<UnitStatus>().IsUnitStunned()) {
-			//remove one round of stun from friendly target (untested) / enemy is removed in Selector because that is were enemy turn is assigned, not here?
+			//remove one round of stun from friendly target (untested) 
 			if (!unit.transform.GetComponent<UnitStatus>().IsEnemy()) {
 				unit.transform.GetComponent<UnitStatus>().countDownStun();
 			}

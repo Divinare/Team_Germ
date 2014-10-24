@@ -21,14 +21,15 @@ public class BattleStatus : MonoBehaviour {
 		} else if (battleStatus != this) {
 			Destroy (gameObject);
 		}
+		//testing poison everyone has poison (3) equipped!
 
 		//test int[] {Health, Dmg, speed, level, melee, ranged, special}
-		currentUnitStats.Add ("Gatbac", new int[] {200, 10, 5, 1, 1, 1, 2});
+		currentUnitStats.Add ("Gatbac", new int[] {200, 10, 5, 1, 1, 1, 3});
 		currentUnitStats.Add ("Strepto", new int[] {100, 10, 8, 1, 1, 0, 3});
-		currentUnitStats.Add ("smallRed", new int[] {100, 10, 6, 1, 1, 0, 4});
-		currentUnitStats.Add ("smallBlue", new int[] {100, 10, 6, 1, 1, 0, 5});
-		currentUnitStats.Add ("smallPurple", new int[] {100, 10, 6, 1, 0, 1, 6});
-		currentUnitStats.Add ("Phage", new int[] {100, 10, 4, 1, 1, 0, 7});
+		currentUnitStats.Add ("smallRed", new int[] {100, 10, 6, 1, 1, 0, 3});
+		currentUnitStats.Add ("smallBlue", new int[] {100, 10, 6, 1, 1, 0, 3});
+		currentUnitStats.Add ("smallPurple", new int[] {100, 10, 6, 1, 0, 1, 3});
+		currentUnitStats.Add ("Phage", new int[] {100, 10, 4, 1, 1, 0, 3});
 		//currentUnitStats.Add ("blueBac", new int[] {100, 15, 10, 1, 1, 1, 8});
 
 		//initial selection
@@ -104,7 +105,7 @@ public class BattleStatus : MonoBehaviour {
 		}
 	}
 
-	public int bacteriaSpecialAttack(string key) {
+	public int getBacteriaSpecialAttack(string key) {
 		unravelArray = currentUnitStats[key];
 		return unravelArray[6];
 	}

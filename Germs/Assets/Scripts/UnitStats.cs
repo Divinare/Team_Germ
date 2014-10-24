@@ -32,9 +32,9 @@ public class UnitStats : MonoBehaviour {
 		gameStatus = GameObject.Find("GameStatus").GetComponent<GameStatus>();
 		baseUnitStats = battleStatus.getAllBacteriaStats();
 
-		//example unitSpecialAttack entry : [0]=SkillName, [1]=SkillType, [2] = dmg, [3]=duration, [4]=skillDescription (for tooltip)}
+		//example unitSpecialAttack entry : [0]=SkillName, [1]=SkillType, [2] = total dmg, [3]=duration, [4]=skillDescription (for tooltip)}
 		unitSpecialAttacks.Add(2, new string[] {"Stunball", "rangedStun", "0", "2", "Bacteria launches a powerful ball that stuns the target for 2 sec."});
-		unitSpecialAttacks.Add(3, new string[] {"Poison", "meleeStun", "10", "2", "Bacteria makes a powerful swing that stuns the target for 2sec."});
+		unitSpecialAttacks.Add(3, new string[] {"Poison", "poison", "30", "2", "Bacteria makes a powerful swing that stuns the target for 2sec."});
 	}
 
 	public int[] getEnemyUnitStats(string enemyName) {

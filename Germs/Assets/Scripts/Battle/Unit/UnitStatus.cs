@@ -27,6 +27,8 @@ public class UnitStatus : MonoBehaviour {
 	//for statusEffects
 	public int unitRounds;
 	private int stunRounds;
+	private int poisonRounds;
+	private int poisonDmg;
 	public bool stunned;
 	public bool poisoned;
 
@@ -94,6 +96,21 @@ public class UnitStatus : MonoBehaviour {
 	
 	public void Poisoned(int damage, int rounds) {
 		//poisoned units taka damage over time for x rounds
+		Debug.Log (unitName + " poisoned for "+rounds+" rounds and "+damage+" dmg!");
+		poisoned = true;
+		animator.SetBool("poisoned", true);
+		poisonRounds = rounds;
+		poisonDmg = damage / poisonRounds;
+	}
+
+	public void countDownPoison() {
+		poisonRounds -= 1;
+		TakeDamage(poisonDmg);
+		Debug.Log (unitName + " takes "+poisonDmg+" poison dmg");
+		if (poisonRounds == 0) {
+			poisoned = false;
+			animator.SetBool ("poisoned", false);
+		}
 	}
 
 	public void Stunned(int rounds) {
@@ -127,6 +144,10 @@ public class UnitStatus : MonoBehaviour {
 		unitRounds += 1;
 		selected = true;
 		GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnStartHandler> ().handeTurnStart ();
+
+		if (poisoned) {
+			countDownPoison();
+		}
 	}
 	
 	public void Deselect() {
@@ -165,5 +186,9 @@ public class UnitStatus : MonoBehaviour {
 
 	public void setSpeed(int spd) {
 		speed = spd;
+	}
+
+	public string getUnitName() {
+		return unitName;
 	}
 }

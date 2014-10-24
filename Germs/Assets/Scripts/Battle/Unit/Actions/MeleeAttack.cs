@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class MeleeAttack : MonoBehaviour {
-
+	
 	public bool goingToAttack;
 	private GameObject attacker;
 	private GameObject target;
@@ -15,7 +15,7 @@ public class MeleeAttack : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		
 		// checks every frame to see if unit has reached a square adjacent to the target and whether an attack is primed, if yes then perform attack
 		if (goingToAttack) {
 			Vector3 targetPos = targetSquare.transform.position;
@@ -28,13 +28,13 @@ public class MeleeAttack : MonoBehaviour {
 			}
 		}
 	}
-
+	
 	public GameObject getAttacker () {
 		return attacker;
 	}
-
+	
 	public void initiateAttack(GameObject activeUnit, GameObject targetGerm) {
-
+		
 		attacker = activeUnit;
 		List<GameObject> route = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (targetGerm.GetComponent<UnitStatus>().getSquare (), true);
 		if (route == null) {
@@ -43,8 +43,8 @@ public class MeleeAttack : MonoBehaviour {
 			attacker = null;
 			return; // no route to enemy found, abort attack
 		}
-
-
+		
+		
 		if (route.Count > 1) { // check if the target is in an adjacent square, if not, move to the square next to the target
 			route.RemoveAt (route.Count - 1); 
 			targetSquare = route[route.Count - 1];
