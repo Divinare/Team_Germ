@@ -44,7 +44,7 @@ public class BattleStatus : MonoBehaviour {
 		enemiesToSpawn.Clear();
 		spawnNum = 5;
 		for (int i=0; i<spawnNum; i++) {
-			var randomKey = currentUnitStats.Keys.ToArray()[(int)Random.Range(0,currentUnitStats.Keys.Count-1)];
+			var randomKey = currentUnitStats.Keys.ToArray()[(int)Random.Range(0,currentUnitStats.Keys.Count)];
 			enemiesToSpawn.Add (randomKey);
 		}
 		return enemiesToSpawn;
