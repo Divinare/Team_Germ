@@ -29,12 +29,16 @@ public class Map : MonoBehaviour {
 
 	private GameStatus gameStatus;
 	private UnitStats unitStats;
+	private BattleStatus battleStatus;
+
 	private BattleStartWindow battleStartWindow;
 
 	// Use this for initialization
 	void Start () {
 		gameStatus = GameObject.Find("GameStatus").GetComponent<GameStatus>();
 		unitStats = GameObject.Find("UnitStats").GetComponent<UnitStats>();
+		battleStatus = GameObject.Find("BattleStatus").GetComponent<BattleStatus>();
+
 		battleStartWindow = GameObject.Find ("Map").GetComponent<BattleStartWindow>();
 		clickSound = GameObject.FindGameObjectWithTag ("AudioController").GetComponent<AudioSource> (); 
 
@@ -60,7 +64,6 @@ public class Map : MonoBehaviour {
 		//first node
 		setNodeActive(transform.FindChild("Node1"));
 		if (!transform.FindChild("Node1").GetComponent<Node>().isNodeCompleted()) {
-			Debug.Log (transform.FindChild("Node1").GetComponent<Node>().isNodeCompleted());
 			transform.FindChild("Node1").FindChild("yellowArrow").gameObject.SetActive (true);
 		}
 	}
@@ -85,6 +88,7 @@ public class Map : MonoBehaviour {
 							getNodeName(hit.collider.transform);
 
 							//enter level through GUI window
+							battleStatus.randomEnemiesForLevel();
 							drawBattleWindow();
 					}
 				}

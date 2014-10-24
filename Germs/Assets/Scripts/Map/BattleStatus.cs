@@ -26,27 +26,30 @@ public class BattleStatus : MonoBehaviour {
 		//test int[] {Health, Dmg, speed, level, melee, ranged, special}
 		currentUnitStats.Add ("Gatbac", new int[] {200, 10, 5, 1, 1, 1, 3});
 		currentUnitStats.Add ("Strepto", new int[] {100, 10, 8, 1, 1, 0, 3});
-		currentUnitStats.Add ("smallRed", new int[] {100, 10, 6, 1, 1, 0, 3});
-		currentUnitStats.Add ("smallBlue", new int[] {100, 10, 6, 1, 1, 0, 3});
-		currentUnitStats.Add ("smallPurple", new int[] {100, 10, 6, 1, 0, 1, 3});
+		currentUnitStats.Add ("Haemophilus", new int[] {100, 10, 6, 1, 1, 0, 3});
+		currentUnitStats.Add ("Salmonella", new int[] {100, 10, 6, 1, 1, 0, 3});
+		currentUnitStats.Add ("Bacillus", new int[] {100, 10, 6, 1, 0, 1, 3});
 		currentUnitStats.Add ("Phage", new int[] {100, 10, 4, 1, 1, 0, 3});
 		//currentUnitStats.Add ("blueBac", new int[] {100, 15, 10, 1, 1, 1, 8});
 
 		//initial selection
 		selectedUnits.Add ("Gatbac");
 		selectedUnits.Add ("Strepto");
-		selectedUnits.Add ("smallRed");
-		selectedUnits.Add ("smallBlue");
+		selectedUnits.Add ("Salmonella");
+		selectedUnits.Add ("Bacillus");
 		selectedUnits.Add ("Phage");
 	}
 
-	public List<string> getEnemiesToSpawn() {
+	public void randomEnemiesForLevel() {
 		enemiesToSpawn.Clear();
 		spawnNum = 5;
 		for (int i=0; i<spawnNum; i++) {
 			var randomKey = currentUnitStats.Keys.ToArray()[(int)Random.Range(0,currentUnitStats.Keys.Count)];
 			enemiesToSpawn.Add (randomKey);
 		}
+	}
+
+	public List<string> getEnemiesToSpawn() {
 		return enemiesToSpawn;
 	}
 	

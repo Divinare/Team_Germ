@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class Poison : MonoBehaviour {
-	private int specialAttack;
 	private int poisonDuration;
 	private int poisonDamage;
 
@@ -29,7 +28,7 @@ public class Poison : MonoBehaviour {
 	}
 
 	void getPoisonStats(GameObject initiator) {
-		specialAttack = battleStatus.getBacteriaSpecialAttack(initiator.GetComponent<UnitStatus>().getUnitName());
+		int specialAttack = battleStatus.getBacteriaSpecialAttack(initiator.GetComponent<UnitStatus>().getUnitName());
 		poisonDamage = unitStats.getSpecialAttackDamage(specialAttack);
 		poisonDuration = unitStats.getSpecialAttackRounds(specialAttack);
 	}

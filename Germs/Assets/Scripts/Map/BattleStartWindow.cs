@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BattleStartWindow : MonoBehaviour {
 	public string lvlName;
@@ -17,8 +18,13 @@ public class BattleStartWindow : MonoBehaviour {
 	private bool drawWindow;
 	public GUISkin battleStartWindowBackground;
 
+	private BattleStatus battleStatus;
+	private List<string> enemiesToSpawn = new List<string>();
+	private string enemyList;
+
 	// Use this for initialization
 	void Start () {
+		battleStatus = GameObject.Find("BattleStatus").GetComponent<BattleStatus>();
 		drawWindow = false;
 		windowRect = centerRectangle(new Rect( (Screen.width / 2), (Screen.height / 2), (Screen.width / 2.5f), (Screen.height / 1.5f) ));
 	}
@@ -27,9 +33,8 @@ public class BattleStartWindow : MonoBehaviour {
 	void OnGUI() {
 		
 		if (drawWindow) {
-			
 			GUI.skin = battleStartWindowBackground;
-			windowRect = GUI.Window(0, windowRect, DoMyWindow, "Level Info: "+lvlName+"\n\n"+lvlInfo+"\n\n"+"Upon victory you will recieve :\n"+rewardGold+" gold and "+rewardXp+"xp!");
+			windowRect = GUI.Window(0, windowRect, DoMyWindow, "Level Info: "+lvlName+"\n\n"+lvlInfo+"\n\n"+"Upon victory you will recieve :\n"+rewardGold+" gold and "+rewardXp+"xp!\n\nYou will face:\n"+enemyList);
 
 		}
 		GUI.skin = null;
@@ -44,6 +49,12 @@ public class BattleStartWindow : MonoBehaviour {
 		rewardSkill = skill;
 		levelNode = node;
 		drawWindow = true;
+
+		enemyList = "";
+		enemiesToSpawn = battleStatus.getEnemiesToSpawn();
+		foreach (string name in enemiesToSpawn) {
+			enemyList += name+" ";
+		}
 	}
 	
 	private void DoMyWindow(int windowID) {
