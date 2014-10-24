@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class ItemStats : MonoBehaviour {
 	
 	public static ItemStats itemStats;
+	private GameStatus gameStatus;
 
 	private static int itemAttributes = 3;
 	private static int inventorySize = 3;
@@ -27,6 +28,8 @@ public class ItemStats : MonoBehaviour {
 		} else if (itemStats != this) {
 			Destroy (gameObject);
 		}
+		gameStatus = GameStatus.gameStatus;
+
 		initInventory ();
 		initItemDescriptions ();
 		addItemIcons ();
@@ -52,11 +55,7 @@ public class ItemStats : MonoBehaviour {
 	itemDescriptions.Add ("speedPotion", "Makes a bacteria move faster");
 
 	}
-	public Dictionary<string, int[]> getCurrentPotionStats() {
-		return currentItemStats;
-	}
-
-	public bool addToInventory(string itemName) {
+	public bool buyItem(string itemName) {
 		bool full = true;
 		for (int i = 0; i < inventoryContent.GetLength(0); i++) {
 
@@ -67,8 +66,8 @@ public class ItemStats : MonoBehaviour {
 		if (full) {
 			return false;
 		}
+		gameStatus.decreaseGold (currentItemStats [itemName][1]);
 
-		bool added = false;
 		KeyValuePair<string, int[]> entry = new KeyValuePair<string, int[]>(itemName, currentItemStats [itemName]);
 		for (int i = 0; i < inventoryContent.Length; i++) {
 			if(inventoryContent[i,0].Equals("empty")) {
@@ -83,7 +82,14 @@ public class ItemStats : MonoBehaviour {
 	}
 
 	public void sellItem(int selectedInventoryIndex) {
+		gameStatus.addGold (getValueOfItem (selectedInventoryIndex));
 		inventoryContent [selectedInventoryIndex, 0] = "empty";
+	}
+
+	public int getValueOfItem(int selectedInventoryIndex) {
+			int gold = int.Parse (inventoryContent [selectedInventoryIndex, 2]);
+			int value = (int)(gold * 0.5);
+			return value;
 	}
 
 	public void levelUpItem(string key) {
@@ -129,6 +135,10 @@ public class ItemStats : MonoBehaviour {
 
 	public string getItemDescription(string itemName) {
 		return itemDescriptions[itemName];
+	}
+
+	public Dictionary<string, int[]> getCurrenItemStats() {
+		return currentItemStats;
 	}
 
 

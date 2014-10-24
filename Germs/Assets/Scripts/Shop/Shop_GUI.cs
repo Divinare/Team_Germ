@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -24,6 +24,7 @@ public class Shop_GUI : MonoBehaviour {
 	public GUIStyle yellowText;
 	public GUIStyle blueText;
 	public GUIStyle blackText;
+	public GUIStyle costText;
 
 	public Texture shopBox;
 	public Texture shopText;
@@ -48,7 +49,7 @@ public class Shop_GUI : MonoBehaviour {
 	bool itemOwned = false;
 	private int selectedInventoryIndex = -1; // 1 - inventorySize
 
-	private Dictionary<string, int[]> currentPotionStats;
+	private Dictionary<string, int[]> currentItemStats;
 
 	//string[] stashItems =  new string[] {"axe", "potion1", "potion2", "boots", "potion3"};
 	//string[] armors = new string[] {"chainmail", "jacket", "leather coat"};
@@ -73,7 +74,7 @@ public class Shop_GUI : MonoBehaviour {
 		itemInfoPos = new Vector2 (windowSize.x + shopPos.x + 25, shopPos.y);
 		itemInfoButtonSize = new Vector2 (windowSize.x/3, itemInfoSize.y*0.25f);
 
-		currentPotionStats = ItemStats.itemStats.getCurrentPotionStats();
+		currentItemStats = ItemStats.itemStats.getCurrenItemStats ();
 	
 	}
 	
@@ -129,7 +130,7 @@ public class Shop_GUI : MonoBehaviour {
 
 	private void createShopContent() {
 		if (clickedIndex == 1) {
-			createContent(currentPotionStats);
+			createContent(currentItemStats);
 		} 
 		/*
 		else if (clickedIndex == 2) {
@@ -167,7 +168,16 @@ public class Shop_GUI : MonoBehaviour {
 
 	private void createItemInfo() {
 		// Item image:
-		GUI.Box (new Rect(0, 0, itemSize.y+10, itemSize.y+10), itemStats.itemIcons[selectedItem]); 
+		GUI.Box (new Rect(0, 0, itemSize.x+10, itemSize.y+10), itemStats.itemIcons[selectedItem]); 
+		// Cost / sell amount
+		string text = "";
+		if (itemOwned) {
+			text = "Value: " + itemStats.getValueOfItem(selectedInventoryIndex);
+		} else {
+			text = "Cost: " + currentItemStats [selectedItem] [1];
+		}
+		GUI.Label (new Rect (10, itemSize.y + 20, itemSize.x + 10, itemSize.y*0.3f), text, costText);
+		
 		float descriptionHeight = itemInfoSize.y * 0.2f;
 
 		// Buy, sell, upgrade Buttons
@@ -201,6 +211,8 @@ public class Shop_GUI : MonoBehaviour {
 		} else {
 			description = selectedItem + "\n" + "level " + itemStats.getItemLevel (selectedItem, -1);
 		}
+
+
 		GUI.Label (new Rect (0, 0, itemInfoTextSize.x, itemInfoTextSize.y * 0.2f), description, blackText);
 
 
@@ -216,7 +228,7 @@ public class Shop_GUI : MonoBehaviour {
 
 	private void createBuyButton(float x, float y) {
 		if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Buy")) {
-			itemStats.addToInventory(selectedItem);
+			itemStats.buyItem(selectedItem);
 			audioController.playClickSound();
 		}
 	}

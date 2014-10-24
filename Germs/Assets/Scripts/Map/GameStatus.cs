@@ -6,8 +6,8 @@ public class GameStatus : MonoBehaviour {
 	public static GameStatus gameStatus;
 
 	//currency
-	public float gold;
-	public float xp;
+	public int gold;
+	public int xp;
 
 	//storage for if a node is completed (true/false
 	public List<bool> mapStateBools = new List<bool>();
@@ -49,24 +49,33 @@ public class GameStatus : MonoBehaviour {
 
 	//store gold
 	public void setGold(Transform node) {
-		gold += node.gameObject.GetComponent<Node>().getGold();
-		xp += node.gameObject.GetComponent<Node>().getXp();
+		gold += (int)node.gameObject.GetComponent<Node>().getGold();
+		xp += (int)node.gameObject.GetComponent<Node>().getXp();
 	}
 
-	public float getGold() {
+	public int getGold() {
 		return gold;
 	}
-
-	public float getXp() {
+	public void addGold(int amount) {
+		gold += amount;
+	}
+	public bool decreaseGold(int amount) {
+		if (gold - amount >= 0) {
+			gold -= amount;
+			return true;
+		}
+		return false;
+	}
+	public int getXp() {
 		return xp;
 	}
 
-	public void setXp(float newXp) {
+	public void setXp(int newXp) {
 		xp = newXp;
 	}
 
-	public void decreaseXp(float amount) {
-		xp -= amount;
+	public void addXp(int amount) {
+		xp += amount;
 	}
 
 	//the level that was entered was...
