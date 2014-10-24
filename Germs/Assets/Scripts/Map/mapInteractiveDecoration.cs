@@ -12,6 +12,8 @@ public class mapInteractiveDecoration : MonoBehaviour {
 			tooltipText = "Moo.";
 		} else if (this.gameObject.name == "dog") {
 			tooltipText = "Woof.";
+		} else if (this.gameObject.name == "chicken") {
+			tooltipText = "Kotkot.";
 		}
 	}
 	

@@ -11,6 +11,7 @@ public class UnitStats : MonoBehaviour {
 	private Dictionary<string, int[]> baseUnitStats = new Dictionary<string, int[]>();
 	public Dictionary<string, int[]> enemyWithStats = new Dictionary<string, int[]>();
 	public Dictionary<int, string[]> unitSpecialAttacks = new Dictionary<int, string[]>();
+	public Dictionary<string, string> unitDescriptions = new Dictionary<string, string>();
 	private string[] unravelArray = new string[4];
 	private List<string> enemiesToSpawn = new List<string>();
 	private int[] unravelStatsArray = new int[7];
@@ -55,6 +56,14 @@ public class UnitStats : MonoBehaviour {
 		allUnitImages.Add ("Salmonella", smallBlue);
 		allUnitImages.Add ("Bacillus", smallPurple);
 		allUnitImages.Add ("empty", empty);
+
+		//set stories for all units
+		unitDescriptions.Add ("Gatbac", "Gatbac is a very fat Epstein-Barr virus, that causes mononucleosis, also known as the kissing disease.");
+		unitDescriptions.Add ("Phage", "A Bacteriophage is a virus that infects and replicates within a bacterium. Bacteriophages are composed of proteins that encapsulate a DNA or RNA genome.");
+		unitDescriptions.Add ("Strepto", "Streptococcus pneumoniae, or pneumococcus, is a significant human pathogenic bacterium and is the cause of pneumonia.");
+		unitDescriptions.Add ("Haemophilus", "...");
+		unitDescriptions.Add ("Salmonella", "...");
+		unitDescriptions.Add ("Bacillus", "...");
 	}
 
 	public int[] getEnemyUnitStats(string enemyName) {
@@ -71,6 +80,10 @@ public class UnitStats : MonoBehaviour {
 		enemyStatsArray = new int[] {unravelStatsArray[0]*baseStatIncreaseFactor,unravelStatsArray[1]*baseStatIncreaseFactor, unravelStatsArray[2]*baseStatIncreaseFactor, unravelStatsArray[3], unravelStatsArray[4], unravelStatsArray[5], unravelStatsArray[6]};
 
 		return enemyStatsArray;
+	}
+
+	public Dictionary<string, string> getUnitDescriptions() {
+		return unitDescriptions;
 	}
 
 	public Dictionary<string, Texture2D> getImageDict() {
