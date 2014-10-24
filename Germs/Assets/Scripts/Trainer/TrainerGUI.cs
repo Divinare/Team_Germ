@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq.Expressions;
+using System.Linq;
 
 public class TrainerGUI : MonoBehaviour {
 
@@ -13,14 +13,6 @@ public class TrainerGUI : MonoBehaviour {
 	public GUIStyle orangeText;
 	public GUIStyle lvlUpButton;
 	public GUIStyle deactiveLvlUpButton;
-
-	public Texture2D gatbac;
-	public Texture2D smallRed;
-	public Texture2D phage;
-	public Texture2D strep_p;
-	public Texture2D smallBlue;
-	public Texture2D smallPurple;
-	public Texture2D blueBac;
 	
 	private bool levelMenu;
 	private bool skillMenu;
@@ -32,6 +24,7 @@ public class TrainerGUI : MonoBehaviour {
 	//Knowledge Stuff
 	private BattleStatus battleStatus;
 	private GameStatus gameStatus;
+	private UnitStats unitStats;
 	
 	public float gold;
 	public float xp;
@@ -52,29 +45,27 @@ public class TrainerGUI : MonoBehaviour {
 	public Dictionary<string, string> allBacsStories = new Dictionary<string, string>();
 	public int selGridInt = 0;
 	private int prevGridInt;
-	public string[] selGridStr;
 	public string selectedBacteria;
 	
 	// Use this for initialization
 	void Start () {
 		gameStatus = GameObject.Find("GameStatus").GetComponent<GameStatus>();
 		battleStatus = GameObject.Find("BattleStatus").GetComponent<BattleStatus>();
-		
+		unitStats = GameObject.Find("UnitStats").GetComponent<UnitStats>();
+
 		gold = gameStatus.getGold();
 		xp = gameStatus.getXp();
+		setBacsAndImages();
 		
-		allBacteriaStats = battleStatus.getAllBacteriaStats();
-		selGridStr = new string[allBacteriaStats.Keys.Count];
+		/*allBacteriaStats = battleStatus.getAllBacteriaStats();
 		
 		var temp = 0;
 		foreach (string key in allBacteriaStats.Keys) {
 			selGridStr[temp] = key;
 			temp += 1;
 		}
-		
-		setBacsAndImages();
+		*/
 		setLevelMenu();
-
 	}
 	
 	void OnGUI() {
@@ -98,8 +89,8 @@ public class TrainerGUI : MonoBehaviour {
 		GUI.Box (new Rect (0,Screen.height/10,Screen.width/2, (Screen.height - 2*Screen.height/10)), "", trainerBox);
 		
 		//selection grid
-		selGridInt = GUI.SelectionGrid(new Rect(0,Screen.height/10,Screen.width/2, (Screen.height-2*(Screen.height/10))/4), selGridInt, selGridStr, 4);
-		selectedBacteria = selGridStr[selGridInt];
+		selGridInt = GUI.SelectionGrid(new Rect(0,Screen.height/10,Screen.width/2, (Screen.height-2*(Screen.height/10))/4), selGridInt, allBacsImages.Values.ToArray(), 4);
+		selectedBacteria = allBacsImages.Keys.ToArray()[selGridInt];
 		
 		if (selGridInt != prevGridInt) {
 			setLevelMenu();
@@ -180,14 +171,6 @@ public class TrainerGUI : MonoBehaviour {
 	}
 	
 	void setBacsAndImages() {
-		allBacsImages.Add ("Phage", phage);
-		allBacsImages.Add ("Gatbac", gatbac);
-		allBacsImages.Add ("Strepto", strep_p);
-		allBacsImages.Add ("smallRed", smallRed);
-		allBacsImages.Add ("blueBac", blueBac);
-		allBacsImages.Add ("smallPurple", smallPurple);
-		allBacsImages.Add ("smallBlue", smallBlue);
-		
 		allBacsStories.Add ("Gatbac", "Gatbac is a very fat Epstein-Barr virus, that causes mononucleosis, also known as the kissing disease.");
 		allBacsStories.Add ("Phage", "A Bacteriophage is a virus that infects and replicates within a bacterium. Bacteriophages are composed of proteins that encapsulate a DNA or RNA genome.");
 		allBacsStories.Add ("Strepto", "Streptococcus pneumoniae, or pneumococcus, is a significant human pathogenic bacterium and is the cause of pneumonia.");
@@ -195,6 +178,8 @@ public class TrainerGUI : MonoBehaviour {
 		allBacsStories.Add ("smallBlue", "...");
 		allBacsStories.Add ("smallPurple", "...");
 		allBacsStories.Add ("blueBac", "...");
+
+		allBacsImages = unitStats.getImageDict();
 	}
 	
 	void setLevelMenu() {
