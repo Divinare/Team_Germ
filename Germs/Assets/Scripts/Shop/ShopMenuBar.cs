@@ -75,7 +75,7 @@ public class ShopMenuBar : MonoBehaviour {
 
 		for(int i = 0; i < items; i++) {
 			string itemName = inventoryContent[i,0];
-			if (GUI.Button (new Rect (centerInventoryPosition + inventoryButtonSize.x * index, menuBarPosition.y, inventoryButtonSize.x, inventoryButtonSize.y), itemStats.itemIcons[itemName])) {
+			if (GUI.Button (new Rect (centerInventoryPosition + inventoryButtonSize.x * index, menuBarPosition.y, inventoryButtonSize.x, inventoryButtonSize.y), itemStats.getItemIcon(itemName))) {
 				if(!itemName.Equals("empty")) {
 
 					shopGUI.setItemOwned(true);

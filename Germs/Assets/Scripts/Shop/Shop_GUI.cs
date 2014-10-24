@@ -25,6 +25,7 @@ public class Shop_GUI : MonoBehaviour {
 	public GUIStyle blueText;
 	public GUIStyle blackText;
 	public GUIStyle costText;
+	public GUIStyle itemStatusText;
 
 	public Texture shopBox;
 	public Texture shopText;
@@ -45,7 +46,7 @@ public class Shop_GUI : MonoBehaviour {
 	// GUI elements inside itemInfoWindow
 	private Vector2 itemInfoButtonSize;
 
-	private string selectedItem = "healPotion";
+	private string selectedItem = "healingPotion";
 	bool itemOwned = false;
 	private int selectedInventoryIndex = -1; // 1 - inventorySize
 
@@ -146,7 +147,7 @@ public class Shop_GUI : MonoBehaviour {
 		int column = 0;
 		int row = 0;
 		foreach (string key in items.Keys) {
-				createItem ((int)itemSize.x * column, (int)itemSize.y * row, key, itemStats.itemIcons[key]);
+				createItem ((int)itemSize.x * column, (int)itemSize.y * row, key, itemStats.getItemIcon(key));
 			if((itemIndex+1) % amountOfItemColumns == 0) {
 				row++;
 				column = 0;
@@ -168,7 +169,7 @@ public class Shop_GUI : MonoBehaviour {
 
 	private void createItemInfo() {
 		// Item image:
-		GUI.Box (new Rect(0, 0, itemSize.x+10, itemSize.y+10), itemStats.itemIcons[selectedItem]); 
+		GUI.Box (new Rect(0, 0, itemSize.x+10, itemSize.y+10), itemStats.getItemIcon(selectedItem)); 
 		// Cost / sell amount
 		string text = "";
 		if (itemOwned) {
@@ -188,7 +189,6 @@ public class Shop_GUI : MonoBehaviour {
 		if (itemOwned) {
 			//createSellButton(0, itemInfoSize.y * 0.5f, itemInfoSize.x, itemInfoSize.y*0.2f);
 			createSellButton(firstButtonPos.x, firstButtonPos.y);
-			createUpgradeButton(secondButtonPos.x, secondButtonPos.y);
 
 		} else {
 			createBuyButton(firstButtonPos.x, firstButtonPos.y);
@@ -203,20 +203,36 @@ public class Shop_GUI : MonoBehaviour {
 	}
 
 	private void createTextItemInfo(Vector2 itemInfoTextSize) {
-		GUI.Box (new Rect(0, 0,  itemInfoTextSize.x,  itemInfoTextSize.y), "");
+		//GUI.Box (new Rect(0, 0,  itemInfoTextSize.x,  itemInfoTextSize.y), "");
 		// Name
 		string description = "";
 		if (itemOwned) {
-			description = selectedItem + "\n" + "level " + itemStats.getItemLevel(selectedItem, selectedInventoryIndex);
+
+			description = itemStats.getItemName(selectedItem) + "\n" + "level " + itemStats.getItemLevel(selectedItem, selectedInventoryIndex);
 		} else {
-			description = selectedItem + "\n" + "level " + itemStats.getItemLevel (selectedItem, -1);
+			description = itemStats.getItemName(selectedItem) + "\n" + "level " + itemStats.getItemLevel (selectedItem, -1);
 		}
 
-
 		GUI.Label (new Rect (0, 0, itemInfoTextSize.x, itemInfoTextSize.y * 0.2f), description, blackText);
-
-
 		// Item status
+	
+		if (!itemOwned) {
+				int level = itemStats.getItemLevel (selectedItem, -1);
+				int effect = itemStats.getItemEffect (selectedItem, -1);
+				string itemStatus = "Level " + level + " stats" + "\n" + "Effect: " + effect;
+				GUI.Label (new Rect (0, itemInfoTextSize.y * 0.5f, itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.2f), itemStatus, itemStatusText);
+
+				string nextLvlItemStatus = "Next Level " + (level + 1) + "\n" + "Effect: " + (effect + effect * itemStats.getLvlUpEffectFactor ());
+				GUI.Label (new Rect (itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.5f, itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.2f), nextLvlItemStatus, itemStatusText);
+		} else {
+			int level = itemStats.getItemLevel (selectedItem, selectedInventoryIndex);
+			int effect = itemStats.getItemEffect (selectedItem, selectedInventoryIndex);
+			string itemStatus = "Level " + level + " stats" + "\n" + "Effect: " + effect;
+			GUI.Label (new Rect (0, itemInfoTextSize.y * 0.5f, itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.2f), itemStatus, itemStatusText);
+
+		}
+
+	
 		
 		//GUI.Label(new Rect (0, 0, itemSize.y, (itemInfoSize.x - itemSize.x) / 2), "level jotain");
 		
