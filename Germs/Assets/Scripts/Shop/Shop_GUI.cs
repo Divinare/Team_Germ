@@ -26,8 +26,7 @@ public class Shop_GUI : MonoBehaviour {
 	public GUIStyle itemStatusText;
 
 	public Texture shopBox;
-	public Texture shopText;
-	public Texture stashText;
+	public Texture shopTopic;
 	public Texture selectedItemWindow;
 
 	private float hScrollbarValue;
@@ -85,49 +84,25 @@ public class Shop_GUI : MonoBehaviour {
 	void OnGUI() {
 
 
+		drawTexture (0, 0, (int)windowSize.x*0.5f, (int)windowSize.y*0.3f, shopTopic);
+
 		// Creating shop
 		GUI.BeginGroup (new Rect (shopPos.x, shopPos.y, windowSize.x, windowSize.y));
-		createMenu ("shop");
+		createShopContent();
 		GUI.EndGroup ();
 
 		// Creating info window
 		GUI.BeginGroup (new Rect (itemInfoPos.x, itemInfoPos.y, windowSize.x, windowSize.y));
-		createMenu ("itemInfo");
+		createItemInfo();
 		GUI.EndGroup ();
 
 	}
 
-	private void createMenu(string type) {
-
-		Vector2 tabSize = new Vector2 (windowSize.x, Screen.height * 0.05f);
-
-		// Draw topics
-		if (type.Equals ("shop")) {
-			//drawTexture(0, Screen.height * 0.05f, windowSize.x/2, Screen.height * 0.10f, stashText);
-		} else if (type.Equals ("itemInfo")) {
-			//drawTexture(0, Screen.height * 0.05f, windowSize.x/2, Screen.height * 0.10f, stashText);
-		}
-
-
-		drawTexture (0, 0, (int)windowSize.x, (int)windowSize.y, shopBox);
-
-		if(type.Equals("shop")) {
-
-			createShopContent();
-
-		} else if(type.Equals("itemInfo")) {
-		
-			createItemInfo();
-			//GUI.BeginGroup (new Rect (itemInfoRightSidePos.x, itemInfoRightSidePos.y, itemInfoSize.x, itemInfoSize.y));
-			//	createItemInfoRightSide();
-			//GUI.EndGroup ();
-
-		}
-		
-	}
 
 
 	private void createShopContent() {
+		drawTexture (0, 0, (int)windowSize.x, (int)windowSize.y, shopBox);
+
 		if (clickedIndex == 1) {
 			createContent(currentItemStats);
 		} 
@@ -166,6 +141,8 @@ public class Shop_GUI : MonoBehaviour {
 	}
 
 	private void createItemInfo() {
+		drawTexture (0, 0, (int)windowSize.x, (int)windowSize.y, shopBox);
+
 		// Item image:
 		GUI.Box (new Rect(0, 0, itemSize.x+10, itemSize.y+10), itemStats.getItemIcon(selectedItem)); 
 
