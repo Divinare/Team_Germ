@@ -141,7 +141,7 @@ public class BattleMenuBar : MonoBehaviour {
 		}
 		if (GUI.Button (new Rect (menuBarSize.x-activityMenuButtonSize.x*2, menuBarPosition.y + menuBarDescriptionHeight, activityMenuButtonSize.x, activityMenuButtonSize.y), new GUIContent ("special here", "Fancy special attack"))) {
 			GameObject currentUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().getActiveUnit ();
-			currentUnit.GetComponent<UnitStatus>().switchSelectedAction ("poison"); // tää vissii se special
+			currentUnit.GetComponent<UnitStatus>().switchSelectedAction ("rangedStun"); // tää vissii se special
 			//clickSound.Play ();		
 		}
 

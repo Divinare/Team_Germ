@@ -38,6 +38,9 @@ public class ActionHandler : MonoBehaviour {
 			if (actionType.Equals ("heal")) {
 				this.GetComponent<Heal>().healTarget (initiator, target);
 			}
+			if (actionType.Equals ("detox")) {
+				this.GetComponent<Dispel>().dispelPoison(initiator, target);
+			}
 		}
 	}
 

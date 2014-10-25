@@ -25,6 +25,8 @@ public class Poison : MonoBehaviour {
 		getPoisonStats(initiator);
 		applyPoison(target);
 		initiator.GetComponent<UnitStatus>().Deselect();
+		selector.SetTargetedUnitToNull();
+		selector.unlockInput (); // unlock input before ending turn
 	}
 
 	void getPoisonStats(GameObject initiator) {
@@ -35,7 +37,5 @@ public class Poison : MonoBehaviour {
 
 	void applyPoison(GameObject target) {
 		target.GetComponent<UnitStatus>().Poisoned(poisonDamage, poisonDuration);
-		selector.SetTargetedUnitToNull();
-		selector.unlockInput (); // unlock input before ending turn
 	}
 }

@@ -25,12 +25,14 @@ public class UnitStatus : MonoBehaviour {
 	private GameObject currentSquare; // the square currently occupied by the unit
 
 	//for statusEffects
-	public int unitRounds;
 	private int stunRounds;
 	private int poisonRounds;
 	private int poisonDmg;
 	public bool stunned;
 	public bool poisoned;
+
+	//for cooldowns
+	public int unitRounds;
 
 	//animations
 	private Animator animator;
@@ -96,7 +98,8 @@ public class UnitStatus : MonoBehaviour {
 	
 	public void Poisoned(int damage, int rounds) {
 		//poisoned units taka damage over time for x rounds
-		Debug.Log (unitName + " poisoned for "+rounds+" rounds and "+damage+" dmg!");
+		//Debug.Log (unitName + " poisoned for "+rounds+" rounds and "+damage+" dmg!");
+		battlelog (unitName + " is poisoned for "+rounds+ " rounds.");
 		poisoned = true;
 		animator.SetBool("poisoned", true);
 		poisonRounds = rounds;
@@ -108,8 +111,7 @@ public class UnitStatus : MonoBehaviour {
 		TakeDamage(poisonDmg);
 		Debug.Log (unitName + " takes "+poisonDmg+" poison dmg");
 		if (poisonRounds == 0) {
-			poisoned = false;
-			animator.SetBool ("poisoned", false);
+			removePoison();
 		}
 	}
 
@@ -117,23 +119,38 @@ public class UnitStatus : MonoBehaviour {
 		stunned = true;
 		animator.SetBool("stunned", true);
 		stunRounds = rounds;
+		battlelog (unitName + " is stunned for "+rounds+ " rounds.");
 	}
 
 	public void countDownStun() {
 		stunRounds -= 1;
 		Debug.Log (unitName + " STUNNED FOR "+stunRounds);
 		if (stunRounds == 0) {
-			stunned = false;
-			animator.SetBool("stunned", false);
-			if (enemy) {
-				//Debug.Log ("Deselect?");
-				//Deselect();
-			}
+			removeStun ();
+		/*
+		if (enemy) {
+			Deselect();
 		}
+		*/
+		}
+	}
+
+	public void removeStun() {
+		stunned = false;
+		animator.SetBool("stunned", false);
+	}
+
+	public void removePoison() {
+		poisoned = false;
+		animator.SetBool ("poisoned", false);
 	}
 
 	public bool IsUnitStunned() {
 		return stunned;
+	}
+
+	public bool IsUnitPoisoned() {
+		return poisoned;
 	}
 
 	public void switchSelectedAction(string clickedMenuItem) {
@@ -143,11 +160,7 @@ public class UnitStatus : MonoBehaviour {
 	public void Select() {
 		unitRounds += 1;
 		selected = true;
-		GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnStartHandler> ().handeTurnStart ();
-
-		if (poisoned) {
-			countDownPoison();
-		}
+		GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnStartHandler> ().handeTurnStart (this.gameObject);
 	}
 	
 	public void Deselect() {
