@@ -18,8 +18,7 @@ public class CursorIconHandler : MonoBehaviour {
 	
 	}
 
-
-
+	
 	public void drawMeleeAttackCursor() {
 		Cursor.SetCursor (cursorIcons[0], new Vector2(15,12), CursorMode.Auto);
 		currentCursor = "melee";
