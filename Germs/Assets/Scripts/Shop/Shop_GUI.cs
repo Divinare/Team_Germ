@@ -21,8 +21,6 @@ public class Shop_GUI : MonoBehaviour {
 	public GUIStyle trainerHover;
 	public GUIStyle mapHover;
 	public GUIStyle bigNumbers;
-	public GUIStyle yellowText;
-	public GUIStyle blueText;
 	public GUIStyle blackText;
 	public GUIStyle costText;
 	public GUIStyle itemStatusText;
@@ -73,7 +71,7 @@ public class Shop_GUI : MonoBehaviour {
 		itemInfoSize = new Vector2(windowSize.x, windowSize.y);
 		shopPos = new Vector2 (Screen.width*0.04f, Screen.height * 0.15f);
 		itemInfoPos = new Vector2 (windowSize.x + shopPos.x + 25, shopPos.y);
-		itemInfoButtonSize = new Vector2 (windowSize.x/3, itemInfoSize.y*0.25f);
+		itemInfoButtonSize = new Vector2 (windowSize.x/3, itemInfoSize.y*0.20f);
 
 		currentItemStats = ItemStats.itemStats.getCurrenItemStats ();
 	
@@ -170,30 +168,8 @@ public class Shop_GUI : MonoBehaviour {
 	private void createItemInfo() {
 		// Item image:
 		GUI.Box (new Rect(0, 0, itemSize.x+10, itemSize.y+10), itemStats.getItemIcon(selectedItem)); 
-		// Cost / sell amount
-		string text = "";
-		if (itemOwned) {
-			text = "Value: " + itemStats.getValueOfItem(selectedInventoryIndex);
-		} else {
-			text = "Cost: " + currentItemStats [selectedItem] [1];
-		}
-		GUI.Label (new Rect (10, itemSize.y + 20, itemSize.x + 10, itemSize.y*0.3f), text, costText);
-		
-		float descriptionHeight = itemInfoSize.y * 0.2f;
 
-		// Buy, sell, upgrade Buttons
-		float offFromSide = itemInfoSize.x*0.1f;
-
-		Vector2 firstButtonPos = new Vector2 (offFromSide, (itemInfoSize.y - itemSize.y + descriptionHeight -itemInfoButtonSize.y)/2+itemSize.y);
-		Vector2 secondButtonPos = new Vector2 (itemInfoSize.x - itemInfoButtonSize.x - offFromSide, firstButtonPos.y);
-		if (itemOwned) {
-			//createSellButton(0, itemInfoSize.y * 0.5f, itemInfoSize.x, itemInfoSize.y*0.2f);
-			createSellButton(firstButtonPos.x, firstButtonPos.y);
-
-		} else {
-			createBuyButton(firstButtonPos.x, firstButtonPos.y);
-			createUpgradeButton(secondButtonPos.x, secondButtonPos.y);
-		}
+		createItemInfoButtons ();
 
 		Vector2 itemInfoTextSize = new Vector2 (itemInfoSize.x - itemSize.x*1.35f, itemInfoSize.y*0.6f);
 		GUI.BeginGroup (new Rect (itemSize.x*1.2f, 0, itemInfoTextSize.x, itemInfoTextSize.y));
@@ -232,13 +208,31 @@ public class Shop_GUI : MonoBehaviour {
 
 		}
 
-	
+	}
+
+	// Buy, sell, upgrade Buttons, cost and value fields
+	private void createItemInfoButtons() {
+		float offFromSide = itemInfoSize.x*0.1f;
 		
-		//GUI.Label(new Rect (0, 0, itemSize.y, (itemInfoSize.x - itemSize.x) / 2), "level jotain");
-		
-		// Next level item status
-		
-		//GUI.Label(new Rect (0, 0, itemSize.y, (itemInfoSize.x - itemSize.x) / 2), " next level jotain");
+		Vector2 firstButtonPos = new Vector2 (offFromSide, (itemInfoSize.y*0.65f));
+		Vector2 secondButtonPos = new Vector2 (itemInfoSize.x - itemInfoButtonSize.x - offFromSide, firstButtonPos.y);
+		if (itemOwned) {
+			//createSellButton(0, itemInfoSize.y * 0.5f, itemInfoSize.x, itemInfoSize.y*0.2f);
+			createSellButton(firstButtonPos.x, firstButtonPos.y);
+			
+		} else {
+			createBuyButton(firstButtonPos.x, firstButtonPos.y);
+			createUpgradeButton(secondButtonPos.x, secondButtonPos.y);
+		}
+
+		// Cost / value amount
+		string text = "";
+		if (itemOwned) {
+			text = "Value: " + itemStats.getValueOfItem(selectedInventoryIndex);
+		} else {
+			text = "Cost: " + currentItemStats [selectedItem] [1];
+		}
+		GUI.Label (new Rect (10, itemInfoSize.y - itemInfoSize.y*0.15f, itemSize.x + 10, itemSize.y*0.3f), text, costText);
 	}
 
 

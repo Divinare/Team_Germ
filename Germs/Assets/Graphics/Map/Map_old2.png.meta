@@ -1,9 +1,8 @@
 fileFormatVersion: 2
-guid: 17350abb0251fd24cbde4afb11e8be48
+guid: 982d187f041394546aea6e46ac6b0030
 TextureImporter:
   fileIDToRecycleName:
-    21300000: StashTxt
-    21300002: stashTxt
+    21300000: Map_old2
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -27,9 +26,9 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: 1
+    aniso: -1
     mipBias: -1
-    wrapMode: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
