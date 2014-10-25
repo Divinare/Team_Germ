@@ -3,9 +3,8 @@ using System.Collections;
 
 public class BattleMenuBar : MonoBehaviour {
 	
-	public static ItemStats itemStats = ItemStats.itemStats;
-
-	public AudioSource clickSound;
+	private ItemStats itemStats = ItemStats.itemStats;
+	private AudioController audioController;
 
 	public Texture2D goldIcon;
 	public Texture2D xpIcon;
@@ -96,11 +95,16 @@ public class BattleMenuBar : MonoBehaviour {
 		float centerInventoryPosition = (Screen.width - (itemMenuButtonSize.x*items))/2;
 		int index = 0;
 
+		GameObject currentUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().getActiveUnit ();
 		for(int i = 0; i < items; i++) {
 			string itemName = inventoryContent[i,0];
 			if (GUI.Button (new Rect (battlelogSize.x + itemMenuButtonSize.x * index, menuBarPosition.y + menuBarDescriptionHeight, itemMenuButtonSize.x, itemMenuButtonSize.y), itemStats.getItemIcon(itemName))) {
 				if(!itemName.Equals("empty")) {
-					// using potions function here
+					string itemType = itemStats.getItemType(itemName);
+					if(itemType.Equals("Potion")) {
+						currentUnit.GetComponent<UnitStatus>().switchSelectedAction (itemName);
+					}
+
 				}
 			}
 			index++;
@@ -110,7 +114,7 @@ public class BattleMenuBar : MonoBehaviour {
 		GUI.Label(new Rect(battlelogSize.x+5, Screen.height - itemMenuButtonSize.y-20, 100, 100), GUI.tooltip);
 		
 	}
-
+	
 	private void createActivityMenu() {
 		float amountOfItems = 4;
 		
@@ -122,32 +126,28 @@ public class BattleMenuBar : MonoBehaviour {
 		//GUI.Box (new Rect (Screen.width-activityMenuButtonSize.x * amountOfItems, Screen.height - activityMenuButtonSize.y, activityMenuButtonSize.x * (amountOfItems+1), activityMenuButtonSize.y), "");
 		
 		//buttons
-		if (GUI.Button (new Rect (menuBarSize.x-activityMenuButtonSize.x*5, menuBarPosition.y + menuBarDescriptionHeight, activityMenuButtonSize.x, activityMenuButtonSize.y), new GUIContent (skipIcon, "Skip turn"))) {
-			GameObject currentUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().getActiveUnit ();
-			if (!currentUnit.GetComponent<UnitStatus>().IsEnemy()) {
-				currentUnit.GetComponent<UnitStatus>().Deselect();
-			}
-			//clickSound.Play ();		
-		}
-		if (GUI.Button (new Rect (menuBarSize.x-activityMenuButtonSize.x*4, menuBarPosition.y + menuBarDescriptionHeight, activityMenuButtonSize.x, activityMenuButtonSize.y), new GUIContent (meleeIcon, "Fancy melee attack"))) {
-			GameObject currentUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().getActiveUnit ();
-			currentUnit.GetComponent<UnitStatus>().switchSelectedAction ("melee");
-			//clickSound.Play ();		
-		}
-		if (GUI.Button (new Rect (menuBarSize.x-activityMenuButtonSize.x*3, menuBarPosition.y + menuBarDescriptionHeight, activityMenuButtonSize.x, activityMenuButtonSize.y), new GUIContent (rangedIcon, "Fancy ranged attack"))) {
-			GameObject currentUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().getActiveUnit ();
-			currentUnit.GetComponent<UnitStatus>().switchSelectedAction ("ranged");
-			//clickSound.Play ();		
-		}
-		if (GUI.Button (new Rect (menuBarSize.x-activityMenuButtonSize.x*2, menuBarPosition.y + menuBarDescriptionHeight, activityMenuButtonSize.x, activityMenuButtonSize.y), new GUIContent ("special here", "Fancy special attack"))) {
-			GameObject currentUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().getActiveUnit ();
-			currentUnit.GetComponent<UnitStatus>().switchSelectedAction ("rangedStun"); // tää vissii se special
-			//clickSound.Play ();		
-		}
+		GameObject currentUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().getActiveUnit ();
+		createActivityButton (currentUnit, 5, "skipTurn", "Skip Turn", skipIcon, true);
+		createActivityButton (currentUnit, 4, "melee", "Fancy melee attack", meleeIcon, false);
+		createActivityButton (currentUnit, 3, "ranged", "Fancy ranged attack", rangedIcon, false);
+		createActivityButton (currentUnit, 2, "rangedStun", "Fancy special attack", rangedIcon, false);
 
-		
 		//Tooltip position
 		GUI.Label(new Rect(Screen.width - 100, Screen.height - activityMenuButtonSize.y - 50, 100, 100), GUI.tooltip);
+	}
+
+	private void createActivityButton(GameObject currentUnit, int index, string action, string actionDescription, Texture2D texture, bool skipTurn) {
+
+		if (GUI.Button (new Rect (menuBarSize.x-activityMenuButtonSize.x*index, menuBarPosition.y + menuBarDescriptionHeight, activityMenuButtonSize.x, activityMenuButtonSize.y), new GUIContent (texture, action))) {
+			if(skipTurn) {
+				if (!currentUnit.GetComponent<UnitStatus>().IsEnemy()) {
+					currentUnit.GetComponent<UnitStatus>().Deselect();
+				}
+			} else {
+				currentUnit.GetComponent<UnitStatus>().switchSelectedAction (action);
+			}
+			//audioController.playClickSound();		
+		}
 	}
 
 }

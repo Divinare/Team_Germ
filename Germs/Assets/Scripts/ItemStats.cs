@@ -40,9 +40,9 @@ public class ItemStats : MonoBehaviour {
 		currentItemStats.Add("ragePotion", new int[] {1, 25, 10});
 		currentItemStats.Add("speedPotion", new int[] {1, 25, 5});
 
-		itemDescriptions.Add ("healingPotion", new string[] {"Healing Potion", "heals a bacteria"});
-		itemDescriptions.Add ("ragePotion", new string[] {"Rage Potion", "Increases damage, causes a bacteria to rage"});
-		itemDescriptions.Add ("speedPotion", new string[] {"Speed Potion", "Makes a bacteria move faster"});
+		itemDescriptions.Add ("healingPotion", new string[] {"Healing Potion", "Potion", "heals a bacteria"});
+		itemDescriptions.Add ("ragePotion", new string[] {"Rage Potion", "Potion", "Increases damage, causes a bacteria to rage"});
+		itemDescriptions.Add ("speedPotion", new string[] {"Speed Potion", "Potion", "Makes a bacteria move faster"});
 
 		itemIcons.Add ("empty", empty);
 		itemIcons.Add ("healingPotion", healingPotion);
@@ -133,9 +133,12 @@ public class ItemStats : MonoBehaviour {
 	public string getItemName(string key) {
 		return itemDescriptions [key] [0];
 	}
+	public string getItemType(string key) {
+		return itemDescriptions [key] [1];
+	}
 
 	public string getItemDescription(string key) {
-		return itemDescriptions[key][1];
+		return itemDescriptions[key][2];
 	}
 
 	public Dictionary<string, int[]> getCurrenItemStats() {

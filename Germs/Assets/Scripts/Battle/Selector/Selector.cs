@@ -26,14 +26,11 @@ public class Selector : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (!turnHandler.isBattleOver()) {
-			//changeUnitsBoxColliders(true);
+		if (!turnHandler.isBattleOver() && !inputLocked) {
+		
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 			Physics.Raycast (ray, out hit, raycastLength);
-			//	if (Physics.Raycast (ray, out hit, raycastLength)) {
-			//changeUnitsBoxColliders(false);
 
-			//Debug.DrawRay (ray.origin, ray.direction * raycastLength);
 			GameObject activeUnit = turnHandler.getActiveUnit();
 
 			// empty space
@@ -64,24 +61,17 @@ public class Selector : MonoBehaviour {
 			if (Input.GetMouseButtonUp (0)) {
 				GameObject objectClicked = hit.collider.gameObject;
 
-				
-
-				if (objectClicked.tag == "Unit" && !inputLocked) {
+				if (objectClicked.tag == "Unit") {
 
 					unitAction(activeUnit, objectClicked);
 				} 
-				else if (objectClicked.tag == "MenuItem") {
-					Debug.Log("menu item clicked!");
-					// activeUnit.GetComponent<UnitStatus> ().switchSelectedAction(objectClicked.name); // handled via GUI/ActivityMenu.cs
-				} 
-				else if (objectClicked.tag == "Square" && !inputLocked){
+				else if (objectClicked.tag == "Square"){
 					// Clicked a square, check if square contains a germ and use unitaction on the target square's germ if so
 					if (objectClicked.GetComponent<SquareStatus>().getObjectOnSquare () != null) {
 						unitAction (activeUnit, objectClicked.GetComponent<SquareStatus>().getObjectOnSquare());
 					}
 					else {
 						List<GameObject> tempRoute = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (hit.collider.gameObject, false);
-						//Debug.Log ("aikaisempi countti: " + tempRoute.Count);
 						if (tempRoute != null) {
 							activeUnit.GetComponent<Movement> ().startMoving(tempRoute);
 						}
@@ -194,17 +184,5 @@ public class Selector : MonoBehaviour {
 			Debug.Log (stringToDebug);
 		}
 	}
-
-
-	// is this still needed...?
-	private void changeUnitsBoxColliders(bool b) {
-		GameObject[] units = GameObject.FindGameObjectsWithTag ("Unit");
-		for (int i = 0; i < units.Length; i++) {
-			units[i].collider.enabled = b;
-		}
-	}
-
-
-
 
 }
