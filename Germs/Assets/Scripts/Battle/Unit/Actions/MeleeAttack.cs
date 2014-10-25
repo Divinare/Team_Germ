@@ -22,7 +22,9 @@ public class MeleeAttack : MonoBehaviour {
 			targetPos.z = -1;
 			if (attacker.transform.position == targetPos) {
 				goingToAttack = false;
-				target.GetComponent<UnitStatus>().TakeDamage (attacker.GetComponent<UnitStatus>().damage);
+				if (target != null) {
+					target.GetComponent<UnitStatus>().TakeDamage (attacker.GetComponent<UnitStatus>().damage);
+				}
 				targetSquare = null; 
 				attacker = null; // turn ends here due to code in Movement.cs
 			}
