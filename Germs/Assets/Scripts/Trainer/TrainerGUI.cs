@@ -106,14 +106,16 @@ public class TrainerGUI : MonoBehaviour {
 
 		if (playerUnitStats.ContainsKey(selectedBacteria)) {
 			unlocked = true;
+			//stats for unit
 			bacHealth = unitStats.getUnitHealth(selectedBacteria);
 			bacDmg = unitStats.getUnitDamage(selectedBacteria);
 			bacSpeed = unitStats.getUnitSpeed(selectedBacteria);
 			bacLevel = unitStats.getUnitLevel(selectedBacteria);
 
+			//stats that are added on levelup
 			lvlUpHealth = bacHealth/unitStats.lvlUpHpIncrease;
 			lvlUpDmg = bacDmg/unitStats.lvlUpDmgIncrease;
-			lvlUpSpeed = bacSpeed/unitStats.lvlUpSpeedIncrease;
+			lvlUpSpeed = bacSpeed/unitStats.calculateUnitSpeed(selectedBacteria);
 			lvlUpXp = unitStats.getLevelUpCost(selectedBacteria);
 
 		} else {

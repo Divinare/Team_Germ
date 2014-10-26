@@ -35,7 +35,7 @@ public class UnitStats : MonoBehaviour {
 
 	//levelup
 	public int lvlUpHpIncrease = 4;
-	public int lvlUpSpeedIncrease = 6;
+	public int lvlUpSpeedIncrease = 5; //notice method calculateUnitSpeed also
 	public int lvlUpDmgIncrease = 4;
 	public int lvlUpCost = 25;
 
@@ -57,7 +57,7 @@ public class UnitStats : MonoBehaviour {
 		baseUnitStats.Add ("Haemophilus", new int[] {100, 10, 6, 1, 1, 0, 3});
 		baseUnitStats.Add ("Salmonella", new int[] {100, 10, 6, 1, 1, 0, 3});
 		baseUnitStats.Add ("Bacillus", new int[] {100, 10, 6, 1, 0, 1, 3});
-		baseUnitStats.Add ("Phage", new int[] {100, 10, 4, 1, 1, 0, 3});
+		baseUnitStats.Add ("Phage", new int[] {100, 10, 5, 1, 1, 0, 3});
 
 		//example unitSpecialAttack entry : [0]=SkillName, [1]=SkillType, [2] = total dmg, [3]=duration, [4]=skillDescription (for tooltip)}
 		unitSpecialAttacks.Add(2, new string[] {"Stunball", "rangedStun", "0", "2", "Bacteria launches a powerful ball that stuns the target."});
@@ -197,5 +197,14 @@ public class UnitStats : MonoBehaviour {
 	public int getUnitUnlockXpCost(string unitName) {
 		unlockArray = unitUnlock[unitName];
 		return unlockArray[1];
+	}
+
+	public int calculateUnitSpeed(string unitName) {
+		int unitSpeed = getUnitSpeed(unitName);
+		if (unitSpeed < 10) {
+			return lvlUpSpeedIncrease;
+		} else {
+			return 10;
+		}
 	}
 }
