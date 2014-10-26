@@ -84,6 +84,16 @@ public class ItemStats : MonoBehaviour {
 		return true;
 	}
 
+	public int useItem(string itemName, int selectedItemIndex) {
+		string itemType = itemDescriptions [itemName] [1];
+		if (itemType.Equals ("Potion")) {
+			int effect = int.Parse(inventoryContent[selectedItemIndex,3]);
+			inventoryContent[selectedItemIndex,0] = "empty";
+			return effect;
+		}
+		return 0;
+	}
+
 	public void sellItem(int selectedInventoryIndex) {
 		gameStatus.addGold (getValueOfItem (selectedInventoryIndex));
 		inventoryContent [selectedInventoryIndex, 0] = "empty";
@@ -151,6 +161,5 @@ public class ItemStats : MonoBehaviour {
 	public float getLvlUpEffectFactor() {
 		return lvlUpEffectFactor;
 	}
-
 
 }

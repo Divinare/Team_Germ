@@ -28,6 +28,7 @@ public class BattleMenuBar : MonoBehaviour {
 	private Vector2 itemMenuButtonSize;
 	private Vector2 activityMenuButtonSize;
 
+	private int selectedItemIndex;
 
 	void Start () {
 
@@ -97,6 +98,7 @@ public class BattleMenuBar : MonoBehaviour {
 					string itemType = itemStats.getItemType(itemName);
 					if(itemType.Equals("Potion")) {
 						currentUnit.GetComponent<UnitStatus>().switchSelectedAction (itemName);
+						selectedItemIndex = i;
 					}
 
 				}
@@ -147,6 +149,10 @@ public class BattleMenuBar : MonoBehaviour {
 		}
 		GUI.enabled = true;
 		GUI.color = original;
+	}
+
+	public int getSelectedItemIndex() {
+		return selectedItemIndex;
 	}
 
 }

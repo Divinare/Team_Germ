@@ -33,6 +33,9 @@ public class ActionHandler : MonoBehaviour {
 			if (actionType.Equals ("detox")) {
 				this.GetComponent<Dispel>().dispelPoison(initiator, target);
 			}
+			if (actionType.Equals ("healingPotion") || actionType.Equals ("speedPotion") || actionType.Equals ("ragePotion")) {
+				this.GetComponent<PotionHandler>().usePotion(target, actionType, initiator);
+			}
 		}
 	}
 }

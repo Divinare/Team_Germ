@@ -109,6 +109,17 @@ public class UnitStatus : MonoBehaviour {
 		} else {
 			currentHealth = maxHealth;
 		}
+		battlelog (unitName + " has been given " + heal + " health!");
+	}
+
+	public void GiveSpeed(int speed) {
+		this.speed += speed;
+		battlelog (unitName + " has been given " + speed + " speed!");
+	}
+
+	public void GiveDamage(int damage) {
+		this.damage += damage;
+		battlelog (unitName + " has been raged with " + damage + " extra damage!");
 	}
 
 	public void TakeDamage(int damage) {
