@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CursorIconHandler : MonoBehaviour {
 
-	public Texture2D[] cursorIcons; // currently contains: 0 = melee attack, 1 = ranged attack, 2 = magic wand, 3 = heal, 4 = error, 5 = stun, 6= poison
+	public Texture2D[] cursorIcons; // currently contains: 0 = melee attack, 1 = ranged attack, 2 = magic wand, 3 = heal, 4 = error, 5 = stun, 6= poison, 7 = detox
 	private string currentCursor; 
 	// Use this for initialization
 	void Start () {
@@ -48,6 +48,11 @@ public class CursorIconHandler : MonoBehaviour {
 		Cursor.SetCursor (cursorIcons[6], new Vector2(16,16), CursorMode.Auto);
 		currentCursor = "poison";
 	}
+	
+	public void drawDetoxCursor() {
+		Cursor.SetCursor (cursorIcons[7], new Vector2(16,16), CursorMode.Auto);
+		currentCursor = "detox";
+	}
 
 	public void drawDefaultCursor() {
 		Cursor.SetCursor (null, Vector2.zero, CursorMode.Auto);	
@@ -84,12 +89,20 @@ public class CursorIconHandler : MonoBehaviour {
 				drawPoisonCursor ();
 				return;
 			}
+			if (currentAction.Equals ("detox") && !currentCursor.Equals ("error")) {
+				drawErrorCursor();
+				return;
+			}
 			if (currentAction.Equals ("rangedStun") && !currentCursor.Equals ("rangedStun")) {
 				drawRangedStunCursor ();
 				return;
 			}
 		}
 		if (activeUnitSquareStatus.Equals (targetSquareStatus)) {
+			if (currentAction.Equals ("detox") && !currentCursor.Equals ("detox")) {
+				drawDetoxCursor();
+				return;
+			}
 			if (currentAction.Equals ("heal") && !currentCursor.Equals ("heal")) {
 				drawHealCursor();
 				return;
