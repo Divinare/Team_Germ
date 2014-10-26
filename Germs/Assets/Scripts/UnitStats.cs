@@ -13,6 +13,8 @@ public class UnitStats : MonoBehaviour {
 	public Dictionary<string, int[]> enemyWithStats = new Dictionary<string, int[]>();
 	private Dictionary<int, string[]> unitSpecialAttacks = new Dictionary<int, string[]>();
 	private Dictionary<string, string> unitDescriptions = new Dictionary<string, string>();
+	private Dictionary<string, int[]> unitUnlock = new Dictionary<string, int[]>();
+	private int[] unlockArray = new int[2];
 	private string[] unravelArray = new string[4];
 	private List<string> enemiesToSpawn = new List<string>();
 	private int[] unravelStatArray = new int[7];
@@ -61,12 +63,12 @@ public class UnitStats : MonoBehaviour {
 		unitSpecialAttacks.Add(4, new string[] {"Healing Mist", "heal", "50", "0", "Bacteria brings forth the powers of healing to aid a wounded ally."});
 
 		//set image dict for all units
-		allUnitImages.Add ("Phage", phage);
-		allUnitImages.Add ("Gatbac", gatbac);
 		allUnitImages.Add ("Strepto", strepto);
-		allUnitImages.Add ("Haemophilus", smallRed);
 		allUnitImages.Add ("Salmonella", smallBlue);
+		allUnitImages.Add ("Gatbac", gatbac);
+		allUnitImages.Add ("Haemophilus", smallRed);
 		allUnitImages.Add ("Bacillus", smallPurple);
+		allUnitImages.Add ("Phage", phage);
 		allUnitImages.Add ("empty", empty);
 
 		//set stories for all units
@@ -77,8 +79,14 @@ public class UnitStats : MonoBehaviour {
 		unitDescriptions.Add ("Salmonella", "...");
 		unitDescriptions.Add ("Bacillus", "...");
 
-		//lvlupstuff
-
+		//unlock bacteria in trainer stuff
+		//name: lvlsCompleted, xpCost
+		unitUnlock.Add ("Strepto", new int[] {0,0});
+		unitUnlock.Add ("Salmonella", new int[] {0,0});
+		unitUnlock.Add ("Gatbac", new int[] {1,50});
+		unitUnlock.Add ("Haemophilus", new int[] {2,100});
+		unitUnlock.Add ("Bacillus", new int[] {3,150});
+		unitUnlock.Add ("Phage", new int[] {4,200});
 
 		//initial bacteria?
 		setPlayerUnit("Salmonella");
@@ -177,5 +185,15 @@ public class UnitStats : MonoBehaviour {
 	public int getLevelUpCost(string unitName) {
 		int unitLevel = getUnitLevel(unitName);
 		return lvlUpCost * unitLevel;
+	}
+
+	public int getUnitUnlockLvls(string unitName) {
+		unlockArray = unitUnlock[unitName];
+		return unlockArray[0];
+	}
+
+	public int getUnitUnlockXpCost(string unitName) {
+		unlockArray = unitUnlock[unitName];
+		return unlockArray[1];
 	}
 }

@@ -122,9 +122,8 @@ public class TrainerGUI : MonoBehaviour {
 		}
 
 		//test
-		int unlockXp = 25;
-		int levelsToUnlock = 0;
-
+		int unlockXp = unitStats.getUnitUnlockXpCost(selectedBacteria);
+		int levelsToUnlock = unitStats.getUnitUnlockLvls(selectedBacteria);
 		int completedLevels = gameStatus.GetComponent<GameStatus>().getCompletedLevels();
 		
 		//right: Name, Level, Info
