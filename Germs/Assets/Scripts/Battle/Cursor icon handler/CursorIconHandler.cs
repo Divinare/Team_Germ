@@ -3,7 +3,7 @@ using System.Collections;
 
 public class CursorIconHandler : MonoBehaviour {
 
-	public Texture2D[] cursorIcons; // currently contains: 0 = melee attack, 1 = ranged attack, 2 = magic wand, 3 = heal, 4 = error
+	public Texture2D[] cursorIcons; // currently contains: 0 = melee attack, 1 = ranged attack, 2 = magic wand, 3 = heal, 4 = error, 5 = stun, 6= poison
 	private string currentCursor; 
 	// Use this for initialization
 	void Start () {
@@ -18,8 +18,7 @@ public class CursorIconHandler : MonoBehaviour {
 	
 	}
 
-
-
+	
 	public void drawMeleeAttackCursor() {
 		Cursor.SetCursor (cursorIcons[0], new Vector2(15,12), CursorMode.Auto);
 		currentCursor = "melee";
@@ -38,6 +37,16 @@ public class CursorIconHandler : MonoBehaviour {
 	public void drawErrorCursor() {
 		Cursor.SetCursor (cursorIcons[4], new Vector2(16,16), CursorMode.Auto);
 		currentCursor = "error";
+	}
+
+	public void drawRangedStunCursor() {
+		Cursor.SetCursor (cursorIcons[5], new Vector2(16,16), CursorMode.Auto);
+		currentCursor = "rangedStun";
+	}
+
+	public void drawPoisonCursor() {
+		Cursor.SetCursor (cursorIcons[6], new Vector2(16,16), CursorMode.Auto);
+		currentCursor = "poison";
 	}
 
 	public void drawDefaultCursor() {
@@ -71,6 +80,14 @@ public class CursorIconHandler : MonoBehaviour {
 				drawErrorCursor ();
 				return;
 			}
+			if (currentAction.Equals ("poison") && !currentCursor.Equals ("poison")) {
+				drawPoisonCursor ();
+				return;
+			}
+			if (currentAction.Equals ("rangedStun") && !currentCursor.Equals ("rangedStun")) {
+				drawRangedStunCursor ();
+				return;
+			}
 		}
 		if (activeUnitSquareStatus.Equals (targetSquareStatus)) {
 			if (currentAction.Equals ("heal") && !currentCursor.Equals ("heal")) {
@@ -82,6 +99,14 @@ public class CursorIconHandler : MonoBehaviour {
 				return;
 			}
 			if (currentAction.Equals ("ranged") && !currentCursor.Equals ("error")) {
+				drawErrorCursor();
+				return;
+			}
+			if (currentAction.Equals ("poison") && !currentCursor.Equals ("error")) {
+				drawErrorCursor();
+				return;
+			}
+			if (currentAction.Equals ("rangedStun") && !currentCursor.Equals ("error")) {
 				drawErrorCursor();
 				return;
 			}

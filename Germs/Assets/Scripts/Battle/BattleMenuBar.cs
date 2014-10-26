@@ -7,11 +7,11 @@ public class BattleMenuBar : MonoBehaviour {
 	private ItemStats itemStats = ItemStats.itemStats;
 	private AudioController audioController;
 
-	public Texture2D goldIcon;
-	public Texture2D xpIcon;
 	public Texture2D meleeIcon;
 	public Texture2D rangedIcon;
 	public Texture2D skipIcon;
+	public Texture2D rangedStunIcon;
+	public Texture2D poisonIcon;
 
 	// Common GUI stuff
 	private Vector2 menuBarSize;
@@ -127,7 +127,7 @@ public class BattleMenuBar : MonoBehaviour {
 		createActivityButton (currentUnit, 5, "skipTurn", "Skip Turn", skipIcon, true);
 		createActivityButton (currentUnit, 4, "melee", "Fancy melee attack", meleeIcon, false);
 		createActivityButton (currentUnit, 3, "ranged", "Fancy ranged attack", rangedIcon, false);
-		createActivityButton (currentUnit, 2, "rangedStun", "Fancy special attack", rangedIcon, false);
+		createActivityButton (currentUnit, 2, "rangedStun", "Fancy special attack", rangedStunIcon, false);
 
 		//Tooltip position
 		GUI.Label(new Rect(Screen.width - 100, Screen.height - activityMenuButtonSize.y - 50, 100, 100), GUI.tooltip);
