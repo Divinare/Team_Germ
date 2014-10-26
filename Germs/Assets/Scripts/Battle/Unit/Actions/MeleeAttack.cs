@@ -25,8 +25,8 @@ public class MeleeAttack : MonoBehaviour {
 			target.GetComponent<UnitStatus>().TakeDamage (attacker.GetComponent<UnitStatus>().damage);
 		}
 		targetSquare = null; 
-		attacker = null;
 		attacker.GetComponent<UnitStatus>().Deselect();
+		attacker = null;		
 	}
 	
 	public GameObject getAttacker () {
