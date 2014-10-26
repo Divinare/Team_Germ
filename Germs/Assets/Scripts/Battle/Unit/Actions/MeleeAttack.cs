@@ -16,19 +16,17 @@ public class MeleeAttack : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		// checks every frame to see if unit has reached a square adjacent to the target and whether an attack is primed, if yes then perform attack
-		if (goingToAttack) {
-			Vector3 targetPos = targetSquare.transform.position;
-			targetPos.z = -1;
-			if (attacker.transform.position == targetPos) {
-				goingToAttack = false;
-				if (target != null) {
-					target.GetComponent<UnitStatus>().TakeDamage (attacker.GetComponent<UnitStatus>().damage);
-				}
-				targetSquare = null; 
-				attacker = null; // turn ends here due to code in Movement.cs
-			}
+		
+	}
+	
+	public void finalizeAttack() {
+		goingToAttack = false;
+		if (target != null) {
+			target.GetComponent<UnitStatus>().TakeDamage (attacker.GetComponent<UnitStatus>().damage);
 		}
+		targetSquare = null; 
+		attacker = null;
+		attacker.GetComponent<UnitStatus>().Deselect();
 	}
 	
 	public GameObject getAttacker () {
@@ -46,17 +44,18 @@ public class MeleeAttack : MonoBehaviour {
 			return; // no route to enemy found, abort attack
 		}
 		
-		
+		goingToAttack = true;
+		target = targetGerm;
 		if (route.Count > 1) { // check if the target is in an adjacent square, if not, move to the square next to the target
 			route.RemoveAt (route.Count - 1); 
 			targetSquare = route[route.Count - 1];
-			activeUnit.GetComponent<Movement> ().startMoving(route);
+			activeUnit.GetComponent<Movement> ().startMoving(route); // finalizeAttack will be called from Movement.cs when movement ends
 		}
 		else { // if target is already at an adjacent square, set current square as the square from which to initiate melee attack
 			targetSquare = activeUnit.GetComponent<UnitStatus>().getSquare ();
-			activeUnit.GetComponent<UnitStatus>().Deselect ();
+			finalizeAttack ();
 		}
-		target = targetGerm;
-		goingToAttack = true;
+		
+		
 	}
 }

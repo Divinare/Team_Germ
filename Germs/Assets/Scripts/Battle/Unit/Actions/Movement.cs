@@ -26,10 +26,16 @@ public class Movement : MonoBehaviour {
 
 		Debug.DrawLine(transform.position, targetPosition, Color.red);
 
-		if (finalTargetPosition == transform.position && this.moving) { // check if moving and reached end of route, if yes unlock input and end turn
+		if (finalTargetPosition == transform.position && this.moving) { // check if moving and reached end of route
 			GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector>().unlockInput (); 
 			this.moving = false;
-			this.gameObject.GetComponent<UnitStatus>().Deselect ();
+			// checks to see if the movement action was initiated in order to melee attack, if yes attack the target, if not end turn after movement ends
+			if (GameObject.FindGameObjectWithTag ("ActionHandler").GetComponent<MeleeAttack>().goingToAttack) {
+				GameObject.FindGameObjectWithTag ("ActionHandler").GetComponent<MeleeAttack>().finalizeAttack();
+			}
+			else {
+				this.gameObject.GetComponent<UnitStatus>().Deselect ();
+			}
 		}
 			//constant movement
 		if (targetPosition != transform.position) {
