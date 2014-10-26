@@ -23,6 +23,7 @@ public class Heal : MonoBehaviour {
 			float z = target.transform.position.z;
 			z = -3f;
 			Destroy(Instantiate(healingEffect, new Vector3(x,y,z), Quaternion.Euler(new Vector3(270,90,0))), 3f);
+			healer.GetComponent<UnitStatus>().Deselect ();
 
 		}
 	}
