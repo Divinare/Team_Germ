@@ -12,6 +12,8 @@ public class BattleMenuBar : MonoBehaviour {
 	public Texture2D skipIcon;
 	public Texture2D rangedStunIcon;
 	public Texture2D poisonIcon;
+	public Texture2D healIcon;
+	public Texture2D detoxIcon;
 
 	// Common GUI stuff
 	private Vector2 menuBarSize;
@@ -118,7 +120,27 @@ public class BattleMenuBar : MonoBehaviour {
 		createActivityButton (currentUnit, 5, "skipTurn", "Skip Turn", skipIcon);
 		createActivityButton (currentUnit, 4, "melee", "Melee attack", meleeIcon);
 		createActivityButton (currentUnit, 3, "ranged", "Ranged attack", rangedIcon);
-		createActivityButton (currentUnit, 2, "rangedStun", "Stun", rangedStunIcon);
+		
+		bool hasSpecialAbility = false;
+		if (currentUnit.GetComponent<UnitStatus>().hasRangedStun) {
+			createActivityButton (currentUnit, 2, "rangedStun", "Stun", rangedStunIcon);
+			hasSpecialAbility = true;
+		}
+		if (currentUnit.GetComponent<UnitStatus>().hasDetox) {
+			createActivityButton (currentUnit, 2, "detox", "Detoxify", detoxIcon);
+			hasSpecialAbility = true;
+		}
+		if (currentUnit.GetComponent<UnitStatus>().hasHeal) {
+			createActivityButton (currentUnit, 2, "heal", "Heal", healIcon);
+			hasSpecialAbility = true;
+		}
+		if (currentUnit.GetComponent<UnitStatus>().hasPoison) {
+			createActivityButton (currentUnit, 2, "poison", "Poison", poisonIcon);
+			hasSpecialAbility = true;
+		}
+		if (!hasSpecialAbility) {
+			createActivityButton (currentUnit, 2, "poison", "No action", null);
+		}
 
 		//Tooltip position
 		GUI.Label(new Rect(Screen.width - 100, Screen.height - activityMenuButtonSize.y - 50, 100, 100), GUI.tooltip);

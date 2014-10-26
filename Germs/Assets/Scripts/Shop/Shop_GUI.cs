@@ -21,8 +21,9 @@ public class Shop_GUI : MonoBehaviour {
 	public GUIStyle trainerHover;
 	public GUIStyle mapHover;
 	public GUIStyle bigNumbers;
-	public GUIStyle blackText;
-	public GUIStyle costText;
+	public GUIStyle buttonBg;
+	public GUIStyle buttonDeactivatedBg;
+	public GUIStyle topicText;
 	public GUIStyle itemStatusText;
 
 	public Texture shopBox;
@@ -45,7 +46,7 @@ public class Shop_GUI : MonoBehaviour {
 
 	private string selectedItem = "healingPotion";
 	bool itemOwned = false;
-	private int selectedInventoryIndex = -1; // 1 - inventorySize
+	private int selectedInventoryIndex = 0; // 1 - inventorySize
 
 	private Dictionary<string, int[]> currentItemStats;
 
@@ -70,7 +71,7 @@ public class Shop_GUI : MonoBehaviour {
 		itemInfoSize = new Vector2(windowSize.x, windowSize.y);
 		shopPos = new Vector2 (Screen.width*0.04f, Screen.height * 0.15f);
 		itemInfoPos = new Vector2 (windowSize.x + shopPos.x + 25, shopPos.y);
-		itemInfoButtonSize = new Vector2 (windowSize.x/3, itemInfoSize.y*0.20f);
+		itemInfoButtonSize = new Vector2 (windowSize.x/3, itemInfoSize.y*0.3f);
 
 		currentItemStats = ItemStats.itemStats.getCurrenItemStats ();
 	
@@ -143,6 +144,11 @@ public class Shop_GUI : MonoBehaviour {
 	private void createItemInfo() {
 		drawTexture (0, 0, (int)windowSize.x, (int)windowSize.y, shopBox);
 
+		string itemName = itemStats.getInventoryContent()[selectedInventoryIndex, 0];
+		if (itemName.Equals ("empty") && itemOwned) {
+			return;
+		}
+
 		// Item image:
 		GUI.Box (new Rect(0, 0, itemSize.x+10, itemSize.y+10), itemStats.getItemIcon(selectedItem)); 
 
@@ -157,6 +163,7 @@ public class Shop_GUI : MonoBehaviour {
 
 	private void createTextItemInfo(Vector2 itemInfoTextSize) {
 		//GUI.Box (new Rect(0, 0,  itemInfoTextSize.x,  itemInfoTextSize.y), "");
+
 		// Name
 		string description = "";
 		if (itemOwned) {
@@ -166,7 +173,7 @@ public class Shop_GUI : MonoBehaviour {
 			description = itemStats.getItemName(selectedItem) + "\n" + "level " + itemStats.getItemLevel (selectedItem, -1);
 		}
 
-		GUI.Label (new Rect (0, 0, itemInfoTextSize.x, itemInfoTextSize.y * 0.2f), description, blackText);
+		GUI.Label (new Rect (0, 0, itemInfoTextSize.x, itemInfoTextSize.y * 0.2f), description, topicText);
 		// Item status
 	
 		if (!itemOwned) {
@@ -178,11 +185,10 @@ public class Shop_GUI : MonoBehaviour {
 				string nextLvlItemStatus = "Next Level " + (level + 1) + "\n" + "Effect: " + (effect + effect * itemStats.getLvlUpEffectFactor ());
 				GUI.Label (new Rect (itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.5f, itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.2f), nextLvlItemStatus, itemStatusText);
 		} else {
-			int level = itemStats.getItemLevel (selectedItem, selectedInventoryIndex);
-			int effect = itemStats.getItemEffect (selectedItem, selectedInventoryIndex);
-			string itemStatus = "Level " + level + " stats" + "\n" + "Effect: " + effect;
-			GUI.Label (new Rect (0, itemInfoTextSize.y * 0.5f, itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.2f), itemStatus, itemStatusText);
-
+				int level = itemStats.getItemLevel (selectedItem, selectedInventoryIndex);
+				int effect = itemStats.getItemEffect (selectedItem, selectedInventoryIndex);
+				string itemStatus = "Level " + level + " stats" + "\n" + "Effect: " + effect;
+				GUI.Label (new Rect (0, itemInfoTextSize.y * 0.5f, itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.2f), itemStatus, itemStatusText);
 		}
 
 	}
@@ -203,33 +209,60 @@ public class Shop_GUI : MonoBehaviour {
 		}
 
 		// Cost / value amount
+		/*
 		string text = "";
 		if (itemOwned) {
 			text = "Value: " + itemStats.getValueOfItem(selectedInventoryIndex);
 		} else {
-			text = "Cost: " + currentItemStats [selectedItem] [1];
+			text = "Cost: " + itemStats.getItemCost(selectedItem);
 		}
-		GUI.Label (new Rect (10, itemInfoSize.y - itemInfoSize.y*0.15f, itemSize.x + 10, itemSize.y*0.3f), text, costText);
+		GUI.Label (new Rect (10, itemInfoSize.y - itemInfoSize.y*0.15f, itemSize.x + 10, itemSize.y*0.3f), text);
+		*/
 	}
 
 
 	private void createBuyButton(float x, float y) {
-		if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Buy")) {
-			itemStats.buyItem(selectedItem);
-			audioController.playClickSound();
+		bool enoughGold = false;
+		if (gameStatus.getGold () - itemStats.getItemCost (selectedItem) > 0) {
+			enoughGold = true;
+		}
+		if(enoughGold) {
+			if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Buy" + "\n" + "Cost: " + itemStats.getItemCost(selectedItem), buttonBg)) {
+				itemStats.buyItem(selectedItem);
+				audioController.playClickSound();
+			}
+		} else {
+			if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Buy" + "\n" + "Cost: " + itemStats.getItemCost(selectedItem), buttonDeactivatedBg)) {
+				itemStats.buyItem(selectedItem);
+				audioController.playClickSound();
+			}
 		}
 	}
 	private void createSellButton(float x, float y) {
-		if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Sell")) {
-			itemStats.sellItem(selectedInventoryIndex);
+		if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Sell" + "\n" + "Value: " + itemStats.getValueOfItem(selectedInventoryIndex), buttonBg)) {
+			bool itemSold = itemStats.sellItem(selectedInventoryIndex);
 			audioController.playClickSound();
+
 		}
 	}
+	
 	private void createUpgradeButton(float x, float y) {
-		if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Upgrade")) {
-			ItemStats.itemStats.levelUpItem(selectedItem);
-			audioController.playClickSound();
+		bool enoughGold = false;
+		if (gameStatus.getGold () - itemStats.getItemUpgradeCost (selectedItem) > 0) {
+			enoughGold = true;
 		}
+		if (enoughGold) {
+			if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Upgrade" + "\n" + "Cost: " + itemStats.getItemUpgradeCost (selectedItem), buttonBg)) {
+					ItemStats.itemStats.levelUpItem (selectedItem);
+					audioController.playClickSound ();
+			}
+		} else {
+			if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Upgrade" + "\n" + "Cost: " + itemStats.getItemUpgradeCost (selectedItem), buttonDeactivatedBg)) {
+				ItemStats.itemStats.levelUpItem (selectedItem);
+				audioController.playClickSound ();
+			}
+		}
+	
 	}
 
 	private void drawTexture(float x, float y, float width, float height, Texture texture) {
@@ -244,6 +277,10 @@ public class Shop_GUI : MonoBehaviour {
 	}
 	public void setSelectedInventoryIndex(int index) {
 		this.selectedInventoryIndex = index;
+	}
+
+	private void showNotification(string text) {
+
 	}
 }
 
