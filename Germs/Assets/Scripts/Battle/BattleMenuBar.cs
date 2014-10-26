@@ -158,7 +158,7 @@ public class BattleMenuBar : MonoBehaviour {
 			transparentButtonColor.a = 0.5f;
 			GUI.color = transparentButtonColor;
 		}
-		else if (!action.Equals ("melee") && !action.Equals ("ranged")) {
+		else if (!action.Equals ("melee") && !action.Equals ("ranged") && !action.Equals ("skipTurn")) {
 			if (currentUnit.GetComponent<UnitStatus>().actionCooldown > 0) {
 				GUI.enabled = false;
 				actionDescription = "Action on cooldown";
