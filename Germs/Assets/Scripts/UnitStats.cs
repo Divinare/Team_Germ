@@ -34,7 +34,9 @@ public class UnitStats : MonoBehaviour {
 	private Dictionary<string, Texture2D> allUnitImages = new Dictionary<string, Texture2D>();
 
 	//levelup
-	public int lvlUpStatIncrease = 4;
+	public int lvlUpHpIncrease = 4;
+	public int lvlUpSpeedIncrease = 6;
+	public int lvlUpDmgIncrease = 4;
 	public int lvlUpCost = 25;
 
 	// Use this for initialization

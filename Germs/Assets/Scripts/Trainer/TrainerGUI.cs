@@ -111,10 +111,9 @@ public class TrainerGUI : MonoBehaviour {
 			bacSpeed = unitStats.getUnitSpeed(selectedBacteria);
 			bacLevel = unitStats.getUnitLevel(selectedBacteria);
 
-			lvlUpFactor = unitStats.lvlUpStatIncrease;
-			lvlUpHealth = bacHealth/lvlUpFactor;
-			lvlUpDmg = bacDmg/lvlUpFactor;
-			lvlUpSpeed = bacSpeed/lvlUpFactor;
+			lvlUpHealth = bacHealth/unitStats.lvlUpHpIncrease;
+			lvlUpDmg = bacDmg/unitStats.lvlUpDmgIncrease;
+			lvlUpSpeed = bacSpeed/unitStats.lvlUpSpeedIncrease;
 			lvlUpXp = unitStats.getLevelUpCost(selectedBacteria);
 
 		} else {
