@@ -21,9 +21,9 @@ public class Shop_GUI : MonoBehaviour {
 	public GUIStyle trainerHover;
 	public GUIStyle mapHover;
 	public GUIStyle bigNumbers;
-	public GUIStyle buttonText;
+	public GUIStyle buttonBg;
+	public GUIStyle buttonDeactivatedBg;
 	public GUIStyle topicText;
-	public GUIStyle costText;
 	public GUIStyle itemStatusText;
 
 	public Texture shopBox;
@@ -216,19 +216,30 @@ public class Shop_GUI : MonoBehaviour {
 		} else {
 			text = "Cost: " + itemStats.getItemCost(selectedItem);
 		}
-		GUI.Label (new Rect (10, itemInfoSize.y - itemInfoSize.y*0.15f, itemSize.x + 10, itemSize.y*0.3f), text, costText);
+		GUI.Label (new Rect (10, itemInfoSize.y - itemInfoSize.y*0.15f, itemSize.x + 10, itemSize.y*0.3f), text);
 		*/
 	}
 
 
 	private void createBuyButton(float x, float y) {
-		if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Buy" + "\n" + "Cost: " + itemStats.getItemCost(selectedItem), buttonText)) {
-			itemStats.buyItem(selectedItem);
-			audioController.playClickSound();
+		bool enoughGold = false;
+		if (gameStatus.getGold () - itemStats.getItemCost (selectedItem) > 0) {
+			enoughGold = true;
+		}
+		if(enoughGold) {
+			if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Buy" + "\n" + "Cost: " + itemStats.getItemCost(selectedItem), buttonBg)) {
+				itemStats.buyItem(selectedItem);
+				audioController.playClickSound();
+			}
+		} else {
+			if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Buy" + "\n" + "Cost: " + itemStats.getItemCost(selectedItem), buttonDeactivatedBg)) {
+				itemStats.buyItem(selectedItem);
+				audioController.playClickSound();
+			}
 		}
 	}
 	private void createSellButton(float x, float y) {
-		if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Sell" + "\n" + "Value: " + itemStats.getValueOfItem(selectedInventoryIndex), buttonText)) {
+		if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Sell" + "\n" + "Value: " + itemStats.getValueOfItem(selectedInventoryIndex), buttonBg)) {
 			bool itemSold = itemStats.sellItem(selectedInventoryIndex);
 			audioController.playClickSound();
 
@@ -236,10 +247,22 @@ public class Shop_GUI : MonoBehaviour {
 	}
 	
 	private void createUpgradeButton(float x, float y) {
-		if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Upgrade" + "\n" + "Cost: " + itemStats.getItemUpgradeCost(selectedItem), buttonText)) {
-			ItemStats.itemStats.levelUpItem(selectedItem);
-			audioController.playClickSound();
+		bool enoughGold = false;
+		if (gameStatus.getGold () - itemStats.getItemUpgradeCost (selectedItem) > 0) {
+			enoughGold = true;
 		}
+		if (enoughGold) {
+			if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Upgrade" + "\n" + "Cost: " + itemStats.getItemUpgradeCost (selectedItem), buttonBg)) {
+					ItemStats.itemStats.levelUpItem (selectedItem);
+					audioController.playClickSound ();
+			}
+		} else {
+			if (GUI.Button (new Rect (x, y, itemInfoButtonSize.x, itemInfoButtonSize.y), "Upgrade" + "\n" + "Cost: " + itemStats.getItemUpgradeCost (selectedItem), buttonDeactivatedBg)) {
+				ItemStats.itemStats.levelUpItem (selectedItem);
+				audioController.playClickSound ();
+			}
+		}
+	
 	}
 
 	private void drawTexture(float x, float y, float width, float height, Texture texture) {
