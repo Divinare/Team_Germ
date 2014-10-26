@@ -37,8 +37,18 @@ public class UnitStatus : MonoBehaviour {
 	//animations
 	private Animator animator;
 
-	// Use this for initialization
+	//action bar actions
+	public bool hasRanged;
+	public bool hasMelee;
+	public bool hasRangedStun;
+	public bool hasPoison;
+	public bool hasHeal;
+	public bool hasDetox;
+	private Dictionary<string, bool> unitActions; // used by battle action bar
+
+
 	void Start () {
+
 		//this gets stats from BattleStatus
 		if (!enemy) {
 			battleStatus = GameObject.Find("BattleStatus").GetComponent<BattleStatus>();
@@ -48,6 +58,27 @@ public class UnitStatus : MonoBehaviour {
 			speed = battleStatus.getBacteriaSpeed(unitName);
 		}
 		animator = this.GetComponent<Animator>();
+
+		// these are for Battle Action Bar
+		unitActions = new Dictionary<string, bool>();
+		listUnitActions ();
+	}
+
+
+	private void listUnitActions() {
+		// These values are used by Battle Action Bar - if the key's value is true, the unit is capable of preforming said action
+		unitActions.Add ("ranged", hasRanged);
+		unitActions.Add ("melee", hasMelee);
+		unitActions.Add ("rangedStun", hasRangedStun);
+		unitActions.Add ("poison", hasPoison);
+		unitActions.Add ("heal", hasHeal);
+		unitActions.Add ("detox", hasDetox);
+		unitActions.Add ("skipTurn", true);
+	}
+
+	// returns a list of actions the unit is allowed to perform
+	public Dictionary<string, bool> GetUnitActions() {
+		return unitActions;
 	}
 
 	// Sounds array contains the following sounds for each clipId: 0 = sound of being hit;

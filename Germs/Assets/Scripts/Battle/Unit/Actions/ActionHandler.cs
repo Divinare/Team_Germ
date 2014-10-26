@@ -3,17 +3,9 @@ using System.Collections;
 
 public class ActionHandler : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	public void performAction(GameObject initiator, GameObject target, string actionType) {
+
 		bool targetIsHostile;
 		if (initiator.GetComponent<UnitStatus> ().IsEnemy () == target.GetComponent<UnitStatus> ().IsEnemy ()) {
 			targetIsHostile = false;
@@ -43,7 +35,4 @@ public class ActionHandler : MonoBehaviour {
 			}
 		}
 	}
-
-
-
 }

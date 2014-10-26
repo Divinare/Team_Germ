@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BattleMenuBar : MonoBehaviour {
 	
@@ -49,10 +50,6 @@ public class BattleMenuBar : MonoBehaviour {
 
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	void OnGUI() {
 		createBattlelog ();
@@ -138,6 +135,14 @@ public class BattleMenuBar : MonoBehaviour {
 
 	private void createActivityButton(GameObject currentUnit, int index, string action, string actionDescription, Texture2D texture, bool skipTurn) {
 
+		Dictionary<string, bool> unitActions = currentUnit.GetComponent<UnitStatus> ().GetUnitActions ();
+
+		if (!unitActions[action]) { // (true -> false, false -> true) lolwut O___o
+			GUI.enabled = false;
+			action = "Action not available";
+
+		}
+
 		if (GUI.Button (new Rect (menuBarSize.x-activityMenuButtonSize.x*index, menuBarPosition.y + menuBarDescriptionHeight, activityMenuButtonSize.x, activityMenuButtonSize.y), new GUIContent (texture, action))) {
 			if(skipTurn) {
 				if (!currentUnit.GetComponent<UnitStatus>().IsEnemy()) {
@@ -148,6 +153,7 @@ public class BattleMenuBar : MonoBehaviour {
 			}
 			//audioController.playClickSound();		
 		}
+		GUI.enabled = true;
 	}
 
 }
