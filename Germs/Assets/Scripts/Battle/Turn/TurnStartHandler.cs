@@ -13,6 +13,8 @@ public class TurnStartHandler : MonoBehaviour {
 		if (unit.GetComponent<UnitStatus>().IsUnitPoisoned()) {
 			unit.GetComponent<UnitStatus>().countDownPoison();
 		}
+		
+		unit.GetComponent<UnitStatus>().countDownAbilityCooldown ();
 
 
 		//Tää ei riitä, jos stunni tarkistetaan pelkästään täällä niin enemyillä on silti vuoro!

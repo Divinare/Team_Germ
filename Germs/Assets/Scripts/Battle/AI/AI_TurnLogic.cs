@@ -26,27 +26,29 @@ public class AI_TurnLogic : MonoBehaviour {
 		currentSquareStatus = currentUnit.GetComponent<UnitStatus> ().getSquare ().GetComponent<SquareStatus> ();
 		targetFinder.updateUnits(currentUnit, currentSquareStatus, thisStatus);
 		
-		if (unitActions["detox"] && (Random.Range (1, 10) > 5)) {
-			if (attemptDetox()) {
-				return;
+		if (thisStatus.actionCooldown == 0) {
+			if (unitActions["detox"]) {
+				if (attemptDetox()) {
+					return;
+				}
 			}
-		}
 		
-		if (unitActions["heal"] && (Random.Range (1, 10) > 5)) {
-			if (attemptHeal()) {
-				return;
+			if (unitActions["heal"]) {
+				if (attemptHeal()) {
+					return;
+				}
 			}
-		}
 		
-		if (unitActions["rangedStun"] && (Random.Range (1, 10) > 5)) {
-			if (attemptRangedStun ()) {
-				return; // ramged stun successful, end turn
+			if (unitActions["rangedStun"]) {
+				if (attemptRangedStun ()) {
+					return; // ramged stun successful, end turn
+				}
 			}
-		}
 		
-		if (unitActions["poison"] && (Random.Range (1, 10) > 5)) {
-			if (attemptPoison()) {
-				return; // poison successful, end turn
+			if (unitActions["poison"]) {
+				if (attemptPoison()) {
+					return; // poison successful, end turn
+				}
 			}
 		}
 		

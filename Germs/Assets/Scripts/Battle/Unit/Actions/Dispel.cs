@@ -16,11 +16,13 @@ public class Dispel : MonoBehaviour {
 
 	public void dispelPoison(GameObject dispeller, GameObject target) {
 		target.GetComponent<UnitStatus>().removePoison();
+		dispeller.GetComponent<UnitStatus>().setActionCooldown(2);
 		endTurn(dispeller, target);
 	}
 
 	public void dispelStun(GameObject dispeller, GameObject target) {
 		target.GetComponent<UnitStatus>().removeStun();
+		dispeller.GetComponent<UnitStatus>().setActionCooldown(2);
 		endTurn(dispeller, target);
 	}
 

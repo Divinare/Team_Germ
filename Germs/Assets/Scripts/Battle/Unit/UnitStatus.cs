@@ -13,14 +13,13 @@ public class UnitStatus : MonoBehaviour {
 	public int heal; // how many HP this unit heals
 
 // This is the attack that we have selected from the attack toolbar
+	public int actionCooldown;
 	public string selectedAction = "melee";
 	public bool selected = false;
 	public bool enemy = false; // true = unit is on computer's side, false = unit is on player's side
 	public AudioClip[] sounds;
 	public GameObject DeathSound;
 	public string unitName;
-	public int x;
-	public int y;
 	private GameObject currentSquare; // the square currently occupied by the unit
 
 	//for statusEffects
@@ -47,6 +46,7 @@ public class UnitStatus : MonoBehaviour {
 
 
 	void Start () {
+		actionCooldown = 0;
 		unitStats = GameObject.Find("UnitStats").GetComponent<UnitStats>();
 		//this gets stats from BattleStatus
 		if (!enemy) {
@@ -60,6 +60,16 @@ public class UnitStatus : MonoBehaviour {
 		// these are for Battle Action Bar
 		unitActions = new Dictionary<string, bool>();
 		listUnitActions ();
+	}
+	
+	public void setActionCooldown(int cooldown) {
+		this.actionCooldown = cooldown;
+	}
+	
+	public void countDownAbilityCooldown() {
+		if (actionCooldown > 0) {
+			actionCooldown--;
+		}
 	}
 
 
@@ -204,6 +214,9 @@ public class UnitStatus : MonoBehaviour {
 	}
 	
 	public void Deselect() {
+		if (!hasRanged) {
+			selectedAction = "melee";
+		}
 		selected = false;
 		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ().resetHostileTurn (); // this is used to inform AI that in case a hostile unit was active, its turn has ended
 	}
