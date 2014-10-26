@@ -154,7 +154,7 @@ public class TrainerGUI : MonoBehaviour {
 				}
 			}
 		} else {
-			GUI.Label(new Rect (Screen.width/2+Screen.width/6,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "This bacteria has not been unlocked yet. To unlock you need to complete... ", blueText);
+			GUI.Label(new Rect (Screen.width/2+Screen.width/6,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "This bacteria has not been unlocked yet. To unlock you need to complete "+levelsToUnlock+ " levels and have "+unlockXp+" xp.", blueText);
 
 			//Unlock Button
 			if (xp >= unlockXp && completedLevels >= levelsToUnlock) {
