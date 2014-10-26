@@ -18,6 +18,7 @@ public class TurnStartHandler : MonoBehaviour {
 
 	
 		if (unit.GetComponent<UnitStatus>().IsUnitStunned()) {
+			unit.GetComponent<UnitStatus>().countDownStun();
 			unit.GetComponent<UnitStatus>().Deselect();
 		}
 
