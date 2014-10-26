@@ -9,13 +9,14 @@ public class UnitStats : MonoBehaviour {
 	private GameStatus gameStatus;
 
 	private Dictionary<string, int[]> baseUnitStats = new Dictionary<string, int[]>();
+	private Dictionary<string, int[]> playerUnitStats = new Dictionary<string, int[]>();
 	public Dictionary<string, int[]> enemyWithStats = new Dictionary<string, int[]>();
-	public Dictionary<int, string[]> unitSpecialAttacks = new Dictionary<int, string[]>();
-	public Dictionary<string, string> unitDescriptions = new Dictionary<string, string>();
+	private Dictionary<int, string[]> unitSpecialAttacks = new Dictionary<int, string[]>();
+	private Dictionary<string, string> unitDescriptions = new Dictionary<string, string>();
 	private string[] unravelArray = new string[4];
 	private List<string> enemiesToSpawn = new List<string>();
-	private int[] unravelStatsArray = new int[7];
-	private int[] enemyStatsArray = new int[7];
+	private int[] unravelStatArray = new int[7];
+	private int[] enemyStatArray = new int[7];
 
 	public int levelsCompleted;
 	public int baseStatIncreaseFactor;
@@ -28,7 +29,7 @@ public class UnitStats : MonoBehaviour {
 	public Texture2D smallBlue;
 	public Texture2D smallPurple;
 	public Texture2D empty;
-	public Dictionary<string, Texture2D> allUnitImages = new Dictionary<string, Texture2D>();
+	private Dictionary<string, Texture2D> allUnitImages = new Dictionary<string, Texture2D>();
 
 	// Use this for initialization
 	void Start () {
@@ -39,9 +40,18 @@ public class UnitStats : MonoBehaviour {
 			Destroy (gameObject);
 		}
 
+		Debug.Log ("UnitStats");
+
 		battleStatus = GameObject.Find("BattleStatus").GetComponent<BattleStatus>();
 		gameStatus = GameObject.Find("GameStatus").GetComponent<GameStatus>();
-		baseUnitStats = battleStatus.getAllBacteriaStats();
+
+		//test int[] {Health, Dmg, speed, level, melee, ranged, special}
+		baseUnitStats.Add ("Gatbac", new int[] {200, 10, 5, 1, 1, 1, 3});
+		baseUnitStats.Add ("Strepto", new int[] {100, 10, 8, 1, 1, 0, 3});
+		baseUnitStats.Add ("Haemophilus", new int[] {100, 10, 6, 1, 1, 0, 3});
+		baseUnitStats.Add ("Salmonella", new int[] {100, 10, 6, 1, 1, 0, 3});
+		baseUnitStats.Add ("Bacillus", new int[] {100, 10, 6, 1, 0, 1, 3});
+		baseUnitStats.Add ("Phage", new int[] {100, 10, 4, 1, 1, 0, 3});
 
 		//example unitSpecialAttack entry : [0]=SkillName, [1]=SkillType, [2] = total dmg, [3]=duration, [4]=skillDescription (for tooltip)}
 		unitSpecialAttacks.Add(2, new string[] {"Stunball", "rangedStun", "0", "2", "Bacteria launches a powerful ball that stuns the target."});
@@ -64,6 +74,11 @@ public class UnitStats : MonoBehaviour {
 		unitDescriptions.Add ("Haemophilus", "...");
 		unitDescriptions.Add ("Salmonella", "...");
 		unitDescriptions.Add ("Bacillus", "...");
+
+		//initial bacteria?
+		setPlayerUnit("Salmonella");
+		setPlayerUnit("Strepto");
+		
 	}
 
 	public int[] getEnemyUnitStats(string enemyName) {
@@ -76,10 +91,10 @@ public class UnitStats : MonoBehaviour {
 		baseStatIncreaseFactor = levelsCompleted;
 
 		enemyWithStats.Clear();
-		unravelStatsArray = baseUnitStats[enemyName];
-		enemyStatsArray = new int[] {unravelStatsArray[0]*baseStatIncreaseFactor,unravelStatsArray[1]*baseStatIncreaseFactor, unravelStatsArray[2]*baseStatIncreaseFactor, unravelStatsArray[3], unravelStatsArray[4], unravelStatsArray[5], unravelStatsArray[6]};
+		unravelStatArray = baseUnitStats[enemyName];
+		enemyStatArray = new int[] {unravelStatArray[0]*baseStatIncreaseFactor,unravelStatArray[1]*baseStatIncreaseFactor, unravelStatArray[2]*baseStatIncreaseFactor, unravelStatArray[3], unravelStatArray[4], unravelStatArray[5], unravelStatArray[6]};
 
-		return enemyStatsArray;
+		return enemyStatArray;
 	}
 
 	public Dictionary<string, string> getUnitDescriptions() {
@@ -113,5 +128,43 @@ public class UnitStats : MonoBehaviour {
 	public string getSpecialAttackTooltip(int key) {
 		unravelArray = unitSpecialAttacks[key];
 		return unravelArray[4];
+	}
+
+	//int[] {Health, Dmg, speed, level}
+	public int getUnitHealth(string key) {
+		unravelStatArray = playerUnitStats[key];
+		return unravelStatArray[0];
+	}
+	
+	public int getUnitDamage(string key) {
+		unravelStatArray = playerUnitStats[key];
+		return unravelStatArray[1];
+	}
+	
+	public int getUnitSpeed(string key) {
+		unravelStatArray = playerUnitStats[key];
+		return unravelStatArray[2];
+	}
+	
+	public int getUnitLevel(string key) {
+		unravelStatArray = playerUnitStats[key];
+		return unravelStatArray[3];
+	}
+
+	public Dictionary<string, int[]> getPlayerUnitStats() {
+		return playerUnitStats;
+	}
+
+	public void setPlayerUnit(string unitName) {
+		Debug.Log ("adding "+unitName+" into player units");
+		playerUnitStats[unitName] = baseUnitStats[unitName];
+	}
+
+	public Dictionary<string, int[]> getBaseUnitStats() {
+		return baseUnitStats;
+	}
+
+	public void setPlayerUnitStats(string key, int health, int dmg, int speed, int lvl) {
+		playerUnitStats[key] = new int[] {health, dmg, speed, lvl};
 	}
 }

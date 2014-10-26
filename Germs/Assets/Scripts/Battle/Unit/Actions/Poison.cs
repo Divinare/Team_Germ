@@ -32,9 +32,13 @@ public class Poison : MonoBehaviour {
 	}
 
 	void getPoisonStats(GameObject initiator) {
-		int specialAttack = battleStatus.getBacteriaSpecialAttack(initiator.GetComponent<UnitStatus>().getUnitName());
+		//int specialAttack = battleStatus.getBacteriaSpecialAttack(initiator.GetComponent<UnitStatus>().getUnitName());
+		/*
 		poisonDamage = unitStats.getSpecialAttackDamage(specialAttack);
 		poisonDuration = unitStats.getSpecialAttackRounds(specialAttack);
+		*/
+		poisonDamage = initiator.GetComponent<UnitStatus>().damage * 2;
+		poisonDuration = 2;
 	}
 
 	void applyPoison(GameObject target) {

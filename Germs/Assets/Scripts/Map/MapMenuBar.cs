@@ -27,7 +27,7 @@ public class MapMenuBar : MonoBehaviour {
 
 	private Vector2 middleBar;
 	public int clickedIndex;
-	public Dictionary<string, int[]> allBacteriaStats = new Dictionary<string, int[]>();
+	public Dictionary<string, int[]> playerUnitStats = new Dictionary<string, int[]>();
 	public List<string> selectedUnits = new List<string>();
 	private Dictionary<string, Texture2D> allUnitImages = new Dictionary<string, Texture2D>();
 	public bool bacChooser;
@@ -38,6 +38,7 @@ public class MapMenuBar : MonoBehaviour {
 		unitStats = GameObject.Find ("UnitStats").GetComponent<UnitStats> ();
 
 		allUnitImages = unitStats.getImageDict();
+		playerUnitStats = unitStats.getPlayerUnitStats();
 	}
 
 	private void getMenuBarValues() {
@@ -54,7 +55,6 @@ public class MapMenuBar : MonoBehaviour {
 		
 		// Map GUI stuff
 		middleBar = new Vector2 (shopMapTrainerButtonSize.x+Screen.width/4, Screen.height-menuButtonSize.y);
-		allBacteriaStats = battleStatus.getAllBacteriaStats();
 		selectedUnits = battleStatus.getSelectedUnits();
 		bacChooser = false;
 		
@@ -109,7 +109,7 @@ public class MapMenuBar : MonoBehaviour {
 
 			float pos = 0;
 			foreach (string bac in allUnitImages.Keys) {
-				if (!selectedUnits.Contains(bac) && bac != "empty") {
+				if (playerUnitStats.ContainsKey(bac) && !selectedUnits.Contains(bac) && bac != "empty") {
 					if (GUI.Button (new Rect (middleBar.x +pos,middleBar.y-menuButtonSize.y,menuButtonSize.x,menuButtonSize.y), allUnitImages[bac])) {
 						battleStatus.setSelectedUnit(bac, clickedIndex);
 						bacChooser = false;

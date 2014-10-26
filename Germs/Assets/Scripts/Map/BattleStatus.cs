@@ -8,11 +8,13 @@ public class BattleStatus : MonoBehaviour {
 
 	public List<GameObject> allUnits = new List<GameObject>();
 	public List<string> selectedUnits = new List<string>();
-	public Dictionary<string, int[]> currentUnitStats = new Dictionary<string, int[]>();
+	public Dictionary<string, int[]> baseUnitStats = new Dictionary<string, int[]>();
 	public List<string> enemiesToSpawn = new List<string>();
 	private int[] unravelArray = new int[7];
 	private int spawnNum;
+
 	private GameStatus gameStatus;
+	private UnitStats unitStats;
 
 	// Use this for initialization
 	void Start () {
@@ -23,25 +25,20 @@ public class BattleStatus : MonoBehaviour {
 			Destroy (gameObject);
 		}
 		gameStatus = GameObject.Find("GameStatus").GetComponent<GameStatus>();
-
-		//test int[] {Health, Dmg, speed, level, melee, ranged, special}
-		currentUnitStats.Add ("Gatbac", new int[] {200, 10, 5, 1, 1, 1, 3});
-		currentUnitStats.Add ("Strepto", new int[] {100, 10, 8, 1, 1, 0, 3});
-		currentUnitStats.Add ("Haemophilus", new int[] {100, 10, 6, 1, 1, 0, 3});
-		currentUnitStats.Add ("Salmonella", new int[] {100, 10, 6, 1, 1, 0, 3});
-		currentUnitStats.Add ("Bacillus", new int[] {100, 10, 6, 1, 0, 1, 3});
-		currentUnitStats.Add ("Phage", new int[] {100, 10, 4, 1, 1, 0, 3});
-		//currentUnitStats.Add ("blueBac", new int[] {100, 15, 10, 1, 1, 1, 8});
+		unitStats = GameObject.Find("UnitStats").GetComponent<UnitStats>();
+		baseUnitStats = unitStats.getBaseUnitStats();
 
 		//initial selection
-		selectedUnits.Add ("Gatbac");
-		selectedUnits.Add ("Strepto");
 		selectedUnits.Add ("Salmonella");
-		selectedUnits.Add ("Bacillus");
-		selectedUnits.Add ("Phage");
+		selectedUnits.Add ("Strepto");
+		selectedUnits.Add ("empty");
+		selectedUnits.Add ("empty");
+		selectedUnits.Add ("empty");
+
 	}
 
 	public void randomEnemiesForLevel() {
+
 		enemiesToSpawn.Clear();
 		int levelsCompleted = gameStatus.getCompletedLevels();
 
@@ -60,7 +57,7 @@ public class BattleStatus : MonoBehaviour {
 
 		//randoms enemies
 		for (int i=0; i<spawnNum; i++) {
-			var randomKey = currentUnitStats.Keys.ToArray()[(int)Random.Range(0,currentUnitStats.Keys.Count)];
+			var randomKey = baseUnitStats.Keys.ToArray()[(int)Random.Range(0,baseUnitStats.Keys.Count)];
 			enemiesToSpawn.Add (randomKey);
 		}
 	}
@@ -81,10 +78,11 @@ public class BattleStatus : MonoBehaviour {
 		selectedUnits.Remove(bac);
 	}
 
+	/*
 	public void setAllBacteriaStats(string key, int health, int dmg, int speed, int lvl) {
 		currentUnitStats[key] = new int[] {health, dmg, speed, lvl};
 	}
-
+	
 	//int[] {Health, Dmg, speed, level}
 	public int getBacteriaHealth(string key) {
 		unravelArray = currentUnitStats[key];
@@ -132,4 +130,5 @@ public class BattleStatus : MonoBehaviour {
 	public Dictionary<string, int[]> getAllBacteriaStats() {
 		return currentUnitStats;
 	}
+	*/
 }

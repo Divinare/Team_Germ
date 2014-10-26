@@ -3,9 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class UnitStatus : MonoBehaviour {
-	private BattleStatus battleStatus;
+	private UnitStats unitStats;
 	public Dictionary <string, int[]> allBacteriaStats = new Dictionary<string, int[]>();
-	public int[] unitStats = new int[4];
 
 	public int currentHealth; // current HP
 	public int damage; // how much damage this unit does
@@ -48,14 +47,13 @@ public class UnitStatus : MonoBehaviour {
 
 
 	void Start () {
-
+		unitStats = GameObject.Find("UnitStats").GetComponent<UnitStats>();
 		//this gets stats from BattleStatus
 		if (!enemy) {
-			battleStatus = GameObject.Find("BattleStatus").GetComponent<BattleStatus>();
-			currentHealth = battleStatus.getBacteriaHealth(unitName);
-			maxHealth = battleStatus.getBacteriaHealth(unitName);
-			damage = battleStatus.getBacteriaDamage(unitName);
-			speed = battleStatus.getBacteriaSpeed(unitName);
+			currentHealth = unitStats.getUnitHealth(unitName);
+			maxHealth = unitStats.getUnitHealth(unitName);
+			damage = unitStats.getUnitDamage(unitName);
+			speed = unitStats.getUnitSpeed(unitName);
 		}
 		animator = this.GetComponent<Animator>();
 

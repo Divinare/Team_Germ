@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: b0a91419b39b97e4a91f46a666e8e121
+guid: 2bc987dadeffb2c469c09307a739b8c6
 TextureImporter:
   fileIDToRecycleName:
-    21300000: upgradeDeactive
+    21300000: unlockUnit_deactive
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

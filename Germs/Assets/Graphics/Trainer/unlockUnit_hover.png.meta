@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: 0cacd163c463309439948dc406a9c555
+guid: 0faa686e0b24e6042a53c3368176463a
 TextureImporter:
   fileIDToRecycleName:
-    21300000: upgradeActive
+    21300000: unlockUnit_hover
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
