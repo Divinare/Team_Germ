@@ -97,6 +97,7 @@ public class Selector : MonoBehaviour {
 	}
 
 	public void lockInput() { // lock and unlock input are used by other scripts which need to lock actions while something is being performed, ie. attacks, movement etc.
+		GameObject.FindGameObjectWithTag ("Drawer").GetComponent<Drawer>().removeDrawedItems ("MovableSquareGfx");
 		inputLocked = true;
 	}
 
