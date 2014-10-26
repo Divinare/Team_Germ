@@ -12,6 +12,7 @@ public class BattleStatus : MonoBehaviour {
 	public List<string> enemiesToSpawn = new List<string>();
 	private int[] unravelArray = new int[7];
 	private int spawnNum;
+	private GameStatus gameStatus;
 
 	// Use this for initialization
 	void Start () {
@@ -21,7 +22,7 @@ public class BattleStatus : MonoBehaviour {
 		} else if (battleStatus != this) {
 			Destroy (gameObject);
 		}
-		//testing poison everyone has poison (3) equipped!
+		gameStatus = GameObject.Find("GameStatus").GetComponent<GameStatus>();
 
 		//test int[] {Health, Dmg, speed, level, melee, ranged, special}
 		currentUnitStats.Add ("Gatbac", new int[] {200, 10, 5, 1, 1, 1, 3});
@@ -42,7 +43,22 @@ public class BattleStatus : MonoBehaviour {
 
 	public void randomEnemiesForLevel() {
 		enemiesToSpawn.Clear();
-		spawnNum = 5;
+		int levelsCompleted = gameStatus.getCompletedLevels();
+
+		//limit amount of enemies based on what level is underway
+		if (levelsCompleted <= 1) {
+			spawnNum = 2;
+		}
+		else if (levelsCompleted > 1 && levelsCompleted <= 3) {
+			spawnNum = 3;
+		}
+		else if (levelsCompleted > 3 && levelsCompleted <=5) {
+			spawnNum = 4;
+		} else {
+			spawnNum = 5;
+		}
+
+		//randoms enemies
 		for (int i=0; i<spawnNum; i++) {
 			var randomKey = currentUnitStats.Keys.ToArray()[(int)Random.Range(0,currentUnitStats.Keys.Count)];
 			enemiesToSpawn.Add (randomKey);
