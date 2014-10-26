@@ -3,71 +3,169 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class AI_TurnLogic : MonoBehaviour {
-
+	
 	private GameObject currentUnit;
 	private UnitStatus thisStatus;
 	private SquareStatus currentSquareStatus;
-	private bool stunned;
+	private AI_TargetFinder targetFinder;
 	// Use this for initialization
 	void Start () {
-	
+		targetFinder = GameObject.FindGameObjectWithTag("AIController").GetComponent<AI_TargetFinder>();
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 	}
-
+	
 	public void handleTurnForGerm(GameObject unit) {
 		currentUnit = unit;
 		thisStatus = currentUnit.GetComponent<UnitStatus> ();
-
+		Dictionary<string, bool> unitActions = currentUnit.GetComponent<UnitStatus> ().GetUnitActions ();
 		currentSquareStatus = currentUnit.GetComponent<UnitStatus> ().getSquare ().GetComponent<SquareStatus> ();
-		if (Random.Range (1,10) > 5) {
+		targetFinder.updateUnits(currentUnit, currentSquareStatus, thisStatus);
+		
+		if (unitActions["detox"] && (Random.Range (1, 10) > 5)) {
+			if (attemptDetox()) {
+				return;
+			}
+		}
+		
+		if (unitActions["heal"] && (Random.Range (1, 10) > 5)) {
+			if (attemptHeal()) {
+				return;
+			}
+		}
+		
+		if (unitActions["rangedStun"] && (Random.Range (1, 10) > 5)) {
+			if (attemptRangedStun ()) {
+				return; // ramged stun successful, end turn
+			}
+		}
+		
+		if (unitActions["poison"] && (Random.Range (1, 10) > 5)) {
+			if (attemptPoison()) {
+				return; // poison successful, end turn
+			}
+		}
+		
+		if (unitActions["ranged"]) {
 			if (attemptRangedAttack ()) {
 				return; // ranged attack successful, end turn
 			}
 		}
-
-		if (attemptMeleeattack ()) {
-			return; // melee attack successful, end turn
+		
+		if (unitActions["melee"]) {
+			if (attemptMeleeattack ()) {
+				return; // melee attack successful, end turn
+			}
 		}
-			
+		
 		if (findTargetAndMoveTowardsIt ()) {
 			return; // was able to find a target and move towards it, end turn
 		}
 		// no possible behaviours found, skipping turn
 		thisStatus.Deselect ();
-
-		// choose action (ranged, melee or special attack)
 		
-
-
-
+		
+		
+		
 	}
-
+	
+	bool attemptMeleeattack() {
+		List<GameObject> targets = targetFinder.findValidMeleeTargets ();
+		if (targets.Count == 0) {
+			return false;
+		}
+		GameObject target = targetFinder.findLowestHealthTarget (targets);
+		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ().setTargetedUnit (target);
+		GameObject.FindGameObjectWithTag("ActionHandler").GetComponent<ActionHandler>().performAction (currentUnit, target, "melee");
+		return true;
+	}
+	
+	bool attemptRangedAttack() {
+		List<GameObject> targets = targetFinder.findValidRangedTargets ();
+		if (targets.Count == 0) {
+			return false; // no valid targets found for ranged attack
+		}
+		GameObject target = targetFinder.findLowestHealthTarget (targets);
+		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ().setTargetedUnit (target);
+		GameObject.FindGameObjectWithTag("ActionHandler").GetComponent<ActionHandler>().performAction (currentUnit, target, "ranged");
+		
+		return true; // valid target found and ranged attack executed
+		
+	}
+	
+	bool attemptPoison() {
+		List<GameObject> allEnemies = targetFinder.findAllEnemies();
+		if (allEnemies.Count == 0) {
+			return false;
+		}
+		GameObject target = targetFinder.findHighestDamageTarget (allEnemies);
+		GameObject.FindGameObjectWithTag("ActionHandler").GetComponent<ActionHandler>().performAction (currentUnit, target, "poison");
+		return true;
+	}
+	
+	bool attemptDetox() {
+		List<GameObject> debuffedUnits = targetFinder.findFriendliesWithDebuffs();
+		if (debuffedUnits.Count == 0) {
+			return false;
+		}
+		GameObject target = targetFinder.pickRandomTarget(debuffedUnits);
+		GameObject.FindGameObjectWithTag("ActionHandler").GetComponent<ActionHandler>().performAction (currentUnit, target, "detox");
+		return true;
+		
+	}
+	
+	bool attemptHeal() {
+		List<GameObject> friendlies = targetFinder.findFriendlies();
+		if (friendlies.Count == 0) {
+			return false;
+		}
+		GameObject lowestHealthFriendly = targetFinder.findLowestHealthTarget (friendlies);
+		if (lowestHealthFriendly.GetComponent<UnitStatus>().currentHealth == lowestHealthFriendly.GetComponent<UnitStatus>().maxHealth) {
+			return false; // no damaged friendlies found, could not heal
+		}		
+		GameObject.FindGameObjectWithTag("ActionHandler").GetComponent<ActionHandler>().performAction (currentUnit, lowestHealthFriendly, "heal");
+		return true;
+		
+	}
+	
+	bool attemptRangedStun() {
+		List<GameObject> targets = targetFinder.findValidStunTargets ();
+		if (targets.Count == 0) {
+			return false; // no valid targets found for ranged stun
+		}
+		GameObject target = targetFinder.findHighestDamageTarget (targets);
+		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ().setTargetedUnit (target);
+		GameObject.FindGameObjectWithTag("ActionHandler").GetComponent<ActionHandler>().performAction (currentUnit, target, "rangedStun");
+		return true; // valid target found and ranged stun executed
+		
+	}
+	
 	bool findTargetAndMoveTowardsIt() {
 		GameObject[] allBacs = GameObject.FindGameObjectsWithTag ("Unit");
 		List<GameObject> targetBacs = new List<GameObject> ();
-
+		
 		foreach (GameObject bac in allBacs) {
 			UnitStatus targetStatus = bac.GetComponent<UnitStatus>();
 			if (targetStatus.IsEnemy () != thisStatus.IsEnemy ()) {
 				targetBacs.Add (bac);
 			}
 		}
-
+		
 		List<GameObject> movableSquares = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<MovableSquaresFinder> ().getMovableSquares ();
 		if (movableSquares.Count == 0) {
 			return false; // no movable squares, can't move
 		}
-		GameObject target = findClosestTarget (targetBacs);
-
+		GameObject target = targetFinder.findClosestTarget (targetBacs);
+		
 		GameObject closestSquareToTarget = movableSquares [0];
 		double lowestDistance = 999;
 		foreach (GameObject square in movableSquares) {
 			GameObject targetSquare = target.GetComponent<UnitStatus>().getSquare();
-			double distance = checkDistance (square, targetSquare);
+			double distance = targetFinder.checkDistance (square, targetSquare);
 			if (distance < lowestDistance) {
 				lowestDistance = distance;
 				closestSquareToTarget = square;
@@ -77,113 +175,9 @@ public class AI_TurnLogic : MonoBehaviour {
 		currentUnit.GetComponent<Movement> ().startMoving (routeToTargetSquare);
 		return true;
 	}
-
-	bool attemptMeleeattack() {
-		List<GameObject> targets = findValidMeleeTargets ();
-		if (targets.Count == 0) {
-			return false;
-		}
-		GameObject target = pickTargetForMelee (targets);
-		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ().setTargetedUnit (target);
-		GameObject.FindGameObjectWithTag ("ActionHandler").GetComponent<MeleeAttack> ().initiateAttack (currentUnit, target);
-		return true;
-	}
-
-	bool attemptRangedAttack() {
-		List<GameObject> targets = findValidRangedTargets ();
-		if (targets.Count == 0) {
-			return false; // no valid targets found for ranged attack
-		}
-		GameObject target = pickTargetForRanged (targets);
-		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ().setTargetedUnit (target);
-		GameObject.FindGameObjectWithTag ("ActionHandler").GetComponent<RangedAttack> ().attack (currentUnit, target);
-
-		return true; // valid target found and ranged attack executed
-
-	}
-
-	List<GameObject> findValidMeleeTargets () {
-		GameObject[] allBacs = GameObject.FindGameObjectsWithTag ("Unit");
-		List<GameObject> validTargets = new List<GameObject> ();
-		foreach (GameObject target in allBacs) {
-			UnitStatus targetStatus = target.GetComponent<UnitStatus>();
-			GameObject targetSquare = target.GetComponent<UnitStatus>().getSquare();
-			if (targetStatus.IsEnemy () != thisStatus.IsEnemy ()) {
-				if (targetIstAtMeleeRange (currentUnit, target)) { // check if target is already at melee range, if yes then it's a valid attack target
-					validTargets.Add (target);
-				}
-				else { // if target is not at melee range, check if there is a valid route to it and if yes, add it as a valid target
-					List<GameObject> route = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (targetSquare, true);
-					if (route != null) {
-						validTargets.Add (target);
-					}
-				}
-			}
-		}
-		return validTargets;
-	}
-
-	bool targetIstAtMeleeRange(GameObject unit, GameObject target) {
-		SquareStatus targetSquare = target.GetComponent<UnitStatus>().getSquare ().GetComponent<SquareStatus>();
-		int distanceX = Mathf.Abs (targetSquare.x - currentSquareStatus.x);
-		int distanceY = Mathf.Abs (targetSquare.y - currentSquareStatus.y);
-		return (distanceX <= 1 && distanceY <= 1);
-	}
-
-	double checkDistance(GameObject from, GameObject to) {
-		SquareStatus fromSquare = from.GetComponent<SquareStatus> ();
-		SquareStatus toSquare = to.GetComponent<SquareStatus> ();
-		int distanceX = Mathf.Abs (fromSquare.x - toSquare.x);
-		int distanceY = Mathf.Abs (fromSquare.y - toSquare.y);
-		double distance = Mathf.Max (distanceX, distanceY) - Mathf.Min(distanceX, distanceY) + Mathf.Min (distanceX, distanceY) * 1.5;
-		return distance;
-	}
-
-	List<GameObject> findValidRangedTargets() { // finds all opposing side targets that are not in melee rnage
-		GameObject[] allBacs = GameObject.FindGameObjectsWithTag ("Unit");
-		List<GameObject> validTargets = new List<GameObject> ();
-		foreach (GameObject target in allBacs) {
-			UnitStatus targetStatus = target.GetComponent<UnitStatus>();
-			if (targetStatus.IsEnemy () != thisStatus.IsEnemy ()) { 
-				if (!targetIstAtMeleeRange (currentUnit, target)) { 
-					validTargets.Add (target);
-				}
-			}
-		}
-		return validTargets;
-	}
-
-	GameObject findClosestTarget(List<GameObject> targets) {
-		GameObject selectedTarget = targets [0];
-		double closestDistance = 999;
-		foreach (GameObject target in targets) {
-			GameObject targetSquare = target.GetComponent<UnitStatus>().getSquare ();
-			double distance = checkDistance (thisStatus.getSquare (), targetSquare);
-			if (distance < closestDistance) {
-				closestDistance = distance;
-				selectedTarget = target;
-			}
-		}
-		return selectedTarget;
-	}
-
-	GameObject pickTargetForRanged(List<GameObject> targets) { // currently picks lowest health target
-		GameObject selectedTarget = targets [0];
-		int lowestHealth = selectedTarget.GetComponent<UnitStatus> ().currentHealth;
-		foreach (GameObject target in targets) {
-			if (target.GetComponent<UnitStatus>().currentHealth < lowestHealth);
-			selectedTarget = target;
-		}
-		return selectedTarget;
-	}
-
-	GameObject pickTargetForMelee(List<GameObject> targets) { // currently picks lowest health target
-		GameObject selectedTarget = targets [0];
-		int lowestHealth = selectedTarget.GetComponent<UnitStatus> ().currentHealth;
-		foreach (GameObject target in targets) {
-			if (target.GetComponent<UnitStatus>().currentHealth < lowestHealth);
-			selectedTarget = target;
-		}
-		return selectedTarget;
-	}
+	
+	
+	
+	
+	
 }
