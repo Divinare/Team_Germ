@@ -31,6 +31,10 @@ public class UnitStats : MonoBehaviour {
 	public Texture2D empty;
 	private Dictionary<string, Texture2D> allUnitImages = new Dictionary<string, Texture2D>();
 
+	//levelup
+	public int lvlUpStatIncrease = 4;
+	public int lvlUpCost = 25;
+
 	// Use this for initialization
 	void Start () {
 		if (unitStats == null) {
@@ -39,8 +43,6 @@ public class UnitStats : MonoBehaviour {
 		} else if (unitStats != this) {
 			Destroy (gameObject);
 		}
-
-		Debug.Log ("UnitStats");
 
 		battleStatus = GameObject.Find("BattleStatus").GetComponent<BattleStatus>();
 		gameStatus = GameObject.Find("GameStatus").GetComponent<GameStatus>();
@@ -75,10 +77,12 @@ public class UnitStats : MonoBehaviour {
 		unitDescriptions.Add ("Salmonella", "...");
 		unitDescriptions.Add ("Bacillus", "...");
 
+		//lvlupstuff
+
+
 		//initial bacteria?
 		setPlayerUnit("Salmonella");
 		setPlayerUnit("Strepto");
-		
 	}
 
 	public int[] getEnemyUnitStats(string enemyName) {
@@ -156,8 +160,10 @@ public class UnitStats : MonoBehaviour {
 	}
 
 	public void setPlayerUnit(string unitName) {
-		Debug.Log ("adding "+unitName+" into player units");
-		playerUnitStats[unitName] = baseUnitStats[unitName];
+		if (!playerUnitStats.ContainsKey(unitName)) {
+			Debug.Log ("adding "+unitName+" into player units");
+			playerUnitStats[unitName] = baseUnitStats[unitName];
+		}
 	}
 
 	public Dictionary<string, int[]> getBaseUnitStats() {
@@ -166,5 +172,10 @@ public class UnitStats : MonoBehaviour {
 
 	public void setPlayerUnitStats(string key, int health, int dmg, int speed, int lvl) {
 		playerUnitStats[key] = new int[] {health, dmg, speed, lvl};
+	}
+
+	public int getLevelUpCost(string unitName) {
+		int unitLevel = getUnitLevel(unitName);
+		return lvlUpCost * unitLevel;
 	}
 }
