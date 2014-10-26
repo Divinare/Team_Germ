@@ -60,7 +60,6 @@ public class BattleMenuBar : MonoBehaviour {
 
 	private void createBattlelog() {
 		// Text area background
-		//GUI.contentColor = Color.yellow;
 		GUI.Box (new Rect (battlelogPosition.x, battlelogPosition.y, battlelogSize.x, battlelogSize.y), "");
 		// Battlelog
 		GUILayout.BeginArea (new Rect (battlelogPosition.x, battlelogPosition.y, battlelogSize.x, battlelogSize.y));
@@ -83,8 +82,6 @@ public class BattleMenuBar : MonoBehaviour {
 	private void createItemMenu() {
 		float amountOfItems = 3;
 		float scaleToMiddle = Screen.width * 0.4f;
-		
-		//GUI.contentColor = Color.yellow;
 
 		string[,] inventoryContent = itemStats.getInventoryContent ();
 
@@ -113,38 +110,33 @@ public class BattleMenuBar : MonoBehaviour {
 	}
 	
 	private void createActivityMenu() {
-		float amountOfItems = 4;
-		
-		// Create menu button
-		//MenuCreator.menuCreator.createMenu ();
-		
-		
-		//bg box
-		//GUI.Box (new Rect (Screen.width-activityMenuButtonSize.x * amountOfItems, Screen.height - activityMenuButtonSize.y, activityMenuButtonSize.x * (amountOfItems+1), activityMenuButtonSize.y), "");
-		
+
 		//buttons
 		GameObject currentUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().getActiveUnit ();
-		createActivityButton (currentUnit, 5, "skipTurn", "Skip Turn", skipIcon, true);
-		createActivityButton (currentUnit, 4, "melee", "Fancy melee attack", meleeIcon, false);
-		createActivityButton (currentUnit, 3, "ranged", "Fancy ranged attack", rangedIcon, false);
-		createActivityButton (currentUnit, 2, "rangedStun", "Fancy special attack", rangedStunIcon, false);
+		createActivityButton (currentUnit, 5, "skipTurn", "Skip Turn", skipIcon);
+		createActivityButton (currentUnit, 4, "melee", "Melee attack", meleeIcon);
+		createActivityButton (currentUnit, 3, "ranged", "Ranged attack", rangedIcon);
+		createActivityButton (currentUnit, 2, "rangedStun", "Stun", rangedStunIcon);
 
 		//Tooltip position
 		GUI.Label(new Rect(Screen.width - 100, Screen.height - activityMenuButtonSize.y - 50, 100, 100), GUI.tooltip);
 	}
 
-	private void createActivityButton(GameObject currentUnit, int index, string action, string actionDescription, Texture2D texture, bool skipTurn) {
+	private void createActivityButton(GameObject currentUnit, int index, string action, string actionDescription, Texture2D texture) {
 
-		Dictionary<string, bool> unitActions = currentUnit.GetComponent<UnitStatus> ().GetUnitActions ();
+		Dictionary<string, bool> unitHasActions = currentUnit.GetComponent<UnitStatus> ().GetUnitActions ();
+		Color original = GUI.color;
 
-		if (!unitActions[action]) { // (true -> false, false -> true) lolwut O___o
+		if (!unitHasActions[action]) {
 			GUI.enabled = false;
-			action = "Action not available";
-
+			actionDescription = "Action not available";
+			Color transparentButtonColor = original;
+			transparentButtonColor.a = 0.5f;
+			GUI.color = transparentButtonColor;
 		}
 
-		if (GUI.Button (new Rect (menuBarSize.x-activityMenuButtonSize.x*index, menuBarPosition.y + menuBarDescriptionHeight, activityMenuButtonSize.x, activityMenuButtonSize.y), new GUIContent (texture, action))) {
-			if(skipTurn) {
+		if (GUI.Button (new Rect (menuBarSize.x-activityMenuButtonSize.x*index, menuBarPosition.y + menuBarDescriptionHeight, activityMenuButtonSize.x, activityMenuButtonSize.y), new GUIContent (texture, actionDescription))) {
+			if(action.Equals("skipTurn")) {
 				if (!currentUnit.GetComponent<UnitStatus>().IsEnemy()) {
 					currentUnit.GetComponent<UnitStatus>().Deselect();
 				}
@@ -154,6 +146,7 @@ public class BattleMenuBar : MonoBehaviour {
 			//audioController.playClickSound();		
 		}
 		GUI.enabled = true;
+		GUI.color = original;
 	}
 
 }
