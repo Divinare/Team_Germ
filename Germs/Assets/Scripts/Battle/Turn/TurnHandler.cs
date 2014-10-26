@@ -126,29 +126,26 @@ public class TurnHandler : MonoBehaviour {
 	}
 
 	private void DrawSelectionCircleForUnit(GameObject unit) {
-		if (unit.GetComponent<UnitStatus>().IsEnemy()) {
-			unit.transform.FindChild("enemyCircle").gameObject.active = true;
-			unit.transform.FindChild("enemyCircle").GetComponent<BlinkingCircle>().enabled = true;
-		}
-		else {
-			unit.transform.FindChild("selectionCircle").gameObject.active = true;
-			unit.transform.FindChild("selectionCircle").GetComponent<BlinkingCircle>().enabled = true;
-		}
+
+		string circleName = GetCircleName (unit);
+		unit.transform.FindChild(circleName).gameObject.active = true;
+		unit.transform.FindChild(circleName).GetComponent<BlinkingCircle>().StartBlink();		
 	}
 
 	private void RemoveSelectionCircleFromUnit(GameObject unit) {
-		if (unit.GetComponent<UnitStatus>().IsEnemy()) {
-			unit.transform.FindChild("enemyCircle").gameObject.active = false;
-			unit.transform.FindChild("enemyCircle").GetComponent<BlinkingCircle>().enabled = false;
 
-		}
-		else {	
-			unit.transform.FindChild("selectionCircle").gameObject.active = false;
-			unit.transform.FindChild("selectionCircle").GetComponent<BlinkingCircle>().enabled = false;
-		}
+		string circleName = GetCircleName (unit);
+		unit.transform.FindChild(circleName).GetComponent<BlinkingCircle>().SetOriginalColor();
+		unit.transform.FindChild(circleName).gameObject.active = false;
 	}
 
+	private string GetCircleName(GameObject unit) {
 
+		if (unit.GetComponent<UnitStatus>().IsEnemy()) {
+			return "enemyCircle";
+		}
+		return "selectionCircle";
+	}
 	
 	// The unit whose turn it is
 	public GameObject getActiveUnit() {
