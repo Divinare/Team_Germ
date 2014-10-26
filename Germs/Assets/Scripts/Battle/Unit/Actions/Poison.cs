@@ -9,6 +9,8 @@ public class Poison : MonoBehaviour {
 	private BattleStatus battleStatus;
 	private Selector selector;
 
+	public GameObject poisonEffect;
+
 	// Use this for initialization
 	void Start () {
 		unitStats = GameObject.Find("UnitStats").GetComponent<UnitStats>();
@@ -37,5 +39,11 @@ public class Poison : MonoBehaviour {
 
 	void applyPoison(GameObject target) {
 		target.GetComponent<UnitStatus>().Poisoned(poisonDamage, poisonDuration);
+		//poison effect
+		float x = target.transform.position.x;
+		float y = target.transform.position.y;
+		float z = target.transform.position.z;
+		z = -3f;
+		Destroy(Instantiate(poisonEffect, new Vector3(x,y,z), Quaternion.Euler(new Vector3(270,90,0))), 3f);
 	}
 }

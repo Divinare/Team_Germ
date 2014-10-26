@@ -1,8 +1,8 @@
 fileFormatVersion: 2
-guid: f0b8168ca9e5a944595ba7c948532364
+guid: 2bdc27ba4adef4a4daf59d0807cc01be
 TextureImporter:
   fileIDToRecycleName:
-    21300000: skillIcon
+    21300000: speechbubble
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
