@@ -47,31 +47,12 @@ public class TurnHandler : MonoBehaviour {
 						// Checks wheter the next unit is still alive so it can be given the next turn
 						if (unitListIndex <= unitList.Count - 1 && unitList [unitListIndex] != null) {
 							activeUnit = unitList [unitListIndex];
-							if (canUnitUseThisTurn(activeUnit)) {
-								activeUnit.transform.GetComponent<UnitStatus>().Select();
-								DrawSelectionCircleForUnit(activeUnit);
-							}
+							activeUnit.transform.GetComponent<UnitStatus>().Select();
+							DrawSelectionCircleForUnit(activeUnit);
 						}
 					}
 				}
 			}
-		}
-	}
-	
-	//friendly and enemy targets have different places where unit turns are set,
-	//what is the real place for this?
-	public bool canUnitUseThisTurn(GameObject unit) {
-		//stun
-		if (unit.transform.GetComponent<UnitStatus>().IsUnitStunned()) {
-			//remove one round of stun from friendly target (untested) 
-			if (!unit.transform.GetComponent<UnitStatus>().IsEnemy()) {
-				unit.transform.GetComponent<UnitStatus>().countDownStun();
-			}
-			return false;
-		}
-		//other things
-		else {
-			return true;
 		}
 	}
 	
