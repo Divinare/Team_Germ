@@ -9,6 +9,7 @@ public class RangedStunHit : MonoBehaviour {
 	private Selector selector;
 	private int stunDuration;
 	public ParticleSystem stunHit;
+	public AudioClip stunSound;
 	
 	void Start() {
 		attackingUnit = GameObject.FindGameObjectWithTag ("TurnHandler").transform.GetComponent<TurnHandler> ().getActiveUnit().GetComponent<UnitStatus>();
@@ -24,6 +25,7 @@ public class RangedStunHit : MonoBehaviour {
 		if (unit.GetComponent<UnitStatus>() == targetedUnit.GetComponent<UnitStatus>()) {
 			
 			Destroy(Instantiate(stunHit, transform.position, transform.rotation), 2f); // instantiating the explosion and destroying it after 2f time
+			AudioSource.PlayClipAtPoint(stunSound, transform.position);
 			unit.GetComponent<UnitStatus>().Stunned(stunDuration);
 			selector.SetTargetedUnitToNull();
 			GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector>().unlockInput (); // unlock input before ending turn
