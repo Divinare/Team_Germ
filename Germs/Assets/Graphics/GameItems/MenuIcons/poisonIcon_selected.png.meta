@@ -1,9 +1,7 @@
 fileFormatVersion: 2
-guid: 846fbfdb0a1e19b45b9c26eb253723c8
+guid: ac4ca7ef1827c824c97edaaa363a7d03
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: lightningBall
-    21300002: rangedStunIcon
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -27,9 +25,9 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: 1
+    aniso: -1
     mipBias: -1
-    wrapMode: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50

@@ -1,8 +1,7 @@
 fileFormatVersion: 2
-guid: 6f5bd98a83e13784a939a511b11c1b75
+guid: dfd1d60b4cdba954da4627847deb7348
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: melee
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0

@@ -8,12 +8,18 @@ public class BattleMenuBar : MonoBehaviour {
 	private AudioController audioController;
 
 	public Texture2D meleeIcon;
+	public Texture2D selectedMeleeIcon;
 	public Texture2D rangedIcon;
+	public Texture2D selectedRangedIcon;
 	public Texture2D skipIcon;
 	public Texture2D rangedStunIcon;
+	public Texture2D selectedRangedStunIcon;
 	public Texture2D poisonIcon;
+	public Texture2D selectedPoisonIcon;
 	public Texture2D healIcon;
+	public Texture2D selectedHealIcon;
 	public Texture2D detoxIcon;
+	public Texture2D selectedDetoxIcon;
 
 	// Common GUI stuff
 	private Vector2 menuBarSize;
@@ -118,24 +124,50 @@ public class BattleMenuBar : MonoBehaviour {
 		//buttons
 		GameObject currentUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().getActiveUnit ();
 		createActivityButton (currentUnit, 5, "skipTurn", "Skip Turn", skipIcon);
-		createActivityButton (currentUnit, 4, "melee", "Melee attack", meleeIcon);
-		createActivityButton (currentUnit, 3, "ranged", "Ranged attack", rangedIcon);
+		if (currentUnit.GetComponent<UnitStatus>().selectedAction.Equals ("melee")) {
+			createActivityButton (currentUnit, 4, "melee", "Melee attack", selectedMeleeIcon);
+		}
+		else {
+			createActivityButton (currentUnit, 4, "melee", "Melee attack", meleeIcon);
+		}
+		if (currentUnit.GetComponent<UnitStatus>().selectedAction.Equals ("ranged")) {
+			createActivityButton (currentUnit, 3, "ranged", "Ranged attack", selectedRangedIcon);
+		}
+		else {
+			createActivityButton (currentUnit, 3, "ranged", "Ranged attack", rangedIcon);
+		}
 		
 		bool hasSpecialAbility = false;
 		if (currentUnit.GetComponent<UnitStatus>().hasRangedStun) {
-			createActivityButton (currentUnit, 2, "rangedStun", "Stun", rangedStunIcon);
+			Texture2D texture = rangedStunIcon;
+			if (currentUnit.GetComponent<UnitStatus>().selectedAction.Equals ("rangedStun")) {
+				texture = selectedRangedStunIcon;
+			}
+			createActivityButton (currentUnit, 2, "rangedStun", "Stun", texture);
 			hasSpecialAbility = true;
 		}
 		if (currentUnit.GetComponent<UnitStatus>().hasDetox) {
-			createActivityButton (currentUnit, 2, "detox", "Detoxify", detoxIcon);
+			Texture2D texture = detoxIcon;
+			if (currentUnit.GetComponent<UnitStatus>().selectedAction.Equals ("detox")) {
+				texture = selectedDetoxIcon;
+			}
+			createActivityButton (currentUnit, 2, "detox", "Detoxify", texture);
 			hasSpecialAbility = true;
 		}
 		if (currentUnit.GetComponent<UnitStatus>().hasHeal) {
-			createActivityButton (currentUnit, 2, "heal", "Heal", healIcon);
+			Texture2D texture = healIcon;
+			if (currentUnit.GetComponent<UnitStatus>().selectedAction.Equals ("heal")) {
+				texture = selectedHealIcon;
+			}
+			createActivityButton (currentUnit, 2, "heal", "Heal", texture);
 			hasSpecialAbility = true;
 		}
 		if (currentUnit.GetComponent<UnitStatus>().hasPoison) {
-			createActivityButton (currentUnit, 2, "poison", "Poison", poisonIcon);
+			Texture2D texture = poisonIcon;
+			if (currentUnit.GetComponent<UnitStatus>().selectedAction.Equals ("poison")) {
+				texture = selectedPoisonIcon;
+			}
+			createActivityButton (currentUnit, 2, "poison", "Poison", texture);
 			hasSpecialAbility = true;
 		}
 		if (!hasSpecialAbility) {
@@ -167,7 +199,7 @@ public class BattleMenuBar : MonoBehaviour {
 				GUI.color = transparentButtonColor;
 			}
 		}
-
+		
 		if (GUI.Button (new Rect (menuBarSize.x-activityMenuButtonSize.x*index, menuBarPosition.y + menuBarDescriptionHeight, activityMenuButtonSize.x, activityMenuButtonSize.y), new GUIContent (texture, actionDescription))) {
 			if(action.Equals("skipTurn")) {
 				if (!currentUnit.GetComponent<UnitStatus>().IsEnemy()) {
