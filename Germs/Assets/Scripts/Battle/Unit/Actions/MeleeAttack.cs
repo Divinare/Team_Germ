@@ -28,7 +28,7 @@ public class MeleeAttack : MonoBehaviour {
 			float y = target.transform.position.y;
 			float z = target.transform.position.z;
 			z = -3f;
-			Destroy(Instantiate(meleeEffect, new Vector3(x,y,z), Quaternion.Euler(new Vector3(270,90,0))), 15f);
+			Destroy(Instantiate(meleeEffect, new Vector3(x,y,z), Quaternion.identity), 0.35f);
 
 			target.GetComponent<UnitStatus>().TakeDamage (attacker.GetComponent<UnitStatus>().getDmg ());
 		}

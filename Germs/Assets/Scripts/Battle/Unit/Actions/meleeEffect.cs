@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class meleeEffect : MonoBehaviour {
-	public Animator anim;
+	private Animator anim;
 
 	// Use this for initialization
 	void Start () {
