@@ -28,32 +28,13 @@ public class BattleInitializer : MonoBehaviour {
 		GameObject[,] squares = matrix.GetComponent<Matrix> ().getSquares ();
 		friendlyGermsToSpawn = battleStatus.getSelectedUnits().ToArray();
 
-		int germsToSpawnCount = 0;
+		int friendlyGermsToSpawnCount =  countGerms(friendlyGermsToSpawn);
 
-		for (int i = 0; i < friendlyGermsToSpawn.Length; i++) {
-			if(!friendlyGermsToSpawn[i].Equals("empty")) {
-				germsToSpawnCount++;
-			}
-		}
-
-		if (germsToSpawnCount == 0) {
+		if (friendlyGermsToSpawnCount == 0) {
 			Debug.Log ("NO FRIENDLY BACTERIA SELECTED");
 		}
 
-		// centerializing germs:
-		int[] germPositions = new int[5]{0,2,4,6,8};
-		if (germsToSpawnCount == 1) {
-			germPositions[0] = 4;
-		}
-		if (germsToSpawnCount == 2) {
-			germPositions[0] = 2;
-			germPositions[1] = 6;
-		}
-		if (germsToSpawnCount == 3) {
-			germPositions[0] = 2;
-			germPositions[1] = 4;
-			germPositions[2] = 6;
-		}
+		int[] germPositions = getGermPotitions (friendlyGermsToSpawnCount);
 
 		int y;
 		for (int i = 0; i < friendlyGermsToSpawn.Length; i++) {
@@ -69,6 +50,8 @@ public class BattleInitializer : MonoBehaviour {
 				Debug.Log ("Empty slot");
 			}
 		}
+		int enemyGermsToSpawnCount =  countGerms(enemiesToSpawn.ToArray());
+		germPositions = getGermPotitions (enemyGermsToSpawnCount);
 
 		for (int i=0; i<enemiesToSpawn.Count; i++) {
 			y = germPositions[i]; // spawn position y of a germ
@@ -89,6 +72,36 @@ public class BattleInitializer : MonoBehaviour {
 
 
 
+	}
+
+	private int countGerms(string[] list) {
+		int count = 0;
+		
+		for (int i = 0; i < list.Length; i++) {
+			if(!list[i].Equals("empty")) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	// for centeralizing germs
+	private int[] getGermPotitions(int germsToSpawnCount) {
+
+		int[] germPositions = new int[5]{0,2,4,6,8};
+		if (germsToSpawnCount == 1) {
+			germPositions[0] = 4;
+		}
+		if (germsToSpawnCount == 2) {
+			germPositions[0] = 2;
+			germPositions[1] = 6;
+		}
+		if (germsToSpawnCount == 3) {
+			germPositions[0] = 2;
+			germPositions[1] = 4;
+			germPositions[2] = 6;
+		}
+		return germPositions;
 	}
 
 
