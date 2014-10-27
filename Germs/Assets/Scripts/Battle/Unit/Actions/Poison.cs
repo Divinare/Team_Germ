@@ -24,13 +24,23 @@ public class Poison : MonoBehaviour {
 		GameObject.FindGameObjectWithTag ("Drawer").GetComponent<BattleMenuBar> ().addToBattleLog (
 			initiator.GetComponent<UnitStatus>().getUnitName() + " uses poison!"
 		);
+		StartCoroutine (DelayedPoisonedEffect(initiator, target));
+
+
+	}
+
+	IEnumerator DelayedPoisonedEffect(GameObject initiator, GameObject target) {
+
 		Destroy(Instantiate(poisonInit, initiator.transform.position, initiator.transform.rotation), 2f); // instantiating the poison effect and destroying it after 2f time
+		yield return new WaitForSeconds (1);
 		getPoisonStats(initiator);
 		applyPoison(target);
+		yield return new WaitForSeconds (1);
 		initiator.GetComponent<UnitStatus>().setActionCooldown(3);
 		initiator.GetComponent<UnitStatus>().Deselect();
 		selector.SetTargetedUnitToNull();
 		selector.unlockInput (); // unlock input before ending turn
+		yield break;
 	}
 
 	void getPoisonStats(GameObject initiator) {
