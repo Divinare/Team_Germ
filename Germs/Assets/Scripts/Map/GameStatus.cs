@@ -36,7 +36,7 @@ public class GameStatus : MonoBehaviour {
 			Destroy (gameObject);
 		}
 
-		gold = 500;
+		gold = 0;
 		xp = 0;
 	}
 
