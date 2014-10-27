@@ -10,6 +10,7 @@ public class Poison : MonoBehaviour {
 	private Selector selector;
 
 	public GameObject poisonEffect;
+	public ParticleSystem poisonInit;
 
 	// Use this for initialization
 	void Start () {
@@ -18,12 +19,12 @@ public class Poison : MonoBehaviour {
 		selector = GameObject.FindGameObjectWithTag ("Selector").transform.GetComponent<Selector> ();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	public void poisonAttack(GameObject initiator, GameObject target) {
+		GameObject.FindGameObjectWithTag ("Drawer").GetComponent<BattleMenuBar> ().addToBattleLog (
+			initiator.GetComponent<UnitStatus>().getUnitName() + " uses poison!"
+		);
+		Destroy(Instantiate(poisonInit, initiator.transform.position, initiator.transform.rotation), 2f); // instantiating the poison effect and destroying it after 2f time
 		getPoisonStats(initiator);
 		applyPoison(target);
 		initiator.GetComponent<UnitStatus>().setActionCooldown(3);
