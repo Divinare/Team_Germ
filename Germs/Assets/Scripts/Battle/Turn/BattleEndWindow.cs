@@ -22,7 +22,7 @@ public class BattleEndWindow : MonoBehaviour {
 		if (battleIsOver) {
 
 			GUI.skin = battleOverWindowBackground;
-			GUI.Label( new Rect(0, 0, 100, 100), "Your bacteria: (to be implemented)");
+			// GUI.Label( new Rect(0, 0, 100, 100), "Your bacteria: (to be implemented)");
 
 			if (winner.Equals("player")) {
 				windowRect = GUI.Window(0, windowRect, DoMyWindow, victoryIcon);
