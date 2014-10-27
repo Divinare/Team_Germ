@@ -9,6 +9,7 @@ public class AI_TurnLogic : MonoBehaviour {
 	private SquareStatus currentSquareStatus;
 	private AI_TargetFinder targetFinder;
 	private int framesSinceInitialization;
+	private bool checkedIfGameIsOver;
 	// Use this for initialization
 	void Start () {
 		targetFinder = GameObject.FindGameObjectWithTag("AIController").GetComponent<AI_TargetFinder>();
@@ -30,6 +31,15 @@ public class AI_TurnLogic : MonoBehaviour {
 			framesSinceInitialization++;
 			return;
 		}
+		framesSinceInitialization = 0;
+		if (!checkedIfGameIsOver) {
+			GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().checkIfBattleOver ();
+			checkedIfGameIsOver = true;
+			GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector>().resetHostileTurn ();
+			return;
+		}
+		
+		checkedIfGameIsOver = false;
 		
 		currentUnit = unit;
 		thisStatus = currentUnit.GetComponent<UnitStatus> ();
