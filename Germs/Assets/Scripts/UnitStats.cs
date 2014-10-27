@@ -52,12 +52,12 @@ public class UnitStats : MonoBehaviour {
 		gameStatus = GameObject.Find("GameStatus").GetComponent<GameStatus>();
 
 		//test int[] {Health, Dmg, speed, level, melee, ranged, special}
-		baseUnitStats.Add ("Gatbac", new int[] {150, 10, 2, 1, 1, 1, 3});
-		baseUnitStats.Add ("Strepto", new int[] {100, 10, 6, 1, 1, 0, 3});
-		baseUnitStats.Add ("Haemophilus", new int[] {100, 10, 6, 1, 1, 0, 3});
-		baseUnitStats.Add ("Salmonella", new int[] {100, 10, 6, 1, 1, 0, 3});
-		baseUnitStats.Add ("Bacillus", new int[] {100, 10, 6, 1, 0, 1, 3});
-		baseUnitStats.Add ("Phage", new int[] {100, 10, 4, 1, 1, 0, 3});
+		baseUnitStats.Add ("Gatbac", new int[] {150, 20, 2, 1, 1, 1, 3});
+		baseUnitStats.Add ("Strepto", new int[] {70, 10, 6, 1, 1, 0, 3});
+		baseUnitStats.Add ("Haemophilus", new int[] {80, 15, 9, 1, 1, 0, 3});
+		baseUnitStats.Add ("Salmonella", new int[] {100, 13, 6, 1, 1, 0, 3});
+		baseUnitStats.Add ("Bacillus", new int[] {90, 15, 6, 1, 0, 1, 3});
+		baseUnitStats.Add ("Phage", new int[] {40, 14, 4, 1, 1, 0, 3});
 
 		//example unitSpecialAttack entry : [0]=SkillName, [1]=SkillType, [2] = total dmg, [3]=duration, [4]=skillDescription (for tooltip)}
 		unitSpecialAttacks.Add(2, new string[] {"Stunball", "rangedStun", "0", "2", "Bacteria launches a powerful ball that stuns the target."});
