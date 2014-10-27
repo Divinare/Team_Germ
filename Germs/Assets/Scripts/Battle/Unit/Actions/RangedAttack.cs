@@ -11,7 +11,7 @@ public class RangedAttack : MonoBehaviour {
 	
 
 	void Start () {
-		bulletSpeed = 8;
+		bulletSpeed = 10;
 		rotationSpeed = 520.0f; // degrees per second
 		bullet = null;
 	}
