@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class MeleeAttack : MonoBehaviour {
 	
 	public bool goingToAttack;
+	public GameObject meleeEffect;
 	private GameObject attacker;
 	private GameObject target;
 	private GameObject targetSquare; // not the square holding the melee target, but the one the Germ needs to stand on in order to be able to melee
@@ -22,6 +23,13 @@ public class MeleeAttack : MonoBehaviour {
 	public void finalizeAttack() {
 		goingToAttack = false;
 		if (target != null) {
+			//meleeEffect
+			float x = target.transform.position.x;
+			float y = target.transform.position.y;
+			float z = target.transform.position.z;
+			z = -3f;
+			Destroy(Instantiate(meleeEffect, new Vector3(x,y,z), Quaternion.Euler(new Vector3(270,90,0))), 15f);
+
 			target.GetComponent<UnitStatus>().TakeDamage (attacker.GetComponent<UnitStatus>().getDmg ());
 		}
 		targetSquare = null; 
