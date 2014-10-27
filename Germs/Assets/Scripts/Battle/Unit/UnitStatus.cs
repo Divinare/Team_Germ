@@ -152,11 +152,12 @@ public class UnitStatus : MonoBehaviour {
 
 	public void countDownPoison() {
 		poisonRounds -= 1;
-		TakeDamage(poisonDmg);
-		Debug.Log (unitName + " takes "+poisonDmg+" poison dmg");
 		if (poisonRounds == 0) {
 			removePoison();
 		}
+		Debug.Log (unitName + " takes "+poisonDmg+" poison dmg");
+		TakeDamage(poisonDmg);		
+		
 	}
 
 	public void Stunned(int rounds) {

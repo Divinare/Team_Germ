@@ -9,11 +9,7 @@ public class TurnStartHandler : MonoBehaviour {
 		GameObject.FindGameObjectWithTag ("Drawer").transform.GetComponent<Drawer> ().drawMovableSquares ();
 		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ().resetHoveredSquare (); // re-draws cursor and route for the unit that gets the new turn
 
-		//if unit is poisoned do dmg, count down poison
-		if (unit.GetComponent<UnitStatus>().IsUnitPoisoned()) {
-			unit.GetComponent<UnitStatus>().countDownPoison();
-		}
-		
+				
 		unit.GetComponent<UnitStatus>().countDownAbilityCooldown ();
 
 	

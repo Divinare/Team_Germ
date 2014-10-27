@@ -38,12 +38,19 @@ public class TurnHandler : MonoBehaviour {
 					
 					// Checks whether round has ended
 					if (unitListIndex == unitList.Count - 1) {
-						trimUnitList ();						
+						trimUnitList ();
+						foreach (GameObject unit in unitList) {
+							if (unit.GetComponent<UnitStatus>().IsUnitPoisoned()) {
+								unit.GetComponent<UnitStatus>().countDownPoison();
+							}
+						}
+						trimUnitList ();
 						initNewRound();
 					}
 					// Round hasn't ended
 					else {
 						unitListIndex++;
+						trimUnitList ();
 						// Checks wheter the next unit is still alive so it can be given the next turn
 						if (unitListIndex <= unitList.Count - 1 && unitList [unitListIndex] != null) {
 							activeUnit = unitList [unitListIndex];
