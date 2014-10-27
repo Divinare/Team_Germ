@@ -112,11 +112,15 @@ public class AI_TurnLogic : MonoBehaviour {
 	}
 	
 	bool attemptPoison() {
-		List<GameObject> allEnemies = targetFinder.findAllEnemies();
-		if (allEnemies.Count == 0) {
+		List<GameObject> targets = targetFinder.findAllEnemies();
+		if (targets.Count == 0) {
 			return false;
 		}
-		GameObject target = targetFinder.findHighestDamageTarget (allEnemies);
+		targets = targetFinder.removeDebuffedFromList("poison", targets);
+		if (targets.Count == 0) {
+			return false;
+		}
+		GameObject target = targetFinder.findHighestDamageTarget (targets);
 		GameObject.FindGameObjectWithTag("ActionHandler").GetComponent<ActionHandler>().performAction (currentUnit, target, "poison");
 		return true;
 	}
