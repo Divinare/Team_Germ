@@ -11,12 +11,6 @@ public class PotionHandler : MonoBehaviour {
 	void Start () {
 		itemStats = ItemStats.itemStats;
 		battleMenuBar = GameObject.FindGameObjectWithTag ("Drawer").GetComponent<BattleMenuBar> ();
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 
 	public void usePotion(GameObject friendlyTarget, string potionName, GameObject initiator) {
@@ -38,7 +32,8 @@ public class PotionHandler : MonoBehaviour {
 			friendlyTarget.GetComponent<UnitStatus>().GiveDamage(effect);
 		}
 
-		AudioSource.PlayClipAtPoint(potionSound, transform.position);
+		print ("potiooooooon");
+		AudioSource.PlayClipAtPoint(potionSound, friendlyTarget.transform.position);
 		//bool hasRanged = initiator.GetComponent<UnitStatus> ().GetUnitActions () ["ranged"];
 		//Selector selector = GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ();
 
