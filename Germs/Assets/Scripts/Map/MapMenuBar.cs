@@ -83,30 +83,16 @@ public class MapMenuBar : MonoBehaviour {
 	
 	private void createBacteriaBar() {
 		//frame for chosen bacteria
+		float width = 0;
+		for (int i = 0; i < selectedUnits.Count; i++) {
+			if (GUI.Button (new Rect (middleBar.x+width,middleBar.y,menuButtonSize.x,menuButtonSize.y), allUnitImages[selectedUnits[i]])) {
+				clickedIndex = i;
+				drawChooserBar();
+			}
+			width += menuButtonSize.x;
+		}
 
-		if (GUI.Button (new Rect (middleBar.x,middleBar.y,menuButtonSize.x,menuButtonSize.y), allUnitImages[selectedUnits[0]])) {
-			clickedIndex = 0;
-			drawChooserBar();
-		}
-		if (GUI.Button (new Rect (middleBar.x+menuButtonSize.x,middleBar.y,menuButtonSize.x,menuButtonSize.y), allUnitImages[selectedUnits[1]])) {
-			clickedIndex = 1;
-			drawChooserBar();
-		}
-		if (GUI.Button (new Rect (middleBar.x+2*menuButtonSize.x,middleBar.y,menuButtonSize.x,menuButtonSize.y), allUnitImages[selectedUnits[2]])) {
-			clickedIndex = 2;
-			drawChooserBar();
-		}
-		if (GUI.Button (new Rect (middleBar.x+3*menuButtonSize.x,middleBar.y,menuButtonSize.x,menuButtonSize.y), allUnitImages[selectedUnits[3]])) {
-			clickedIndex = 3;
-			drawChooserBar();
-		}
-		if (GUI.Button (new Rect (middleBar.x+4*menuButtonSize.x,middleBar.y,menuButtonSize.x,menuButtonSize.y), allUnitImages[selectedUnits[4]])) {
-			clickedIndex = 4;
-			drawChooserBar();
-		}
-		
 		if (bacChooser) {
-
 			float pos = 0;
 			foreach (string bac in allUnitImages.Keys) {
 				if (playerUnitStats.ContainsKey(bac) && !selectedUnits.Contains(bac) && bac != "empty") {
