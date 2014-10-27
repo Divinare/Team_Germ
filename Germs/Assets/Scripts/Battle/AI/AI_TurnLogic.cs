@@ -32,6 +32,8 @@ public class AI_TurnLogic : MonoBehaviour {
 			return;
 		}
 		framesSinceInitialization = 0;
+		
+		// This prevents the AI from continuing in case the game has ended
 		if (!checkedIfGameIsOver) {
 			GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().checkIfBattleOver ();
 			checkedIfGameIsOver = true;

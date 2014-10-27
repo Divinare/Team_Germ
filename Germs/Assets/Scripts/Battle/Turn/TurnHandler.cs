@@ -37,18 +37,14 @@ public class TurnHandler : MonoBehaviour {
 					
 					// Checks whether round has ended
 					if (unitListIndex == unitList.Count - 1) {
-						Debug.Log ("Reached end of unitlist, doing checks");
 						trimUnitList ();
-						Debug.Log ("First trim done");
 						foreach (GameObject unit in unitList) {
 							if (unit.GetComponent<UnitStatus>().IsUnitPoisoned()) {
 								unit.GetComponent<UnitStatus>().countDownPoison();
 							}
 						}
 						trimUnitList ();
-						Debug.Log ("Second trim done");
 						checkIfBattleOver ();
-						Debug.Log ("Battle status checked, is battle over: " + battleIsOver);
 						if (!battleIsOver) {
 							initNewRound();
 						}
