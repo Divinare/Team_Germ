@@ -9,42 +9,23 @@ public class Drawer : MonoBehaviour {
 	public Transform movingIndicationIcon;
 	public Transform selectedSquareIcon;
 
-	public Texture furBg;
-	public Texture fur2Bg;
-	public Texture petridishBlueBg;
+	// backgrounds
+	public Transform petridishBlueBg;
 
 	public GUIStyle petridishBlue;
 
 	private Dictionary<string, Texture> backgrounds = new Dictionary<string, Texture>();
-	// Use this for initialization
+
 	void Start () {
-		backgrounds.Add ("furBg", furBg);
-		backgrounds.Add ("fur2Bg", fur2Bg);
-		backgrounds.Add ("petridishBlueBg", petridishBlueBg);
+
+		Vector2 middle = new Vector2 (7.5f, 4.5f);
+		Instantiate (petridishBlueBg, new Vector3(middle.x,middle.y,0 -0.5f), Quaternion.identity);
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 
 	}
-
-	void OnGUI() {
-		drawBackground ();
-	}
-
-	private void drawBackground() {
-		GUI.depth = 15;
-		//GUI.Box (new Rect (0, 0, Screen.height*1.5f, Screen.height*1.5f), "", petridishBlue);
-
-
-	//	drawTexture (0,0, Screen.width, Screen.height, petridishBlueBg);
-	}
-
-	//private void drawTexture(float x, float y, float width, float height, Texture texture) {
-
-	//	GUI.DrawTexture (new Rect (x, y, width, height), texture, ScaleMode.ScaleToFit, true, width/height);
-	//}
-
+	
 	public void handleDrawingForSquare(GameObject targetSquare) {
 		
 		
