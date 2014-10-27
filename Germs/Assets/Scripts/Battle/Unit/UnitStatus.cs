@@ -126,7 +126,7 @@ public class UnitStatus : MonoBehaviour {
 
 	public void TakeDamage(int damage) {
 		currentHealth -= damage;
-		battlelog (this.getUnitName + " took " + damage + " damage!");
+		battlelog (this.getUnitName() + " took " + damage + " damage!");
 		if (currentHealth <= 0) {
 			animator.SetTrigger ("dead");
 			GameObject deathSound = Instantiate (DeathSound, this.transform.position, this.transform.rotation) as GameObject;
