@@ -51,10 +51,18 @@ public class MainMenu : MonoBehaviour {
 		// Create menu
 		if (gameGoing) {
 			if (GUI.Button (new Rect (menuPosition.x, menuPosition.y, buttonSize.x, buttonSize.y), "Resume Game")) {
+				if(AudioController.audioController != null) {
+					AudioController.audioController.stopMenuMusic();
+					AudioController.audioController.playMapMusic();
+				}
 				Application.LoadLevel ("Map");
 			}
 		}
 		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * (0+addOn), buttonSize.x, buttonSize.y), "New Game")) {
+			if(AudioController.audioController != null) {
+				AudioController.audioController.stopMenuMusic();
+				AudioController.audioController.playMapMusic();
+			}
 			Application.LoadLevel ("Map");
 		}
 		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * (1+addOn), buttonSize.x, buttonSize.y), "Load Game")) {

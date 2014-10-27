@@ -51,6 +51,12 @@ public class AudioController : MonoBehaviour {
 	public void stopMapMusic() {
 		music [1].Stop ();
 	}
+	public void playMenuMusic() {
+		music[2].Play ();
+	}
+	public void stopMenuMusic() {
+		music [2].Stop ();
+	}
 
 	public void playClickSound() {
 		sounds[0].Play ();

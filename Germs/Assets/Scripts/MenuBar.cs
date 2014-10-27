@@ -89,6 +89,9 @@ public class MenuBar : MonoBehaviour {
 	public void createMainMenuButton() {
 		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y, menuButtonSize.x, menuButtonSize.y), "Main\nMenu")) {
 			audioController.playClickSound();
+			audioController.stopMapMusic();
+			audioController.stopBattleMusic();
+			audioController.playMenuMusic();
 			Application.LoadLevel ("MainMenu");
 		}
 	}
