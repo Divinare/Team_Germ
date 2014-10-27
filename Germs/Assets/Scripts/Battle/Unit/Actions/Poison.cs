@@ -27,8 +27,6 @@ public class Poison : MonoBehaviour {
 			initiator.GetComponent<UnitStatus>().getUnitName() + " uses poison!"
 		);
 		StartCoroutine (DelayedPoisonedEffect(initiator, target));
-
-
 	}
 
 	IEnumerator DelayedPoisonedEffect(GameObject initiator, GameObject target) {

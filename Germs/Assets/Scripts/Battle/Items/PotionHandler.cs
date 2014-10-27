@@ -5,6 +5,7 @@ public class PotionHandler : MonoBehaviour {
 
 	private ItemStats itemStats;
 	private BattleMenuBar battleMenuBar;
+	public AudioClip potionSound;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +20,7 @@ public class PotionHandler : MonoBehaviour {
 	}
 
 	public void usePotion(GameObject friendlyTarget, string potionName, GameObject initiator) {
+
 		int selectedItemIndex = battleMenuBar.getSelectedItemIndex ();
 		int effect = itemStats.useItem (potionName, selectedItemIndex);
 		Debug.Log (effect);
@@ -28,14 +30,15 @@ public class PotionHandler : MonoBehaviour {
 		if (potionName.Equals ("healingPotion")) {
 			friendlyTarget.GetComponent<UnitStatus>().Heal(effect);
 		}
-		if (potionName.Equals ("speedPotion")) {
+		else if (potionName.Equals ("speedPotion")) {
 			friendlyTarget.GetComponent<UnitStatus>().GiveSpeed(effect);
 			GameObject.FindGameObjectWithTag ("Drawer").GetComponent<Drawer>().drawMovableSquares();
 		}
-		if (potionName.Equals ("ragePotion")) {
+		else if (potionName.Equals ("ragePotion")) {
 			friendlyTarget.GetComponent<UnitStatus>().GiveDamage(effect);
 		}
 
+		AudioSource.PlayClipAtPoint(potionSound, transform.position);
 		//bool hasRanged = initiator.GetComponent<UnitStatus> ().GetUnitActions () ["ranged"];
 		//Selector selector = GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ();
 
