@@ -101,7 +101,12 @@ public class BattleMenuBar : MonoBehaviour {
 		GameObject currentUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().getActiveUnit ();
 		for(int i = 0; i < items; i++) {
 			string itemName = inventoryContent[i,0];
-			if (GUI.Button (new Rect (battlelogSize.x + itemMenuButtonSize.x * index, menuBarPosition.y + menuBarDescriptionHeight, itemMenuButtonSize.x, itemMenuButtonSize.y), itemStats.getItemIcon(itemName))) {
+			string potionIcon = itemName;
+			if (itemName.Equals (currentUnit.GetComponent<UnitStatus>().selectedAction)) {
+				potionIcon = potionIcon + "Selected";
+				Debug.Log ("Potion icon name is now " + potionIcon);
+			}
+			if (GUI.Button (new Rect (battlelogSize.x + itemMenuButtonSize.x * index, menuBarPosition.y + menuBarDescriptionHeight, itemMenuButtonSize.x, itemMenuButtonSize.y), itemStats.getItemIcon(potionIcon))) {
 				if(!itemName.Equals("empty")) {
 					string itemType = itemStats.getItemType(itemName);
 					if(itemType.Equals("Potion")) {

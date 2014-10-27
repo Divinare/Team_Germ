@@ -1,8 +1,7 @@
 fileFormatVersion: 2
 guid: ffb2be170880a8745b35f9f1644460cc
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: speedPotion
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
