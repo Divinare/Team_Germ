@@ -86,9 +86,9 @@ public class UnitStats : MonoBehaviour {
 		unitUnlock.Add ("Strepto", new int[] {0,0});
 		unitUnlock.Add ("Salmonella", new int[] {0,0});
 		unitUnlock.Add ("Gatbac", new int[] {1,100});
-		unitUnlock.Add ("Haemophilus", new int[] {2,150});
-		unitUnlock.Add ("Bacillus", new int[] {3,200});
-		unitUnlock.Add ("Phage", new int[] {4,250});
+		unitUnlock.Add ("Haemophilus", new int[] {4,150});
+		unitUnlock.Add ("Bacillus", new int[] {6,200});
+		unitUnlock.Add ("Phage", new int[] {8,250});
 
 		//initial bacteria?
 		setPlayerUnit("Salmonella");
