@@ -103,10 +103,11 @@ public class UnitStats : MonoBehaviour {
 
 		//this is the factor with which all the enemy stats are multiplied, needs to be balanced.
 		baseStatIncreaseFactor = levelsCompleted;
+		// currently multiplies hp, dmg with levels completed and adds levels completed to speed (so 1 increase per level completed)
 
 		enemyWithStats.Clear();
 		unravelStatArray = baseUnitStats[enemyName];
-		enemyStatArray = new int[] {unravelStatArray[0]*baseStatIncreaseFactor,unravelStatArray[1]*baseStatIncreaseFactor, unravelStatArray[2]*baseStatIncreaseFactor, unravelStatArray[3], unravelStatArray[4], unravelStatArray[5], unravelStatArray[6]};
+		enemyStatArray = new int[] {unravelStatArray[0]*baseStatIncreaseFactor,unravelStatArray[1]*baseStatIncreaseFactor, unravelStatArray[2]+baseStatIncreaseFactor, unravelStatArray[3], unravelStatArray[4], unravelStatArray[5], unravelStatArray[6]};
 
 		return enemyStatArray;
 	}
