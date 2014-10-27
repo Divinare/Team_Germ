@@ -135,16 +135,8 @@ public class AI_TargetFinder : MonoBehaviour {
 	}
 	
 	public List<GameObject> findValidStunTargets() { // finds all opposing targets that are not in melee range and are not stunned
-		List<GameObject> validTargets = findValidRangedTargets();
-		List<GameObject> alreadyStunned = new List<GameObject>();
-		for (int i = 0; i < validTargets.Count; i++) {
-			if (validTargets[i].GetComponent<UnitStatus>().IsUnitStunned ()) {
-				alreadyStunned.Add (validTargets[i]);
-			}
-		}
-		foreach (GameObject o in alreadyStunned) {
-			validTargets.Remove (o);
-		}
+		List<GameObject> validTargets = findAllEnemies();
+		validTargets = removeDebuffedFromList("stun", validTargets);
 		return validTargets;
 	}
 	
