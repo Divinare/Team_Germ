@@ -28,7 +28,7 @@ public class MovableSquaresFinder : MonoBehaviour {
 		this.squares = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<Matrix> ().getSquares ();
 
 		// speed of the current active unit
-		int maxSpeed = turnHandler.getActiveUnit ().GetComponent<UnitStatus> ().speed;
+		int maxSpeed = turnHandler.getActiveUnit ().GetComponent<UnitStatus> ().getSpeed();
 
 		GameObject first = turnHandler.getActiveUnit ().GetComponent<UnitStatus> ().getSquare ();
 

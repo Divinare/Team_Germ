@@ -48,7 +48,7 @@ public class RouteFinder : MonoBehaviour {
 		this.squares = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<Matrix> ().getSquares ();
 
 		// speed of the current active unit
-		int maxSpeed = turnHandler.getActiveUnit ().GetComponent<UnitStatus> ().speed;
+		int maxSpeed = turnHandler.getActiveUnit ().GetComponent<UnitStatus> ().getSpeed();
 
 		// Checks if routefinding is being done for a melee attack, in this case increases speed by 1 since the attacker doesn't need to move to the last square on the route, just the second last one
 		if (findingRouteForMelee) {

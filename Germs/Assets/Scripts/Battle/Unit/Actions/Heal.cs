@@ -18,7 +18,7 @@ public class Heal : MonoBehaviour {
 	public void healTarget(GameObject healer, GameObject target) {
 		if (target.GetComponent<UnitStatus>().IsEnemy() == healer.GetComponent<UnitStatus>().IsEnemy()) {
 			healer.GetComponent<UnitStatus>().setActionCooldown(2);
-			target.GetComponent<UnitStatus>().Heal (healer.GetComponent<UnitStatus>().heal);
+			target.GetComponent<UnitStatus>().Heal ((int) (healer.GetComponent<UnitStatus>().getDmg () * 1.5));
 			float x = target.transform.position.x;
 			float y = target.transform.position.y;
 			float z = target.transform.position.z;

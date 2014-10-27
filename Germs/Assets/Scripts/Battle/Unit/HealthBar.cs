@@ -15,8 +15,8 @@ public class HealthBar : MonoBehaviour {
 
 	void Start () {
 		unit = gameObject;
-		maxHealth = unit.transform.GetComponent<UnitStatus> ().maxHealth;
-		curHealth = unit.transform.GetComponent<UnitStatus> ().currentHealth;
+		maxHealth = unit.transform.GetComponent<UnitStatus> ().getMaxHp ();
+		curHealth = unit.transform.GetComponent<UnitStatus> ().getHp ();
 		enemy = unit.transform.GetComponent<UnitStatus> ().IsEnemy();
 
 		barLength = Screen.width / 22; // This variable makes it easy to adjust the Healthbar's size
@@ -29,7 +29,7 @@ public class HealthBar : MonoBehaviour {
 
 	void Update () {
 
-		curHealth = unit.transform.GetComponent<UnitStatus>().currentHealth;
+		curHealth = unit.transform.GetComponent<UnitStatus>().getHp ();
 		AdjustcurHealth(curHealth) ; 	
 	}
 

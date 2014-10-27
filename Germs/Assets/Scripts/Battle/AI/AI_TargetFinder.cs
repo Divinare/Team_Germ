@@ -148,9 +148,9 @@ public class AI_TargetFinder : MonoBehaviour {
 	
 	public GameObject findLowestHealthTarget(List<GameObject> targets) { 
 		GameObject selectedTarget = targets [0];
-		int lowestHealth = selectedTarget.GetComponent<UnitStatus> ().currentHealth;
+		int lowestHealth = selectedTarget.GetComponent<UnitStatus> ().getHp ();
 		foreach (GameObject target in targets) {
-			if (target.GetComponent<UnitStatus>().currentHealth < lowestHealth) {
+			if (target.GetComponent<UnitStatus>().getHp () < lowestHealth) {
 				selectedTarget = target;
 			}
 		}
@@ -161,9 +161,9 @@ public class AI_TargetFinder : MonoBehaviour {
 	
 	public GameObject findHighestDamageTarget(List<GameObject> targets) { 
 		GameObject selectedTarget = targets [0];
-		int highestDamage = selectedTarget.GetComponent<UnitStatus> ().damage;
+		int highestDamage = selectedTarget.GetComponent<UnitStatus> ().getDmg ();
 		foreach (GameObject target in targets) {
-			if (target.GetComponent<UnitStatus>().currentHealth > highestDamage) {
+			if (target.GetComponent<UnitStatus>().getHp () > highestDamage) {
 				selectedTarget = target;
 			}
 		}

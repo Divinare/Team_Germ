@@ -6,11 +6,10 @@ public class UnitStatus : MonoBehaviour {
 	private UnitStats unitStats;
 	public Dictionary <string, int[]> allBacteriaStats = new Dictionary<string, int[]>();
 
-	public int currentHealth; // current HP
-	public int damage; // how much damage this unit does
-	public int speed; // how far this unit can move
-	public int maxHealth; // max HP
-	public int heal; // how many HP this unit heals
+	private int currentHealth; // current HP
+	private int damage; // how much damage this unit does
+	private int speed; // how far this unit can move
+	private int maxHealth; // max HP
 
 // This is the attack that we have selected from the attack toolbar
 	public int actionCooldown;
@@ -240,18 +239,34 @@ public class UnitStatus : MonoBehaviour {
 	private void battlelog(string txt) {
 		GameObject.FindGameObjectWithTag ("Drawer").GetComponent<BattleMenuBar> ().addToBattleLog (txt);
 	}
+	
+	public int getMaxHp() {
+		return this.maxHealth;
+	}
 
 	public void setHp(int hp) {
 		currentHealth = hp;
 		maxHealth = hp;
 	}
+	
+	public int getHp() {
+		return this.currentHealth;
+	}
 
 	public void setDmg(int dmg) {
 		damage = dmg;
 	}
+	
+	public int getDmg() {
+		return this.damage;
+	}
 
 	public void setSpeed(int spd) {
 		speed = spd;
+	}
+	
+	public int getSpeed() {
+		return this.speed;
 	}
 
 	public string getUnitName() {

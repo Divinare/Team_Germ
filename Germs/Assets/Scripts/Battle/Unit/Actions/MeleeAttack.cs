@@ -22,7 +22,7 @@ public class MeleeAttack : MonoBehaviour {
 	public void finalizeAttack() {
 		goingToAttack = false;
 		if (target != null) {
-			target.GetComponent<UnitStatus>().TakeDamage (attacker.GetComponent<UnitStatus>().damage);
+			target.GetComponent<UnitStatus>().TakeDamage (attacker.GetComponent<UnitStatus>().getDmg ());
 		}
 		targetSquare = null; 
 		attacker.GetComponent<UnitStatus>().Deselect();
