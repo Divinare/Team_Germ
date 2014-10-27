@@ -6,9 +6,8 @@ public class Node : MonoBehaviour {
 	public bool active = false;
 	public bool completed = false;
 
-	//currency values
-	public float gold;
-	public float xp;
+	public int id;
+
 	public bool skillReward;
 	
 	//level info
@@ -49,14 +48,6 @@ public class Node : MonoBehaviour {
 		completed = true;
 	}
 
-	public float getGold() {
-		return gold;
-	}
-
-	public float getXp() {
-		return xp;
-	}
-
 	public bool getSkill() {
 		//does this map reward a skill?
 		return skillReward;
@@ -80,6 +71,10 @@ public class Node : MonoBehaviour {
 
 	public string getNodeName() {
 		return nodeName;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	void OnMouseEnter() {

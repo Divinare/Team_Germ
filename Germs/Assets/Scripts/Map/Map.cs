@@ -55,7 +55,8 @@ public class Map : MonoBehaviour {
 			if (gameStatus.onReturnToMap()) {
 				setNodeActive(transform.FindChild(storedNode));
 				setNodeCompleted(transform.FindChild(storedNode));
-				setGold(transform.FindChild(storedNode));
+				gameStatus.addGoldFromNode(transform.FindChild(storedNode).GetComponent<Node>().getId());
+				gameStatus.addXpFromNode(transform.FindChild(storedNode).GetComponent<Node>().getId());
 				gameStatus.clearNode();
 				storeGameStatus();
 			}
@@ -119,10 +120,6 @@ public class Map : MonoBehaviour {
 		gameStatus.storeGameStatus(allNodes);
 	}
 
-	public void setGold(Transform node) {
-		gameStatus.setGold(node);
-	}
-
 	public void retrieveGameStatus() {
 		mapStateBools = gameStatus.retrieveMapStateBools();
 		for (int i = 0; i < mapStateBools.Count; i++) {
@@ -140,8 +137,8 @@ public class Map : MonoBehaviour {
 	public void drawBattleWindow() {
 		lvlName = storedHit.transform.GetComponent<Node>().getLevelName();
 		lvlInfo = storedHit.transform.GetComponent<Node>().getLevelInfo();
-		gold = storedHit.transform.GetComponent<Node>().getGold();
-		xp = storedHit.transform.GetComponent<Node>().getXp();
+		gold = gameStatus.getGoldReward (storedHit.transform.GetComponent<Node> ().getId());
+		xp = gameStatus.getXpReward (storedHit.transform.GetComponent<Node> ().getId());
 		skill = storedHit.transform.GetComponent<Node>().getSkill();
 		gameStatus.storeNode(storedHit.collider.transform);
 

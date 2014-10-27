@@ -9,6 +9,12 @@ public class GameStatus : MonoBehaviour {
 	public int gold;
 	public int xp;
 
+	private int firstLvlGoldReward = 250;
+	private int goldAddOn = 50;
+
+	private int firstLvlXpReward = 250;
+	private int xpAddOn = 50; // for example 250, 300, 350, 400.. when firstLvlReward is 250 and lvlRewardAddOn is 50
+
 	//storage for if a node is completed (true/false
 	public List<bool> mapStateBools = new List<bool>();
 
@@ -30,8 +36,8 @@ public class GameStatus : MonoBehaviour {
 			Destroy (gameObject);
 		}
 
-		gold = 500; // for testing
-		xp = 500;
+		gold = 0;
+		xp = 0;
 	}
 
 	//stores map status
@@ -48,10 +54,19 @@ public class GameStatus : MonoBehaviour {
 	}
 
 	//store gold
-	public void setGold(Transform node) {
-		gold += (int)node.gameObject.GetComponent<Node>().getGold();
-		xp += (int)node.gameObject.GetComponent<Node>().getXp();
+	public void addGoldFromNode(int nodeId) {
+		addGold(getGoldReward(nodeId));
 	}
+	public void addXpFromNode(int nodeId) {
+		addXp(getXpReward(nodeId));
+	}
+
+	public int getXpReward(int nodeId) {
+		return firstLvlXpReward + nodeId * xpAddOn;
+	}
+	public int getGoldReward(int nodeId) {
+		return firstLvlGoldReward + nodeId * goldAddOn;
+	}       
 
 	public int getGold() {
 		return gold;
