@@ -24,6 +24,7 @@ public class Shop_GUI : MonoBehaviour {
 	public GUIStyle buttonBg;
 	public GUIStyle buttonDeactivatedBg;
 	public GUIStyle topicText;
+	public GUIStyle itemDescriptionText;
 	public GUIStyle itemStatusText;
 
 	public Texture shopBox;
@@ -162,33 +163,36 @@ public class Shop_GUI : MonoBehaviour {
 	}
 
 	private void createTextItemInfo(Vector2 itemInfoTextSize) {
-		//GUI.Box (new Rect(0, 0,  itemInfoTextSize.x,  itemInfoTextSize.y), "");
-
-		// Name
-		string description = "";
+		// Name and level
+		string topic = "";
 		if (itemOwned) {
 
-			description = itemStats.getItemName(selectedItem) + "\n" + "level " + itemStats.getItemLevel(selectedItem, selectedInventoryIndex);
+			topic = itemStats.getItemName(selectedItem) + "\n" + "level " + itemStats.getItemLevel(selectedItem, selectedInventoryIndex);
 		} else {
-			description = itemStats.getItemName(selectedItem) + "\n" + "level " + itemStats.getItemLevel (selectedItem, -1);
+			topic = itemStats.getItemName(selectedItem) + "\n" + "level " + itemStats.getItemLevel (selectedItem, -1);
 		}
 
-		GUI.Label (new Rect (0, 0, itemInfoTextSize.x, itemInfoTextSize.y * 0.2f), description, topicText);
+		GUI.Label (new Rect (0, 0, itemInfoTextSize.x, itemInfoTextSize.y * 0.3f), topic, topicText);
+
+		// Item description
+
+		GUI.Label (new Rect (0, itemInfoTextSize.y * 0.4f, itemInfoTextSize.x, itemInfoTextSize.y * 0.3f), itemStats.getItemDescription(selectedItem), itemDescriptionText);
+
 		// Item status
 	
 		if (!itemOwned) {
 				int level = itemStats.getItemLevel (selectedItem, -1);
 				int effect = itemStats.getItemEffect (selectedItem, -1);
 				string itemStatus = "Level " + level + " stats" + "\n" + "Effect: " + effect;
-				GUI.Label (new Rect (0, itemInfoTextSize.y * 0.5f, itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.2f), itemStatus, itemStatusText);
+				GUI.Label (new Rect (0, itemInfoTextSize.y * 0.7f, itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.2f), itemStatus, itemStatusText);
 
 				string nextLvlItemStatus = "Next Level " + (level + 1) + "\n" + "Effect: " + (effect + effect * itemStats.getLvlUpEffectFactor ());
-				GUI.Label (new Rect (itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.5f, itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.2f), nextLvlItemStatus, itemStatusText);
+				GUI.Label (new Rect (itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.7f, itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.2f), nextLvlItemStatus, itemStatusText);
 		} else {
 				int level = itemStats.getItemLevel (selectedItem, selectedInventoryIndex);
 				int effect = itemStats.getItemEffect (selectedItem, selectedInventoryIndex);
 				string itemStatus = "Level " + level + " stats" + "\n" + "Effect: " + effect;
-				GUI.Label (new Rect (0, itemInfoTextSize.y * 0.5f, itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.2f), itemStatus, itemStatusText);
+				GUI.Label (new Rect (0, itemInfoTextSize.y * 0.7f, itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.2f), itemStatus, itemStatusText);
 		}
 
 	}

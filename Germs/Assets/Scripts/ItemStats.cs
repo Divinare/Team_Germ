@@ -41,9 +41,9 @@ public class ItemStats : MonoBehaviour {
 		currentItemStats.Add("ragePotion", new int[] {50, 1, 25, 10});
 		currentItemStats.Add("speedPotion", new int[] {50, 1, 25, 5});
 
-		itemDescriptions.Add ("healingPotion", new string[] {"Healing Potion", "Potion", "heals a bacteria"});
-		itemDescriptions.Add ("ragePotion", new string[] {"Rage Potion", "Potion", "Increases damage, causes a bacteria to rage"});
-		itemDescriptions.Add ("speedPotion", new string[] {"Speed Potion", "Potion", "Makes a bacteria move faster"});
+		itemDescriptions.Add ("healingPotion", new string[] {"Healing Potion", "Potion", "Heals a bacterium"});
+		itemDescriptions.Add ("ragePotion", new string[] {"Rage Potion", "Potion", "Increases damage, causes a bacterium to rage"});
+		itemDescriptions.Add ("speedPotion", new string[] {"Speed Potion", "Potion", "Makes a bacterium to move faster"});
 
 		itemIcons.Add ("empty", empty);
 		itemIcons.Add ("healingPotion", healingPotion);

@@ -72,7 +72,7 @@ public class MapMenuBar : MonoBehaviour {
 	}
 	
 
-	public void createMapMenu() {
+	private void createMapMenu() {
 		MenuBar.menuBar.createTrainerButton(1);
 		MenuBar.menuBar.createShopButton (2);
 		
