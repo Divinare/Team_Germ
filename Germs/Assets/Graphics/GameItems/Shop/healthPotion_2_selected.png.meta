@@ -1,8 +1,7 @@
 fileFormatVersion: 2
-guid: 553c4cd02b0c9a24a98a639c78965ba7
+guid: f02a513e919023645b2e578ac097bbf6
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: healthPotion
+  fileIDToRecycleName: {}
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -26,9 +25,9 @@ TextureImporter:
   maxTextureSize: 1024
   textureSettings:
     filterMode: -1
-    aniso: 1
+    aniso: -1
     mipBias: -1
-    wrapMode: 1
+    wrapMode: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50

@@ -20,6 +20,9 @@ public class ItemStats : MonoBehaviour {
 	public Texture2D healingPotion;
 	public Texture2D ragePotion;
 	public Texture2D speedPotion;
+	public Texture2D selectedSpeedPotion;
+	public Texture2D selectedRagePotion;
+	public Texture2D selectedHealingPotion;
 
 	private float lvlUpCostFactor = 0.15f;
 	private float lvlUpEffectFactor = 0.25f;
@@ -49,6 +52,9 @@ public class ItemStats : MonoBehaviour {
 		itemIcons.Add ("healingPotion", healingPotion);
 		itemIcons.Add ("ragePotion", ragePotion);
 		itemIcons.Add ("speedPotion", speedPotion);
+		itemIcons.Add ("speedPotionSelected", selectedSpeedPotion);
+		itemIcons.Add ("healingPotionSelected", selectedHealingPotion);
+		itemIcons.Add ("ragePotionSelected", selectedRagePotion);
 	}
 	
 

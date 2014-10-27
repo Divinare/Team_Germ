@@ -38,6 +38,22 @@ public class AI_TargetFinder : MonoBehaviour {
 		return debuffedFriendlies;
 	}
 	
+	public List<GameObject> removeDebuffedFromList(string debuff, List<GameObject> targets) {
+		List<GameObject> toDelete = new List<GameObject>();
+		foreach (GameObject o in targets) {
+			if (o.GetComponent<UnitStatus>().IsUnitPoisoned () && debuff.Equals ("poison")) {
+				toDelete.Add (o);
+			}
+			else if (o.GetComponent<UnitStatus>().IsUnitStunned () && debuff.Equals ("stun")) {
+				toDelete.Add (o);
+			}
+		}
+		foreach (GameObject o in toDelete) {
+			targets.Remove (o);
+		}
+		return targets;
+	}
+	
 	public List<GameObject> findAllEnemies() {
 		GameObject[] allBacs = GameObject.FindGameObjectsWithTag ("Unit");
 		List<GameObject> enemies = new List<GameObject> ();
@@ -145,6 +161,8 @@ public class AI_TargetFinder : MonoBehaviour {
 		}
 		return selectedTarget;
 	}
+	
+
 	
 	public GameObject findLowestHealthTarget(List<GameObject> targets) { 
 		GameObject selectedTarget = targets [0];

@@ -2,8 +2,7 @@ fileFormatVersion: 2
 guid: 455fc572275dc7546b483d0c60fd4fb2
 TextureImporter:
   fileIDToRecycleName:
-    21300000: purplePotion
-    21300002: ragePotion
+    21300000: ragePotion
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
