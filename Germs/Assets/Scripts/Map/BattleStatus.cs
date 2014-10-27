@@ -67,6 +67,12 @@ public class BattleStatus : MonoBehaviour {
 	}
 	
 	public List<string> getSelectedUnits() {
+		List<string> noEmptySelectedUnits = new List<string>();
+		for (int i = 0; i < selectedUnits.Count; i++) {
+			if(!selectedUnits[i].Equals("empty")) {
+				noEmptySelectedUnits.Add(selectedUnits[i]);
+			}
+		}
 		return selectedUnits;
 	}
 
