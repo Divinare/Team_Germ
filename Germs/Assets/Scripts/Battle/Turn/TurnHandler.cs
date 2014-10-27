@@ -50,7 +50,6 @@ public class TurnHandler : MonoBehaviour {
 					// Round hasn't ended
 					else {
 						unitListIndex++;
-						trimUnitList ();
 						// Checks wheter the next unit is still alive so it can be given the next turn
 						if (unitListIndex <= unitList.Count - 1 && unitList [unitListIndex] != null) {
 							activeUnit = unitList [unitListIndex];
