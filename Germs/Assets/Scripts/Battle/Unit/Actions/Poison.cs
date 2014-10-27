@@ -11,6 +11,7 @@ public class Poison : MonoBehaviour {
 
 	public GameObject poisonEffect;
 	public ParticleSystem poisonInit;
+	public AudioClip poisoningSound;
 
 	// Use this for initialization
 	void Start () {
@@ -31,8 +32,9 @@ public class Poison : MonoBehaviour {
 
 	IEnumerator DelayedPoisonedEffect(GameObject initiator, GameObject target) {
 
+		AudioSource.PlayClipAtPoint(poisoningSound, transform.position);
 		Destroy(Instantiate(poisonInit, initiator.transform.position, initiator.transform.rotation), 2f); // instantiating the poison effect and destroying it after 2f time
-		yield return new WaitForSeconds (1);
+		yield return new WaitForSeconds (1.3f);
 		getPoisonStats(initiator);
 		applyPoison(target);
 		yield return new WaitForSeconds (1);
