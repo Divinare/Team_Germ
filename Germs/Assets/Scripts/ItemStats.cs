@@ -27,6 +27,7 @@ public class ItemStats : MonoBehaviour {
 	private float lvlUpCostFactor = 0.15f;
 	private float lvlUpEffectFactor = 0.25f;
 	private float lvlUpUpgradeCostFactor = 0.25f;
+	private int speedPotionAddOn = 25; // percentage
 
 	void Start () {
 		if (itemStats == null) {
@@ -42,11 +43,11 @@ public class ItemStats : MonoBehaviour {
 		// in the int array the order is: 0: itemUpgradeCost, 1 level,  2 cost, 3 effect (healing/damage buff amount)
 		currentItemStats.Add("healingPotion", new int[] {50, 1, 25, 10});
 		currentItemStats.Add("ragePotion", new int[] {50, 1, 25, 10});
-		currentItemStats.Add("speedPotion", new int[] {50, 1, 25, 5});
+		currentItemStats.Add("speedPotion", new int[] {50, 1, 25, 115});
 
 		itemDescriptions.Add ("healingPotion", new string[] {"Healing Potion", "Potion", "Heals a bacterium"});
 		itemDescriptions.Add ("ragePotion", new string[] {"Rage Potion", "Potion", "Increases damage, causes a bacterium to rage"});
-		itemDescriptions.Add ("speedPotion", new string[] {"Speed Potion", "Potion", "Makes a bacterium to move faster"});
+		itemDescriptions.Add ("speedPotion", new string[] {"Speed Potion", "Potion", "Makes a bacterium to move faster at least one square. Effect is given as percentage of speed increased."});
 
 		itemIcons.Add ("empty", empty);
 		itemIcons.Add ("healingPotion", healingPotion);
@@ -126,11 +127,20 @@ public class ItemStats : MonoBehaviour {
 		if (gameStatus.getGold () - upgradeCost < 0) {
 			return false; // not enough gold
 		}
+		if (itemName.Equals("speedPotion")) {
+			gameStatus.decreaseGold (currentItemStats [itemName][0]);
+			currentItemStats [itemName] [0] += (int)(currentItemStats [itemName] [0] * lvlUpUpgradeCostFactor); // upgrade cost increase
+			currentItemStats [itemName] [1]++; // level increase
+			currentItemStats [itemName] [2] += (int)(currentItemStats [itemName] [2] * lvlUpCostFactor); // cost increase
+			currentItemStats [itemName] [3] += speedPotionAddOn; // effect percentage increase
+		} else {
+
 		gameStatus.decreaseGold (currentItemStats [itemName][0]);
 		currentItemStats [itemName] [0] += (int)(currentItemStats [itemName] [0] * lvlUpUpgradeCostFactor); // upgrade cost increase
 		currentItemStats [itemName] [1]++; // level increase
 		currentItemStats [itemName] [2] += (int)(currentItemStats [itemName] [2] * lvlUpCostFactor); // cost increase
 		currentItemStats [itemName] [3] += (int)(currentItemStats [itemName] [3] * lvlUpEffectFactor); // effect inrease
+		}
 		return true;
 	}
 
@@ -186,6 +196,10 @@ public class ItemStats : MonoBehaviour {
 	}
 	public float getLvlUpEffectFactor() {
 		return lvlUpEffectFactor;
+	}
+
+	public float getSpeedPotionAddOn() {
+		return speedPotionAddOn;
 	}
 
 }

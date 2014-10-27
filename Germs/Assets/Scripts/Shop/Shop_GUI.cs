@@ -185,9 +185,13 @@ public class Shop_GUI : MonoBehaviour {
 				int effect = itemStats.getItemEffect (selectedItem, -1);
 				string itemStatus = "Level " + level + " stats" + "\n" + "Effect: " + effect;
 				GUI.Label (new Rect (0, itemInfoTextSize.y * 0.7f, itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.2f), itemStatus, itemStatusText);
-
+				if(selectedItem.Equals("speedPotion")) {
+				string nextLvlItemStatus = "Next Level " + (level + 1) + "\n" + "Effect: " + (effect + itemStats.getSpeedPotionAddOn ());
+				GUI.Label (new Rect (itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.7f, itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.2f), nextLvlItemStatus, itemStatusText);
+				} else {
 				string nextLvlItemStatus = "Next Level " + (level + 1) + "\n" + "Effect: " + (effect + effect * itemStats.getLvlUpEffectFactor ());
 				GUI.Label (new Rect (itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.7f, itemInfoTextSize.x / 2, itemInfoTextSize.y * 0.2f), nextLvlItemStatus, itemStatusText);
+				}
 		} else {
 				int level = itemStats.getItemLevel (selectedItem, selectedInventoryIndex);
 				int effect = itemStats.getItemEffect (selectedItem, selectedInventoryIndex);
