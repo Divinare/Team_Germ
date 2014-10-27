@@ -126,7 +126,7 @@ public class AI_TurnLogic : MonoBehaviour {
 			return false;
 		}
 		GameObject lowestHealthFriendly = targetFinder.findLowestHealthTarget (friendlies);
-		if (lowestHealthFriendly.GetComponent<UnitStatus>().currentHealth == lowestHealthFriendly.GetComponent<UnitStatus>().maxHealth) {
+		if (lowestHealthFriendly.GetComponent<UnitStatus>().getHp () == lowestHealthFriendly.GetComponent<UnitStatus>().getMaxHp ()) {
 			return false; // no damaged friendlies found, could not heal
 		}		
 		GameObject.FindGameObjectWithTag("ActionHandler").GetComponent<ActionHandler>().performAction (currentUnit, lowestHealthFriendly, "heal");

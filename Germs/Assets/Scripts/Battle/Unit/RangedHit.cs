@@ -37,7 +37,7 @@ public class RangedHit : MonoBehaviour {
 		// Hitting the attacker, as the bullet is spawned inside the attacker's collider
 		else if (unit.GetComponent<UnitStatus>().IsSelected()) {	
 			attackingUnit = unit.GetComponent<UnitStatus>();
-			attackerGivesDamage = attackingUnit.damage;
+			attackerGivesDamage = attackingUnit.getDmg ();
 		}
 	}
 }

@@ -58,7 +58,7 @@ public class TurnHandler : MonoBehaviour {
 	
 	// Comparison thingy for Sort() - compares the units' speed
 	private int SpeedCompare(GameObject x, GameObject y) {
-		int result = -x.transform.GetComponent<UnitStatus>().speed.CompareTo(y.transform.GetComponent<UnitStatus>().speed);		
+		int result = -x.transform.GetComponent<UnitStatus>().getSpeed().CompareTo(y.transform.GetComponent<UnitStatus>().getSpeed());		
 		return result;
 	}
 	

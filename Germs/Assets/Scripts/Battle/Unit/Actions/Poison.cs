@@ -38,7 +38,7 @@ public class Poison : MonoBehaviour {
 		poisonDamage = unitStats.getSpecialAttackDamage(specialAttack);
 		poisonDuration = unitStats.getSpecialAttackRounds(specialAttack);
 		*/
-		poisonDamage = initiator.GetComponent<UnitStatus>().damage * 2;
+		poisonDamage = initiator.GetComponent<UnitStatus>().getDmg () * 2;
 		poisonDuration = 2;
 	}
 
