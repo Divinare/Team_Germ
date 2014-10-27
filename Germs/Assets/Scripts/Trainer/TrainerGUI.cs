@@ -82,11 +82,6 @@ public class TrainerGUI : MonoBehaviour {
 				drawBacteriaLevelMenu();
 			}
 		}
-		/*
-		if (skillMenu == true) {
-			drawBacteriaSkillMenu();
-		}
-		*/
 	}
 	
 	void drawSelectionMenu() {
@@ -94,15 +89,10 @@ public class TrainerGUI : MonoBehaviour {
 		GUI.Box (new Rect (leftBox.x,topBar.y,leftBox.y, (Screen.height - 2*topBar.y)), "", trainerBox);
 		
 		//selection grid
-		selGridInt = GUI.SelectionGrid(new Rect(0,topBar.y,leftBox.y, (Screen.height-2*(topBar.y))/4), selGridInt, allBacsImages.Values.ToArray(), 4);
+		var tempArray = new List <Texture2D> (allBacsImages.Values.ToArray());
+		tempArray.Remove(null);
+		selGridInt = GUI.SelectionGrid(new Rect(0,topBar.y,leftBox.y, (Screen.height-2*(topBar.y))/4), selGridInt, tempArray.ToArray(), 4);
 		selectedBacteria = allBacsImages.Keys.ToArray()[selGridInt];
-		
-		if (selGridInt != prevGridInt) {
-			setLevelMenu();
-		}
-	}
-	
-	void drawBacteriaLevelMenu() {
 
 		if (playerUnitStats.ContainsKey(selectedBacteria)) {
 			unlocked = true;
@@ -111,17 +101,20 @@ public class TrainerGUI : MonoBehaviour {
 			bacDmg = unitStats.getUnitDamage(selectedBacteria);
 			bacSpeed = unitStats.getUnitSpeed(selectedBacteria);
 			bacLevel = unitStats.getUnitLevel(selectedBacteria);
-
+			
 			//stats that are added on levelup
 			lvlUpHealth = bacHealth/unitStats.lvlUpHpIncrease;
 			lvlUpDmg = bacDmg/unitStats.lvlUpDmgIncrease;
 			lvlUpSpeed = bacSpeed/unitStats.calculateUnitSpeed(selectedBacteria);
 			lvlUpXp = unitStats.getLevelUpCost(selectedBacteria);
-
+			
 		} else {
+			bacLevel = 1;
 			unlocked = false;
 		}
-
+	}
+	
+	void drawBacteriaLevelMenu() {
 		//test
 		int unlockXp = unitStats.getUnitUnlockXpCost(selectedBacteria);
 		int levelsToUnlock = unitStats.getUnitUnlockLvls(selectedBacteria);
@@ -172,47 +165,15 @@ public class TrainerGUI : MonoBehaviour {
 
 		prevGridInt = selGridInt;
 	}
-	/*
-	void drawBacteriaSkillMenu() {
-		GUI.Box (new Rect (Screen.width/2,Screen.height/10,Screen.width/2,(Screen.height - 2*Screen.height/10)), "", trainerBox);
-		
-		GUI.Box (new Rect (Screen.width/2, Screen.height/10, Screen.width/2, buttonSize.y), "Here's some text about leveling up skills for bacteria: "+selectedBacteria);
-		
-		//skill slots
-		GUI.Box (new Rect (Screen.width/2, Screen.height/10+buttonSize.y, buttonSize.x, buttonSize.y), "Icon 1");
-		GUI.Box (new Rect (Screen.width/2+buttonSize.x, Screen.height/10+buttonSize.y, Screen.width/2-2*buttonSize.x, buttonSize.y), "Text about skill");
-		GUI.Box (new Rect (Screen.width-buttonSize.x, Screen.height/10+buttonSize.y, buttonSize.x, buttonSize.y), upgradeIcon);
-		
-		GUI.Box (new Rect (Screen.width/2, Screen.height/10+2*buttonSize.y, buttonSize.x, buttonSize.y), "Icon 2");
-		GUI.Box (new Rect (Screen.width/2+buttonSize.x, Screen.height/10+2*buttonSize.y, Screen.width/2-2*buttonSize.x, buttonSize.y), "Text about skill");
-		GUI.Box (new Rect (Screen.width-buttonSize.x, Screen.height/10+2*buttonSize.y, buttonSize.x, buttonSize.y), upgradeDeactIcon);
-		
-		GUI.Box (new Rect (Screen.width/2, Screen.height/10+3*buttonSize.y, buttonSize.x, buttonSize.y), "Icon 3");
-		GUI.Box (new Rect (Screen.width/2+buttonSize.x, Screen.height/10+3*buttonSize.y, Screen.width/2-2*buttonSize.x, buttonSize.y), "Text about skill");
-		GUI.Box (new Rect (Screen.width-buttonSize.x, Screen.height/10+3*buttonSize.y, buttonSize.x, buttonSize.y), upgradeDeactIcon);
-		
-		GUI.Box (new Rect (Screen.width/2, Screen.height/10+4*buttonSize.y, buttonSize.x, buttonSize.y), "Icon 4");
-		GUI.Box (new Rect (Screen.width/2+buttonSize.x, Screen.height/10+4*buttonSize.y, Screen.width/2-2*buttonSize.x, buttonSize.y), "Text about skill");
-		GUI.Box (new Rect (Screen.width-buttonSize.x, Screen.height/10+4*buttonSize.y, buttonSize.x, buttonSize.y), upgradeIcon);
-	}
-	*/
 
 	void drawTop() {
 		GUI.Box (new Rect (0,0,Screen.width/4,Screen.height/10), "", trainerText);
-		/*
-		if (GUI.Button (new Rect (Screen.width/2,0,Screen.width/10,Screen.height/10), "", levelHover)) {
-			setLevelMenu();
-		}
-		if (GUI.Button(new Rect (Screen.width/2+Screen.width/10,0,Screen.width/10,Screen.height/10), "", skillsHover)) {
-			skillMenu = true;
-			levelMenu = false;
-		}
-		*/
 	}
 	
 	void setBacsAndImages() {
 		allBacsStories = unitStats.getUnitDescriptions();
 		allBacsImages = unitStats.getImageDict();
+		//allBacsImages.Remove("empty");
 	}
 	
 	void setLevelMenu() {
