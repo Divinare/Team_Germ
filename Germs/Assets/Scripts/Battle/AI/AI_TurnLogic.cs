@@ -8,23 +8,35 @@ public class AI_TurnLogic : MonoBehaviour {
 	private UnitStatus thisStatus;
 	private SquareStatus currentSquareStatus;
 	private AI_TargetFinder targetFinder;
+	private int framesSinceInitialization;
 	// Use this for initialization
 	void Start () {
 		targetFinder = GameObject.FindGameObjectWithTag("AIController").GetComponent<AI_TargetFinder>();
-		
+		framesSinceInitialization = 0;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
+		
 	}
 	
 	public void handleTurnForGerm(GameObject unit) {
+	
+		// This fixes a bug where sometimes unitActions was not initialized by another script before AI attempts to fetch unitActions. The solution is to wait a few frames to ensure everything is initialized.
+		// The fix looks a bit ugly, but since there is no proper system to control the order in which game objects are loaded into the scene, have to use this for now.
+		if (framesSinceInitialization < 2) {
+			GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector>().resetHostileTurn ();
+			framesSinceInitialization++;
+			return;
+		}
+		
 		currentUnit = unit;
 		thisStatus = currentUnit.GetComponent<UnitStatus> ();
 		Dictionary<string, bool> unitActions = currentUnit.GetComponent<UnitStatus> ().GetUnitActions ();
 		currentSquareStatus = currentUnit.GetComponent<UnitStatus> ().getSquare ().GetComponent<SquareStatus> ();
 		targetFinder.updateUnits(currentUnit, currentSquareStatus, thisStatus);
+		
 		
 		if (thisStatus.actionCooldown == 0) {
 			if (unitActions["detox"]) {
