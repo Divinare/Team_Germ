@@ -37,6 +37,11 @@ public class AI_TurnLogic : MonoBehaviour {
 		currentSquareStatus = currentUnit.GetComponent<UnitStatus> ().getSquare ().GetComponent<SquareStatus> ();
 		targetFinder.updateUnits(currentUnit, currentSquareStatus, thisStatus);
 		
+		if (thisStatus.IsUnitStunned ()) {
+			thisStatus.Deselect ();
+			return;
+		}
+		
 		
 		if (thisStatus.actionCooldown == 0) {
 			if (unitActions["detox"]) {
