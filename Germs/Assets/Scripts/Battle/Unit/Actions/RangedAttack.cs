@@ -21,13 +21,19 @@ public class RangedAttack : MonoBehaviour {
 			bullet.transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime, Space.Self);
 		}
 	}
+
+	private void battlelog(string txt) {
+		GameObject.FindGameObjectWithTag ("Drawer").GetComponent<BattleMenuBar> ().addToBattleLog (txt);
+	}
 	
 
 	public void attack(GameObject attacker, GameObject target) {
+		battlelog (attacker.GetComponent<UnitStatus>().getUnitName() + " shoots a noxious slimeball!");
 		spawnProjectile(attacker, target, rangedProjectile);
 	}
 
 	public void initiateStun(GameObject attacker, GameObject target) {
+		battlelog (attacker.GetComponent<UnitStatus>().getUnitName() + " uses stun!");
 		attacker.GetComponent<UnitStatus>().setActionCooldown(5);
 		spawnProjectile(attacker, target, stunProjectile);
 	}
