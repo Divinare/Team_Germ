@@ -37,7 +37,7 @@ public class UnitStats : MonoBehaviour {
 	public int lvlUpHpIncrease = 4;
 	//speed is set in a method, everything else incraeses 25%
 	public int lvlUpDmgIncrease = 4;
-	public int lvlUpCost = 25;
+	public int lvlUpCost = 50;
 
 	// Use this for initialization
 	void Start () {
@@ -85,10 +85,10 @@ public class UnitStats : MonoBehaviour {
 		//name: lvlsCompleted, xpCost
 		unitUnlock.Add ("Strepto", new int[] {0,0});
 		unitUnlock.Add ("Salmonella", new int[] {0,0});
-		unitUnlock.Add ("Gatbac", new int[] {1,50});
-		unitUnlock.Add ("Haemophilus", new int[] {2,100});
-		unitUnlock.Add ("Bacillus", new int[] {3,150});
-		unitUnlock.Add ("Phage", new int[] {4,200});
+		unitUnlock.Add ("Gatbac", new int[] {1,100});
+		unitUnlock.Add ("Haemophilus", new int[] {2,150});
+		unitUnlock.Add ("Bacillus", new int[] {3,200});
+		unitUnlock.Add ("Phage", new int[] {4,250});
 
 		//initial bacteria?
 		setPlayerUnit("Salmonella");

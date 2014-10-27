@@ -137,7 +137,7 @@ public class TrainerGUI : MonoBehaviour {
 			if (xp >= lvlUpXp) {
 				if (GUI.Button(new Rect (Screen.width/2+Screen.width/8,Screen.height/10+Screen.width/6+Screen.height/8+Screen.height/8,Screen.width/4,Screen.height/8), "", lvlUpButton)) {
 					//Debug.Log ("lvlUpButtonPress");
-					xp -= lvlUpXp;
+					xp -= lvlUpXp*bacLevel;
 					gameStatus.SendMessage("setXp", xp);
 					unitStats.setPlayerUnitStats(selectedBacteria, bacHealth+lvlUpHealth, bacDmg+lvlUpDmg, bacSpeed+lvlUpSpeed, bacLevel+1);
 				}
