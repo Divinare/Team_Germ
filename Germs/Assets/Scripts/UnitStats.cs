@@ -21,7 +21,7 @@ public class UnitStats : MonoBehaviour {
 	private int[] enemyStatArray = new int[7];
 
 	public int levelsCompleted;
-	public int baseStatIncreaseFactor;
+	public float baseStatIncreaseFactor;
 
 	//imagedict
 	public Texture2D gatbac;
@@ -97,18 +97,23 @@ public class UnitStats : MonoBehaviour {
 
 	public int[] getEnemyUnitStats(string enemyName) {
 		levelsCompleted = gameStatus.getCompletedLevels();
-		if (levelsCompleted == 0) {
-			levelsCompleted = 1;
+		if (levelsCompleted <= 3) {
+			baseStatIncreaseFactor = 0.75f;
+		} else {
+			baseStatIncreaseFactor = levelsCompleted;
 		}
 
-		//this is the factor with which all the enemy stats are multiplied, needs to be balanced.
-		baseStatIncreaseFactor = levelsCompleted;
 		// currently multiplies hp, dmg with levels completed and adds levels completed to speed (so 1 increase per level completed)
 
 		enemyWithStats.Clear();
 		unravelStatArray = baseUnitStats[enemyName];
-		enemyStatArray = new int[] {unravelStatArray[0]*baseStatIncreaseFactor,unravelStatArray[1]*baseStatIncreaseFactor, unravelStatArray[2]+baseStatIncreaseFactor, unravelStatArray[3], unravelStatArray[4], unravelStatArray[5], unravelStatArray[6]};
+		int enemyHealth = (int) (unravelStatArray[0]*baseStatIncreaseFactor);
+		int enemySpeed = (int) (unravelStatArray[2]+baseStatIncreaseFactor);
+		int enemyDamage = (int) (unravelStatArray[1]*baseStatIncreaseFactor);
+		//enemyStatArray = new int[] {unravelStatArray[0]*baseStatIncreaseFactor,unravelStatArray[1]*baseStatIncreaseFactor, unravelStatArray[2]+baseStatIncreaseFactor, unravelStatArray[3], unravelStatArray[4], unravelStatArray[5], unravelStatArray[6]};
+		enemyStatArray = new int[] {enemyHealth, enemyDamage, enemySpeed, unravelStatArray[3], unravelStatArray[4], unravelStatArray[5], unravelStatArray[6]};
 
+		Debug.Log (enemyHealth);
 		return enemyStatArray;
 	}
 
