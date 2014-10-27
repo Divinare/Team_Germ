@@ -86,9 +86,9 @@ public class UnitStats : MonoBehaviour {
 		unitUnlock.Add ("Strepto", new int[] {0,0});
 		unitUnlock.Add ("Salmonella", new int[] {0,0});
 		unitUnlock.Add ("Gatbac", new int[] {1,100});
-		unitUnlock.Add ("Haemophilus", new int[] {2,150});
-		unitUnlock.Add ("Bacillus", new int[] {3,200});
-		unitUnlock.Add ("Phage", new int[] {4,250});
+		unitUnlock.Add ("Haemophilus", new int[] {4,150});
+		unitUnlock.Add ("Bacillus", new int[] {6,200});
+		unitUnlock.Add ("Phage", new int[] {8,250});
 
 		//initial bacteria?
 		setPlayerUnit("Salmonella");
@@ -108,12 +108,11 @@ public class UnitStats : MonoBehaviour {
 		enemyWithStats.Clear();
 		unravelStatArray = baseUnitStats[enemyName];
 		int enemyHealth = (int) (unravelStatArray[0]*baseStatIncreaseFactor);
-		int enemySpeed = (int) (unravelStatArray[2]+baseStatIncreaseFactor);
+		int enemySpeed = unravelStatArray[2]; //ei muutu!
 		int enemyDamage = (int) (unravelStatArray[1]*baseStatIncreaseFactor);
-		//enemyStatArray = new int[] {unravelStatArray[0]*baseStatIncreaseFactor,unravelStatArray[1]*baseStatIncreaseFactor, unravelStatArray[2]+baseStatIncreaseFactor, unravelStatArray[3], unravelStatArray[4], unravelStatArray[5], unravelStatArray[6]};
+
 		enemyStatArray = new int[] {enemyHealth, enemyDamage, enemySpeed, unravelStatArray[3], unravelStatArray[4], unravelStatArray[5], unravelStatArray[6]};
 
-		Debug.Log (enemyHealth);
 		return enemyStatArray;
 	}
 
@@ -207,16 +206,6 @@ public class UnitStats : MonoBehaviour {
 
 	public int calculateUnitSpeed(string unitName) {
 		int unitSpeed = getUnitSpeed(unitName);
-		if (unitSpeed < 4) {
-			return 2;
-		}
-		else if (unitSpeed >= 4 && unitSpeed < 6) {
-			return 4;
-		}
-		else if (unitSpeed >= 6 && unitSpeed < 10) {
-			return 6;
-		} else {
-			return 10;
-		}
+		return unitSpeed;
 	}
 }

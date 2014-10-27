@@ -89,8 +89,10 @@ public class Map : MonoBehaviour {
 							getNodeName(hit.collider.transform);
 
 							//enter level through GUI window
-							battleStatus.randomEnemiesForLevel();
-							drawBattleWindow();
+							if (!hit.collider.transform.GetComponent<Node>().isNodeCompleted()) {
+								battleStatus.randomEnemiesForLevel();
+								drawBattleWindow();
+							}
 					}
 				}
 				

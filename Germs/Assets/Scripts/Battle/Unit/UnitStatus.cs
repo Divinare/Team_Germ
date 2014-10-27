@@ -114,8 +114,12 @@ public class UnitStatus : MonoBehaviour {
 		battlelog (unitName + " has been given " + heal + " health!");
 	}
 
-	public void GiveSpeed(int speed) {
-		this.speed += speed;
+	public void GiveSpeed(int speedPercentage) {
+		int oldSpeed = speed;
+		speed = speed * (speedPercentage/100);
+		if (oldSpeed == speed) {
+			speed++; // increasin at least with 1
+		}
 		battlelog (unitName + " has been given " + speed + " speed!");
 	}
 

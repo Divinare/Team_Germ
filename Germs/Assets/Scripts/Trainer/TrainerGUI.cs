@@ -105,7 +105,7 @@ public class TrainerGUI : MonoBehaviour {
 			//stats that are added on levelup
 			lvlUpHealth = bacHealth/unitStats.lvlUpHpIncrease;
 			lvlUpDmg = bacDmg/unitStats.lvlUpDmgIncrease;
-			lvlUpSpeed = bacSpeed/unitStats.calculateUnitSpeed(selectedBacteria);
+			lvlUpSpeed = 0;
 			lvlUpXp = unitStats.getLevelUpCost(selectedBacteria);
 			
 		} else {
@@ -131,7 +131,7 @@ public class TrainerGUI : MonoBehaviour {
 			GUI.Label(new Rect (Screen.width/2+Screen.width/6,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "Level "+bacLevel+" Stats: \nHealth : "+bacHealth+"\nDamage : "+bacDmg+"\nSpeed : "+bacSpeed, blueText);
 			
 			//NextLevelBox
-			GUI.Label (new Rect (Screen.width/2+2*Screen.width/6,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "Next Level : "+(bacLevel+1)+"\nHealth : "+(bacHealth+lvlUpHealth)+"\nDamage : "+(bacDmg+lvlUpDmg)+"\nSpeed : "+(bacSpeed+lvlUpSpeed)+"\nXP required to level : "+lvlUpXp*bacLevel, blueText);
+			GUI.Label (new Rect (Screen.width/2+2*Screen.width/6,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "Next Level : "+(bacLevel+1)+"\nHealth : "+(bacHealth+lvlUpHealth)+"\nDamage : "+(bacDmg+lvlUpDmg)+"\nSpeed : "+(bacSpeed)+"\nXP required to level : "+lvlUpXp*bacLevel, blueText);
 			
 			//LvlUpButton
 			if (xp >= lvlUpXp*bacLevel) {
@@ -140,7 +140,7 @@ public class TrainerGUI : MonoBehaviour {
 					xp -= lvlUpXp*bacLevel;
 					gameStatus.SendMessage("setXp", xp);
 					xp = gameStatus.getXp();
-					unitStats.setPlayerUnitStats(selectedBacteria, bacHealth+lvlUpHealth, bacDmg+lvlUpDmg, bacSpeed+lvlUpSpeed, bacLevel+1);
+					unitStats.setPlayerUnitStats(selectedBacteria, bacHealth+lvlUpHealth, bacDmg+lvlUpDmg, bacSpeed, bacLevel+1);
 				}
 			} else {
 				if (GUI.Button(new Rect (Screen.width/2+Screen.width/8,Screen.height/10+Screen.width/6+Screen.height/8+Screen.height/8,Screen.width/4,Screen.height/8), "", deactiveLvlUpButton)) {
