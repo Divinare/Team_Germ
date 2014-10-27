@@ -100,7 +100,7 @@ public class UnitStats : MonoBehaviour {
 		if (levelsCompleted <= 3) {
 			baseStatIncreaseFactor = 0.75f;
 		} else {
-			baseStatIncreaseFactor = levelsCompleted;
+			baseStatIncreaseFactor = levelsCompleted/2;
 		}
 
 		// currently multiplies hp, dmg with levels completed and adds levels completed to speed (so 1 increase per level completed)
