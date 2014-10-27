@@ -6,10 +6,11 @@ public class AudioController : MonoBehaviour {
 
 	public static AudioController audioController;
 	public AudioSource audioSource;
-	public AudioClip[] audioClips;
-
+	public AudioSource[] sounds; // 0 clicksound
+	public AudioSource[] music;
 	// Sounds
-	public AudioSource clickSound;
+	//public AudioSource clickSound;
+	//public AudioSource battleMusic;
 
 	// Unit specific battle sounds
 	private Dictionary<string, AudioSource> meleeSounds = new Dictionary<string, AudioSource>();
@@ -27,8 +28,8 @@ public class AudioController : MonoBehaviour {
 			Destroy (gameObject);
 		}
 
-		clickSound = GameObject.FindGameObjectWithTag ("AudioController").GetComponent<AudioSource> ();
-		initSounds ();
+		//clickSound = GameObject.FindGameObjectWithTag ("AudioController").GetComponent<AudioSource> ();
+
 	}
 	
 	// Update is called once per frame
@@ -36,14 +37,23 @@ public class AudioController : MonoBehaviour {
 	
 	}
 
-	private void initSounds() {
-
+	public void playBattleMusic() {
+		music [0].Play ();
 	}
 
+	public void stopBattleMusic() {
+		music [0].Stop ();
+	}
 
+	public void playMapMusic() {
+		music [1].Play ();
+	}
+	public void stopMapMusic() {
+		music [1].Stop ();
+	}
 
 	public void playClickSound() {
-		clickSound.Play ();
+		sounds[0].Play ();
 	}
 
 	public void playMeleeSound(string unitName) {
