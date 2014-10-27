@@ -35,7 +35,7 @@ public class UnitStats : MonoBehaviour {
 
 	//levelup
 	public int lvlUpHpIncrease = 4;
-	public int lvlUpSpeedIncrease = 5; //notice method calculateUnitSpeed also
+	//speed is set in a method, everything else incraeses 25%
 	public int lvlUpDmgIncrease = 4;
 	public int lvlUpCost = 25;
 
@@ -52,12 +52,12 @@ public class UnitStats : MonoBehaviour {
 		gameStatus = GameObject.Find("GameStatus").GetComponent<GameStatus>();
 
 		//test int[] {Health, Dmg, speed, level, melee, ranged, special}
-		baseUnitStats.Add ("Gatbac", new int[] {200, 10, 5, 1, 1, 1, 3});
-		baseUnitStats.Add ("Strepto", new int[] {100, 10, 8, 1, 1, 0, 3});
+		baseUnitStats.Add ("Gatbac", new int[] {150, 10, 2, 1, 1, 1, 3});
+		baseUnitStats.Add ("Strepto", new int[] {100, 10, 6, 1, 1, 0, 3});
 		baseUnitStats.Add ("Haemophilus", new int[] {100, 10, 6, 1, 1, 0, 3});
 		baseUnitStats.Add ("Salmonella", new int[] {100, 10, 6, 1, 1, 0, 3});
 		baseUnitStats.Add ("Bacillus", new int[] {100, 10, 6, 1, 0, 1, 3});
-		baseUnitStats.Add ("Phage", new int[] {100, 10, 5, 1, 1, 0, 3});
+		baseUnitStats.Add ("Phage", new int[] {100, 10, 4, 1, 1, 0, 3});
 
 		//example unitSpecialAttack entry : [0]=SkillName, [1]=SkillType, [2] = total dmg, [3]=duration, [4]=skillDescription (for tooltip)}
 		unitSpecialAttacks.Add(2, new string[] {"Stunball", "rangedStun", "0", "2", "Bacteria launches a powerful ball that stuns the target."});
@@ -202,8 +202,14 @@ public class UnitStats : MonoBehaviour {
 
 	public int calculateUnitSpeed(string unitName) {
 		int unitSpeed = getUnitSpeed(unitName);
-		if (unitSpeed < 10) {
-			return lvlUpSpeedIncrease;
+		if (unitSpeed < 4) {
+			return 2;
+		}
+		else if (unitSpeed >= 4 && unitSpeed < 6) {
+			return 4;
+		}
+		else if (unitSpeed >= 6 && unitSpeed < 10) {
+			return 6;
 		} else {
 			return 10;
 		}
