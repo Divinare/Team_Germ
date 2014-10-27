@@ -28,7 +28,7 @@ public class RangedAttack : MonoBehaviour {
 	}
 
 	public void initiateStun(GameObject attacker, GameObject target) {
-		attacker.GetComponent<UnitStatus>().setActionCooldown(4);
+		attacker.GetComponent<UnitStatus>().setActionCooldown(5);
 		spawnProjectile(attacker, target, stunProjectile);
 	}
 

@@ -65,7 +65,7 @@ public class Movement : MonoBehaviour {
 	
 	public void startMoving(List<GameObject> newRoute) {
 	
-		movementSpeed = Mathf.Clamp ((this.gameObject.GetComponent<UnitStatus>().getSpeed () / 4), 1, 6);
+		movementSpeed = Mathf.Clamp ((this.gameObject.GetComponent<UnitStatus>().getSpeed () / 2.5f), 1, 6);
 
 		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector>().lockInput (); // lock input after movement has been initiated
 		this.route = newRoute;
