@@ -110,10 +110,16 @@ public class UnitStats : MonoBehaviour {
 		int enemyHealth = (int) (unravelStatArray[0]*baseStatIncreaseFactor);
 		int enemySpeed = (int) (unravelStatArray[2]+baseStatIncreaseFactor);
 		int enemyDamage = (int) (unravelStatArray[1]*baseStatIncreaseFactor);
-		//enemyStatArray = new int[] {unravelStatArray[0]*baseStatIncreaseFactor,unravelStatArray[1]*baseStatIncreaseFactor, unravelStatArray[2]+baseStatIncreaseFactor, unravelStatArray[3], unravelStatArray[4], unravelStatArray[5], unravelStatArray[6]};
+
+		//testiksi speed ei koskaan kasva enemyillä yli 10.
+		if (enemyName == "Gatbac" && enemySpeed >= 6) {
+			enemySpeed = 6;
+		} else if (enemySpeed >= 10) {
+			enemySpeed = 10;
+		}
+
 		enemyStatArray = new int[] {enemyHealth, enemyDamage, enemySpeed, unravelStatArray[3], unravelStatArray[4], unravelStatArray[5], unravelStatArray[6]};
 
-		Debug.Log (enemyHealth);
 		return enemyStatArray;
 	}
 
