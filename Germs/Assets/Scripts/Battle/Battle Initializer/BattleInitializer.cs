@@ -28,36 +28,39 @@ public class BattleInitializer : MonoBehaviour {
 		GameObject[,] squares = matrix.GetComponent<Matrix> ().getSquares ();
 		friendlyGermsToSpawn = battleStatus.getSelectedUnits().ToArray();
 
-		if (friendlyGermsToSpawn.Length == 0) {
+		int friendlyGermsToSpawnCount =  countGerms(friendlyGermsToSpawn);
+
+		if (friendlyGermsToSpawnCount == 0) {
 			Debug.Log ("NO FRIENDLY BACTERIA SELECTED");
 		}
 
-		int y = 8; // Start spawning mobs from the top to bottom
+		int[] germPositions = getGermPotitions (friendlyGermsToSpawnCount);
+
+		int y;
 		for (int i = 0; i < friendlyGermsToSpawn.Length; i++) {
 			if (friendlyGermsToSpawn[i] != "empty") {
+				y = germPositions[i]; // spawn position y of a germ
 				GameObject germToSpawn = GameObject.FindGameObjectWithTag("Unit Prefab Container").GetComponent<UnitPrefabContainer>().getGerm(friendlyGermsToSpawn[i]);
 				//Debug.Log("Attempting to spawn " + germToSpawn);
 				GameObject spawnedGerm = SpawnObjectAtSquare (germToSpawn, squares [0, y]); 
 				spawnedGerm.transform.GetChild(0).position = spawnedGerm.transform.position;
 				spawnedGerm.GetComponent<UnitStatus>().setSquare (squares[0,y]); // give unit a reference to the square it is currently standing on
 				squares[0, y].GetComponent <SquareStatus>().setStatus ("friendly", spawnedGerm); // Set square status to indicate there is a friendly unit
-				y -= 2;
 			} else {
 				Debug.Log ("Empty slot");
 			}
 		}
+		int enemyGermsToSpawnCount =  countGerms(enemiesToSpawn.ToArray());
+		germPositions = getGermPotitions (enemyGermsToSpawnCount);
 
-		y = 8;
 		for (int i=0; i<enemiesToSpawn.Count; i++) {
-			//Debug.Log ("BATTLEINIT "+enemiesToSpawn[i]);
+			y = germPositions[i]; // spawn position y of a germ
 			GameObject germToSpawn = GameObject.FindGameObjectWithTag("Unit Prefab Container").GetComponent<UnitPrefabContainer>().getGerm(enemiesToSpawn[i]);
 			GameObject spawnedGerm = SpawnObjectAtSquare (germToSpawn, squares[14, y]);
 			spawnedGerm.transform.GetChild(0).position = spawnedGerm.transform.position;
 			spawnedGerm.GetComponent<UnitStatus>().setSquare (squares[14,y]);
 			squares[14, y].GetComponent <SquareStatus>().setStatus ("enemy", spawnedGerm); // Set square status to indicate there is a hostile unit
 			spawnedGerm.GetComponent<UnitStatus>().SetAsEnemy();
-			y -= 2;
-
 
 			unravelArray = unitStats.getEnemyUnitStats(enemiesToSpawn[i]);
 			//Debug.Log (unitName+" hp "+unravelArray[0]);
@@ -69,6 +72,36 @@ public class BattleInitializer : MonoBehaviour {
 
 
 
+	}
+
+	private int countGerms(string[] list) {
+		int count = 0;
+		
+		for (int i = 0; i < list.Length; i++) {
+			if(!list[i].Equals("empty")) {
+				count++;
+			}
+		}
+		return count;
+	}
+
+	// for centeralizing germs
+	private int[] getGermPotitions(int germsToSpawnCount) {
+
+		int[] germPositions = new int[5]{0,2,4,6,8};
+		if (germsToSpawnCount == 1) {
+			germPositions[0] = 4;
+		}
+		if (germsToSpawnCount == 2) {
+			germPositions[0] = 2;
+			germPositions[1] = 6;
+		}
+		if (germsToSpawnCount == 3) {
+			germPositions[0] = 2;
+			germPositions[1] = 4;
+			germPositions[2] = 6;
+		}
+		return germPositions;
 	}
 
 

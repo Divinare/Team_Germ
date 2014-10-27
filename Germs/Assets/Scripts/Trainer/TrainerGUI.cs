@@ -134,11 +134,12 @@ public class TrainerGUI : MonoBehaviour {
 			GUI.Label (new Rect (Screen.width/2+2*Screen.width/6,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "Next Level : "+(bacLevel+1)+"\nHealth : "+(bacHealth+lvlUpHealth)+"\nDamage : "+(bacDmg+lvlUpDmg)+"\nSpeed : "+(bacSpeed+lvlUpSpeed)+"\nXP required to level : "+lvlUpXp*bacLevel, blueText);
 			
 			//LvlUpButton
-			if (xp >= lvlUpXp) {
+			if (xp >= lvlUpXp*bacLevel) {
 				if (GUI.Button(new Rect (Screen.width/2+Screen.width/8,Screen.height/10+Screen.width/6+Screen.height/8+Screen.height/8,Screen.width/4,Screen.height/8), "", lvlUpButton)) {
 					//Debug.Log ("lvlUpButtonPress");
-					xp -= lvlUpXp;
+					xp -= lvlUpXp*bacLevel;
 					gameStatus.SendMessage("setXp", xp);
+					xp = gameStatus.getXp();
 					unitStats.setPlayerUnitStats(selectedBacteria, bacHealth+lvlUpHealth, bacDmg+lvlUpDmg, bacSpeed+lvlUpSpeed, bacLevel+1);
 				}
 			} else {
@@ -153,6 +154,9 @@ public class TrainerGUI : MonoBehaviour {
 			if (xp >= unlockXp && completedLevels >= levelsToUnlock) {
 				if (GUI.Button(new Rect (Screen.width/2+Screen.width/8,Screen.height/10+Screen.width/6+Screen.height/8+Screen.height/8,Screen.width/4,Screen.height/8), "", unlockButton)) {
 					//Debug.Log ("unlock");
+					xp -= unlockXp;
+					gameStatus.SendMessage("setXp", xp);
+					xp = gameStatus.getXp();
 					unitStats.setPlayerUnit(selectedBacteria);
 				}
 			} else {
