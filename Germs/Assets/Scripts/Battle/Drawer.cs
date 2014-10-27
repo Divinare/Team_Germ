@@ -9,17 +9,12 @@ public class Drawer : MonoBehaviour {
 	public Transform movingIndicationIcon;
 	public Transform selectedSquareIcon;
 
-	// backgrounds
-	public Transform petridishBlueBg;
-
-	public GUIStyle petridishBlue;
-
-	private Dictionary<string, Texture> backgrounds = new Dictionary<string, Texture>();
+	public Transform[] backgrounds;
 
 	void Start () {
-
+		int randomIndex = (int)(Random.Range (0f, 3f));
 		Vector2 middle = new Vector2 (7.5f, 4.5f);
-		Instantiate (petridishBlueBg, new Vector3(middle.x,middle.y,0 -0.5f), Quaternion.identity);
+		Instantiate (backgrounds[randomIndex], new Vector3(middle.x,middle.y,0 -0.5f), Quaternion.identity);
 	}
 
 	void Update () {
