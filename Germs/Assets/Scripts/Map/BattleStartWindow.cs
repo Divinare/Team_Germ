@@ -65,8 +65,12 @@ public class BattleStartWindow : MonoBehaviour {
 		GUILayout.BeginVertical();		
 		GUILayout.FlexibleSpace();
 		
-		if (GUILayout.Button ("", GUILayout.Width(128), GUILayout.Height(64)))
-			nodeLoadLevel(levelNode);
+		if (GUILayout.Button ("", GUILayout.Width (128), GUILayout.Height (64))) {
+			AudioController.audioController.playBattleMusic ();
+			AudioController.audioController.stopMapMusic();
+			nodeLoadLevel (levelNode);
+		}
+
 
 		if (GUI.Button (new Rect (Screen.width/3,25,30,30), "", "return")) {
 			drawWindow = false;

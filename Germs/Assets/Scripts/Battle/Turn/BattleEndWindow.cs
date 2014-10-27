@@ -50,9 +50,11 @@ public class BattleEndWindow : MonoBehaviour {
 		GUILayout.BeginVertical();		
 		GUILayout.FlexibleSpace();
 
-		if (GUILayout.Button ("", GUILayout.Width(100), GUILayout.Height(50)))
+		if (GUILayout.Button ("", GUILayout.Width (100), GUILayout.Height (50))) {
+			AudioController.audioController.stopBattleMusic();
+			AudioController.audioController.playMapMusic();
 			Application.LoadLevel ("Map");
-
+		}
 		// More centering...
 		GUILayout.EndVertical ();
 		GUILayout.FlexibleSpace();
