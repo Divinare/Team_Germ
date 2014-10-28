@@ -190,6 +190,9 @@ public class RouteFinder : MonoBehaviour {
 
 	private void removeAllPaths() {
 		GameObject[,] removeList = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<Matrix> ().getSquares ();
+		if (removeList == null) {
+			return;
+		}
 		foreach(GameObject removePath in removeList) {
 			if (removePath != null) {
 				removePath.GetComponent<SquareStatus>().resetPath();
