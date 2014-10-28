@@ -57,7 +57,9 @@ public class TurnHandler : MonoBehaviour {
 						if (unitListIndex <= unitList.Count - 1 && unitList [unitListIndex] != null) {
 							activeUnit = unitList [unitListIndex];
 							activeUnit.transform.GetComponent<UnitStatus>().Select();
-							DrawSelectionCircleForUnit(activeUnit);
+							if (!activeUnit.GetComponent<UnitStatus>().IsUnitStunned ()) {
+								DrawSelectionCircleForUnit(activeUnit);
+							}
 						}
 					}
 				}
