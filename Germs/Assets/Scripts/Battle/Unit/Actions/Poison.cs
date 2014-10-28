@@ -30,7 +30,11 @@ public class Poison : MonoBehaviour {
 	IEnumerator DelayedPoisonedEffect(GameObject initiator, GameObject target) {
 
 		AudioSource.PlayClipAtPoint(poisoningSound, transform.position);
-		Instantiate(poisonInit, initiator.transform.position, initiator.transform.rotation); // instantiating the poison effect and destroying it after 2f time
+		float x = initiator.transform.position.x;
+		float y = initiator.transform.position.y;
+		float z = initiator.transform.position.z;
+		z = -3f;
+		Instantiate(poisonInit, new Vector3(x,y,z), initiator.transform.rotation); // instantiating the poison effect, is destroyed by DestroyObject script attached to prefab
 		yield return new WaitForSeconds (2f);
 		getPoisonStats(initiator);
 		AudioSource.PlayClipAtPoint(gettingPoisonedSound, transform.position);
