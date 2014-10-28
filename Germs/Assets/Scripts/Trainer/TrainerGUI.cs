@@ -38,7 +38,7 @@ public class TrainerGUI : MonoBehaviour {
 	private int lvlUpHealth;
 	private int lvlUpDmg;
 	private int lvlUpSpeed;
-	private int lvlUpXp;
+	public int lvlUpXp;
 	
 	public Dictionary <string, int[]> playerUnitStats = new Dictionary<string, int[]>();
 	public int[] tempStats = new int[4];
@@ -131,13 +131,13 @@ public class TrainerGUI : MonoBehaviour {
 			GUI.Label(new Rect (Screen.width/2+Screen.width/6,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "Level "+bacLevel+" Stats: \nHealth : "+bacHealth+"\nDamage : "+bacDmg+"\nSpeed : "+bacSpeed, blueText);
 			
 			//NextLevelBox
-			GUI.Label (new Rect (Screen.width/2+2*Screen.width/6,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "Next Level : "+(bacLevel+1)+"\nHealth : "+(bacHealth+lvlUpHealth)+"\nDamage : "+(bacDmg+lvlUpDmg)+"\nSpeed : "+(bacSpeed)+"\nXP required to level : "+lvlUpXp*bacLevel, blueText);
+			GUI.Label (new Rect (Screen.width/2+2*Screen.width/6,Screen.height/10+Screen.width/6,Screen.width/6,Screen.height/8), "Next Level : "+(bacLevel+1)+"\nHealth : "+(bacHealth+lvlUpHealth)+"\nDamage : "+(bacDmg+lvlUpDmg)+"\nSpeed : "+(bacSpeed)+"\nXP required to level : "+lvlUpXp, blueText);
 			
 			//LvlUpButton
-			if (xp >= lvlUpXp*bacLevel) {
+			if (xp >= lvlUpXp) {
 				if (GUI.Button(new Rect (Screen.width/2+Screen.width/8,Screen.height/10+Screen.width/6+Screen.height/8+Screen.height/8,Screen.width/4,Screen.height/8), "", lvlUpButton)) {
 					//Debug.Log ("lvlUpButtonPress");
-					xp -= lvlUpXp*bacLevel;
+					xp -= lvlUpXp;
 					gameStatus.SendMessage("setXp", xp);
 					xp = gameStatus.getXp();
 					unitStats.setPlayerUnitStats(selectedBacteria, bacHealth+lvlUpHealth, bacDmg+lvlUpDmg, bacSpeed, bacLevel+1);

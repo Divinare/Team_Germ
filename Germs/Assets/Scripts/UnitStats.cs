@@ -37,7 +37,7 @@ public class UnitStats : MonoBehaviour {
 	public int lvlUpHpIncrease = 4;
 	//speed is set in a method, everything else incraeses 25%
 	public int lvlUpDmgIncrease = 4;
-	public int lvlUpCost = 50;
+	private int lvlUpCost = 50;
 
 	// Use this for initialization
 	void Start () {
