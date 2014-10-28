@@ -39,8 +39,10 @@ public class TurnHandler : MonoBehaviour {
 					if (unitListIndex == unitList.Count - 1) {
 						trimUnitList ();
 						foreach (GameObject unit in unitList) {
-							if (unit.GetComponent<UnitStatus>().IsUnitPoisoned()) {
-								unit.GetComponent<UnitStatus>().countDownPoison();
+							if (unit != null) {
+								if (unit.GetComponent<UnitStatus>().IsUnitPoisoned()) {
+									unit.GetComponent<UnitStatus>().countDownPoison();
+								}
 							}
 						}
 						trimUnitList ();
