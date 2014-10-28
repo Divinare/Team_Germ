@@ -35,7 +35,6 @@ public class BattleStartWindow : MonoBehaviour {
 		if (drawWindow) {
 			GUI.skin = battleStartWindowBackground;
 			windowRect = GUI.Window(0, windowRect, DoMyWindow, "Level Info: "+lvlName+"\n\n"+lvlInfo+"\n\n"+"Upon victory you will recieve :\n"+rewardGold+" gold and "+rewardXp+"xp!\n\nYou will face:\n"+enemyList);
-
 		}
 		GUI.skin = null;
 	}
@@ -72,7 +71,7 @@ public class BattleStartWindow : MonoBehaviour {
 		}
 
 
-		if (GUI.Button (new Rect (Screen.width/3,25,30,30), "", "return")) {
+		if (GUI.Button (new Rect (25,25,30,30), "", "return")) {
 			drawWindow = false;
 		}
 
