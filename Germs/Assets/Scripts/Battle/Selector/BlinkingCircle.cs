@@ -18,6 +18,9 @@ public class BlinkingCircle : MonoBehaviour {
 
 	IEnumerator BlinkyBlink() {
 
+		originalColor = renderer.material.color;
+		blinkColor = blinkColor = new Color (originalColor.r, originalColor.g, originalColor.b, 0.4F);
+
 		while (true) {
 
 			renderer.material.color = blinkColor;

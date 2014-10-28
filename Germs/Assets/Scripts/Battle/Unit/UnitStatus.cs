@@ -63,6 +63,11 @@ public class UnitStatus : MonoBehaviour {
 	
 	public void setActionCooldown(int cooldown) {
 		this.actionCooldown = cooldown;
+		if (!hasRanged) {
+			selectedAction = "melee";
+		} else {
+			selectedAction = "ranged";
+		}
 	}
 	
 	public void countDownAbilityCooldown() {

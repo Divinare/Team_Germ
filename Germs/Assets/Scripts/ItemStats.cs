@@ -47,7 +47,7 @@ public class ItemStats : MonoBehaviour {
 
 		itemDescriptions.Add ("healingPotion", new string[] {"Healing Potion", "Potion", "Heals a bacterium"});
 		itemDescriptions.Add ("ragePotion", new string[] {"Rage Potion", "Potion", "Increases damage, causes a bacterium to rage"});
-		itemDescriptions.Add ("speedPotion", new string[] {"Speed Potion", "Potion", "Makes a bacterium to move faster at least one square. Effect is given as percentage of speed increased."});
+		itemDescriptions.Add ("speedPotion", new string[] {"Speed Potion", "Potion", "Makes a bacterium move faster by a certain percentage."});
 
 		itemIcons.Add ("empty", empty);
 		itemIcons.Add ("healingPotion", healingPotion);
