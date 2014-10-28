@@ -97,8 +97,19 @@ public class BattleMenuBar : MonoBehaviour {
 		int items = itemStats.getInventorySize();
 		float centerInventoryPosition = (Screen.width - (itemMenuButtonSize.x*items))/2;
 		int index = 0;
-
+		
+		Color original = GUI.color;
+		
 		GameObject currentUnit = GameObject.FindGameObjectWithTag ("TurnHandler").GetComponent<TurnHandler>().getActiveUnit ();
+		
+		if (currentUnit.GetComponent<UnitStatus>().IsEnemy ()) {
+			GUI.enabled = false;
+			Color transparentButtonColor = original;
+			transparentButtonColor.a = 0.5f;
+			GUI.color = transparentButtonColor;
+		}
+
+		
 		for(int i = 0; i < items; i++) {
 			string itemName = inventoryContent[i,0];
 			string potionIcon = itemName;
@@ -187,7 +198,7 @@ public class BattleMenuBar : MonoBehaviour {
 		Dictionary<string, bool> unitHasActions = currentUnit.GetComponent<UnitStatus> ().GetUnitActions ();
 		Color original = GUI.color;
 
-		if (!unitHasActions[action]) {
+		if (!unitHasActions[action] || currentUnit.GetComponent<UnitStatus>().IsEnemy ()) {
 			GUI.enabled = false;
 			actionDescription = "Action not available";
 			Color transparentButtonColor = original;

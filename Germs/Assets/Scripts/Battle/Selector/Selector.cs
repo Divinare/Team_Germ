@@ -99,6 +99,10 @@ public class Selector : MonoBehaviour {
 	public void resetHostileTurn() {
 		this.hostileTurnActive = false;
 	}
+	
+	public bool isHostileTurnActive() {
+		return hostileTurnActive;
+	}
 
 
 	private void unitAction(GameObject activeUnit, GameObject objectClicked) {
