@@ -24,7 +24,7 @@ public class RangedStunHit : MonoBehaviour {
 		// Hitting the enemy
 		if (unit.GetComponent<UnitStatus>() == targetedUnit.GetComponent<UnitStatus>()) {
 			
-			Destroy(Instantiate(stunHit, transform.position, transform.rotation), 2f); // instantiating the explosion and destroying it after 2f time
+			Destroy(Instantiate(stunHit, targetedUnit.transform.position, targetedUnit.transform.rotation), 2f); // instantiating the explosion and destroying it after 2f time
 			AudioSource.PlayClipAtPoint(stunSound, transform.position);
 			unit.GetComponent<UnitStatus>().Stunned(stunDuration);
 			selector.SetTargetedUnitToNull();
