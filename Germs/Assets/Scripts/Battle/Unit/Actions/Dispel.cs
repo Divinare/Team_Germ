@@ -14,6 +14,7 @@ public class Dispel : MonoBehaviour {
 
 	public void dispelPoison(GameObject dispeller, GameObject target) {
 		target.GetComponent<UnitStatus>().removePoison();
+		target.GetComponent<UnitStatus>().removeStun();
 		PlaySound ();
 		dispeller.GetComponent<UnitStatus>().setActionCooldown(2);
 		endTurn(dispeller, target);
