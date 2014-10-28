@@ -37,7 +37,7 @@ public class ActionHandler : MonoBehaviour {
 				this.GetComponent<Heal>().healTarget (initiator, target);
 			}
 			if (actionType.Equals ("detox")) {
-				Battlelog (initiator, target, "boldly sweeps away all harmful conditions affecting " + GetTargetName(initiator, target) + "'s cell wall!");
+				Battlelog (initiator, target, "boldly sucks away all harmful poison that's affecting " + GetTargetName(initiator, target) + "'s cell wall!");
 				this.GetComponent<Dispel>().dispelPoison(initiator, target);
 			}
 			if (actionType.Equals ("healingPotion") || actionType.Equals ("speedPotion") || actionType.Equals ("ragePotion")) {

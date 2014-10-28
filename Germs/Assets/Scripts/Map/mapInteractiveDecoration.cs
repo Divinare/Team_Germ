@@ -17,10 +17,6 @@ public class mapInteractiveDecoration : MonoBehaviour {
 		}
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	void OnMouseEnter() {
 		mouseOver = true;
