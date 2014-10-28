@@ -134,7 +134,7 @@ public class UnitStatus : MonoBehaviour {
 		if (currentHealth <= 0) {
 			animator.SetTrigger ("dead");
 			GameObject deathSound = Instantiate (DeathSound, this.transform.position, this.transform.rotation) as GameObject;
-			battlelog (this.getUnitName() + " 's nucleoid explodes into a pile of slimy mush!");
+			battlelog (this.getUnitName() + "'s nucleoid explodes into a pile of slimy mush!");
 			currentSquare.GetComponent<SquareStatus>().setStatus ("movable",null);
 			Destroy (this.gameObject);
 			return;
