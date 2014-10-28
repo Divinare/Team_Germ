@@ -97,7 +97,7 @@ public class UnitStats : MonoBehaviour {
 
 	public int[] getEnemyUnitStats(string enemyName) {
 		levelsCompleted = gameStatus.getCompletedLevels();
-		if (levelsCompleted <= 3) {
+		if (levelsCompleted <= 1) {
 			baseStatIncreaseFactor = 0.75f;
 		} else {
 			baseStatIncreaseFactor = levelsCompleted/2;
