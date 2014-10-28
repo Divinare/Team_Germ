@@ -32,7 +32,7 @@ public class ActionHandler : MonoBehaviour {
 		}
 		else { // actions that can only be performed on friendly targets
 			if (actionType.Equals ("heal")) {
-				Battlelog (initiator, target, "straightens its healing flagella towards " + GetTargetName(initiator, target) + "'s wounds!");
+				Battlelog (initiator, target, "reaches its healing flagella towards " + GetTargetName(initiator, target) + "'s wounds!");
 				this.GetComponent<Heal>().healTarget (initiator, target);
 			}
 			if (actionType.Equals ("detox")) {

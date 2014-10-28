@@ -77,15 +77,13 @@ public class TurnHandler : MonoBehaviour {
 	
 	// Removes the dead creatures (nulls) from the unitList
 	private void trimUnitList() {
-		List<GameObject> deadUnits = new List<GameObject>();
+		List<GameObject> newList = new List<GameObject>();
 		for (int i = 0; i < unitList.Count; i++) {
-			if (unitList[i] == null) {
-				deadUnits.Add (unitList[i]);
+			if (unitList[i] != null) {
+				newList.Add (unitList[i]);
 			}
 		}
-		foreach (GameObject o in deadUnits) {
-			unitList.Remove (o);
-		}
+		unitList = newList;
 		
 	}
 	
