@@ -14,22 +14,19 @@ public class HealthBar : MonoBehaviour {
 	private bool enemy;
 
 	void Start () {
-		unit = gameObject;
-		maxHealth = unit.transform.GetComponent<UnitStatus> ().getMaxHp ();
-		curHealth = unit.transform.GetComponent<UnitStatus> ().getHp ();
-		enemy = unit.transform.GetComponent<UnitStatus> ().IsEnemy();
 
 		barLength = Screen.width / 22; // This variable makes it easy to adjust the Healthbar's size
 		healthBarlength = barLength; 
 		bckgrndLength = barLength + 2;
-
 		loadBarColors ();	
+		unit = gameObject;
+		enemy = unit.transform.GetComponent<UnitStatus> ().IsEnemy();
 	}
 	
 
 	void Update () {
-
-		curHealth = unit.transform.GetComponent<UnitStatus>().getHp ();
+		maxHealth = unit.transform.GetComponent<UnitStatus> ().getMaxHp ();
+		curHealth = unit.transform.GetComponent<UnitStatus> ().getHp ();
 		AdjustcurHealth(curHealth) ; 	
 	}
 
