@@ -9,10 +9,10 @@ public class GameStatus : MonoBehaviour {
 	public int gold;
 	public int xp;
 
-	private int firstLvlGoldReward = 250;
-	private int goldAddOn = 50;
+	private int firstLvlGoldReward = 125;
+	private int goldAddOn = 25;
 
-	private int firstLvlXpReward = 250;
+	private int firstLvlXpReward = 200;
 	private int xpAddOn = 50; // for example 250, 300, 350, 400.. when firstLvlReward is 250 and lvlRewardAddOn is 50
 
 	//storage for if a node is completed (true/false

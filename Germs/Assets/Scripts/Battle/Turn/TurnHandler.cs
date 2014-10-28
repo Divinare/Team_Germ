@@ -39,8 +39,10 @@ public class TurnHandler : MonoBehaviour {
 					if (unitListIndex == unitList.Count - 1) {
 						trimUnitList ();
 						foreach (GameObject unit in unitList) {
-							if (unit.GetComponent<UnitStatus>().IsUnitPoisoned()) {
-								unit.GetComponent<UnitStatus>().countDownPoison();
+							if (unit != null) {
+								if (unit.GetComponent<UnitStatus>().IsUnitPoisoned()) {
+									unit.GetComponent<UnitStatus>().countDownPoison();
+								}
 							}
 						}
 						trimUnitList ();
@@ -57,7 +59,9 @@ public class TurnHandler : MonoBehaviour {
 						if (unitListIndex <= unitList.Count - 1 && unitList [unitListIndex] != null) {
 							activeUnit = unitList [unitListIndex];
 							activeUnit.transform.GetComponent<UnitStatus>().Select();
-							DrawSelectionCircleForUnit(activeUnit);
+							if (!activeUnit.GetComponent<UnitStatus>().IsUnitStunned ()) {
+								DrawSelectionCircleForUnit(activeUnit);
+							}
 						}
 					}
 				}
@@ -73,11 +77,16 @@ public class TurnHandler : MonoBehaviour {
 	
 	// Removes the dead creatures (nulls) from the unitList
 	private void trimUnitList() {
+		List<GameObject> deadUnits = new List<GameObject>();
 		for (int i = 0; i < unitList.Count; i++) {
 			if (unitList[i] == null) {
-				unitList.RemoveAt(i);
+				deadUnits.Add (unitList[i]);
 			}
 		}
+		foreach (GameObject o in deadUnits) {
+			unitList.Remove (o);
+		}
+		
 	}
 	
 	// Initializes variables for a new game round

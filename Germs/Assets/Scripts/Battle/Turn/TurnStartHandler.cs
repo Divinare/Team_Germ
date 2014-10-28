@@ -6,8 +6,10 @@ public class TurnStartHandler : MonoBehaviour {
 	
 	public void handeTurnStart(GameObject unit) {
 
-		GameObject.FindGameObjectWithTag ("Drawer").transform.GetComponent<Drawer> ().drawMovableSquares ();
-		GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ().resetHoveredSquare (); // re-draws cursor and route for the unit that gets the new turn
+		if (!unit.GetComponent<UnitStatus>().IsUnitStunned ()) {
+			GameObject.FindGameObjectWithTag ("Drawer").transform.GetComponent<Drawer> ().drawMovableSquares ();
+			GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ().resetHoveredSquare ();
+		}
 
 				
 		unit.GetComponent<UnitStatus>().countDownAbilityCooldown ();

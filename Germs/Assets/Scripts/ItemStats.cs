@@ -24,7 +24,7 @@ public class ItemStats : MonoBehaviour {
 	public Texture2D selectedRagePotion;
 	public Texture2D selectedHealingPotion;
 
-	private float lvlUpCostFactor = 0.15f;
+	private float lvlUpCostFactor = 0.21f;
 	private float lvlUpEffectFactor = 0.25f;
 	private float lvlUpUpgradeCostFactor = 0.25f;
 	private int speedPotionAddOn = 25; // percentage
@@ -41,9 +41,9 @@ public class ItemStats : MonoBehaviour {
 		initInventory ();
 
 		// in the int array the order is: 0: itemUpgradeCost, 1 level,  2 cost, 3 effect (healing/damage buff amount)
-		currentItemStats.Add("healingPotion", new int[] {50, 1, 25, 10});
-		currentItemStats.Add("ragePotion", new int[] {50, 1, 25, 10});
-		currentItemStats.Add("speedPotion", new int[] {50, 1, 25, 115});
+		currentItemStats.Add("healingPotion", new int[] {50, 1, 30, 10});
+		currentItemStats.Add("ragePotion", new int[] {50, 1, 30, 10});
+		currentItemStats.Add("speedPotion", new int[] {50, 1, 30, 115});
 
 		itemDescriptions.Add ("healingPotion", new string[] {"Healing Potion", "Potion", "Heals a bacterium"});
 		itemDescriptions.Add ("ragePotion", new string[] {"Rage Potion", "Potion", "Increases damage, causes a bacterium to rage"});
