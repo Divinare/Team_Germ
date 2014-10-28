@@ -111,7 +111,7 @@ public class UnitStatus : MonoBehaviour {
 		} else {
 			currentHealth = maxHealth;
 		}
-		battlelog (unitName + " has been given " + heal + " health!");
+		battlelog (unitName + " has been healed for " + heal + " HP!");
 	}
 
 	public void GiveSpeed(int speedPercentage) {
@@ -120,21 +120,21 @@ public class UnitStatus : MonoBehaviour {
 		if (oldSpeed == speed) {
 			speed++; // increasin at least with 1
 		}
-		battlelog (unitName + " has been given " + speed + " speed!");
+		battlelog (unitName + "'s speed has increased by " + speed + " units!");
 	}
 
 	public void GiveDamage(int damage) {
 		this.damage += damage;
-		battlelog (unitName + " has been raged with " + damage + " extra damage!");
+		battlelog (unitName + " has been affected by mind-blowing rage, increasing its damage by " + damage + " extra points!");
 	}
 
 	public void TakeDamage(int damage) {
 		currentHealth -= damage;
-		battlelog (this.getUnitName() + " took " + damage + " damage!");
+		battlelog (this.getUnitName() + " takes " + damage + " damage!");
 		if (currentHealth <= 0) {
 			animator.SetTrigger ("dead");
 			GameObject deathSound = Instantiate (DeathSound, this.transform.position, this.transform.rotation) as GameObject;
-			Debug.Log ("Unit died");
+			battlelog (this.getUnitName() + " 's nucleoid explodes into a pile of slimy mush!");
 			currentSquare.GetComponent<SquareStatus>().setStatus ("movable",null);
 			Destroy (this.gameObject);
 			return;
@@ -147,7 +147,7 @@ public class UnitStatus : MonoBehaviour {
 	public void Poisoned(int damage, int rounds) {
 		//poisoned units taka damage over time for x rounds
 		//Debug.Log (unitName + " poisoned for "+rounds+" rounds and "+damage+" dmg!");
-		battlelog (unitName + " is poisoned for "+rounds+ " rounds.");
+		battlelog (unitName + " has become poisoned for " + rounds + " rounds.");
 		poisoned = true;
 		animator.SetBool("poisoned", true);
 		poisonRounds = rounds;
@@ -159,7 +159,7 @@ public class UnitStatus : MonoBehaviour {
 		if (poisonRounds == 0) {
 			removePoison();
 		}
-		Debug.Log (unitName + " takes "+poisonDmg+" poison dmg");
+		Debug.Log (unitName + " takes " + poisonDmg + " damage from poison.");
 		TakeDamage(poisonDmg);		
 		
 	}
@@ -168,7 +168,7 @@ public class UnitStatus : MonoBehaviour {
 		stunned = true;
 		animator.SetBool("stunned", true);
 		stunRounds = rounds;
-		battlelog (unitName + " is stunned for "+rounds+ " rounds.");
+		battlelog (unitName + " has become stunned for " + rounds + " rounds.");
 	}
 
 	public void countDownStun() {

@@ -31,8 +31,6 @@ public class PotionHandler : MonoBehaviour {
 		else if (potionName.Equals ("ragePotion")) {
 			friendlyTarget.GetComponent<UnitStatus>().GiveDamage(effect);
 		}
-
-		print ("potiooooooon");
 		AudioSource.PlayClipAtPoint(potionSound, friendlyTarget.transform.position);
 		//bool hasRanged = initiator.GetComponent<UnitStatus> ().GetUnitActions () ["ranged"];
 		//Selector selector = GameObject.FindGameObjectWithTag ("Selector").GetComponent<Selector> ();

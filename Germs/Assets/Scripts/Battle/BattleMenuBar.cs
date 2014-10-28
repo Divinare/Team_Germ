@@ -51,7 +51,7 @@ public class BattleMenuBar : MonoBehaviour {
 		// Battle GUI stuff
 		battlelogScrollPosition = new Vector2(0,0);
 		battlelog = "";
-		battlelogSize = new Vector2 (Screen.width * 0.2f, menuBarSize.y);
+		battlelogSize = new Vector2 (Screen.width * 0.3f, menuBarSize.y);
 		battlelogPosition = new Vector2 (0, menuBarPosition.y);
 		itemMenuButtonSize = new Vector2 (menuBarSize.y-menuBarDescriptionHeight, menuBarSize.y-menuBarDescriptionHeight);
 		activityMenuButtonSize = new Vector2 (menuBarSize.y-menuBarDescriptionHeight, menuBarSize.y-menuBarDescriptionHeight);

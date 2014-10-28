@@ -23,9 +23,7 @@ public class Poison : MonoBehaviour {
 	
 
 	public void poisonAttack(GameObject initiator, GameObject target) {
-		GameObject.FindGameObjectWithTag ("Drawer").GetComponent<BattleMenuBar> ().addToBattleLog (
-			initiator.GetComponent<UnitStatus>().getUnitName() + " uses poison!"
-		);
+
 		StartCoroutine (DelayedPoisonedEffect(initiator, target));
 	}
 
