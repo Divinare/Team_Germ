@@ -18,8 +18,9 @@ public class ActionHandler : MonoBehaviour {
 				this.GetComponent<RangedAttack> ().attack (initiator, target);
 			}
 			if (actionType.Equals ("melee")) {
-				Battlelog (initiator, target, "sinks its gelatinous fangs deep into " + GetUnitName(target) + "'s RNA!");
-				this.GetComponent<MeleeAttack>().initiateAttack (initiator, target);
+				if (this.GetComponent<MeleeAttack>().initiateAttack (initiator, target)) {
+					Battlelog (initiator, target, "sinks its gelatinous fangs deep into " + GetUnitName(target) + "'s RNA!");
+				}
 			}
 			if (actionType.Equals ("rangedStun")) {
 				Battlelog (initiator, target, "sends a sphere of stunning lightning towards " + GetUnitName(target) + "!");

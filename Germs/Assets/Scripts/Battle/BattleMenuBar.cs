@@ -208,6 +208,10 @@ public class BattleMenuBar : MonoBehaviour {
 		if (GUI.Button (new Rect (menuBarSize.x-activityMenuButtonSize.x*index, menuBarPosition.y + menuBarDescriptionHeight, activityMenuButtonSize.x, activityMenuButtonSize.y), new GUIContent (texture, actionDescription))) {
 			if(action.Equals("skipTurn")) {
 				if (!currentUnit.GetComponent<UnitStatus>().IsEnemy()) {
+					GameObject.FindGameObjectWithTag ("Drawer").GetComponent<BattleMenuBar> ().addToBattleLog (
+						GameObject.FindGameObjectWithTag ("TurnHandler").transform.GetComponent<TurnHandler> ().getActiveUnit().GetComponent<UnitStatus>().getUnitName()
+						+ " cowardly skips its turn!"
+						);
 					currentUnit.GetComponent<UnitStatus>().Deselect();
 				}
 			} else {

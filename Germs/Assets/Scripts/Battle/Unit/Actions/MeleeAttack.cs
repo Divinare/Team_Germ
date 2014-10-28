@@ -41,7 +41,7 @@ public class MeleeAttack : MonoBehaviour {
 		return attacker;
 	}
 	
-	public void initiateAttack(GameObject activeUnit, GameObject targetGerm) {
+	public bool initiateAttack(GameObject activeUnit, GameObject targetGerm) {
 		
 		attacker = activeUnit;
 		List<GameObject> route = GameObject.FindGameObjectWithTag ("Matrix").GetComponent<RouteFinder> ().findRoute (targetGerm.GetComponent<UnitStatus>().getSquare (), true);
@@ -49,7 +49,7 @@ public class MeleeAttack : MonoBehaviour {
 			target = null;
 			targetSquare = null;
 			attacker = null;
-			return; // no route to enemy found, abort attack
+			return false; // no route to enemy found, abort attack
 		}
 		
 		goingToAttack = true;
@@ -63,7 +63,7 @@ public class MeleeAttack : MonoBehaviour {
 			targetSquare = activeUnit.GetComponent<UnitStatus>().getSquare ();
 			finalizeAttack ();
 		}
-		
+		return true;
 		
 	}
 }
