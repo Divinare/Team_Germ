@@ -12,19 +12,25 @@ public class HealthBar : MonoBehaviour {
 	private Texture2D healthTexture;
 	private Texture2D backgroundTexture;
 	private bool enemy;
+	private bool valuesNeedToBeInitialized;
 
 	void Start () {
 
 		barLength = Screen.width / 22; // This variable makes it easy to adjust the Healthbar's size
 		healthBarlength = barLength; 
 		bckgrndLength = barLength + 2;
-		loadBarColors ();	
-		unit = gameObject;
-		enemy = unit.transform.GetComponent<UnitStatus> ().IsEnemy();
+		valuesNeedToBeInitialized = true;
 	}
 	
 
 	void Update () {
+
+		if (valuesNeedToBeInitialized) {
+			valuesNeedToBeInitialized = false;
+			unit = gameObject;
+			enemy = unit.transform.GetComponent<UnitStatus> ().IsEnemy();
+			loadBarColors ();
+		}
 		maxHealth = unit.transform.GetComponent<UnitStatus> ().getMaxHp ();
 		curHealth = unit.transform.GetComponent<UnitStatus> ().getHp ();
 		AdjustcurHealth(curHealth) ; 	
