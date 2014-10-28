@@ -74,12 +74,12 @@ public class UnitStats : MonoBehaviour {
 		allUnitImages.Add ("empty", empty);
 
 		//set stories for all units
-		unitDescriptions.Add ("Gatbac", "Gatbac is a very fat Epstein-Barr virus, that causes mononucleosis, also known as the kissing disease.");
-		unitDescriptions.Add ("Phage", "A Bacteriophage is a virus that infects and replicates within a bacterium. Bacteriophages are composed of proteins that encapsulate a DNA or RNA genome.");
-		unitDescriptions.Add ("Strepto", "Streptococcus pneumoniae, or pneumococcus, is a significant human pathogenic bacterium and is the cause of pneumonia.");
-		unitDescriptions.Add ("Haemophilus", "...");
-		unitDescriptions.Add ("Salmonella", "...");
-		unitDescriptions.Add ("Bacillus", "...");
+		unitDescriptions.Add ("Gatbac", "Gatbac is a very fat Epstein-Barr virus, that causes mononucleosis, also known as the kissing disease. Because of his large size he is very slow, but also very durable.");
+		unitDescriptions.Add ("Phage", "A Bacteriophage is a virus that infects and replicates within a bacterium. The Bacteriophage is a fearsome poisoner and ranged attacker.");
+		unitDescriptions.Add ("Strepto", "Streptococcus pneumoniae, or pneumococcus, is a significant human pathogenic bacterium and is the cause of pneumonia. He is an excellent jack-of-all-trades.");
+		unitDescriptions.Add ("Haemophilus", "The Haemophilus is a coccobacilli bacteria belonging to the Pasteurellaceae family and is the cause of spesis and bacterial meningitis. He is fast and can dispel any status effect from his companions.");
+		unitDescriptions.Add ("Salmonella", "Salmonella is a rod-shaped, Gram-negative bacteria and is the cause of typhoid fever and food types of food poisoning. He is fast and an excellent healer.");
+		unitDescriptions.Add ("Bacillus", "Bacillus is a rod shaped bacteria and a member of the phylum Firmicutes and is the cause of anthrax. He is fast and a powerful stunner.");
 
 		//unlock bacteria in trainer stuff
 		//name: lvlsCompleted, xpCost

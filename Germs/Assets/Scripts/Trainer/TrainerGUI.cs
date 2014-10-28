@@ -38,10 +38,12 @@ public class TrainerGUI : MonoBehaviour {
 	private int lvlUpHealth;
 	private int lvlUpDmg;
 	private int lvlUpSpeed;
-	public int lvlUpXp;
+	private int lvlUpXp;
+
 	
 	public Dictionary <string, int[]> playerUnitStats = new Dictionary<string, int[]>();
 	public int[] tempStats = new int[4];
+	public List<string> selectedBacs = new List<string>();
 	
 	//Selection grid stuff
 	public Dictionary<string, Texture2D> allBacsImages = new Dictionary<string, Texture2D>();
@@ -124,7 +126,7 @@ public class TrainerGUI : MonoBehaviour {
 		GUI.Box (new Rect (leftBox.y,topBar.y,Screen.width/2, (Screen.height - 2*topBar.y)), "", trainerBox);
 		GUI.Box (new Rect (leftBox.y,topBar.y,Screen.width/6,Screen.width/6), allBacsImages[selectedBacteria], yellowText);
 		GUI.Box (new Rect (leftBox.y+Screen.width/6,topBar.y,2*(Screen.width/6),(Screen.width/6)/2), " "+selectedBacteria+"\n Level "+bacLevel, orangeText);
-		GUI.Box (new Rect (leftBox.y+Screen.width/6,topBar.y+(Screen.width/6)/2,2*(Screen.width/6),(Screen.width/6)/2), allBacsStories[selectedBacteria], yellowText);
+		GUI.Box (new Rect (leftBox.y+Screen.width/6,topBar.y+(Screen.width/6)/2,2*(Screen.width/6)-50,(Screen.width/6)/2), allBacsStories[selectedBacteria], yellowText);
 
 		if (unlocked) {
 			//Statbox
@@ -158,6 +160,15 @@ public class TrainerGUI : MonoBehaviour {
 					gameStatus.SendMessage("setXp", xp);
 					xp = gameStatus.getXp();
 					unitStats.setPlayerUnit(selectedBacteria);
+
+					//set just unlocked unit into selected bacs if selected bacs has an empty slot
+					selectedBacs = battleStatus.getSelectedUnits();
+					for (int i = 0; i < selectedBacs.Count; i++) {
+						if (selectedBacs[i] == "empty") {
+							battleStatus.setSelectedUnit(selectedBacteria, i);
+							break;
+						}
+					}
 				}
 			} else {
 				if (GUI.Button(new Rect (Screen.width/2+Screen.width/8,Screen.height/10+Screen.width/6+Screen.height/8+Screen.height/8,Screen.width/4,Screen.height/8), "", deactiveUnlockButton)) {
