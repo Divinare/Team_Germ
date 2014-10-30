@@ -109,14 +109,12 @@ public class TurnHandler : MonoBehaviour {
 			}
 		}
 		if (playerIsDead) {
-			Debug.Log("BATTLE IS OVER, the enemy side has triumphed!");
 			GameObject.FindGameObjectWithTag ("CursorHandler").GetComponent<CursorIconHandler>().drawDefaultCursor ();
 			gameStatus.levelFailed();
 			this.battleIsOver = true;
 			GameObject.FindGameObjectWithTag("TurnHandler").transform.GetComponent<BattleEndWindow>().drawGameEndWindow("enemy");
 		}
 		else if (enemyIsDead) {
-			Debug.Log("BATTLE IS OVER, the player is very victorious! Much win! So wow!");
 			GameObject.FindGameObjectWithTag ("CursorHandler").GetComponent<CursorIconHandler>().drawDefaultCursor ();
 			gameStatus.levelCompleted();
 			this.battleIsOver = true;
@@ -134,7 +132,6 @@ public class TurnHandler : MonoBehaviour {
 	private void RemoveSelectionCircleFromUnit(GameObject unit) {
 
 		string circleName = GetCircleName (unit);
-		unit.transform.FindChild(circleName).GetComponent<BlinkingCircle>().SetOriginalColor();
 		unit.transform.FindChild(circleName).gameObject.active = false;
 	}
 

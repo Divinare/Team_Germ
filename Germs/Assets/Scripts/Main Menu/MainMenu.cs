@@ -58,21 +58,21 @@ public class MainMenu : MonoBehaviour {
 				Application.LoadLevel ("Map");
 			}
 		}
-		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * (0+addOn), buttonSize.x, buttonSize.y), "New Game")) {
-			if(AudioController.audioController != null) {
-				AudioController.audioController.stopMenuMusic();
-				AudioController.audioController.playMapMusic();
-			}
-			Application.LoadLevel ("Map");
-		}
-		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * (1+addOn), buttonSize.x, buttonSize.y), "Load Game")) {
-			this.showing = "loadgame";
-		}
-		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * (2+addOn), buttonSize.x, buttonSize.y), "Save Game")) {
-			this.showing = "savegame";
-		}
-		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * (3+addOn), buttonSize.x, buttonSize.y), "Options")) {
-		}
+//		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * (0+addOn), buttonSize.x, buttonSize.y), "New Game")) {
+//			if(AudioController.audioController != null) {
+//				AudioController.audioController.stopMenuMusic();
+//				AudioController.audioController.playMapMusic();
+//			}
+//			Application.LoadLevel ("Map");
+//		}
+//		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * (1+addOn), buttonSize.x, buttonSize.y), "Load Game")) {
+//			this.showing = "loadgame";
+//		}
+//		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * (2+addOn), buttonSize.x, buttonSize.y), "Save Game")) {
+//			this.showing = "savegame";
+//		}
+//		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * (3+addOn), buttonSize.x, buttonSize.y), "Options")) {
+//		}
 		if (GUI.Button (new Rect (menuPosition.x, menuPosition.y+buttonSize.y * (4+addOn), buttonSize.x, buttonSize.y), "Quit Game")) {
 			this.showing = "exitClicked";
 		}

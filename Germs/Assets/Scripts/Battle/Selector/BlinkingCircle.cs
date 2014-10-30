@@ -6,23 +6,24 @@ public class BlinkingCircle : MonoBehaviour {
 	private Color blinkColor;
 	private Color originalColor;
 
-	public void StartBlink() {
-		originalColor = renderer.material.color;
-		blinkColor = new Color (originalColor.r, originalColor.g, originalColor.b, 0.4F);
-		StartCoroutine(BlinkyBlink());
-	}
 
-	public void SetOriginalColor() {
-		renderer.material.color = originalColor;
+	public void StartBlink() {
+		StartCoroutine(BlinkyBlink());
 	}
 
 	IEnumerator BlinkyBlink() {
 
-		originalColor = renderer.material.color;
-		blinkColor = blinkColor = new Color (originalColor.r, originalColor.g, originalColor.b, 0.4F);
+		GameObject activeUnit = GameObject.FindGameObjectWithTag ("TurnHandler").transform.GetComponent<TurnHandler> ().getActiveUnit ();
+		if (activeUnit.GetComponent<UnitStatus> ().IsEnemy()) {
+			originalColor = new Color (1.0F, 0.3F, 0.3F, 1.0F);
+		}
+		else {
+			originalColor = new Color (0.3F, 1.0F, 0.3F, 1.0F);
+		}
+
+		blinkColor = new Color (originalColor.r, originalColor.g, originalColor.b, 0.4F);
 
 		while (true) {
-
 			renderer.material.color = blinkColor;
 			yield return new WaitForSeconds(0.4f);		
 			renderer.material.color = originalColor;
