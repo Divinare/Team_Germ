@@ -7,14 +7,6 @@ Heroes of Might and Magic 3:n tapainen vuoropohjainen RPG-seikkailu/taistelupeli
 Teemana on bakteerit ja virukset RPG-seikkailussa.
 
 
-<b>Gitin käytöstä:</b>
-
-* git add -A --ignore-errors
-* (git status, check onko kaikki ok)
-* git commit -m "viesti"
-* git push
-
-
 <h2>Linkkejä:</h2>
 
 Saving stuff with binary serialization:
@@ -43,11 +35,4 @@ http://answers.unity3d.com/questions/46037/add-tags-during-runtime.html
 
 - joku perus-AI vastassa
 - perustaistelut eri kentissä toimii
-- hahmot menettää hp:ta
-- hahmot voivat taistella ja liikkua ympäri kenttää
 - kaksinpeli
-
-
-
-
-
