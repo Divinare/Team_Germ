@@ -2,7 +2,7 @@
 
 Heroes of Might and Magic 3:n tapainen vuoropohjainen RPG-seikkailu/taistelupeli PC:lle.
 
-3D-grafiikat ja kuvattu 3. persoonasta. Käytetään Unity 3D:tä ja tehdään C#-kielellä.
+2D-grafiikat ja kuvattu 3. persoonasta. Käytetään Unity 3D:tä ja tehdään C#-kielellä.
 
 Teemana on bakteerit ja virukset RPG-seikkailussa.
 
